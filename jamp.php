@@ -27,7 +27,7 @@
 
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
-	die;
+    die;
 }
 
 /**
@@ -42,8 +42,8 @@ define( 'JAMP_VERSION', '1.0.0' );
  * This action is documented in includes/class-jamp-activator.php
  */
 function activate_jamp() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-jamp-activator.php';
-	Jamp_Activator::activate();
+    require_once plugin_dir_path( __FILE__ ) . 'includes/class-jamp-activator.php';
+    Jamp_Activator::activate();
 }
 
 /**
@@ -51,8 +51,8 @@ function activate_jamp() {
  * This action is documented in includes/class-jamp-deactivator.php
  */
 function deactivate_jamp() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-jamp-deactivator.php';
-	Jamp_Deactivator::deactivate();
+    require_once plugin_dir_path( __FILE__ ) . 'includes/class-jamp-deactivator.php';
+    Jamp_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_jamp' );
@@ -75,8 +75,8 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-jamp.php';
  */
 function run_jamp() {
 
-	$plugin = new Jamp();
-	$plugin->run();
+    $plugin = new Jamp();
+    $plugin->run();
 
 }
 run_jamp();
