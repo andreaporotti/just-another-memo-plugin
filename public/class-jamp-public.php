@@ -18,7 +18,7 @@
  *
  * @package    Jamp
  * @subpackage Jamp/public
- * @author     Andrea Porotti <dev@andreaporotti.it>
+ * @author     Andrea Porotti
  */
 class Jamp_Public {
 

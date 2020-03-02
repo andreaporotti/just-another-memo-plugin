@@ -19,7 +19,7 @@
  *
  * @package    Jamp
  * @subpackage Jamp/includes
- * @author     Andrea Porotti <dev@andreaporotti.it>
+ * @author     Andrea Porotti
  */
 class Jamp_Loader {
 

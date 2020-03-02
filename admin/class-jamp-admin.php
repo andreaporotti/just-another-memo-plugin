@@ -18,7 +18,7 @@
  *
  * @package    Jamp
  * @subpackage Jamp/admin
- * @author     Andrea Porotti <dev@andreaporotti.it>
+ * @author     Andrea Porotti
  */
 class Jamp_Admin {
 
