@@ -77,6 +77,7 @@ class Jamp {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->register_custom_post_types();
 
 	}
 
@@ -120,6 +121,11 @@ class Jamp {
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-jamp-public.php';
+		
+		/**
+		 * The class responsible for registering Custom Post Types.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-jamp-cpt.php';
 
 		$this->loader = new Jamp_Loader();
 
@@ -173,6 +179,28 @@ class Jamp {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
+	
+	
+	
+	
+	
+	/**
+	 * Register all of the hooks related to the custom post types.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function register_custom_post_types() {
+
+		$plugin_custom_post_types = new Jamp_CPT( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_action( 'init', $plugin_custom_post_types, 'register' );
+
+	}
+	
+	
+	
+	
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
