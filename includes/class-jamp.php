@@ -161,6 +161,7 @@ class Jamp {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_meta_box' );
 
 	}
 
@@ -180,10 +181,6 @@ class Jamp {
 
 	}
 	
-	
-	
-	
-	
 	/**
 	 * Register all of the hooks related to the custom post types.
 	 *
@@ -197,10 +194,6 @@ class Jamp {
 		$this->loader->add_action( 'init', $plugin_custom_post_types, 'register' );
 
 	}
-	
-	
-	
-	
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.

@@ -98,5 +98,36 @@ class Jamp_Admin {
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/jamp-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
+	
+	/**
+	 * Adds the meta box.
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_meta_box() {
+
+		$screens = ['jamp_note'];
+		foreach ($screens as $screen) {
+			add_meta_box(
+				'jamp_meta_box',
+				__('Impostazioni Nota'),
+				[self::class, 'meta_box_html'],
+				$screen,
+				'side',
+			);
+		}
+
+	}
+	
+	/**
+	 * Outputs the meta box HTML.
+	 *
+	 * @since    1.0.0
+	 */
+	public function meta_box_html() {
+		
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-meta-box.php';
+		
+	}
 
 }
