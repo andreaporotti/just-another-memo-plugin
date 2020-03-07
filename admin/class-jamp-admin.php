@@ -111,7 +111,7 @@ class Jamp_Admin {
 			add_meta_box(
 				'jamp_meta_box',
 				__('Impostazioni Nota'),
-				[self::class, 'meta_box_html'],
+				[self::class, 'meta_box_html_cb'],
 				$screen,
 				'side',
 			);
@@ -124,9 +124,33 @@ class Jamp_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function meta_box_html() {
+	public static function meta_box_html_cb( $post ) {
 		
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-meta-box.php';
+		
+	}
+	
+	/**
+	 * Saves meta data
+	 *
+	 * @since    1.0.0
+	 */
+	public function save_meta_data($post_id) {
+		
+		// Checks save status
+		$is_autosave = wp_is_post_autosave( $post_id );
+		$is_revision = wp_is_post_revision( $post_id );
+		$is_valid_nonce = ( isset( $_POST[ 'jamp_meta_box_nonce' ] ) && wp_verify_nonce( $_POST[ 'jamp_meta_box_nonce' ], 'jamp_meta_box_nonce' ) ) ? 'true' : 'false';
+
+		// Exits script depending on save status
+		if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
+			return;
+		}
+
+		// Checks for input and saves if needed
+		if( isset( $_POST[ 'scope' ] ) ) {
+			update_post_meta( $post_id, 'scope', $_POST[ 'scope' ] );
+		}
 		
 	}
 
