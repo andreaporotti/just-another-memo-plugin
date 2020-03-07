@@ -124,7 +124,7 @@ class Jamp_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function meta_box_html() {
+	public static function meta_box_html() {
 		
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-meta-box.php';
 		
