@@ -81,7 +81,7 @@ class Jamp_CPT {
 			'show_in_rest'          => false,
 		);
 		
-		register_post_type( 'note', $args );
+		register_post_type( 'jamp_note', $args );
 	}
 
 }
