@@ -37,3 +37,18 @@
 		<?php _e( 'Entità', 'jamp' ); ?>
 	</label>
 </div>
+<br>
+<div class="meta-section">
+	<label for="section"><?php _e( 'Scegli la Sezione.', 'jamp' )?></label>
+    <select name="section" id="section">
+		<option value="">seleziona...</option>
+		
+		<?php foreach ($args['args'] as $section): ?>
+		
+			<option value="<?php echo $section['file'] ?>" <?php if ( isset ( $jamp_meta['target'] ) ) { selected( $jamp_meta['target'][0], wp_kses_decode_entities ( $section['file'] ) ); } echo(!$section['is_submenu']) ? 'disabled' : ''; ?>>
+				<?php echo $section['name']; ?>
+			</option>
+		
+		<?php endforeach; ?>
+    </select>
+</div>

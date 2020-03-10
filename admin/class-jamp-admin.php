@@ -38,6 +38,15 @@ class Jamp_Admin {
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
+	
+	/**
+	 * The list of all dashboard side menu items.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      array     $version    The list of all dashboard side menu items.
+	 */
+	private $sections_list = array();
 
 	/**
 	 * Initialize the class and set its properties.
@@ -100,20 +109,60 @@ class Jamp_Admin {
 	}
 	
 	/**
+	 * Creates a list of all dashboard side menu items.
+	 *
+	 * @since    1.0.0
+	 */
+	public function build_sections_list() {
+		global $menu, $submenu;
+		
+		// The sections placed on the first level menu.
+		$first_level_sections = array();
+		
+		// Get sections placed on the first level menu. Some names are ignored.
+		foreach ( $menu as $menu_item ) {
+			if( !in_array( $menu_item[0], array( '', 'Link' ) ) ) {
+				$first_level_sections[] = array(
+					'name' => strstr( $menu_item[0], ' <', true ) ?: $menu_item[0], // The section name ignoring any HTML content.
+					'file' => $menu_item[2], // The section file name.
+					'is_submenu' => false
+				);
+			}
+		}
+		
+		// Build complete sections list
+		foreach ( $first_level_sections as $section ) {
+			// Add current first level section to the list.
+			$this->sections_list[] = $section;
+			
+			// Get the sub sections of current first level section from the sub menu 
+			foreach ( $submenu[$section['file']] as $submenu_item ) {
+				$this->sections_list[] = array(
+					'name' => '-- ' . (strstr( $submenu_item[0], ' <', true ) ?: $submenu_item[0]), // The section name ignoring any HTML content.
+					'file' => $submenu_item[2], // The section file name.
+					'is_submenu' => true
+				);
+			}
+		}
+	}
+
+	/**
 	 * Adds the meta box.
 	 *
 	 * @since    1.0.0
 	 */
 	public function add_meta_box() {
-
+		
 		$screens = ['jamp_note'];
-		foreach ($screens as $screen) {
+		foreach ( $screens as $screen ) {
 			add_meta_box(
 				'jamp_meta_box',
 				__('Impostazioni Nota'),
-				[self::class, 'meta_box_html_cb'],
+				array( $this, 'meta_box_html_cb' ),
 				$screen,
 				'side',
+				'default',
+				$this->sections_list
 			);
 		}
 
@@ -124,7 +173,7 @@ class Jamp_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function meta_box_html_cb( $post ) {
+	public static function meta_box_html_cb( $post, $args ) {
 		
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-meta-box.php';
 		
@@ -150,6 +199,11 @@ class Jamp_Admin {
 		// Checks for input and saves if needed
 		if( isset( $_POST[ 'scope' ] ) ) {
 			update_post_meta( $post_id, 'scope', $_POST[ 'scope' ] );
+		}
+		
+		if( isset( $_POST[ 'section' ] ) ) {
+			update_post_meta( $post_id, 'target_type', 'section' );
+			update_post_meta( $post_id, 'target', $_POST[ 'section' ] );
 		}
 		
 	}
