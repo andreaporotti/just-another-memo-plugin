@@ -19,7 +19,7 @@
 	$jamp_meta = get_post_meta( $post->ID );
 ?>
 
-<div class="meta-scope">
+<div class="meta-field meta-scope">
 	<span><?php _e( 'Seleziona l\'ambito della nota.', 'jamp' ); ?></span>
 	<br>
 	<label for="scope-global">
@@ -37,8 +37,8 @@
 		<?php _e( 'Entità', 'jamp' ); ?>
 	</label>
 </div>
-<br>
-<div class="meta-section">
+
+<div class="meta-field meta-section">
 	<label for="section"><?php _e( 'Scegli la Sezione.', 'jamp' )?></label>
     <select name="section" id="section">
 		<option value="">seleziona...</option>

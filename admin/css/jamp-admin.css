@@ -1,4 +1,13 @@
-/**
- * All of the CSS for your admin-specific functionality should be
- * included in this file.
- */
+/* META BOX */
+
+#jamp_meta_box .meta-field {
+	margin-bottom: 15px;
+}
+
+#jamp_meta_box .meta-field:last-child {
+	margin-bottom: 0;
+}
+
+#jamp_meta_box .meta-section {
+	display: none;
+}
