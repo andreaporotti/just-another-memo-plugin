@@ -58,29 +58,29 @@ class Jamp_CPT {
 			'items_list_navigation' => __( 'Navigazione elenco Note', 'jamp' ),
 			'filter_items_list'     => __( 'Filtra elenco Note', 'jamp' ),
 		);
-		
+
 		$args = array(
-			'label'                 => __( 'Note', 'jamp' ),
-			'description'           => __( 'Una nota che può essere aggiunta alla dashboard.', 'jamp' ),
-			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'revisions' ),
-			'taxonomies'            => array(),
-			'hierarchical'          => false,
-			'public'                => true,
-			'show_ui'               => true,
-			'show_in_menu'          => true,
-			'menu_position'         => 5,
-			'menu_icon'             => 'dashicons-welcome-write-blog',
-			'show_in_admin_bar'     => true,
-			'show_in_nav_menus'     => true,
-			'can_export'            => true,
-			'has_archive'           => false,
-			'exclude_from_search'   => true,
-			'publicly_queryable'    => false,
-			'capability_type'       => 'page',
-			'show_in_rest'          => false,
+			'label'               => __( 'Note', 'jamp' ),
+			'description'         => __( 'Una nota che può essere aggiunta alla dashboard.', 'jamp' ),
+			'labels'              => $labels,
+			'supports'            => array( 'title', 'editor', 'revisions' ),
+			'taxonomies'          => array(),
+			'hierarchical'        => false,
+			'public'              => true,
+			'show_ui'             => true,
+			'show_in_menu'        => true,
+			'menu_position'       => 5,
+			'menu_icon'           => 'dashicons-welcome-write-blog',
+			'show_in_admin_bar'   => true,
+			'show_in_nav_menus'   => true,
+			'can_export'          => true,
+			'has_archive'         => false,
+			'exclude_from_search' => true,
+			'publicly_queryable'  => false,
+			'capability_type'     => 'page',
+			'show_in_rest'        => false,
 		);
-		
+
 		register_post_type( 'jamp_note', $args );
 	}
 
