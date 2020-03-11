@@ -23,17 +23,17 @@
 	<span><?php _e( 'Seleziona l\'ambito della nota.', 'jamp' ); ?></span>
 	<br>
 	<label for="scope-global">
-		<input type="radio" name="scope" id="scope-global" value="global" <?php if ( isset ( $jamp_meta['scope'] ) ) { checked( $jamp_meta['scope'][0], 'global' ); } ?>>
+		<input type="radio" name="scope" id="scope-global" value="global" <?php if ( isset ( $jamp_meta['jamp_scope'] ) ) { checked( $jamp_meta['jamp_scope'][0], 'global' ); } ?>>
 		<?php _e( 'Globale', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="scope-section">
-		<input type="radio" name="scope" id="scope-section" value="section" <?php if ( isset ( $jamp_meta['scope'] ) ) { checked( $jamp_meta['scope'][0], 'section' ); } ?>>
+		<input type="radio" name="scope" id="scope-section" value="section" <?php if ( isset ( $jamp_meta['jamp_scope'] ) ) { checked( $jamp_meta['jamp_scope'][0], 'section' ); } ?>>
 		<?php _e( 'Sezione', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="scope-entity">
-		<input type="radio" name="scope" id="scope-entity" value="entity" <?php if ( isset ( $jamp_meta['scope'] ) ) { checked( $jamp_meta['scope'][0], 'entity' ); } ?>>
+		<input type="radio" name="scope" id="scope-entity" value="entity" <?php if ( isset ( $jamp_meta['jamp_scope'] ) ) { checked( $jamp_meta['jamp_scope'][0], 'entity' ); } ?>>
 		<?php _e( 'Entità', 'jamp' ); ?>
 	</label>
 </div>
@@ -45,7 +45,7 @@
 		
 		<?php foreach ($args['args'] as $section): ?>
 		
-			<option value="<?php echo $section['file'] ?>" <?php if ( isset ( $jamp_meta['target'] ) ) { selected( $jamp_meta['target'][0], $section['file'] ); } echo(!$section['is_submenu']) ? 'disabled' : ''; ?>>
+			<option value="<?php echo $section['file'] ?>" <?php if ( isset ( $jamp_meta['jamp_target'] ) ) { selected( $jamp_meta['jamp_target'][0], $section['file'] ); } echo(!$section['is_submenu']) ? 'disabled' : ''; ?>>
 				<?php echo $section['name']; ?>
 			</option>
 		

@@ -198,24 +198,24 @@ class Jamp_Admin {
 
 		// Checks for field values and saves if needed.
 		if ( isset( $_POST[ 'scope' ] ) ) {
-			update_post_meta( $post_id, 'scope', $_POST[ 'scope' ] );
+			update_post_meta( $post_id, 'jamp_scope', $_POST[ 'scope' ] );
 			
 			if ($_POST[ 'scope' ] == 'global') {
-				update_post_meta( $post_id, 'target_type', 'global' );
-				update_post_meta( $post_id, 'target', 'global' );
+				update_post_meta( $post_id, 'jamp_target_type', 'global' );
+				update_post_meta( $post_id, 'jamp_target', 'global' );
 			}
 			
 			if ($_POST[ 'scope' ] == 'section') {
 				if ( isset( $_POST[ 'section' ] ) ) {
-					update_post_meta( $post_id, 'target_type', 'section' );
-					update_post_meta( $post_id, 'target', $_POST[ 'section' ] );
+					update_post_meta( $post_id, 'jamp_target_type', 'section' );
+					update_post_meta( $post_id, 'jamp_target', $_POST[ 'section' ] );
 				}
 			}
 			
 			if ($_POST[ 'scope' ] == 'entity') {
 				//if ( isset( $_POST[ 'section' ] ) ) {
-					update_post_meta( $post_id, 'target_type', 'entity' );
-					update_post_meta( $post_id, 'target', 'entity' );
+					update_post_meta( $post_id, 'jamp_target_type', 'entity' );
+					update_post_meta( $post_id, 'jamp_target', 'entity' );
 				//}
 			}
 		}
