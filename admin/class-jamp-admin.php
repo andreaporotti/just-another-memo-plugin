@@ -186,26 +186,40 @@ class Jamp_Admin {
 	 */
 	public function save_meta_data($post_id) {
 		
-		// Checks save status
+		// Checks save status.
 		$is_autosave = wp_is_post_autosave( $post_id );
 		$is_revision = wp_is_post_revision( $post_id );
 		$is_valid_nonce = ( isset( $_POST[ 'jamp_meta_box_nonce' ] ) && wp_verify_nonce( $_POST[ 'jamp_meta_box_nonce' ], 'jamp_meta_box_nonce' ) ) ? 'true' : 'false';
 
-		// Exits script depending on save status
+		// Exits script depending on save status.
 		if ( $is_autosave || $is_revision || !$is_valid_nonce ) {
 			return;
 		}
 
-		// Checks for input and saves if needed
-		if( isset( $_POST[ 'scope' ] ) ) {
+		// Checks for field values and saves if needed.
+		if ( isset( $_POST[ 'scope' ] ) ) {
 			update_post_meta( $post_id, 'scope', $_POST[ 'scope' ] );
+			
+			if ($_POST[ 'scope' ] == 'global') {
+				update_post_meta( $post_id, 'target_type', 'global' );
+				update_post_meta( $post_id, 'target', 'global' );
+			}
+			
+			if ($_POST[ 'scope' ] == 'section') {
+				if ( isset( $_POST[ 'section' ] ) ) {
+					update_post_meta( $post_id, 'target_type', 'section' );
+					update_post_meta( $post_id, 'target', $_POST[ 'section' ] );
+				}
+			}
+			
+			if ($_POST[ 'scope' ] == 'entity') {
+				//if ( isset( $_POST[ 'section' ] ) ) {
+					update_post_meta( $post_id, 'target_type', 'entity' );
+					update_post_meta( $post_id, 'target', 'entity' );
+				//}
+			}
 		}
-		
-		if( isset( $_POST[ 'section' ] ) ) {
-			update_post_meta( $post_id, 'target_type', 'section' );
-			update_post_meta( $post_id, 'target', $_POST[ 'section' ] );
-		}
-		
+
 	}
 
 }
