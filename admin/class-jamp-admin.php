@@ -124,7 +124,7 @@ class Jamp_Admin {
 			if( !in_array( $menu_item[0], array( '', 'Link' ) ) ) {
 				$first_level_sections[] = array(
 					'name' => strstr( $menu_item[0], ' <', true ) ?: $menu_item[0], // The section name ignoring any HTML content.
-					'file' => $menu_item[2], // The section file name.
+					'file' => remove_query_arg('return', wp_kses_decode_entities($menu_item[2])), // The section file name without the "return" parameter.
 					'is_submenu' => false
 				);
 			}
@@ -139,7 +139,7 @@ class Jamp_Admin {
 			foreach ( $submenu[$section['file']] as $submenu_item ) {
 				$this->sections_list[] = array(
 					'name' => '-- ' . (strstr( $submenu_item[0], ' <', true ) ?: $submenu_item[0]), // The section name ignoring any HTML content.
-					'file' => $submenu_item[2], // The section file name.
+					'file' => remove_query_arg('return', wp_kses_decode_entities($submenu_item[2])), // The section file name without the "return" parameter.
 					'is_submenu' => true
 				);
 			}

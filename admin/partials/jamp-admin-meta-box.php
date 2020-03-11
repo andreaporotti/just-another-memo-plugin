@@ -45,7 +45,7 @@
 		
 		<?php foreach ($args['args'] as $section): ?>
 		
-			<option value="<?php echo $section['file'] ?>" <?php if ( isset ( $jamp_meta['target'] ) ) { selected( $jamp_meta['target'][0], wp_kses_decode_entities ( $section['file'] ) ); } echo(!$section['is_submenu']) ? 'disabled' : ''; ?>>
+			<option value="<?php echo $section['file'] ?>" <?php if ( isset ( $jamp_meta['target'] ) ) { selected( $jamp_meta['target'][0], $section['file'] ); } echo(!$section['is_submenu']) ? 'disabled' : ''; ?>>
 				<?php echo $section['name']; ?>
 			</option>
 		
