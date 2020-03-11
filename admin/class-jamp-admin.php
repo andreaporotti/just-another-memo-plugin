@@ -219,5 +219,36 @@ class Jamp_Admin {
 		}
 
 	}
+	
+	/**
+	 * Adds a column to a management page.
+	 *
+	 * @since    1.0.0
+	 */
+	function add_columns_head( $defaults ) {
+		
+		$post_type = get_post_type();
+		
+		// Adds the column skipping out post type.
+		if ( $post_type !== 'jamp_note' ) {
+			$defaults['jamp_note'] = __( 'Note' );
+		}
+		
+		return $defaults;
+		
+	}
+
+	/**
+	 * Shows the column content.
+	 *
+	 * @since    1.0.0
+	 */
+	function show_columns_content( $column_name, $post_id ) {
+		
+		if ( $column_name == 'jamp_note' ) {
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
+		}
+		
+	}
 
 }
