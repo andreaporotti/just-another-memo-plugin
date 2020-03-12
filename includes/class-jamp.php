@@ -169,6 +169,8 @@ class Jamp {
 		
 		$this->loader->add_filter( 'manage_posts_columns', $plugin_admin, 'add_columns_head' );
 		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'show_columns_content', 10, 2 );
+		$this->loader->add_filter( 'manage_page_posts_columns', $plugin_admin, 'add_columns_head' );
+		$this->loader->add_action( 'manage_page_posts_custom_column', $plugin_admin, 'show_columns_content', 10, 2 );
 
 	}
 
