@@ -19,7 +19,7 @@
 	$jamp_meta = get_post_meta( $post->ID );
 ?>
 
-<div class="meta-field meta-scope">
+<div class="meta-field meta-scope no-margin-top">
 	<span><?php _e( 'Seleziona l\'ambito della nota.', 'jamp' ); ?></span>
 	<br>
 	<label for="scope-global">
@@ -39,9 +39,9 @@
 </div>
 
 <div class="meta-field meta-section">
-	<label for="section"><?php _e( 'Scegli la Sezione.', 'jamp' )?></label>
+	<label for="section" class="display-block"><?php _e( 'Scegli la Sezione.', 'jamp' )?></label>
     <select name="section" id="section">
-		<option value="">seleziona...</option>
+		<option value=""><?php _e( 'seleziona...' ); ?></option>
 		
 		<?php foreach ($args['args'] as $section): ?>
 		
@@ -50,5 +50,13 @@
 			</option>
 		
 		<?php endforeach; ?>
+    </select>
+</div>
+
+<div class="meta-field meta-target-type">
+	<label for="target-type" class="display-block"><?php _e( 'Scegli il tipo di Entità.', 'jamp' )?></label>
+	<select name="target-type" id="target-type">
+		<option value=""><?php _e( 'seleziona...' ); ?></option>
+		<option value=""><?php _e( 'Articolo' ); ?></option>
     </select>
 </div>

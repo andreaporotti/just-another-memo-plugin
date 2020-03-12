@@ -3,22 +3,47 @@
 
 	$(function() {
 
-		// Shows or hides Section Field based on selected Scope.
-		function setSectionVisibility(scope) {
-			if (scope === 'section') {
-				$( '.meta-section' ).show();
-			} else {
-				$( '.meta-section' ).hide().find( 'option:first' ).attr( 'selected', 'selected' );
+		// Hides and resets fields unless an element selector is passed.
+		function hideFields( ignoredElement = '' ) {
+
+			if ( ignoredElement !== '.meta-section' ) {
+				$( '.meta-section' ).hide().find( 'option:first' ).attr( 'selected', 'selected' );			
 			}
+
+			if ( ignoredElement !== '.meta-target-type' ) {
+				$( '.meta-target-type' ).hide().find( 'option:first' ).attr( 'selected', 'selected' );
+			}
+
 		}
 
-		// Sets Section field visibility on Scope change.
+		// Shows or hides fields based on selected Scope.
+		function setFieldsVisibility(scope) {
+			
+			switch(scope) {
+				case 'global':
+					hideFields();
+				break;
+				case 'section':
+					hideFields( '.meta-section' );
+					$( '.meta-section' ).show();
+				break;
+				case 'entity':
+					hideFields( '.meta-target-type' );
+					$( '.meta-target-type' ).show();
+				break;
+				default:
+					// code block
+			}
+			
+		}
+
+		// Sets fields visibility on Scope change.
 		$( 'input[type=radio][name=scope]' ).on('change', function() {
-			setSectionVisibility( this.value );
+			setFieldsVisibility( this.value );
 		});
 
 		// Sets Section field visibility on page ready.
-		setSectionVisibility( $( 'input[type=radio][name=scope]:checked' ).val() );
+		setFieldsVisibility( $( 'input[type=radio][name=scope]:checked' ).val() );
 	});
 
 })( jQuery );

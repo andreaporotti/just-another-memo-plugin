@@ -1,13 +1,23 @@
+/* GENERAL */
+
+.display-block {
+	display: block;
+}
+
+.no-margin-top {
+	margin-top: 0 !important;
+}
+
 /* META BOX */
 
 #jamp_meta_box .meta-field {
-	margin-bottom: 15px;
-}
-
-#jamp_meta_box .meta-field:last-child {
-	margin-bottom: 0;
+	margin-top: 15px;
 }
 
 #jamp_meta_box .meta-section {
+	display: none;
+}
+
+#jamp_meta_box .meta-target-type {
 	display: none;
 }
