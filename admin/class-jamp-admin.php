@@ -47,6 +47,15 @@ class Jamp_Admin {
 	 * @var      array     $version    The list of all dashboard side menu items.
 	 */
 	private $sections_list = array();
+	
+	/**
+	 * The list of all supported target types.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      array     $version    The list of all supported target types.
+	 */
+	private $target_types_list = array();
 
 	/**
 	 * Initialize the class and set its properties.
@@ -145,6 +154,28 @@ class Jamp_Admin {
 			}
 		}
 	}
+	
+	/**
+	 * Creates a list of all supported target types.
+	 *
+	 * @since    1.0.0
+	 */
+	public function build_target_types_list() {
+
+		$post_types = get_post_types(array(
+			'public' => true
+		), 'objects');
+
+		foreach ($post_types as $post_type) {
+			if( ! in_array( $post_type->name, array( 'attachment', 'jamp_note' ), true ) ) {
+				$this->target_types_list[] = array(
+					'name' => $post_type->name,
+					'label' => $post_type->label,
+				);
+			}
+		}
+
+	}
 
 	/**
 	 * Adds the meta box.
@@ -152,6 +183,8 @@ class Jamp_Admin {
 	 * @since    1.0.0
 	 */
 	public function add_meta_box() {
+		
+		$this->build_target_types_list();
 
 		$screens = array( 'jamp_note' );
 		foreach ( $screens as $screen ) {
@@ -162,7 +195,10 @@ class Jamp_Admin {
 				$screen,
 				'side',
 				'default',
-				$this->sections_list
+				array(
+					'sections'     => $this->sections_list,
+					'target_types' => $this->target_types_list
+				)
 			);
 		}
 
@@ -213,8 +249,8 @@ class Jamp_Admin {
 			}
 
 			if ( $_POST['scope'] === 'entity' ) {
-				update_post_meta( $post_id, 'jamp_target_type', 'entity' );
-				update_post_meta( $post_id, 'jamp_target', 'entity' );
+				update_post_meta( $post_id, 'jamp_target_type', $_POST['target-type'] );
+				update_post_meta( $post_id, 'jamp_target', '' );
 			}
 		}
 
@@ -229,7 +265,7 @@ class Jamp_Admin {
 		
 		$post_type = get_post_type();
 		
-		// Adds the column skipping out post type.
+		// Adds the column skipping the plugin custom post type.
 		if ( $post_type !== 'jamp_note' ) {
 			$defaults['jamp_note'] = __( 'Note' );
 		}

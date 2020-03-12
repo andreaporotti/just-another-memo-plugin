@@ -43,7 +43,7 @@
     <select name="section" id="section">
 		<option value=""><?php _e( 'seleziona...' ); ?></option>
 		
-		<?php foreach ($args['args'] as $section): ?>
+		<?php foreach ($args['args']['sections'] as $section): ?>
 		
 			<option value="<?php echo $section['file'] ?>" <?php if ( isset ( $jamp_meta['jamp_target'] ) ) { selected( $jamp_meta['jamp_target'][0], $section['file'] ); } echo(!$section['is_submenu']) ? 'disabled' : ''; ?>>
 				<?php echo $section['name']; ?>
@@ -57,6 +57,13 @@
 	<label for="target-type" class="display-block"><?php _e( 'Scegli il tipo di Entità.', 'jamp' )?></label>
 	<select name="target-type" id="target-type">
 		<option value=""><?php _e( 'seleziona...' ); ?></option>
-		<option value=""><?php _e( 'Articolo' ); ?></option>
+		
+		<?php foreach ($args['args']['target_types'] as $target_type): ?>
+		
+			<option value="<?php echo $target_type['name']; ?>" <?php if ( isset ( $jamp_meta['jamp_target_type'] ) ) { selected( $jamp_meta['jamp_target_type'][0], $target_type['name'] ); } ?>>
+				<?php echo $target_type['label']; ?>
+			</option>
+		
+		<?php endforeach; ?>
     </select>
 </div>
