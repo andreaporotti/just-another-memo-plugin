@@ -111,10 +111,28 @@ class Jamp_Admin {
 		 * The Jamp_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
+		 * 
+		 * 
+		 * 
+		 * function my_enqueue( $hook ) {
+				if( 'myplugin_settings.php' != $hook ) return;
+				wp_enqueue_script( 'ajax-script',
+					plugins_url( '/js/myjquery.js', __FILE__ ),
+					array( 'jquery' )
+				);
+			}
+		 * 
+		 * 
+		 * 
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/jamp-admin.js', array( 'jquery' ), $this->version, false );
 
+		wp_localize_script( $this->plugin_name, 'jamp_ajax', array(
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce'    => wp_create_nonce( $this->plugin_name ),
+		) );
+		
 	}
 
 	/**
@@ -154,7 +172,47 @@ class Jamp_Admin {
 			}
 		}
 	}
-	
+
+	/**
+	 * Creates a list of all entities of the passed post type.
+	 *
+	 * @since    1.0.0
+	 */
+	public function build_entities_list() {
+
+		// Checks the nonce is valid.
+		check_ajax_referer( $this->plugin_name );
+
+		
+		$post_type = $_POST['post_type'];
+		
+		if ( ! empty( $post_type ) ) {
+
+			// Gets entities as objects
+			$entities_objects = get_posts( array(
+				'post_type' => $post_type,
+				'posts_per_page' => -1,
+			) );
+
+			// Builds the actual list.
+			$entities = array();
+			foreach ( $entities_objects as $entity ) {
+				$entities[] = array(
+					'id' => $entity->ID,
+					'title' => $entity->post_title,
+				);
+			}
+
+			wp_send_json_success($entities);
+
+		} else {
+			
+			wp_send_json_error('');
+			
+		}
+
+	}
+
 	/**
 	 * Creates a list of all supported target types.
 	 *
@@ -250,7 +308,7 @@ class Jamp_Admin {
 
 			if ( $_POST['scope'] === 'entity' ) {
 				update_post_meta( $post_id, 'jamp_target_type', $_POST['target-type'] );
-				update_post_meta( $post_id, 'jamp_target', '' );
+				update_post_meta( $post_id, 'jamp_target', $_POST['target'] );
 			}
 		}
 

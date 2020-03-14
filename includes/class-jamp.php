@@ -163,6 +163,7 @@ class Jamp {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'build_sections_list' );
+		$this->loader->add_action( 'wp_ajax_build_entities_list', $plugin_admin, 'build_entities_list' );
 		
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_meta_box' );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_meta_data' );

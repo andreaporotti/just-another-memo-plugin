@@ -2,6 +2,50 @@
 	'use strict';
 
 	$(function() {
+		// ...
+		function getEntitiesList(postType) {
+			
+			//console.log(postType);
+			//console.log(jamp_ajax);
+			
+			if ( postType !== '' ) {
+				
+				console.log('getting entities list...');
+				
+				$.post( jamp_ajax.ajax_url, {
+					_ajax_nonce: jamp_ajax.nonce,
+					action: 'build_entities_list',
+					post_type: postType
+				}, function( response ) {
+					
+					//console.log('response data:');
+					//console.log(response);
+					
+					if ( response.success ) {
+
+						var options = ``;
+						$.each(response.data, function(key, entity) {
+							options += `<option class="target-entity" value="${entity.id}">${entity.title}</option>`;
+						});
+						
+						$('#target option.target-entity').remove();
+						$('#target').append(options);
+
+					} else {
+						
+						console.log('Error getting entities!');
+						
+					}
+					
+				} );
+				
+			} else {
+				
+				console.log('do nothing');
+				
+			}
+			
+		}
 
 		// Hides and resets fields unless an element selector is passed.
 		function hideFields( ignoredElement = '' ) {
@@ -41,9 +85,15 @@
 		$( 'input[type=radio][name=scope]' ).on('change', function() {
 			setFieldsVisibility( this.value );
 		});
+		
+		// Fills the entities list on target type change.
+		$( '#target-type' ).on('change', function() {
+			getEntitiesList( this.value );
+		});
 
 		// Sets Section field visibility on page ready.
 		setFieldsVisibility( $( 'input[type=radio][name=scope]:checked' ).val() );
+
 	});
 
 })( jQuery );

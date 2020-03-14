@@ -67,3 +67,10 @@
 		<?php endforeach; ?>
     </select>
 </div>
+
+<div class="meta-field meta-target">
+	<label for="target" class="display-block"><?php _e( 'Scegli l\'Entità.', 'jamp' )?></label>
+	<select name="target" id="target">
+		<option value=""><?php _e( 'seleziona...' ); ?></option>
+	</select>
+</div>
