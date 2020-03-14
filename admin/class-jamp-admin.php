@@ -174,11 +174,33 @@ class Jamp_Admin {
 	}
 
 	/**
+	 * Creates a list of all supported target types.
+	 *
+	 * @since    1.0.0
+	 */
+	public function build_target_types_list() {
+
+		$post_types = get_post_types(array(
+			'public' => true
+		), 'objects');
+
+		foreach ($post_types as $post_type) {
+			if( ! in_array( $post_type->name, array( 'attachment', 'jamp_note' ), true ) ) {
+				$this->target_types_list[] = array(
+					'name' => $post_type->name,
+					'label' => $post_type->label,
+				);
+			}
+		}
+
+	}
+	
+	/**
 	 * Creates a list of all entities of the passed post type.
 	 *
 	 * @since    1.0.0
 	 */
-	public function build_entities_list() {
+	public function build_targets_list() {
 
 		// Checks the nonce is valid.
 		check_ajax_referer( $this->plugin_name );
@@ -209,28 +231,6 @@ class Jamp_Admin {
 			
 			wp_send_json_error('');
 			
-		}
-
-	}
-
-	/**
-	 * Creates a list of all supported target types.
-	 *
-	 * @since    1.0.0
-	 */
-	public function build_target_types_list() {
-
-		$post_types = get_post_types(array(
-			'public' => true
-		), 'objects');
-
-		foreach ($post_types as $post_type) {
-			if( ! in_array( $post_type->name, array( 'attachment', 'jamp_note' ), true ) ) {
-				$this->target_types_list[] = array(
-					'name' => $post_type->name,
-					'label' => $post_type->label,
-				);
-			}
 		}
 
 	}

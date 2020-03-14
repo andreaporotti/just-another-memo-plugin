@@ -15,6 +15,7 @@
 }
 
 #jamp_meta_box .meta-section,
-#jamp_meta_box .meta-target-type {
+#jamp_meta_box .meta-target-type,
+#jamp_meta_box .meta-target {
 	display: none;
 }

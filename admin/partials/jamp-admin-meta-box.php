@@ -19,6 +19,8 @@
 	$jamp_meta = get_post_meta( $post->ID );
 ?>
 
+<input type="hidden" id="saved-target" value="<?php if ( isset ( $jamp_meta['jamp_target'] ) ) { echo $jamp_meta['jamp_target'][0]; } ?>">
+
 <div class="meta-field meta-scope no-margin-top">
 	<span><?php _e( 'Seleziona l\'ambito della nota.', 'jamp' ); ?></span>
 	<br>
