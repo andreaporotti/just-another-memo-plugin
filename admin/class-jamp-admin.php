@@ -344,5 +344,32 @@ class Jamp_Admin {
 		}
 		
 	}
+	
+	/**
+	 * Adds an item to the admin bar
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_admin_bar_menu_item() {
+		
+		global $wp_admin_bar;
+		
+		// Main node.
+        $wp_admin_bar->add_node( array(
+            'id'    => 'jamp',
+            'title' => '<span class="ab-icon"></span>' . __( 'Note', 'jamp' ),
+            'href'  => '#',
+        ));
+		
+		// Content node.
+        $wp_admin_bar->add_node( array(
+            'id'    => 'jamp-content',
+            'title' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+			. '<br>Integer rhoncus sem eu posuere sollicitudin.'
+			. '<br>Sed metus nunc, consequat imperdiet eleifend sit amet, faucibus vel leo. </p>',
+            'parent'  => 'jamp',
+        ));
+		
+	}
 
 }

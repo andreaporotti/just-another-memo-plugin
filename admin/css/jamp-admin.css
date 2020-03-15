@@ -19,3 +19,13 @@
 #jamp_meta_box .meta-target {
 	display: none;
 }
+
+/* ADMIN BAR */
+#wpadminbar #wp-admin-bar-jamp .ab-icon:before {
+    content: "\f119";
+    top: 3px;
+}
+
+#wpadminbar #wp-admin-bar-jamp #wp-admin-bar-jamp-content div.ab-item {
+	height: 100%;
+}
