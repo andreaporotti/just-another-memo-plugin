@@ -1,4 +1,4 @@
-/* GENERAL */
+/* ==== GENERAL ==== */
 
 .display-block {
 	display: block;
@@ -8,7 +8,7 @@
 	margin-top: 0 !important;
 }
 
-/* META BOX */
+/* ==== META BOX ==== */
 
 #jamp_meta_box .meta-field {
 	margin-top: 15px;
@@ -20,7 +20,8 @@
 	display: none;
 }
 
-/* ADMIN BAR */
+/* ==== ADMIN BAR ==== */
+
 #wpadminbar #wp-admin-bar-jamp .ab-icon:before {
     content: "\f119";
     top: 3px;
@@ -28,4 +29,9 @@
 
 #wpadminbar #wp-admin-bar-jamp #wp-admin-bar-jamp-content div.ab-item {
 	height: 100%;
+}
+
+
+#wpadminbar #wp-admin-bar-jamp #wp-admin-bar-jamp-content div.ab-item .jamp-admin-bar-note-title {
+	font-weight: 700;
 }

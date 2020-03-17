@@ -149,9 +149,12 @@ class Jamp_Admin {
 		// Get sections placed on the first level menu. Some names are ignored.
 		foreach ( $menu as $menu_item ) {
 			if ( ! in_array( $menu_item[0], array( '', 'Link' ), true ) ) {
+				$file = remove_query_arg( 'return', wp_kses_decode_entities( $menu_item[2] ) );
+				
 				$first_level_sections[] = array(
 					'name'       => strstr( $menu_item[0], ' <', true ) ?: $menu_item[0], // The section name ignoring any HTML content.
-					'file'       => remove_query_arg( 'return', wp_kses_decode_entities( $menu_item[2] ) ), // The section file name without the "return" parameter.
+					'file'       => $file, // The section file name without the "return" parameter.
+					'url'        => admin_url($file),
 					'is_submenu' => false,
 				);
 			}
@@ -164,9 +167,12 @@ class Jamp_Admin {
 
 			// Get the sub sections of current first level section from the sub menu.
 			foreach ( $submenu[ $section['file'] ] as $submenu_item ) {
+				$file = remove_query_arg( 'return', wp_kses_decode_entities( $submenu_item[2] ) );
+				
 				$this->sections_list[] = array(
 					'name'       => '-- ' . ( strstr( $submenu_item[0], ' <', true ) ?: $submenu_item[0] ), // The section name ignoring any HTML content.
-					'file'       => remove_query_arg( 'return', wp_kses_decode_entities( $submenu_item[2] ) ), // The section file name without the "return" parameter.
+					'file'       => $file, // The section file name without the "return" parameter.
+					'url'        => admin_url($file),
 					'is_submenu' => true,
 				);
 			}
@@ -351,8 +357,8 @@ class Jamp_Admin {
 	 * @since    1.0.0
 	 */
 	public function add_admin_bar_menu_item() {
-		
-		global $wp_admin_bar;
+
+		global $wp_admin_bar;		
 		
 		// Main node.
         $wp_admin_bar->add_node( array(
@@ -364,12 +370,11 @@ class Jamp_Admin {
 		// Content node.
         $wp_admin_bar->add_node( array(
             'id'    => 'jamp-content',
-            'title' => '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-			. '<br>Integer rhoncus sem eu posuere sollicitudin.'
-			. '<br>Sed metus nunc, consequat imperdiet eleifend sit amet, faucibus vel leo. </p>',
             'parent'  => 'jamp',
+            'title' => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
         ));
 		
 	}
+
 
 }

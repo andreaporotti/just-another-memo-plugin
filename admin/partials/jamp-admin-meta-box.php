@@ -47,7 +47,7 @@
 		
 		<?php foreach ($args['args']['sections'] as $section): ?>
 		
-			<option value="<?php echo $section['file'] ?>" <?php if ( isset ( $jamp_meta['jamp_target'] ) ) { selected( $jamp_meta['jamp_target'][0], $section['file'] ); } echo(!$section['is_submenu']) ? 'disabled' : ''; ?>>
+			<option value="<?php echo $section['url'] ?>" <?php if ( isset ( $jamp_meta['jamp_target'] ) ) { selected( $jamp_meta['jamp_target'][0], $section['url'] ); } echo(!$section['is_submenu']) ? 'disabled' : ''; ?>>
 				<?php echo $section['name']; ?>
 			</option>
 		
