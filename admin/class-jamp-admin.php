@@ -378,24 +378,41 @@ class Jamp_Admin {
 	 * @since    1.0.0
 	 */
 	public function add_admin_bar_menu_item() {
+		
+		// Checks if current section is supported by the plugin.
+		$current_section_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+		$is_supported_section = false;
+		
+		foreach ( $this->sections_list as $section ) {
+			
+			if ( $section['url'] === $current_section_url ) {
 
-		global $wp_admin_bar;		
-		
-		// Main node.
-        $wp_admin_bar->add_node( array(
-            'id'    => 'jamp',
-            'title' => '<span class="ab-icon"></span>' . __( 'Note', 'jamp' ),
-            'href'  => '#',
-        ));
-		
-		// Content node.
-        $wp_admin_bar->add_node( array(
-            'id'    => 'jamp-content',
-            'parent'  => 'jamp',
-            'title' => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
-        ));
-		
+				$is_supported_section = true;
+
+			}
+
+		}
+
+		if ( $is_supported_section ) {
+
+			global $wp_admin_bar;		
+
+			// Main node.
+			$wp_admin_bar->add_node( array(
+				'id'    => 'jamp',
+				'title' => '<span class="ab-icon"></span>' . __( 'Note', 'jamp' ),
+				'href'  => '#',
+			));
+
+			// Content node.
+			$wp_admin_bar->add_node( array(
+				'id'    => 'jamp-content',
+				'parent'  => 'jamp',
+				'title' => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
+			));
+
+		}
+
 	}
-
 
 }

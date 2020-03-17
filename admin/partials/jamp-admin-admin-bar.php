@@ -11,7 +11,6 @@
 ?>
 
 <?php
-	$current_page_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 	$html = '';
 
 	// Gets Notes with the current page url.
@@ -20,7 +19,7 @@
 		'posts_per_page' => -1,
 		'meta_key' => 'jamp_target',
 		'meta_compare' => '=',
-		'meta_value' => $current_page_url,
+		'meta_value' => $current_section_url,
 	);
 	
 	$notes = new WP_Query($args);
