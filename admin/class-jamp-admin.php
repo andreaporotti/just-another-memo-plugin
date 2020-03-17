@@ -142,18 +142,13 @@ class Jamp_Admin {
 	 */
 	public function build_sections_list() {
 		global $menu, $submenu;
-		
-		/*error_log('========= MENU ==============================================');
-		error_log(print_r($menu, true));
-		error_log('========= SUBMENU ===========================================');
-		error_log(print_r($submenu, true));*/
 
 		// The sections placed on the first level menu.
 		$first_level_sections = array();
 
-		// Gets sections placed on the first level menu. Some names are ignored.
+		// Gets sections placed on the first level menu. Some items are ignored.
 		foreach ( $menu as $menu_item ) {
-			if ( ! in_array( $menu_item[0], array( '', 'Link' ), true ) ) {
+			if ( ! in_array( $menu_item[0], array( '', 'Link' ), true ) && ! strpos($menu_item[2], 'jamp_note') ) {
 				// Gets section file without the "return" parameter.
 				$file = remove_query_arg( 'return', wp_kses_decode_entities( $menu_item[2] ) );
 				
