@@ -142,19 +142,32 @@ class Jamp_Admin {
 	 */
 	public function build_sections_list() {
 		global $menu, $submenu;
+		
+		/*error_log('========= MENU ==============================================');
+		error_log(print_r($menu, true));
+		error_log('========= SUBMENU ===========================================');
+		error_log(print_r($submenu, true));*/
 
 		// The sections placed on the first level menu.
 		$first_level_sections = array();
 
-		// Get sections placed on the first level menu. Some names are ignored.
+		// Gets sections placed on the first level menu. Some names are ignored.
 		foreach ( $menu as $menu_item ) {
 			if ( ! in_array( $menu_item[0], array( '', 'Link' ), true ) ) {
+				// Gets section file without the "return" parameter.
 				$file = remove_query_arg( 'return', wp_kses_decode_entities( $menu_item[2] ) );
+				
+				// Generates section absolute url.
+				$url = $file;
+				if ( ! strpos($url, '.php')) {
+					$url = '/admin.php?page=' . $url;
+				}
+				$url = admin_url($url);
 				
 				$first_level_sections[] = array(
 					'name'       => strstr( $menu_item[0], ' <', true ) ?: $menu_item[0], // The section name ignoring any HTML content.
-					'file'       => $file, // The section file name without the "return" parameter.
-					'url'        => admin_url($file),
+					'file'       => $file,
+					'url'        => $url,
 					'is_submenu' => false,
 				);
 			}
@@ -165,14 +178,22 @@ class Jamp_Admin {
 			// Add current first level section to the list.
 			$this->sections_list[] = $section;
 
-			// Get the sub sections of current first level section from the sub menu.
+			// Gets the sub sections of current first level section from the sub menu.
 			foreach ( $submenu[ $section['file'] ] as $submenu_item ) {
+				// Gets section file without the "return" parameter.
 				$file = remove_query_arg( 'return', wp_kses_decode_entities( $submenu_item[2] ) );
+				
+				// Generates section absolute url.
+				$url = $file;
+				if ( ! strpos($url, '.php')) {
+					$url = '/admin.php?page=' . $url;
+				}
+				$url = admin_url($url);
 				
 				$this->sections_list[] = array(
 					'name'       => '-- ' . ( strstr( $submenu_item[0], ' <', true ) ?: $submenu_item[0] ), // The section name ignoring any HTML content.
-					'file'       => $file, // The section file name without the "return" parameter.
-					'url'        => admin_url($file),
+					'file'       => $file,
+					'url'        => $url,
 					'is_submenu' => true,
 				);
 			}
