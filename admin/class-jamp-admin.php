@@ -180,7 +180,7 @@ class Jamp_Admin {
 				
 				// Generates section absolute url.
 				$url = $file;
-				if ( ! strpos($url, '.php')) {
+				if ( ! strpos($url, '.php') ) {
 					$url = '/admin.php?page=' . $url;
 				}
 				$url = admin_url($url);
@@ -227,7 +227,6 @@ class Jamp_Admin {
 		// Checks the nonce is valid.
 		check_ajax_referer( $this->plugin_name );
 
-		
 		$post_type = $_POST['post_type'];
 		
 		if ( ! empty( $post_type ) ) {
@@ -246,7 +245,7 @@ class Jamp_Admin {
 					'title' => $entity->post_title,
 				);
 			}
-
+			
 			wp_send_json_success($entities);
 
 		} else {
@@ -368,45 +367,61 @@ class Jamp_Admin {
 	}
 	
 	/**
-	 * Adds an item to the admin bar
+	 * Generates current page url.
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_admin_bar_menu_item() {
+	private function get_current_page_url() {
+
+		return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+
+	}
+	
+	/**
+	 * Checks if current section is supported by the plugin.
+	 *
+	 * @since    1.0.0
+	 */
+	private function is_section_supported() {
 		
-		// Checks if current section is supported by the plugin.
-		$current_section_url = $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-		$is_supported_section = false;
+		$current_section_url = $this->get_current_page_url();
 		
 		foreach ( $this->sections_list as $section ) {
 			
 			if ( $section['url'] === $current_section_url ) {
 
-				$is_supported_section = true;
+				return true;
 
 			}
 
 		}
+		
+		return false;
+		
+	}
+	
+	/**
+	 * Adds an item to the admin bar
+	 *
+	 * @since    1.0.0
+	 */
+	public function add_admin_bar_menu_item() {
 
-		if ( $is_supported_section ) {
+		global $wp_admin_bar;		
 
-			global $wp_admin_bar;		
+		// Main node.
+		$wp_admin_bar->add_node( array(
+			'id'    => 'jamp',
+			'title' => '<span class="ab-icon"></span>' . __( 'Note', 'jamp' ),
+			'href'  => '#',
+		));
 
-			// Main node.
-			$wp_admin_bar->add_node( array(
-				'id'    => 'jamp',
-				'title' => '<span class="ab-icon"></span>' . __( 'Note', 'jamp' ),
-				'href'  => '#',
-			));
-
-			// Content node.
-			$wp_admin_bar->add_node( array(
-				'id'    => 'jamp-content',
-				'parent'  => 'jamp',
-				'title' => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
-			));
-
-		}
+		// Content node.
+		$wp_admin_bar->add_node( array(
+			'id'    => 'jamp-content',
+			'parent'  => 'jamp',
+			'title' => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
+		));
 
 	}
 

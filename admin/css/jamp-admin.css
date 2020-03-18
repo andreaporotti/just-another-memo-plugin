@@ -27,11 +27,36 @@
     top: 3px;
 }
 
-#wpadminbar #wp-admin-bar-jamp #wp-admin-bar-jamp-content div.ab-item {
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper .ab-item {
+	color: #FFFFFF;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item {
 	height: 100%;
 }
 
 
-#wpadminbar #wp-admin-bar-jamp #wp-admin-bar-jamp-content div.ab-item .jamp-admin-bar-note-title {
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .area-title {
+	display: inline-block;
+	font-size: 15px;
 	font-weight: 700;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .create-link {
+	display: inline-block;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .note {
+	background-color: #ddd;
+	color: #333;
+	padding: 5px;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .note-title {
+	font-weight: 700;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .notes-not-found {
+	display: block;
+	font-style: italic;
 }
