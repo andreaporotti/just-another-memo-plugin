@@ -418,9 +418,9 @@ class Jamp_Admin {
 
 		// Content node.
 		$wp_admin_bar->add_node( array(
-			'id'    => 'jamp-content',
-			'parent'  => 'jamp',
-			'title' => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
+			'id'     => 'jamp-content',
+			'parent' => 'jamp',
+			'title'  => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
 		));
 
 	}

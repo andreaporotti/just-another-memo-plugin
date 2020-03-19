@@ -48,38 +48,42 @@
 	wp_reset_postdata();
 	
 	// Section notes.
-	$html .= '<span class="area-title">' . __('Note in questa sezione') . '</span> <span class="create-link">(<a href="#">' . __('aggiungi') . '</a>)</span>';
-	
-	$section_notes_args = array(
-		'post_type' => 'jamp_note',
-		'posts_per_page' => -1,
-		'meta_key' => 'jamp_target',
-		'meta_compare' => '=',
-		'meta_value' => $this->get_current_page_url(),
-	);
-	
-	$section_notes = get_posts($section_notes_args);
-	
-	if ( ! empty( $section_notes ) ) {
-		
-		foreach ($section_notes as $note) {
-			
-			$html .= '<div class="note">'
-					. '<span class="note-title">' . $note->post_title . '</span> '
-					. '<span class="edit-link">(<a href="#">' . __('modifica') . '</a></span> | '
-					. '<span class="trash-link"><a href="#">' . __('cestina') . '</a>)</span>'
-					. '<p class="note-content">' . $note->post_content . '</p>'
-					. '</div>';
-			
+	if ( $this->is_section_supported() ) {
+
+		$html .= '<span class="area-title">' . __('Note in questa sezione') . '</span> <span class="create-link">(<a href="#">' . __('aggiungi') . '</a>)</span>';
+
+		$section_notes_args = array(
+			'post_type' => 'jamp_note',
+			'posts_per_page' => -1,
+			'meta_key' => 'jamp_target',
+			'meta_compare' => '=',
+			'meta_value' => $this->get_current_page_url(),
+		);
+
+		$section_notes = get_posts($section_notes_args);
+
+		if ( ! empty( $section_notes ) ) {
+
+			foreach ($section_notes as $note) {
+
+				$html .= '<div class="note">'
+						. '<span class="note-title">' . $note->post_title . '</span> '
+						. '<span class="edit-link">(<a href="#">' . __('modifica') . '</a></span> | '
+						. '<span class="trash-link"><a href="#">' . __('cestina') . '</a>)</span>'
+						. '<p class="note-content">' . $note->post_content . '</p>'
+						. '</div>';
+
+			}
+
+		} else {
+
+			$html .= '<span class="notes-not-found">' . __('Non sono presenti note in questa sezione.') . '</span>';
+
 		}
-		
-	} else {
-		
-		$html .= '<span class="notes-not-found">' . __('Non sono presenti note in questa sezione.') . '</span>';
-		
+
+		wp_reset_postdata();
+
 	}
 	
-	wp_reset_postdata();
-
 	return $html;
 ?>
