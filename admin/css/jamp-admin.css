@@ -22,6 +22,11 @@
 
 /* ==== ADMIN BAR ==== */
 
+/* Just for debug! */
+/*#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper {
+	display: block;
+}*/
+
 #wpadminbar #wp-admin-bar-jamp .ab-icon:before {
     content: "\f119";
     top: 3px;
@@ -35,7 +40,6 @@
 	height: 100%;
 }
 
-
 #wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .area-title {
 	display: inline-block;
 	font-size: 15px;
@@ -46,14 +50,52 @@
 	display: inline-block;
 }
 
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .create-link a,
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .edit-link a,
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .trash-link a {
+	display: inline;
+	padding: 0;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .edit-link a {
+	color: #187fe6;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .trash-link a {
+	color: #ff0000;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .edit-link a:hover,
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .trash-link a:hover {
+	color: #32373c;
+}
+
 #wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .note {
-	background-color: #ddd;
-	color: #333;
-	padding: 5px;
+	position: relative;
+	max-width: 400px;
+	padding: 0 5px 5px 5px;
+	margin-bottom: 5px;
+	background-color: #fffd89;
+	color: #32373c;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .note::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-width: 0 16px 16px 0;
+    border-style: solid;
+    border-color: #c4c267  #32373c;
 }
 
 #wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .note-title {
 	font-weight: 700;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .note-content {
+	white-space: normal;
+	line-height: 1.6;
 }
 
 #wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .notes-not-found {

@@ -14,7 +14,7 @@
 	$html = '';
 	
 	// Global notes.
-	$html .= '<span class="area-title">' . __('Note globali') . '</span><span class="create-link"><a href="#">aggiungi</a></span>';
+	$html .= '<span class="area-title">' . __('Note globali') . '</span> <span class="create-link">(<a href="#">' . __('aggiungi') . '</a>)</span>';
 	
 	$global_notes_args = array(
 		'post_type' => 'jamp_note',
@@ -31,7 +31,9 @@
 		foreach ($global_notes as $note) {
 			
 			$html .= '<div class="note">'
-					. '<span class="note-title">' . $note->post_title . '</span>'
+					. '<span class="note-title">' . $note->post_title . '</span> '
+					. '<span class="edit-link">(<a href="#">' . __('modifica') . '</a></span> | '
+					. '<span class="trash-link"><a href="#">' . __('cestina') . '</a>)</span>'
 					. '<p class="note-content">' . $note->post_content . '</p>'
 					. '</div>';
 			
@@ -46,7 +48,7 @@
 	wp_reset_postdata();
 	
 	// Section notes.
-	$html .= '<span class="area-title">' . __('Note in questa sezione') . '</span><span class="create-link"><a href="#">aggiungi</a></span>';
+	$html .= '<span class="area-title">' . __('Note in questa sezione') . '</span> <span class="create-link">(<a href="#">' . __('aggiungi') . '</a>)</span>';
 	
 	$section_notes_args = array(
 		'post_type' => 'jamp_note',
@@ -63,7 +65,9 @@
 		foreach ($section_notes as $note) {
 			
 			$html .= '<div class="note">'
-					. '<span class="note-title">' . $note->post_title . '</span>'
+					. '<span class="note-title">' . $note->post_title . '</span> '
+					. '<span class="edit-link">(<a href="#">' . __('modifica') . '</a></span> | '
+					. '<span class="trash-link"><a href="#">' . __('cestina') . '</a>)</span>'
 					. '<p class="note-content">' . $note->post_content . '</p>'
 					. '</div>';
 			
@@ -71,7 +75,7 @@
 		
 	} else {
 		
-		$html .= '<span class="notes-not-found">' . __('Non sono presenti note per questa sezione.') . '</span>';
+		$html .= '<span class="notes-not-found">' . __('Non sono presenti note in questa sezione.') . '</span>';
 		
 	}
 	
