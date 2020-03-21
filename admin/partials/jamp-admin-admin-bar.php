@@ -49,9 +49,7 @@
 		$html .= '<span class="notes-not-found">' . __('Non sono presenti note globali.') . '</span>';
 		
 	}
-	
-	wp_reset_postdata();
-	
+
 	// Section notes.
 	if ( $this->is_section_supported() ) {
 
@@ -92,9 +90,7 @@
 
 		}
 
-		wp_reset_postdata();
-
 	}
-	
+
 	return $html;
 ?>
