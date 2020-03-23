@@ -301,6 +301,15 @@ class Jamp_Admin {
 	 */
 	public function save_meta_data( $post_id ) {
 
+		error_log('-- save_meta_data');
+		
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+		
+		error_log('$_SESSION:');
+		error_log(print_r($_SESSION, true));
+		
 		// Checks save status.
 		$is_autosave    = wp_is_post_autosave( $post_id );
 		$is_revision    = wp_is_post_revision( $post_id );
@@ -423,6 +432,103 @@ class Jamp_Admin {
 			'title'  => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
 		));
 
+	}
+	
+	public function post_create_page() {
+		
+		error_log('-- post_create_page');
+		
+		// Extract the "post_type" parameter value from querystring.
+		$current_url = $this->get_current_page_url();
+		$querystring = parse_url($current_url, PHP_URL_QUERY);
+		parse_str($querystring, $params);
+		$post_type = ( isset ( $params['post_type'] ) ) ? $params['post_type'] : null;
+		
+		if ( $post_type === 'jamp_note' ) {
+			
+			$referer = wp_get_referer();
+			error_log('saving referer in session');
+			error_log('referer:');
+			error_log($referer);
+
+			if (session_status() == PHP_SESSION_NONE) {
+				session_start();
+			}
+
+			$_SESSION['return_url'] = $referer;
+			
+		}
+		
+	}
+	
+	public function redirect_after_save( $location ) {
+		
+		error_log('-- redirect_after_save');
+		
+		global $post;
+		
+		// Perform redirection only for notes.
+		if ($post->post_type === 'jamp_note') {
+			
+			// Extract the "message" parameter value from querystring.
+			$querystring = parse_url($location, PHP_URL_QUERY);
+			parse_str($querystring, $params);
+			$message = $params['message'];
+			
+			if (session_status() == PHP_SESSION_NONE) {
+				session_start();
+			}
+			
+			if ( !empty( $_SESSION['return_url'] ) ) {
+				
+				// Add parameters to return url.
+				$return_url = add_query_arg(array(
+					'jamp_message_id' => $message,
+				), $_SESSION['return_url']);
+
+				error_log('return url modificata:');
+				error_log($return_url);
+				
+				// Destroy session variabile.
+				unset($_SESSION['return_url']);
+
+				return $return_url;
+				
+			}
+
+		}
+
+	}
+	
+	public function set_admin_notices() {
+		
+		error_log('-- set_admin_notices');
+		
+		if ( isset( $_GET['jamp_message_id'] ) ) {
+			
+			error_log('configuring note messages');
+			
+			$messages['jamp_note'] = array(
+				0  => '',
+				1  => __( 'Nota aggiornata.' ),
+				2  => __( 'Campo personalizzato aggiornato.' ),
+				3  => __( 'Campo personalizzato eliminato.' ),
+				4  => __( 'Nota aggiornata.' ),
+				5  => isset( $_GET['revision'] ) ? sprintf( __( 'Nota ripristinata a revisione da %s.' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+				6  => __( 'Nota pubblicata.' ),
+				7  => __( 'Nota salvata.' ),
+				8  => __( 'Nota inviata.' ),
+				9  => __( 'Nota pianificata.' ),
+				10 => __( 'Bozza della nota aggiornata.' ),
+			);
+			
+			?>
+				<div class="notice notice-success is-dismissible">
+				   <p><?php echo $messages['jamp_note'][$_GET['jamp_message_id']]; ?></p>
+				</div>
+			<?php
+		
+		}
 	}
 
 }

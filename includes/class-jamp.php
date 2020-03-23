@@ -166,7 +166,7 @@ class Jamp {
 		$this->loader->add_action( 'wp_ajax_build_targets_list', $plugin_admin, 'build_targets_list' );
 
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_meta_box' );
-		$this->loader->add_action( 'save_post', $plugin_admin, 'save_meta_data' );
+		$this->loader->add_action( 'save_post_jamp_note', $plugin_admin, 'save_meta_data' );
 
 		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'add_admin_bar_menu_item', 999 );
 
@@ -174,6 +174,10 @@ class Jamp {
 		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'show_columns_content', 10, 2 );
 		$this->loader->add_filter( 'manage_page_posts_columns', $plugin_admin, 'add_columns_head' );
 		$this->loader->add_action( 'manage_page_posts_custom_column', $plugin_admin, 'show_columns_content', 10, 2 );
+		
+		$this->loader->add_action( 'admin_notices', $plugin_admin, 'set_admin_notices' );
+		$this->loader->add_action( 'load-post-new.php', $plugin_admin, 'post_create_page' );
+		$this->loader->add_filter( 'redirect_post_location', $plugin_admin, 'redirect_after_save' );
 
 	}
 
