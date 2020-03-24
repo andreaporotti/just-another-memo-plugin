@@ -302,11 +302,6 @@ class Jamp_Admin {
 	public function save_meta_data( $post_id ) {
 
 		error_log('-- save_meta_data');
-		
-		if (session_status() == PHP_SESSION_NONE) {
-			session_start();
-		}
-		
 		error_log('$_SESSION:');
 		error_log(print_r($_SESSION, true));
 		
@@ -396,7 +391,7 @@ class Jamp_Admin {
 		$current_section_url = $this->get_current_page_url();
 		
 		foreach ( $this->sections_list as $section ) {
-			
+
 			if ( $section['url'] === $current_section_url ) {
 
 				return true;
@@ -404,13 +399,13 @@ class Jamp_Admin {
 			}
 
 		}
-		
+
 		return false;
-		
+
 	}
 	
 	/**
-	 * Adds an item to the admin bar
+	 * Adds an item to the admin bar.
 	 *
 	 * @since    1.0.0
 	 */
@@ -448,14 +443,9 @@ class Jamp_Admin {
 			
 			$referer = wp_get_referer();
 			error_log('saving referer in session');
-			error_log('referer:');
-			error_log($referer);
+			error_log('referer: ' . $referer);
 
-			if (session_status() == PHP_SESSION_NONE) {
-				session_start();
-			}
-
-			$_SESSION['return_url'] = $referer;
+			$_SESSION['jamp_return_url'] = $referer;
 			
 		}
 		
@@ -469,29 +459,23 @@ class Jamp_Admin {
 		
 		// Perform redirection only for notes.
 		if ($post->post_type === 'jamp_note') {
-			
-			// Extract the "message" parameter value from querystring.
-			$querystring = parse_url($location, PHP_URL_QUERY);
-			parse_str($querystring, $params);
-			$message = $params['message'];
-			
-			if (session_status() == PHP_SESSION_NONE) {
-				session_start();
-			}
-			
-			if ( !empty( $_SESSION['return_url'] ) ) {
-				
-				// Add parameters to return url.
-				$return_url = add_query_arg(array(
-					'jamp_message_id' => $message,
-				), $_SESSION['return_url']);
 
-				error_log('return url modificata:');
-				error_log($return_url);
+			if ( isset( $_SESSION['jamp_return_url'] ) && !empty( $_SESSION['jamp_return_url'] ) ) {
+				
+				// Extract the "message" parameter value from querystring.
+				$querystring = parse_url($location, PHP_URL_QUERY);
+				parse_str($querystring, $params);
+				$message = $params['message'];
+
+				// Save message value in session.
+				$_SESSION['jamp_message'] = $message;
+				
+				// Get return url.
+				$return_url = $_SESSION['jamp_return_url'];
 				
 				// Destroy session variabile.
-				unset($_SESSION['return_url']);
-
+				unset($_SESSION['jamp_return_url']);
+				
 				return $return_url;
 				
 			}
@@ -503,11 +487,11 @@ class Jamp_Admin {
 	public function set_admin_notices() {
 		
 		error_log('-- set_admin_notices');
+		error_log(print_r($_SESSION, true));
 		
-		if ( isset( $_GET['jamp_message_id'] ) ) {
-			
-			error_log('configuring note messages');
-			
+		if ( isset( $_SESSION['jamp_message'] ) && $_SESSION['jamp_message'] >= 0 ) {
+
+			// Define feedback messages.
 			$messages['jamp_note'] = array(
 				0  => '',
 				1  => __( 'Nota aggiornata.' ),
@@ -524,11 +508,25 @@ class Jamp_Admin {
 			
 			?>
 				<div class="notice notice-success is-dismissible">
-				   <p><?php echo $messages['jamp_note'][$_GET['jamp_message_id']]; ?></p>
+					<p><strong><?php echo $messages['jamp_note'][$_SESSION['jamp_message']]; ?></strong></p>
 				</div>
 			<?php
+			
+			// Destroy session variabile.
+			unset($_SESSION['jamp_message']);
 		
 		}
+		
+	}
+	
+	public function session_start() {
+		if (session_status() == PHP_SESSION_NONE) {
+			session_start();
+		}
+	}
+	
+	public function session_destroy() {
+		session_destroy();
 	}
 
 }
