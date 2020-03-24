@@ -375,7 +375,7 @@ class Jamp_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	private function get_current_page_url() {
+	private static function get_current_page_url() {
 
 		return $_SERVER['REQUEST_SCHEME'] . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 

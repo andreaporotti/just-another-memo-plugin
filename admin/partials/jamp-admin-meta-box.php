@@ -15,8 +15,29 @@
 	// Cretes nonce field.
 	wp_nonce_field( 'jamp_meta_box_nonce', 'jamp_meta_box_nonce' );
 	
-	// Gets post's meta data
-	$jamp_meta = get_post_meta( $post->ID );
+	$current_screen = get_current_screen();
+	
+	// Build array for the meta box fields.
+	if ( $current_screen->action === 'add' ) { // Creating a new note.
+		
+		// Extract parameters from querystring.
+		$current_url = self::get_current_page_url();
+		$querystring = parse_url($current_url, PHP_URL_QUERY);
+		parse_str($querystring, $params);
+
+		$jamp_meta                     = array();
+		$jamp_meta['jamp_scope']       = array( ( isset( $params['jamp_scope'] ) ) ? $params['jamp_scope'] : '' );
+		$jamp_meta['jamp_target_type'] = array( ( isset( $params['jamp_target_type'] ) ) ? $params['jamp_target_type'] : '' );
+		$jamp_meta['jamp_target']      = array( ( isset( $params['jamp_target'] ) ) ? $params['jamp_target'] : '' );
+
+	} else { // Editing a note.
+		
+		// Gets post's meta data.
+		$jamp_meta = get_post_meta( $post->ID );
+		
+	}
+	
+	error_log(print_r($jamp_meta, true));
 ?>
 
 <input type="hidden" id="saved-target" value="<?php if ( isset ( $jamp_meta['jamp_target'] ) ) { echo $jamp_meta['jamp_target'][0]; } ?>">

@@ -16,7 +16,7 @@
 	// Global notes.
 	$create_url = add_query_arg( array(
 		'post_type' => 'jamp_note',
-		'scope' => 'global',
+		'jamp_scope' => 'global',
 	), admin_url( 'post-new.php' ) );
 	
 	$html .= '<span class="area-title">' . __('Note globali') . '</span> <span class="create-link">(<a href="' . $create_url . '">' . __('aggiungi') . '</a>)</span>';
@@ -55,8 +55,8 @@
 
 		$create_url = add_query_arg( array(
 			'post_type' => 'jamp_note',
-			'scope' => 'section',
-			'section' => $this->get_current_page_url(),
+			'jamp_scope' => 'section',
+			'jamp_target' => $this->get_current_page_url(),
 		), admin_url( 'post-new.php' ) );
 		
 		$html .= '<span class="area-title">' . __('Note in questa sezione') . '</span> <span class="create-link">(<a href="' . $create_url . '">' . __('aggiungi') . '</a>)</span>';
