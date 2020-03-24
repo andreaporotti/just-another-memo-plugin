@@ -178,6 +178,11 @@ class Jamp {
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'set_admin_notices' );
 		$this->loader->add_action( 'load-post-new.php', $plugin_admin, 'post_create_page' );
 		$this->loader->add_filter( 'redirect_post_location', $plugin_admin, 'redirect_after_save' );
+		
+		// Session hooks
+		$this->loader->add_action( 'init', $plugin_admin, 'session_start', 1 );
+		$this->loader->add_action( 'wp_logout', $plugin_admin, 'session_destroy' );
+		$this->loader->add_action( 'wp_login', $plugin_admin, 'session_destroy' );
 
 	}
 
