@@ -36,8 +36,6 @@
 		$jamp_meta = get_post_meta( $post->ID );
 		
 	}
-	
-	error_log(print_r($jamp_meta, true));
 ?>
 
 <input type="hidden" id="saved-target" value="<?php if ( isset ( $jamp_meta['jamp_target'] ) ) { echo $jamp_meta['jamp_target'][0]; } ?>">

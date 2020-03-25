@@ -176,7 +176,8 @@ class Jamp {
 		$this->loader->add_action( 'manage_page_posts_custom_column', $plugin_admin, 'show_columns_content', 10, 2 );
 		
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'set_admin_notices' );
-		$this->loader->add_action( 'load-post-new.php', $plugin_admin, 'post_create_page' );
+		$this->loader->add_action( 'load-post-new.php', $plugin_admin, 'note_form_page' );
+		$this->loader->add_action( 'load-post.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_filter( 'redirect_post_location', $plugin_admin, 'redirect_after_save' );
 		
 		// Session hooks

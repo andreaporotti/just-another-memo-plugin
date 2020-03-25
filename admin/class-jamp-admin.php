@@ -429,26 +429,59 @@ class Jamp_Admin {
 
 	}
 	
-	public function post_create_page() {
+	/**
+	 * Saves referer as return url when loading the new or edit post pages.
+	 *
+	 * @since    1.0.0
+	 */
+	public function note_form_page( $post ) {
 		
-		error_log('-- post_create_page');
+		error_log('-- note_form_page');
 		
-		// Extract the "post_type" parameter value from querystring.
+		// Extract parameters from querystring.
 		$current_url = $this->get_current_page_url();
 		$querystring = parse_url($current_url, PHP_URL_QUERY);
 		parse_str($querystring, $params);
-		$post_type = ( isset ( $params['post_type'] ) ) ? $params['post_type'] : null;
 		
-		if ( $post_type === 'jamp_note' ) {
+		// Get post type.
+		$post_type = '';
+		$current_screen = get_current_screen();
+		
+		if ( $current_screen->action === 'add' ) { // Creating a new note.
 			
-			$referer = wp_get_referer();
-			error_log('saving referer in session');
-			error_log('referer: ' . $referer);
+			error_log('---- new note');
+			
+			if ( isset( $params['post_type'] ) ) {
+				
+				$post_type = $params['post_type'];
+				
+			} 
 
-			$_SESSION['jamp_return_url'] = $referer;
+		} else { // Editing a note.
+			
+			error_log('---- edit note');
+			
+			if ( isset ( $params['post'] ) ) {
+				
+				$post = get_post( $params['post'] );
+				$post_type = $post->post_type;
+				
+			}
 			
 		}
 		
+		error_log('---- post type: ' . $post_type);
+		
+		// Save referer in session if current post is a note.
+		if ( $post_type === 'jamp_note' ) {
+
+			$referer = wp_get_referer();
+			$_SESSION['jamp_return_url'] = $referer;
+
+			error_log('---- saved referer: ' . $referer);
+
+		}
+
 	}
 	
 	public function redirect_after_save( $location ) {
@@ -458,7 +491,7 @@ class Jamp_Admin {
 		global $post;
 		
 		// Perform redirection only for notes.
-		if ($post->post_type === 'jamp_note') {
+		if ( $post->post_type === 'jamp_note' ) {
 
 			if ( isset( $_SESSION['jamp_return_url'] ) && !empty( $_SESSION['jamp_return_url'] ) ) {
 				
@@ -477,6 +510,11 @@ class Jamp_Admin {
 				unset($_SESSION['jamp_return_url']);
 				
 				return $return_url;
+				
+			} else {
+				
+				// Fallback to default location.
+				return $location;
 				
 			}
 
@@ -520,7 +558,7 @@ class Jamp_Admin {
 	}
 	
 	public function session_start() {
-		if (session_status() == PHP_SESSION_NONE) {
+		if ( session_status() == PHP_SESSION_NONE ) {
 			session_start();
 		}
 	}
