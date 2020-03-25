@@ -56,6 +56,15 @@ class Jamp_Admin {
 	 * @var      array     $version    The list of all supported target types.
 	 */
 	private $target_types_list = array();
+	
+	/**
+	 * Custom feedback messages for actions on notes.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      array     $version    Custom feedback messages for actions on notes.
+	 */
+	private $feedback_messages = array();
 
 	/**
 	 * Initialize the class and set its properties.
@@ -68,6 +77,22 @@ class Jamp_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
+		
+		// Set custom feedback messages.
+		$this->feedback_messages = array(
+			0  => '',
+			1  => __( 'Nota aggiornata.' ),
+			2  => __( 'Campo personalizzato aggiornato.' ),
+			3  => __( 'Campo personalizzato eliminato.' ),
+			4  => __( 'Nota aggiornata.' ),
+			5  => isset( $_GET['revision'] ) ? sprintf( __( 'Nota ripristinata a revisione da %s.' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
+			6  => __( 'La nota è stata creata.' ),
+			7  => __( 'Nota salvata.' ),
+			8  => __( 'Nota inviata.' ),
+			9  => __( 'Nota pianificata.' ),
+			10 => __( 'Bozza della nota aggiornata.' ),
+			11 => __( 'La nota è stata spostata nel cestino.' ),
+		);
 
 	}
 
@@ -446,7 +471,7 @@ class Jamp_Admin {
 		// Get post type.
 		$post_type = '';
 		$current_screen = get_current_screen();
-		
+
 		if ( $current_screen->action === 'add' ) { // Creating a new note.
 			
 			error_log('---- new note');
@@ -500,7 +525,7 @@ class Jamp_Admin {
 				parse_str($querystring, $params);
 				$message = $params['message'];
 
-				// Save message value in session.
+				// Save message id in session.
 				$_SESSION['jamp_message'] = $message;
 				
 				// Get return url.
@@ -522,37 +547,38 @@ class Jamp_Admin {
 
 	}
 	
-	public function set_admin_notices() {
+	public function show_admin_notices() {
 		
-		error_log('-- set_admin_notices');
+		error_log('-- show_admin_notices');
 		error_log(print_r($_SESSION, true));
 		
 		if ( isset( $_SESSION['jamp_message'] ) && $_SESSION['jamp_message'] >= 0 ) {
 
-			// Define feedback messages.
-			$messages['jamp_note'] = array(
-				0  => '',
-				1  => __( 'Nota aggiornata.' ),
-				2  => __( 'Campo personalizzato aggiornato.' ),
-				3  => __( 'Campo personalizzato eliminato.' ),
-				4  => __( 'Nota aggiornata.' ),
-				5  => isset( $_GET['revision'] ) ? sprintf( __( 'Nota ripristinata a revisione da %s.' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-				6  => __( 'Nota pubblicata.' ),
-				7  => __( 'Nota salvata.' ),
-				8  => __( 'Nota inviata.' ),
-				9  => __( 'Nota pianificata.' ),
-				10 => __( 'Bozza della nota aggiornata.' ),
-			);
+			// Set feedback messages.
+			$messages['jamp_note'] = $this->feedback_messages;
 			
 			?>
 				<div class="notice notice-success is-dismissible">
-					<p><strong><?php echo $messages['jamp_note'][$_SESSION['jamp_message']]; ?></strong></p>
+					<p><?php echo $messages['jamp_note'][$_SESSION['jamp_message']]; ?></p>
 				</div>
 			<?php
 			
 			// Destroy session variabile.
 			unset($_SESSION['jamp_message']);
 		
+		}
+		
+	}
+	
+	public function show_notice_after_note_trashed( $post_id ) {
+		
+		$post = get_post( $post_id );
+		
+		if ( $post->post_type === 'jamp_note' && $post->post_status === 'trash' ) {
+			
+			// Save message id in session.
+			$_SESSION['jamp_message'] = 11;
+
 		}
 		
 	}
