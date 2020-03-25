@@ -20,6 +20,7 @@
 	), admin_url( 'post-new.php' ) );
 	
 	$html .= '<span class="area-title">' . __('Note globali') . '</span> <span class="create-link">(<a href="' . $create_url . '">' . __('aggiungi') . '</a>)</span>';
+	//$html .= '<span class="area-title">' . __('Note globali') . '</span> <span class="note-actions"><span class="create-link"><a href="' . $create_url . '">' . __('aggiungi') . '</a></span></span>';
 	
 	$global_notes_args = array(
 		'post_type' => 'jamp_note',
@@ -34,11 +35,13 @@
 	if ( ! empty( $global_notes ) ) {
 		
 		foreach ($global_notes as $note) {
-			
+
 			$html .= '<div class="note">'
-					. '<span class="note-title">' . $note->post_title . '</span> '
-					. '<span class="edit-link">(<a href="' . get_edit_post_link($note->ID) . '">' . __('modifica') . '</a></span> | '
-					. '<span class="trash-link"><a href="' . get_delete_post_link($note->ID) . '">' . __('cestina') . '</a>)</span>'
+					. '<span class="note-title">' . $note->post_title . '</span>'
+					. '<span class="note-actions">'
+					. '<span class="edit-link"><a href="' . get_edit_post_link($note->ID) . '" title="' . __('Modifica') . '"></a></span>'
+					. '<span class="trash-link"><a href="' . get_delete_post_link($note->ID) . '" title="' . __('Sposta nel cestino') . '"></a></span>'
+					. '</span>'
 					. '<p class="note-content">' . $note->post_content . '</p>'
 					. '</div>';
 			
@@ -60,6 +63,7 @@
 		), admin_url( 'post-new.php' ) );
 		
 		$html .= '<span class="area-title">' . __('Note in questa sezione') . '</span> <span class="create-link">(<a href="' . $create_url . '">' . __('aggiungi') . '</a>)</span>';
+		//$html .= '<span class="area-title">' . __('Note in questa sezione') . '</span> <span class="note-actions"><span class="create-link"><a href="' . $create_url . '">' . __('aggiungi') . '</a></span></span>';
 
 		$section_notes_args = array(
 			'post_type' => 'jamp_note',
@@ -76,9 +80,11 @@
 			foreach ($section_notes as $note) {
 
 				$html .= '<div class="note">'
-						. '<span class="note-title">' . $note->post_title . '</span> '
-						. '<span class="edit-link">(<a href="' . get_edit_post_link($note->ID) . '">' . __('modifica') . '</a></span> | '
-						. '<span class="trash-link"><a href="' . get_delete_post_link($note->ID) . '">' . __('cestina') . '</a>)</span>'
+						. '<span class="note-title">' . $note->post_title . '</span>'
+						. '<span class="note-actions">'
+						. '<span class="edit-link"><a href="' . get_edit_post_link($note->ID) . '" title="' . __('Modifica') . '"></a></span>'
+						. '<span class="trash-link"><a href="' . get_delete_post_link($note->ID) . '" title="' . __('Sposta nel cestino') . '"></a></span>'
+						. '</span>'
 						. '<p class="note-content">' . $note->post_content . '</p>'
 						. '</div>';
 

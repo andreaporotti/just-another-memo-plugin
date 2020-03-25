@@ -28,7 +28,7 @@
 }*/
 
 #wpadminbar #wp-admin-bar-jamp .ab-icon:before {
-    content: "\f119";
+    content: "\f157";
     top: 3px;
 }
 
@@ -58,11 +58,11 @@
 }
 
 #wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .edit-link a {
-	color: #187fe6;
+	color: #00a0d2;
 }
 
 #wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .trash-link a {
-	color: #ff0000;
+	color: #a00;
 }
 
 #wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .edit-link a:hover,
@@ -70,12 +70,42 @@
 	color: #32373c;
 }
 
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .note-actions {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .create-link a::before,
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .edit-link a::before,
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .trash-link a::before {
+	font-family: "dashicons";
+	font-size: 20px;
+	line-height: normal;
+	vertical-align: text-bottom;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .create-link a::before {
+	content: "\f132";
+	position: relative;
+	top: 5px;
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .edit-link a::before {
+	content: "\f119";
+}
+
+#wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .trash-link a::before {	
+	content: "\f182";
+}
+
 #wpadminbar #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item .note {
 	position: relative;
-	max-width: 400px;
+	min-width: 300px;
+	max-width: 500px;
 	padding: 0 5px 5px 5px;
 	margin-bottom: 5px;
-	background-color: #fffd89;
+	background-color: #fffebb;
 	color: #32373c;
 }
 
@@ -84,7 +114,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    border-width: 0 16px 16px 0;
+    border-width: 0 10px 10px 0;
     border-style: solid;
     border-color: #c4c267  #32373c;
 }
