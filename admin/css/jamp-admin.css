@@ -132,3 +132,39 @@
 	display: block;
 	font-style: italic;
 }
+
+/* ==== TABLE COLUMN ==== */
+
+.jamp-column-note {
+	margin-bottom: 10px;
+}
+
+.jamp-column-note__tile {
+	font-weight: 600;
+}
+
+.jamp-column-note__container {
+	padding-left: 5px !important;
+	border-left: 2px solid #dddddd;
+}
+
+.jamp-column-note__content  {
+	margin-bottom: 0 !important;
+}
+
+.jamp-column-note__note-actions {
+	color: #dddddd;
+}
+
+.jamp-column-note__note-trash-action {
+	color: #a00;
+}
+
+.jamp-column-note__note-trash-action:hover {
+	color: #dc3232;
+}
+
+.jamp-column-note__no-notes-notice {
+	display: block;
+	margin-bottom: 10px;
+}

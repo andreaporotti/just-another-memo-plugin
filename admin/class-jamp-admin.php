@@ -369,16 +369,18 @@ class Jamp_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	function add_columns_head( $defaults ) {
-		
+	function add_columns_head( $columns ) {
+
 		$post_type = get_post_type();
 		
 		// Adds the column skipping the plugin custom post type.
 		if ( $post_type !== 'jamp_note' ) {
-			$defaults['jamp_note'] = __( 'Note' );
+
+			$columns['jamp_note'] = __( 'Note' );
+			
 		}
 		
-		return $defaults;
+		return $columns;
 		
 	}
 
@@ -389,8 +391,10 @@ class Jamp_Admin {
 	 */
 	function show_columns_content( $column_name, $post_id ) {
 		
-		if ( $column_name == 'jamp_note' ) {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
+		if ( $column_name === 'jamp_note' ) {
+
+			require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
+			
 		}
 		
 	}
