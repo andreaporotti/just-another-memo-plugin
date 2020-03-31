@@ -243,7 +243,7 @@ class Jamp_Admin {
 	}
 	
 	/**
-	 * Creates a list of all entities of the passed post type.
+	 * Creates a list of all entities of the passed post type. (ajax function)
 	 *
 	 * @since    1.0.0
 	 */
@@ -616,6 +616,38 @@ class Jamp_Admin {
         );
 
 		return $bulk_messages;
+		
+	}
+	
+	/**
+	 * Moves a note to trash. (ajax function)
+	 *
+	 * @since    1.0.0
+	 */
+	public function move_to_trash() {
+		
+		error_log('-- MOVE_TO_TRASH');
+		
+		// Checks the nonce is valid.
+		check_ajax_referer( $this->plugin_name );
+
+		$note_id = $_POST['note'];
+		
+		if ( !empty( $note_id ) && current_user_can( 'delete_post', $note_id ) ) {
+			
+			$note = wp_trash_post( $note_id );
+			
+			if ( !empty( $note ) ) {
+				
+				wp_send_json_success();
+				
+			} else {
+				
+				wp_send_json_error();
+				
+			}
+			
+		}
 		
 	}
 	

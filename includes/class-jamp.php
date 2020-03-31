@@ -163,7 +163,6 @@ class Jamp {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'build_sections_list' );
-		$this->loader->add_action( 'wp_ajax_build_targets_list', $plugin_admin, 'build_targets_list' );
 
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_meta_box' );
 		$this->loader->add_action( 'save_post_jamp_note', $plugin_admin, 'save_meta_data' );
@@ -173,6 +172,10 @@ class Jamp {
 		$this->loader->add_action( 'load-post-new.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_action( 'load-post.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_filter( 'redirect_post_location', $plugin_admin, 'redirect_after_save' );
+		
+		// Ajax
+		$this->loader->add_action( 'wp_ajax_build_targets_list', $plugin_admin, 'build_targets_list' );
+		$this->loader->add_action( 'wp_ajax_move_to_trash', $plugin_admin, 'move_to_trash' );
 		
 		// Notices
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'show_admin_notices' );

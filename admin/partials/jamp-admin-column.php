@@ -28,22 +28,24 @@
 
 		foreach ($notes as $note) {
 			
-			$html .= '<div class="jamp-column-note">'
+			$html .= '<div class="jamp-column-note" data-note="' . $note->ID . '">'
 					. '<span class="jamp-column-note__tile">' . $note->post_title . '</span>'
 					. '<div class="jamp-column-note__container">'
 					. '<p class="jamp-column-note__content">' . $note->post_content . '</p>'
 					. '<div class="jamp-column-note__note-actions">'
 					. '<a href="' . get_edit_post_link($note->ID) . '">' . __('Modifica') . '</a> | '
-					. '<a href="' . get_delete_post_link($note->ID) . '" class="jamp-column-note__note-trash-action">' . __('Cestino') . '</a>'
+					. '<a href="#" class="jamp-column-note__note-trash-action" data-note="' . $note->ID . '">' . __('Cestino') . '</a>'
 					. '</div>'
 					. '</div>'
 					. '</div>';
 		
 		}
 		
-	} else {
-		$html .= '<span class="jamp-column-note__no-notes-notice">—</span>';
 	}
+	
+	// Adds placeholder, hidden if there are notes.
+	$css_class = ( !empty( $notes ) ) ? 'jamp-column-note__no-notes-notice--hidden' : '';
+	$html .= '<span class="jamp-column-note__no-notes-notice ' . $css_class . '">—</span>';
 	
 	// Create link.
 	$screen = get_current_screen();

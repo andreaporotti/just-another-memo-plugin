@@ -86,7 +86,51 @@
 					$( '.meta-target' ).show();
 				break;
 				default:
-					// code block
+				break;
+			}
+			
+		}
+		
+		// Moves a note to trash.
+		function moveToTrash( note ) {
+			
+			if ( note !== '' & note !== null ) {
+				
+				$.post( jamp_ajax.ajax_url, {
+					_ajax_nonce: jamp_ajax.nonce,
+					action: 'move_to_trash',
+					note: note
+				}, function( response ) {
+					
+					if ( response.success ) {
+						
+						// Gets number of notes in the current table cell.
+						var cell = $( '.jamp-column-note[data-note=' + note + ']' ).parent( 'td' );
+						var existingNotes = cell.find( '.jamp-column-note' ).length;
+						
+						// Hides current note.
+						$( '.jamp-column-note[data-note=' + note + ']' ).addClass( 'jamp-column-note--red-background' ).fadeOut( 600, function() {
+							
+							// Removes hidden element.
+							$(this).remove();
+							
+							// Shows the placeholder if no more notes are present in the row.
+							if ( ( existingNotes - 1 ) === 0 ) {
+								
+								cell.find( '.jamp-column-note__no-notes-notice' ).removeClass( 'jamp-column-note__no-notes-notice--hidden' );
+								
+							}
+							
+						} );
+						
+					} else {
+						
+						console.log('Error moving the note to trash!');
+						
+					}
+					
+				} );
+				
 			}
 			
 		}
@@ -103,6 +147,12 @@
 
 		// Sets fields visibility on page ready.
 		setFieldsVisibility( $( 'input[type=radio][name=scope]:checked' ).val() );
+		
+		// Trash link on custom column.
+		$( '.jamp-column-note__note-trash-action' ).on( 'click', function( e ) {
+			e.preventDefault();
+			moveToTrash( $(this).data('note') );
+		} );
 
 	});
 

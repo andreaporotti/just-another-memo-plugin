@@ -139,6 +139,10 @@
 	margin-bottom: 10px;
 }
 
+.jamp-column-note--red-background {
+	background-color: #ffbfbf;
+}
+
 .jamp-column-note__tile {
 	font-weight: 600;
 }
@@ -167,4 +171,8 @@
 .jamp-column-note__no-notes-notice {
 	display: block;
 	margin-bottom: 10px;
+}
+
+.jamp-column-note__no-notes-notice--hidden {
+	display: none;
 }
