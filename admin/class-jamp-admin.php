@@ -234,7 +234,7 @@ class Jamp_Admin {
 		foreach ($post_types as $post_type) {
 			if( ! in_array( $post_type->name, array( 'attachment', 'jamp_note' ), true ) ) {
 				$this->target_types_list[] = array(
-					'name' => $post_type->name,
+					'name'  => $post_type->name,
 					'label' => $post_type->label,
 				);
 			}
@@ -258,7 +258,7 @@ class Jamp_Admin {
 
 			// Gets entities as objects
 			$entities_objects = get_posts( array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => -1,
 			) );
 
@@ -266,16 +266,16 @@ class Jamp_Admin {
 			$entities = array();
 			foreach ( $entities_objects as $entity ) {
 				$entities[] = array(
-					'id' => $entity->ID,
+					'id'    => $entity->ID,
 					'title' => $entity->post_title,
 				);
 			}
 			
-			wp_send_json_success($entities);
+			wp_send_json_success( $entities );
 
 		} else {
 			
-			wp_send_json_error('');
+			wp_send_json_error( '' );
 			
 		}
 
@@ -326,9 +326,7 @@ class Jamp_Admin {
 	 */
 	public function save_meta_data( $post_id ) {
 
-		error_log('-- save_meta_data');
-		error_log('$_SESSION:');
-		error_log(print_r($_SESSION, true));
+		error_log('-- SAVE_META_DATA');
 		
 		// Checks save status.
 		$is_autosave    = wp_is_post_autosave( $post_id );
@@ -465,12 +463,12 @@ class Jamp_Admin {
 	 */
 	public function note_form_page( $post ) {
 		
-		error_log('-- note_form_page');
+		error_log('-- NOTE_FORM_PAGE');
 		
 		// Extract parameters from querystring.
 		$current_url = $this->get_current_page_url();
-		$querystring = parse_url($current_url, PHP_URL_QUERY);
-		parse_str($querystring, $params);
+		$querystring = parse_url( $current_url, PHP_URL_QUERY );
+		parse_str( $querystring, $params );
 		
 		// Get post type.
 		$post_type = '';
@@ -515,7 +513,7 @@ class Jamp_Admin {
 	
 	public function redirect_after_save( $location ) {
 		
-		error_log('-- redirect_after_save');
+		error_log('-- REDIRECT_AFTER_SAVE');
 		
 		global $post;
 		
@@ -525,8 +523,8 @@ class Jamp_Admin {
 			if ( isset( $_SESSION['jamp_return_url'] ) && !empty( $_SESSION['jamp_return_url'] ) ) {
 				
 				// Extract the "message" parameter value from querystring.
-				$querystring = parse_url($location, PHP_URL_QUERY);
-				parse_str($querystring, $params);
+				$querystring = parse_url( $location, PHP_URL_QUERY );
+				parse_str( $querystring, $params );
 				$message = $params['message'];
 
 				// Save message id in session.
@@ -536,7 +534,7 @@ class Jamp_Admin {
 				$return_url = $_SESSION['jamp_return_url'];
 				
 				// Destroy session variabile.
-				unset($_SESSION['jamp_return_url']);
+				unset( $_SESSION['jamp_return_url'] );
 				
 				return $return_url;
 				
@@ -553,9 +551,8 @@ class Jamp_Admin {
 	
 	public function show_admin_notices() {
 		
-		error_log('-- show_admin_notices');
-		error_log(print_r($_SESSION, true));
-		
+		error_log('-- SHOW_ADMIN_NOTICES');
+
 		if ( isset( $_SESSION['jamp_message'] ) && $_SESSION['jamp_message'] >= 0 ) {
 
 			// Set feedback messages.
@@ -568,13 +565,32 @@ class Jamp_Admin {
 			<?php
 			
 			// Destroy session variabile.
-			unset($_SESSION['jamp_message']);
+			unset( $_SESSION['jamp_message'] );
 		
 		}
 		
 	}
 	
 	public function show_notice_after_note_trashed( $post_id ) {
+		
+		error_log('-- SHOW_NOTICE_AFTER_NOTE_TRASHED');
+		
+		// Check referer: if trash action comes from the Notes page, don't add custom admin notice and show only the bulk notice.
+		if ( isset( $_SESSION['jamp_return_url'] ) ) {
+			
+			// Get querystring.
+			$querystring = parse_url( $_SESSION['jamp_return_url'], PHP_URL_QUERY );
+			parse_str( $querystring, $params );
+			
+			// Trash from Notes page
+			if ( isset( $params['post_type'] ) && $params['post_type'] === 'jamp_note' ) {
+
+				error_log('---- skip custom admin notice');
+				return;
+				
+			}
+			
+		}
 		
 		$post = get_post( $post_id );
 		
@@ -587,14 +603,36 @@ class Jamp_Admin {
 		
 	}
 	
+	public function manage_default_bulk_notices( $bulk_messages, $bulk_counts ) {
+		
+		error_log('-- MANAGE_DEFAULT_BULK_NOTICES');
+
+		$bulk_messages['jamp_note'] = array(
+            'updated'   => '%s note aggiornate.',
+            'locked'    => '%s note non aggiornate, qualcuno le sta modificando.',
+            'deleted'   => '%s note eliminate definitivamente.',
+            'trashed'   => '%s note spostate nel cestino.',
+            'untrashed' => '%s note ripristinate dal cestino.',
+        );
+
+		return $bulk_messages;
+		
+	}
+	
 	public function session_start() {
+		
 		if ( session_status() == PHP_SESSION_NONE ) {
+			
 			session_start();
+			
 		}
+		
 	}
 	
 	public function session_destroy() {
+		
 		session_destroy();
+		
 	}
 
 }
