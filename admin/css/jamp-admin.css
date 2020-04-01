@@ -176,3 +176,9 @@
 .jamp-column-note__no-notes-notice--hidden {
 	display: none;
 }
+
+/* ==== TRASH DIALOG ==== */
+
+.jamp-trash-dialog--hidden {
+	display: none;
+}

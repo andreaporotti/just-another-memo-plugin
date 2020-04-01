@@ -151,9 +151,21 @@
 		// Trash link on custom column.
 		$( '.jamp-column-note__note-trash-action' ).on( 'click', function( e ) {
 			e.preventDefault();
-			moveToTrash( $(this).data('note') );
+			
+			var trashLink = $( this );
+			
+			$( '.jamp-trash-dialog' ).dialog( {
+				modal: true,
+				buttons: {
+					'OK': function() {
+						$( this ).dialog( "close" );
+						
+						moveToTrash( trashLink.data('note') );
+					}
+				}
+			} );
 		} );
-
+		
 	});
 
 })( jQuery );

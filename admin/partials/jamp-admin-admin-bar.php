@@ -97,6 +97,11 @@
 		}
 
 	}
+	
+	// Trash dialog.
+	$html .= '<div class="jamp-trash-dialog jamp-trash-dialog--hidden" title="' . __('Sposta nel cestino?') . '">'
+			. '<p>' . __('Vuoi spostare questa nota nel cestino?') . '</p>'
+			. '</div>';
 
 	return $html;
 ?>
