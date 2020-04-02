@@ -211,10 +211,12 @@ class Jamp_Admin {
 				$url = admin_url($url);
 				
 				$this->sections_list[] = array(
-					'name'       => '-- ' . ( strstr( $submenu_item[0], ' <', true ) ?: $submenu_item[0] ), // The section name ignoring any HTML content.
-					'file'       => $file,
-					'url'        => $url,
-					'is_submenu' => true,
+					'name'        => '-- ' . ( strstr( $submenu_item[0], ' <', true ) ?: $submenu_item[0] ), // The section name ignoring any HTML content.
+					'file'        => $file,
+					'url'         => $url,
+					'is_submenu'  => true,
+					'parent_url'  => $section['url'],
+					'parent_name' => $section['name'],
 				);
 			}
 		}
@@ -368,13 +370,29 @@ class Jamp_Admin {
 	 * @since    1.0.0
 	 */
 	function add_columns_head( $columns ) {
-
+		
+		$this->build_target_types_list();
+		
 		$post_type = get_post_type();
 		
-		// Adds the column skipping the plugin custom post type.
 		if ( $post_type !== 'jamp_note' ) {
 
+			// Adds custom columns for other post types and pages.
 			$columns['jamp_note'] = __( 'Note' );
+			
+		} else {
+			
+			// Get Date column label and remove the column.
+			$date_column_label = $columns['date'];
+			unset( $columns['date'] );
+			
+			// Adds custom columns for Notes page.
+			$columns['jamp_scope']   = __( 'Ambito' );
+			$columns['jamp_target_type'] = __( 'Tipo di Entità' );
+			$columns['jamp_target']  = __( 'Entità' );
+			
+			//Re-add Date column at the end.
+			$columns['date'] = $date_column_label;
 			
 		}
 		
@@ -389,7 +407,7 @@ class Jamp_Admin {
 	 */
 	function show_columns_content( $column_name, $post_id ) {
 		
-		if ( $column_name === 'jamp_note' ) {
+		if ( strpos($column_name, 'jamp') !== false ) {
 
 			require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
 			
