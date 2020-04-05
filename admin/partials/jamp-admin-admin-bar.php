@@ -19,8 +19,7 @@
 		'jamp_scope' => 'global',
 	), admin_url( 'post-new.php' ) );
 	
-	$html .= '<span class="area-title">' . __('Note globali') . '</span> <span class="create-link">(<a href="' . $create_url . '">' . __('aggiungi') . '</a>)</span>';
-	//$html .= '<span class="area-title">' . __('Note globali') . '</span> <span class="note-actions"><span class="create-link"><a href="' . $create_url . '">' . __('aggiungi') . '</a></span></span>';
+	$html .= '<span class="jamp-admin-bar-section-title">' . __('Note globali') . '</span> (<a class="jamp-admin-bar-action jamp-admin-bar-action--create" href="' . $create_url . '">' . __('aggiungi') . '</a>)';
 	
 	$global_notes_args = array(
 		'post_type' => 'jamp_note',
@@ -36,20 +35,20 @@
 		
 		foreach ($global_notes as $note) {
 
-			$html .= '<div class="note">'
-					. '<span class="note-title">' . $note->post_title . '</span>'
-					. '<span class="note-actions">'
-					. '<span class="edit-link"><a href="' . get_edit_post_link($note->ID) . '" title="' . __('Modifica') . '"></a></span>'
-					. '<span class="trash-link"><a href="' . get_delete_post_link($note->ID) . '" title="' . __('Sposta nel cestino') . '"></a></span>'
+			$html .= '<div class="jamp-admin-bar-note">'
+					. '<span class="jamp-admin-bar-note__title">' . $note->post_title . '</span>'
+					. '<span class="jamp-admin-bar-note__actions">'
+					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--edit" href="' . get_edit_post_link($note->ID) . '" title="' . __('Modifica') . '"></a>'
+					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="' . get_delete_post_link($note->ID) . '" title="' . __('Sposta nel cestino') . '"></a>'
 					. '</span>'
-					. '<p class="note-content">' . $note->post_content . '</p>'
+					. '<p class="jamp-admin-bar-note__content">' . $note->post_content . '</p>'
 					. '</div>';
 			
 		}
 		
 	} else {
 		
-		$html .= '<span class="notes-not-found">' . __('Non sono presenti note globali.') . '</span>';
+		$html .= '<span class="jamp-admin-bar-note__no-notes-notice">' . __('Non sono presenti note globali.') . '</span>';
 		
 	}
 
@@ -62,8 +61,7 @@
 			'jamp_target' => $this->get_current_page_url(),
 		), admin_url( 'post-new.php' ) );
 		
-		$html .= '<span class="area-title">' . __('Note in questa sezione') . '</span> <span class="create-link">(<a href="' . $create_url . '">' . __('aggiungi') . '</a>)</span>';
-		//$html .= '<span class="area-title">' . __('Note in questa sezione') . '</span> <span class="note-actions"><span class="create-link"><a href="' . $create_url . '">' . __('aggiungi') . '</a></span></span>';
+		$html .= '<span class="jamp-admin-bar-section-title">' . __('Note in questa sezione') . '</span> (<a class="jamp-admin-bar-action jamp-admin-bar-action--create" href="' . $create_url . '">' . __('aggiungi') . '</a>)';
 
 		$section_notes_args = array(
 			'post_type' => 'jamp_note',
@@ -79,20 +77,20 @@
 
 			foreach ($section_notes as $note) {
 
-				$html .= '<div class="note">'
-						. '<span class="note-title">' . $note->post_title . '</span>'
-						. '<span class="note-actions">'
-						. '<span class="edit-link"><a href="' . get_edit_post_link($note->ID) . '" title="' . __('Modifica') . '"></a></span>'
-						. '<span class="trash-link"><a href="' . get_delete_post_link($note->ID) . '" title="' . __('Sposta nel cestino') . '"></a></span>'
+				$html .= '<div class="jamp-admin-bar-note">'
+						. '<span class="jamp-admin-bar-note__title">' . $note->post_title . '</span>'
+						. '<span class="jamp-admin-bar-note__actions">'
+						. '<a class="jamp-admin-bar-action jamp-admin-bar-action--edit" href="' . get_edit_post_link($note->ID) . '" title="' . __('Modifica') . '"></a>'
+						. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="' . get_delete_post_link($note->ID) . '" title="' . __('Sposta nel cestino') . '"></a>'
 						. '</span>'
-						. '<p class="note-content">' . $note->post_content . '</p>'
+						. '<p class="jamp-admin-bar-note__content">' . $note->post_content . '</p>'
 						. '</div>';
 
 			}
 
 		} else {
 
-			$html .= '<span class="notes-not-found">' . __('Non sono presenti note in questa sezione.') . '</span>';
+			$html .= '<span class="jamp-admin-bar-note__no-notes-notice">' . __('Non sono presenti note in questa sezione.') . '</span>';
 
 		}
 
