@@ -92,7 +92,7 @@
 		}
 		
 		// Moves a note to trash.
-		function moveToTrash( note ) {
+		function moveToTrash( note, location ) {
 			
 			if ( note !== '' & note !== null ) {
 				
@@ -104,34 +104,73 @@
 					
 					if ( response.success ) {
 						
-						// Gets number of notes in the current table cell.
-						var cell = $( '.jamp-column-note[data-note=' + note + ']' ).parent( 'td' );
-						var existingNotes = cell.find( '.jamp-column-note' ).length;
-						
-						// Hides current note.
-						$( '.jamp-column-note[data-note=' + note + ']' ).addClass( 'jamp-column-note--red-background' ).fadeOut( 600, function() {
+						if ( location === 'column' ) {
 							
-							// Removes hidden element.
-							$(this).remove();
+							removeTrashedNoteFromColumn( note );
 							
-							// Shows the placeholder if no more notes are present in the row.
-							if ( ( existingNotes - 1 ) === 0 ) {
-								
-								cell.find( '.jamp-column-note__no-notes-notice' ).removeClass( 'jamp-column-note__no-notes-notice--hidden' );
-								
-							}
+						} else if ( location === 'adminbar' ) {
 							
-						} );
-						
+							removeTrashedNoteFromAdminBar( note );
+							
+						}
+
 					} else {
-						
-						console.log('Error moving the note to trash!');
-						
+
+						console.log( 'Error moving note to trash!' );
+
 					}
 					
 				} );
 				
 			}
+			
+		}
+		
+		// Removes trashed note from a custom column.
+		function removeTrashedNoteFromColumn( note ) {
+			
+			// Gets number of notes in the current table cell.
+			var cell = $( '.jamp-column-note[data-note=' + note + ']' ).parent( 'td' );
+			var existingNotes = cell.find( '.jamp-column-note' ).length;
+
+			// Hides current note.
+			$( '.jamp-column-note[data-note=' + note + ']' ).addClass( 'jamp-column-note--red-background' ).fadeOut( 600, function() {
+
+				// Removes hidden element.
+				$(this).remove();
+
+				// Shows the placeholder if no more notes are present in the row.
+				if ( ( existingNotes - 1 ) === 0 ) {
+
+					cell.find( '.jamp-column-note__no-notes-notice' ).removeClass( 'jamp-column-note__no-notes-notice--hidden' );
+
+				}
+
+			} );
+			
+		}
+		
+		// Removes trashed note from admin bar.
+		function removeTrashedNoteFromAdminBar( note ) {
+			
+			// Gets number of notes in the current admin bar section.
+			var section = $( '.jamp-admin-bar-note[data-note=' + note + ']' ).parent( '.jamp-admin-bar-section' );
+			var existingNotes = section.find( '.jamp-admin-bar-note' ).length;
+			
+			// Hides current note.
+			$( '.jamp-admin-bar-note[data-note=' + note + ']' ).addClass( 'jamp-admin-bar-note--red-background' ).fadeOut( 600, function() {
+				
+				// Removes hidden element.
+				$(this).remove();
+				
+				// Shows the placeholder if no more notes are present in the section.
+				if ( ( existingNotes - 1 ) === 0 ) {
+
+					section.find( '.jamp-admin-bar-note__no-notes-notice' ).removeClass( 'jamp-admin-bar-note__no-notes-notice--hidden' );
+
+				}
+				
+			} );
 			
 		}
 
@@ -159,8 +198,24 @@
 				buttons: {
 					'OK': function() {
 						$( this ).dialog( "close" );
-						
-						moveToTrash( trashLink.data('note') );
+						moveToTrash( trashLink.data('note'), 'column' );
+					}
+				}
+			} );
+		} );
+		
+		// Trash link on admin bar.
+		$( '.jamp-admin-bar-action--trash' ).on( 'click', function( e ) {
+			e.preventDefault();
+			
+			var trashLink = $( this );
+			
+			$( '.jamp-trash-dialog' ).dialog( {
+				modal: true,
+				buttons: {
+					'OK': function() {
+						$( this ).dialog( "close" );
+						moveToTrash( trashLink.data('note'), 'adminbar' );
 					}
 				}
 			} );

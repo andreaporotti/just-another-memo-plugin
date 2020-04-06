@@ -14,6 +14,8 @@
 	$html = '';
 	
 	// Global notes.
+	$html .= '<div class="jamp-admin-bar-section">';
+	
 	$create_url = add_query_arg( array(
 		'post_type' => 'jamp_note',
 		'jamp_scope' => 'global',
@@ -35,25 +37,29 @@
 		
 		foreach ($global_notes as $note) {
 
-			$html .= '<div class="jamp-admin-bar-note">'
+			$html .= '<div class="jamp-admin-bar-note" data-note="' . $note->ID . '">'
 					. '<span class="jamp-admin-bar-note__title">' . $note->post_title . '</span>'
 					. '<span class="jamp-admin-bar-note__actions">'
 					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--edit" href="' . get_edit_post_link($note->ID) . '" title="' . __('Modifica') . '"></a>'
-					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="' . get_delete_post_link($note->ID) . '" title="' . __('Sposta nel cestino') . '"></a>'
+					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="#" data-note="' . $note->ID . '" title="' . __('Sposta nel cestino') . '"></a>'
 					. '</span>'
 					. '<p class="jamp-admin-bar-note__content">' . $note->post_content . '</p>'
 					. '</div>';
 			
 		}
 		
-	} else {
-		
-		$html .= '<span class="jamp-admin-bar-note__no-notes-notice">' . __('Non sono presenti note globali.') . '</span>';
-		
 	}
+		
+	// Adds placeholder, hidden if there are notes.
+	$css_class = ( !empty( $global_notes ) ) ? 'jamp-admin-bar-note__no-notes-notice--hidden' : '';
+	$html .= '<span class="jamp-admin-bar-note__no-notes-notice ' . $css_class . '">' . __('Non sono presenti note globali.') . '</span>';
+	
+	$html .= '</div>';
 
 	// Section notes.
 	if ( $this->is_section_supported() ) {
+		
+		$html .= '<div class="jamp-admin-bar-section">';
 
 		$create_url = add_query_arg( array(
 			'post_type' => 'jamp_note',
@@ -77,23 +83,25 @@
 
 			foreach ($section_notes as $note) {
 
-				$html .= '<div class="jamp-admin-bar-note">'
+				$html .= '<div class="jamp-admin-bar-note" data-note="' . $note->ID . '">'
 						. '<span class="jamp-admin-bar-note__title">' . $note->post_title . '</span>'
 						. '<span class="jamp-admin-bar-note__actions">'
 						. '<a class="jamp-admin-bar-action jamp-admin-bar-action--edit" href="' . get_edit_post_link($note->ID) . '" title="' . __('Modifica') . '"></a>'
-						. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="' . get_delete_post_link($note->ID) . '" title="' . __('Sposta nel cestino') . '"></a>'
+						. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="#" data-note="' . $note->ID . '" title="' . __('Sposta nel cestino') . '"></a>'
 						. '</span>'
 						. '<p class="jamp-admin-bar-note__content">' . $note->post_content . '</p>'
 						. '</div>';
 
 			}
 
-		} else {
-
-			$html .= '<span class="jamp-admin-bar-note__no-notes-notice">' . __('Non sono presenti note in questa sezione.') . '</span>';
-
 		}
 
+		// Adds placeholder, hidden if there are notes.
+		$css_class = ( !empty( $section_notes ) ) ? 'jamp-admin-bar-note__no-notes-notice--hidden' : '';
+		$html .= '<span class="jamp-admin-bar-note__no-notes-notice ' . $css_class . '">' . __('Non sono presenti note in questa sezione.') . '</span>';
+
+		$html .= '</div>';
+		
 	}
 	
 	// Trash dialog.

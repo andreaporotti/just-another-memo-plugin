@@ -117,6 +117,10 @@
 	color: #32373c;
 }
 
+.jamp-admin-bar-note--red-background {
+	background-color: #ffbfbf;
+}
+
 .jamp-admin-bar-note__title {
 	font-weight: 700 !important;
 }
@@ -133,8 +137,12 @@
 }
 
 .jamp-admin-bar-note__no-notes-notice {
-	display: block !important;
+	display: block;
 	font-style: italic !important;
+}
+
+.jamp-admin-bar-note__no-notes-notice--hidden {
+	display: none;
 }
 
 /* ====================== */
