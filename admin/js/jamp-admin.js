@@ -18,7 +18,7 @@
 
 						var options = ``;
 						$.each(response.data, function( key, entity ) {
-							options += `<option class="target-entity" value="${entity.id}">${entity.title}</option>`;
+							options += `<option class="target-entity" value="${entity.id}">${entity.title} (${entity.status})</option>`;
 						});
 						
 						$( '#target option.target-entity' ).remove();

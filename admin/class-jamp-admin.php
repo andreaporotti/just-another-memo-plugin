@@ -262,14 +262,19 @@ class Jamp_Admin {
 			$entities_objects = get_posts( array(
 				'post_type'      => $post_type,
 				'posts_per_page' => -1,
+				'post_status'    => array( 'publish', 'future', 'draft', 'pending', 'private', 'trash' ),
 			) );
 
 			// Builds the actual list.
 			$entities = array();
 			foreach ( $entities_objects as $entity ) {
+				
+				$post_status_obj = get_post_status_object( $entity->post_status );
+				
 				$entities[] = array(
-					'id'    => $entity->ID,
-					'title' => $entity->post_title,
+					'id'     => $entity->ID,
+					'title'  => $entity->post_title,
+					'status' => $post_status_obj->label,
 				);
 			}
 			
