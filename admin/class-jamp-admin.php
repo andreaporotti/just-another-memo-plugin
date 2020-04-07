@@ -115,7 +115,7 @@ class Jamp_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
+		wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . 'css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
 
 	}
 
@@ -151,9 +151,9 @@ class Jamp_Admin {
 		 * 
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/jamp-admin.js', array( 'jquery', 'jquery-ui-dialog' ), $this->version, false );
+		wp_enqueue_script( 'jamp-admin-script', plugin_dir_url( __FILE__ ) . 'js/jamp-admin.js', array( 'jquery', 'jquery-ui-dialog' ), $this->version, false );
 
-		wp_localize_script( $this->plugin_name, 'jamp_ajax', array(
+		wp_localize_script( 'jamp-admin-script', 'jamp_ajax', array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'nonce'    => wp_create_nonce( $this->plugin_name ),
 		) );

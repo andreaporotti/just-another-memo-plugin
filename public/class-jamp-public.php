@@ -72,8 +72,15 @@ class Jamp_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/jamp-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( 'jamp-public-style', plugin_dir_url( __FILE__ ) . 'css/jamp-public.css', array(), $this->version, 'all' );
 
+		// Load admin styles if a user is logged.
+		if ( is_user_logged_in() ) {
+			
+			wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__) . '../admin/css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
+			
+		}
+		
 	}
 
 	/**
@@ -95,8 +102,20 @@ class Jamp_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/jamp-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( 'jamp-public-script', plugin_dir_url( __FILE__ ) . 'js/jamp-public.js', array( 'jquery' ), $this->version, false );
 
+		// Load admin scripts if a user is logged.
+		if ( is_user_logged_in() ) {
+			
+			wp_enqueue_script( 'jamp-admin-script', plugin_dir_url( __FILE__ ) . '../admin/js/jamp-admin.js', array( 'jquery', 'jquery-ui-dialog' ), $this->version, false );
+
+			wp_localize_script( 'jamp-admin-script', 'jamp_ajax', array(
+				'ajax_url' => admin_url( 'admin-ajax.php' ),
+				'nonce'    => wp_create_nonce( $this->plugin_name ),
+			) );
+			
+		}
+		
 	}
 
 }
