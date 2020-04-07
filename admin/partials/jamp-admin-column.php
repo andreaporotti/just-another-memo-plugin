@@ -68,72 +68,56 @@
 	
 	}
 	
-	if ( $column_name === 'jamp_scope' ) {
+	if ( $column_name === 'jamp_location' ) {
 		
 		$jamp_meta = get_post_meta( $post_id );
 		
 		switch ( $jamp_meta['jamp_scope'][0] ) {
 			
 			case 'global':
-				echo 'Globale';
+				
+				echo __( 'Globale', 'jamp' );
 				break;
+			
 			case 'section':
-				echo 'Sezione';
+				
+				// Look for the section url inside the sections list and print the corresponding name.
+				foreach ( $this->sections_list as $section ) {
+
+					if ( $section['url'] === $jamp_meta['jamp_target'][0] && $section['is_submenu'] ) {
+
+						echo __( 'Sezione', 'jamp' ) . ': ' . $section['parent_name'] . ' ' .  $section['name'];
+
+					}
+
+				}
+				
 				break;
+			
 			case 'entity':
-				echo 'Entità';
+				
+				// Look for the target type name inside the target types list and print the corresponding label.
+				foreach ( $this->target_types_list as $target_type ) {
+
+					if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
+
+						echo $target_type['singular_name'] . ': ';
+
+					}
+
+				}
+				
+				$post = get_post( $jamp_meta['jamp_target'][0] );
+				echo $post->post_title;
+				
 				break;
+			
 			default:
+				
 				break;
 			
 		}
 		
 	}
-	
-	if ( $column_name === 'jamp_target_type' ) {
-		
-		$jamp_meta = get_post_meta( $post_id );
-		
-		if ( $jamp_meta['jamp_scope'][0] === 'entity' ) {
-			
-			// Look for the target type name inside the target types list and print the corresponding label.
-			foreach ( $this->target_types_list as $target_type ) {
-				
-				if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
-					
-					echo $target_type['label'];
-					
-				}
-				
-			}
-			
-		}
-		
-	}
-	
-	if ( $column_name === 'jamp_target' ) {
-		
-		$jamp_meta = get_post_meta( $post_id );
-		
-		if ( $jamp_meta['jamp_scope'][0] === 'entity' ) {
-			
-			$post = get_post($jamp_meta['jamp_target'][0]);
-			echo $post->post_title;
-			
-		} elseif ( $jamp_meta['jamp_scope'][0] === 'section' ) {
-			
-			// Look for the section url inside the sections list and print the corresponding name.
-			foreach ( $this->sections_list as $section ) {
-				
-				if ( $section['url'] === $jamp_meta['jamp_target'][0] && $section['is_submenu'] ) {
-					
-					echo $section['parent_name'] . ' ' .  $section['name'];
-					
-				}
-				
-			}
-			
-		}
-		
-	}
+
 ?>

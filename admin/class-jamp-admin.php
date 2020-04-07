@@ -236,8 +236,9 @@ class Jamp_Admin {
 		foreach ($post_types as $post_type) {
 			if( ! in_array( $post_type->name, array( 'attachment', 'jamp_note' ), true ) ) {
 				$this->target_types_list[] = array(
-					'name'  => $post_type->name,
-					'label' => $post_type->label,
+					'name'          => $post_type->name,
+					'label'         => $post_type->label,
+					'singular_name' => $post_type->labels->singular_name,
 				);
 			}
 		}
@@ -383,7 +384,7 @@ class Jamp_Admin {
 		if ( $post_type !== 'jamp_note' ) {
 
 			// Adds custom columns for other post types and pages.
-			$columns['jamp_note'] = __( 'Note' );
+			$columns['jamp_note'] = __( 'Note', 'jamp' );
 			
 		} else {
 			
@@ -392,11 +393,9 @@ class Jamp_Admin {
 			unset( $columns['date'] );
 			
 			// Adds custom columns for Notes page.
-			$columns['jamp_scope']   = __( 'Ambito' );
-			$columns['jamp_target_type'] = __( 'Tipo di Entità' );
-			$columns['jamp_target']  = __( 'Entità' );
+			$columns['jamp_location'] = __( 'Posizione', 'jamp' );
 			
-			//Re-add Date column at the end.
+			// Re-add Date column at the end.
 			$columns['date'] = $date_column_label;
 			
 		}
