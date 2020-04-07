@@ -179,7 +179,7 @@ class Jamp {
 		
 		// Notices
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'show_admin_notices' );
-		$this->loader->add_action( 'trashed_post', $plugin_admin, 'show_notice_after_note_trashed' );
+		//$this->loader->add_action( 'trashed_post', $plugin_admin, 'show_notice_after_note_trashed' );
 		$this->loader->add_filter( 'bulk_post_updated_messages', $plugin_admin, 'manage_default_bulk_notices', 10, 2 );
 		
 		// Custom column

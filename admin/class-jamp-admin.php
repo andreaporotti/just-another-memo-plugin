@@ -589,7 +589,7 @@ class Jamp_Admin {
 		
 	}
 	
-	public function show_notice_after_note_trashed( $post_id ) {
+	/*public function show_notice_after_note_trashed( $post_id ) {
 		
 		error_log('-- SHOW_NOTICE_AFTER_NOTE_TRASHED');
 		
@@ -619,18 +619,16 @@ class Jamp_Admin {
 
 		}
 		
-	}
+	}*/
 	
 	public function manage_default_bulk_notices( $bulk_messages, $bulk_counts ) {
-		
-		error_log('-- MANAGE_DEFAULT_BULK_NOTICES');
 
 		$bulk_messages['jamp_note'] = array(
-            'updated'   => '%s note aggiornate.',
-            'locked'    => '%s note non aggiornate, qualcuno le sta modificando.',
-            'deleted'   => '%s note eliminate definitivamente.',
-            'trashed'   => '%s note spostate nel cestino.',
-            'untrashed' => '%s note ripristinate dal cestino.',
+            'updated'   => _n( '%s nota aggiornata.', '%s note aggiornate.', $bulk_counts['updated'], 'jamp' ),
+            'locked'    => _n( '%s nota non aggiornata, qualcuno la sta modificando.', '%s note non aggiornate, qualcuno le sta modificando.', $bulk_counts['locked'], 'jamp' ),
+            'deleted'   => _n( '%s nota eliminata definitivamente.', '%s note eliminate definitivamente.', $bulk_counts['deleted'], 'jamp' ),
+            'trashed'   => _n( '%s nota spostata nel cestino.', '%s note spostate nel cestino.', $bulk_counts['trashed'], 'jamp' ),
+            'untrashed' => _n( '%s nota ripristinata dal cestino.', '%s note ripristinate dal cestino.', $bulk_counts['untrashed'], 'jamp' ),
         );
 
 		return $bulk_messages;
