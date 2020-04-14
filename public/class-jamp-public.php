@@ -43,8 +43,8 @@ class Jamp_Public {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param      string    $plugin_name       The name of the plugin.
-	 * @param      string    $version    The version of this plugin.
+	 * @param      string $plugin_name       The name of the plugin.
+	 * @param      string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
@@ -76,11 +76,11 @@ class Jamp_Public {
 
 		// Load admin styles if a user is logged.
 		if ( is_user_logged_in() ) {
-			
-			wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__) . '../admin/css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
-			
+
+			wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . '../admin/css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
+
 		}
-		
+
 	}
 
 	/**
@@ -106,16 +106,20 @@ class Jamp_Public {
 
 		// Load admin scripts if a user is logged.
 		if ( is_user_logged_in() ) {
-			
+
 			wp_enqueue_script( 'jamp-admin-script', plugin_dir_url( __FILE__ ) . '../admin/js/jamp-admin.js', array( 'jquery', 'jquery-ui-dialog' ), $this->version, false );
 
-			wp_localize_script( 'jamp-admin-script', 'jamp_ajax', array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( $this->plugin_name ),
-			) );
-			
+			wp_localize_script(
+				'jamp-admin-script',
+				'jamp_ajax',
+				array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'nonce'    => wp_create_nonce( $this->plugin_name ),
+				)
+			);
+
 		}
-		
+
 	}
 
 }

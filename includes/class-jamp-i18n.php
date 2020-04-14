@@ -23,7 +23,7 @@
  * @subpackage Jamp/includes
  * @author     Andrea Porotti
  */
-class Jamp_i18n {
+class Jamp_I18n {
 
 
 	/**

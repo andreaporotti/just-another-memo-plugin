@@ -33,8 +33,8 @@
 /* STOP debug styles */
 
 #wp-admin-bar-jamp .ab-icon:before {
-    content: "\f157";
-    top: 3px;
+	content: "\f157";
+	top: 3px;
 }
 
 #wp-admin-bar-jamp .ab-sub-wrapper .ab-item {
@@ -98,13 +98,13 @@
 }
 
 .jamp-admin-bar-note:before {
-    content: "";
-    position: absolute !important;
-    top: 0;
-    right: 0;
-    border-width: 0 10px 10px 0;
-    border-style: solid;
-    border-color: #c4c267  #32373c;
+	content: "";
+	position: absolute !important;
+	top: 0;
+	right: 0;
+	border-width: 0 10px 10px 0;
+	border-style: solid;
+	border-color: #c4c267  #32373c;
 }
 
 .jamp-admin-bar-note {

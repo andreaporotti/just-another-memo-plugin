@@ -8,116 +8,112 @@
  * @package    Jamp
  * @subpackage Jamp/admin/partials
  */
+
 ?>
 
 <?php
-	if ( $column_name === 'jamp_note' ) {
+if ( 'jamp_note' === $column_name ) {
 
-		$html = '';
+	// Get notes.
+	$notes_args = array(
+		'post_type'      => 'jamp_note',
+		'posts_per_page' => -1,
+		'meta_key'       => 'jamp_target',
+		'meta_compare'   => '=',
+		'meta_value'     => $post_id,
+	);
 
-		// Get notes.
-		$notes_args = array(
-			'post_type'      => 'jamp_note',
-			'posts_per_page' => -1,
-			'meta_key'       => 'jamp_target',
-			'meta_compare'   => '=',
-			'meta_value'     => $post_id,
-		);
+	$notes = get_posts( $notes_args );
 
-		$notes = get_posts($notes_args);
+	if ( ! empty( $notes ) ) {
 
-		if ( ! empty( $notes ) ) {
+		foreach ( $notes as $note ) {
 
-			foreach ($notes as $note) {
-
-				$html .= '<div class="jamp-column-note" data-note="' . $note->ID . '">'
-						. '<span class="jamp-column-note__tile">' . $note->post_title . '</span>'
-						. '<div class="jamp-column-note__container">'
-						. '<p class="jamp-column-note__content">' . $note->post_content . '</p>'
-						. '<div class="jamp-column-note__note-actions">'
-						. '<a href="' . get_edit_post_link($note->ID) . '">' . __('Modifica') . '</a> | '
-						. '<a href="#" class="jamp-column-note__note-trash-action" data-note="' . $note->ID . '">' . __('Cestino') . '</a>'
-						. '</div>'
-						. '</div>'
-						. '</div>';
-
-			}
+			?>
+			<div class="jamp-column-note" data-note="<?php echo esc_attr( $note->ID ); ?>">
+				<span class="jamp-column-note__tile"><?php echo esc_html( $note->post_title ); ?></span>
+				<div class="jamp-column-note__container">
+					<p class="jamp-column-note__content"><?php echo wp_kses_post( $note->post_content ); ?></p>
+					<div class="jamp-column-note__note-actions">
+						<a href="<?php echo esc_url( get_edit_post_link( $note->ID ) ); ?>"><?php echo esc_html__( 'Modifica' ); ?></a> | 
+						<a href="#" class="jamp-column-note__note-trash-action" data-note="<?php echo esc_attr( $note->ID ); ?>"><?php echo esc_html__( 'Cestino' ); ?></a>
+					</div>
+				</div>
+			</div>
+			<?php
 
 		}
+	}
 
-		// Adds placeholder, hidden if there are notes.
-		$css_class = ( !empty( $notes ) ) ? 'jamp-column-note__no-notes-notice--hidden' : '';
-		$html .= '<span class="jamp-column-note__no-notes-notice ' . $css_class . '">—</span>';
+	// Adds placeholder, hidden if there are notes.
+	$css_class = ( ! empty( $notes ) ) ? 'jamp-column-note__no-notes-notice--hidden' : '';
 
-		// Create link.
-		$screen = get_current_screen();
+	?>
+	<span class="jamp-column-note__no-notes-notice <?php echo esc_attr( $css_class ); ?>">—</span>
+	<?php
 
-		$create_url = add_query_arg( array(
+	// Create link.
+	$screen = get_current_screen();
+
+	$create_url = add_query_arg(
+		array(
 			'post_type'        => 'jamp_note',
 			'jamp_scope'       => 'entity',
 			'jamp_target_type' => $screen->post_type,
 			'jamp_target'      => $post_id,
-		), admin_url( 'post-new.php' ) );
+		),
+		admin_url( 'post-new.php' )
+	);
 
-		$html .= '<div class="jamp-column-note__generic-actions">'
-				. '<a href="' . $create_url . '">Aggiungi nota</a>'
-				. '</div>';
+	?>
+	<div class="jamp-column-note__generic-actions">
+		<a href="<?php echo esc_url( $create_url ); ?>">Aggiungi nota</a>
+	</div>
+	<?php
 
-		// Show content.
-		echo $html;
-	
-	}
-	
-	if ( $column_name === 'jamp_location' ) {
-		
-		$jamp_meta = get_post_meta( $post_id );
-		
-		switch ( $jamp_meta['jamp_scope'][0] ) {
-			
-			case 'global':
-				
-				echo __( 'Globale', 'jamp' );
-				break;
-			
-			case 'section':
-				
-				// Look for the section url inside the sections list and print the corresponding name.
-				foreach ( $this->sections_list as $section ) {
+}
 
-					if ( $section['url'] === $jamp_meta['jamp_target'][0] && $section['is_submenu'] ) {
+if ( 'jamp_location' === $column_name ) {
 
-						echo __( 'Sezione', 'jamp' ) . ': ' . $section['parent_name'] . ' ' .  $section['name'];
+	$jamp_meta = get_post_meta( $post_id );
 
-					}
+	switch ( $jamp_meta['jamp_scope'][0] ) {
+
+		case 'global':
+			echo esc_html__( 'Globale', 'jamp' );
+			break;
+
+		case 'section':
+			// Look for the section url inside the sections list and print the corresponding name.
+			foreach ( $this->sections_list as $section ) {
+
+				if ( $section['url'] === $jamp_meta['jamp_target'][0] && $section['is_submenu'] ) {
+
+					echo esc_html__( 'Sezione', 'jamp' ) . ': ' . esc_html( $section['parent_name'] ) . ' ' . esc_html( $section['name'] );
 
 				}
-				
-				break;
-			
-			case 'entity':
-				
-				// Look for the target type name inside the target types list and print the corresponding label.
-				foreach ( $this->target_types_list as $target_type ) {
+			}
 
-					if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
+			break;
 
-						echo $target_type['singular_name'] . ': ';
+		case 'entity':
+			// Look for the target type name inside the target types list and print the corresponding label.
+			foreach ( $this->target_types_list as $target_type ) {
 
-					}
+				if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
+
+					echo esc_html( $target_type['singular_name'] ) . ': ';
 
 				}
-				
-				$post = get_post( $jamp_meta['jamp_target'][0] );
-				echo $post->post_title;
-				
-				break;
-			
-			default:
-				
-				break;
-			
-		}
-		
-	}
+			}
 
-?>
+			$current_post = get_post( $jamp_meta['jamp_target'][0] );
+			echo esc_html( $current_post->post_title );
+
+			break;
+
+		default:
+			break;
+
+	}
+}

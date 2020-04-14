@@ -142,7 +142,7 @@ class Jamp {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Jamp_i18n();
+		$plugin_i18n = new Jamp_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -168,27 +168,26 @@ class Jamp {
 		$this->loader->add_action( 'save_post_jamp_note', $plugin_admin, 'save_meta_data' );
 
 		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'add_admin_bar_menu_item', 999 );
-		
+
 		$this->loader->add_action( 'load-post-new.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_action( 'load-post.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_filter( 'redirect_post_location', $plugin_admin, 'redirect_after_save' );
-		
-		// Ajax
+
+		// Ajax.
 		$this->loader->add_action( 'wp_ajax_build_targets_list', $plugin_admin, 'build_targets_list' );
 		$this->loader->add_action( 'wp_ajax_move_to_trash', $plugin_admin, 'move_to_trash' );
-		
-		// Notices
+
+		// Notices.
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'show_admin_notices' );
-		//$this->loader->add_action( 'trashed_post', $plugin_admin, 'show_notice_after_note_trashed' );
 		$this->loader->add_filter( 'bulk_post_updated_messages', $plugin_admin, 'manage_default_bulk_notices', 10, 2 );
-		
-		// Custom column
+
+		// Custom column.
 		$this->loader->add_filter( 'manage_posts_columns', $plugin_admin, 'add_columns_head' );
 		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'show_columns_content', 10, 2 );
 		$this->loader->add_filter( 'manage_page_posts_columns', $plugin_admin, 'add_columns_head' );
 		$this->loader->add_action( 'manage_page_posts_custom_column', $plugin_admin, 'show_columns_content', 10, 2 );
-		
-		// Session management
+
+		// Session management.
 		$this->loader->add_action( 'init', $plugin_admin, 'session_start', 1 );
 		$this->loader->add_action( 'wp_logout', $plugin_admin, 'session_destroy' );
 		$this->loader->add_action( 'wp_login', $plugin_admin, 'session_destroy' );
