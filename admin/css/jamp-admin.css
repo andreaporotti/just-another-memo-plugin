@@ -117,6 +117,12 @@
 	color: #32373c;
 }
 
+.jamp-admin-bar-note img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
 .jamp-admin-bar-note--red-background {
 	background-color: #ffbfbf;
 }
@@ -157,6 +163,12 @@
 	background-color: #ffbfbf;
 }
 
+.jamp-column-note img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
 .jamp-column-note__tile {
 	font-weight: 600;
 }
@@ -166,7 +178,7 @@
 	border-left: 2px solid #dddddd;
 }
 
-.jamp-column-note__content  {
+.jamp-column-note__content {
 	margin-bottom: 0 !important;
 }
 
