@@ -35,8 +35,8 @@ if ( 'jamp_note' === $column_name ) {
 				<div class="jamp-column-note__container">
 					<div class="jamp-column-note__content"><?php echo wp_kses_post( $note->post_content ); ?></div>
 					<div class="jamp-column-note__note-actions">
-						<a href="<?php echo esc_url( get_edit_post_link( $note->ID ) ); ?>"><?php echo esc_html__( 'Modifica' ); ?></a> | 
-						<a href="#" class="jamp-column-note__note-trash-action" data-note="<?php echo esc_attr( $note->ID ); ?>"><?php echo esc_html__( 'Cestino' ); ?></a>
+						<a href="<?php echo esc_url( get_edit_post_link( $note->ID ) ); ?>"><?php echo esc_html__( 'Modifica', 'jamp' ); ?></a> | 
+						<a href="#" class="jamp-column-note__note-trash-action" data-note="<?php echo esc_attr( $note->ID ); ?>"><?php echo esc_html__( 'Cestino', 'jamp' ); ?></a>
 					</div>
 				</div>
 			</div>

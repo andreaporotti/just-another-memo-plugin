@@ -289,7 +289,7 @@ class Jamp_Admin {
 		foreach ( $screens as $screen ) {
 			add_meta_box(
 				'jamp_meta_box',
-				__( 'Impostazioni Nota' ),
+				__( 'Impostazioni Nota', 'jamp' ),
 				array( $this, 'meta_box_html_cb' ),
 				$screen,
 				'side',
@@ -588,18 +588,18 @@ class Jamp_Admin {
 			// Set custom feedback messages.
 			$messages['jamp_note'] = array(
 				0  => '',
-				1  => __( 'Nota aggiornata.' ),
-				2  => __( 'Campo personalizzato aggiornato.' ),
-				3  => __( 'Campo personalizzato eliminato.' ),
-				4  => __( 'Nota aggiornata.' ),
+				1  => __( 'Nota aggiornata.', 'jamp' ),
+				2  => __( 'Campo personalizzato aggiornato.', 'jamp' ),
+				3  => __( 'Campo personalizzato eliminato.', 'jamp' ),
+				4  => __( 'Nota aggiornata.', 'jamp' ),
 				// translators: %s contains date and time of the revision.
-				5  => isset( $_GET['revision'] ) ? sprintf( __( 'Nota ripristinata alla revisione del %s.' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : '',
-				6  => __( 'La nota è stata creata.' ),
-				7  => __( 'Nota salvata.' ),
-				8  => __( 'Nota inviata.' ),
-				9  => __( 'Nota pianificata.' ),
-				10 => __( 'Bozza della nota aggiornata.' ),
-				11 => __( 'La nota è stata spostata nel cestino.' ),
+				5  => isset( $_GET['revision'] ) ? sprintf( __( 'Nota ripristinata alla revisione del %s.', 'jamp' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : '',
+				6  => __( 'La nota è stata creata.', 'jamp' ),
+				7  => __( 'Nota salvata.', 'jamp' ),
+				8  => __( 'Nota inviata.', 'jamp' ),
+				9  => __( 'Nota pianificata.', 'jamp' ),
+				10 => __( 'Bozza della nota aggiornata.', 'jamp' ),
+				11 => __( 'La nota è stata spostata nel cestino.', 'jamp' ),
 			);
 
 			?>
