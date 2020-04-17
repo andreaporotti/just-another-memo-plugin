@@ -289,7 +289,7 @@ class Jamp_Admin {
 		foreach ( $screens as $screen ) {
 			add_meta_box(
 				'jamp_meta_box',
-				__( 'Impostazioni Nota', 'jamp' ),
+				esc_html__( 'Impostazioni Nota', 'jamp' ),
 				array( $this, 'meta_box_html_cb' ),
 				$screen,
 				'side',
@@ -378,7 +378,7 @@ class Jamp_Admin {
 		if ( 'jamp_note' !== $post_type ) {
 
 			// Adds custom columns for other post types and pages.
-			$columns['jamp_note'] = __( 'Note', 'jamp' );
+			$columns['jamp_note'] = esc_html__( 'Note', 'jamp' );
 
 		} else {
 
@@ -387,7 +387,7 @@ class Jamp_Admin {
 			unset( $columns['date'] );
 
 			// Adds custom columns for Notes page.
-			$columns['jamp_location'] = __( 'Posizione', 'jamp' );
+			$columns['jamp_location'] = esc_html__( 'Posizione', 'jamp' );
 
 			// Re-add Date column at the end.
 			$columns['date'] = $date_column_label;
@@ -476,7 +476,7 @@ class Jamp_Admin {
 		$wp_admin_bar->add_node(
 			array(
 				'id'    => 'jamp',
-				'title' => '<span class="ab-icon"></span>' . __( 'Note', 'jamp' ),
+				'title' => '<span class="ab-icon"></span>' . esc_html__( 'Note', 'jamp' ),
 				'href'  => '#',
 			)
 		);
@@ -588,18 +588,17 @@ class Jamp_Admin {
 			// Set custom feedback messages.
 			$messages['jamp_note'] = array(
 				0  => '',
-				1  => __( 'Nota aggiornata.', 'jamp' ),
-				2  => __( 'Campo personalizzato aggiornato.', 'jamp' ),
-				3  => __( 'Campo personalizzato eliminato.', 'jamp' ),
-				4  => __( 'Nota aggiornata.', 'jamp' ),
-				// translators: %s contains date and time of the revision.
-				5  => isset( $_GET['revision'] ) ? sprintf( __( 'Nota ripristinata alla revisione del %s.', 'jamp' ), wp_post_revision_title( (int) $_GET['revision'], false ) ) : '',
-				6  => __( 'La nota è stata creata.', 'jamp' ),
-				7  => __( 'Nota salvata.', 'jamp' ),
-				8  => __( 'Nota inviata.', 'jamp' ),
-				9  => __( 'Nota pianificata.', 'jamp' ),
-				10 => __( 'Bozza della nota aggiornata.', 'jamp' ),
-				11 => __( 'La nota è stata spostata nel cestino.', 'jamp' ),
+				1  => esc_html__( 'Nota aggiornata.', 'jamp' ),
+				2  => esc_html__( 'Campo personalizzato aggiornato.', 'jamp' ),
+				3  => esc_html__( 'Campo personalizzato eliminato.', 'jamp' ),
+				4  => esc_html__( 'Nota aggiornata.', 'jamp' ),
+				5  => '', // Revisions are disabled.
+				6  => esc_html__( 'La nota è stata creata.', 'jamp' ),
+				7  => esc_html__( 'Nota salvata.', 'jamp' ),
+				8  => esc_html__( 'Nota inviata.', 'jamp' ),
+				9  => esc_html__( 'Nota pianificata.', 'jamp' ),
+				10 => esc_html__( 'Bozza della nota aggiornata.', 'jamp' ),
+				11 => esc_html__( 'La nota è stata spostata nel cestino.', 'jamp' ),
 			);
 
 			?>
