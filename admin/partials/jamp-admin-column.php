@@ -31,7 +31,7 @@ if ( 'jamp_note' === $column_name ) {
 
 			?>
 			<div class="jamp-column-note" data-note="<?php echo esc_attr( $note->ID ); ?>">
-				<span class="jamp-column-note__tile"><?php echo esc_html( $note->post_title ); ?></span>
+				<span class="jamp-column-note__title"><?php echo esc_html( $note->post_title ); ?></span>
 				<div class="jamp-column-note__container">
 					<div class="jamp-column-note__content"><?php echo wp_kses_post( $note->post_content ); ?></div>
 					<div class="jamp-column-note__note-actions">

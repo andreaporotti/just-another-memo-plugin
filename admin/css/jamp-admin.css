@@ -137,9 +137,22 @@
 	right: 10px;
 }
 
-.jamp-admin-bar-note__content {
+.jamp-admin-bar-note__content * {
 	white-space: normal !important;
 	line-height: 1.6 !important;
+}
+
+.jamp-admin-bar-note__content a {
+	display: inline !important;
+	margin: 0 !important;
+	padding: 0 !important;
+	
+	color: inherit !important;
+	text-decoration: underline !important;
+}
+
+.jamp-admin-bar-note__content a:hover {
+	color: #00a0d2 !important;
 }
 
 .jamp-admin-bar-note__no-notes-notice {
@@ -169,7 +182,7 @@
 	height: auto;
 }
 
-.jamp-column-note__tile {
+.jamp-column-note__title {
 	font-weight: 600;
 }
 
