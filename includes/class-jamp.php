@@ -168,6 +168,8 @@ class Jamp {
 		$this->loader->add_action( 'save_post_jamp_note', $plugin_admin, 'save_meta_data' );
 
 		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'add_admin_bar_menu_item', 999 );
+		
+		$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin, 'tiny_mce_before_init' );
 
 		$this->loader->add_action( 'load-post-new.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_action( 'load-post.php', $plugin_admin, 'note_form_page' );

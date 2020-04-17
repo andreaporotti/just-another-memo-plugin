@@ -666,6 +666,25 @@ class Jamp_Admin {
 	}
 
 	/**
+	 * Creates a TinyMCE custom configuration when editing notes.
+	 *
+	 * @since    1.0.0
+	 * @param    array $mceInit An array with TinyMCE config.
+	 */
+	public function tiny_mce_before_init( $mceInit ) {
+
+		unset( $mceInit['toolbar1'] );
+		unset( $mceInit['toolbar2'] );
+		unset( $mceInit['toolbar3'] );
+		unset( $mceInit['toolbar4'] );
+
+		$mceInit['toolbar1'] = 'bold,italic,alignleft,aligncenter,alignright,link,strikethrough,hr,forecolor,pastetext,removeformat,charmap,undo,redo,wp_help';
+
+		return $mceInit;
+
+	}
+
+	/**
 	 * Starts PHP session.
 	 *
 	 * @since    1.0.0
