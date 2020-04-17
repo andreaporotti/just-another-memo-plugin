@@ -432,6 +432,11 @@ class Jamp_Admin {
 			$url = $request_scheme . '://' . $http_host . $request_uri;
 		}
 
+		// If current url is the admin url, let's add "index.php" to it so it's equal to the "Home" link in the sidebar menu.
+		if ( $url === admin_url() ) {
+			$url .= 'index.php';
+		}
+
 		return $url;
 
 	}
