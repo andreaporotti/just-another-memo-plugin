@@ -63,7 +63,7 @@ class Jamp_CPT {
 			'label'               => __( 'Note', 'jamp' ),
 			'description'         => __( 'Una nota che può essere aggiunta alla dashboard.', 'jamp' ),
 			'labels'              => $labels,
-			'supports'            => array( 'title', 'editor', 'revisions' ),
+			'supports'            => array( 'title', 'editor' ),
 			'taxonomies'          => array(),
 			'hierarchical'        => false,
 			'public'              => true,
