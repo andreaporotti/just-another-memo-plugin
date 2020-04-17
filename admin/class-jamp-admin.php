@@ -678,6 +678,7 @@ class Jamp_Admin {
 		unset( $mceInit['toolbar3'] );
 		unset( $mceInit['toolbar4'] );
 
+		$mceInit['wpautop']  = false;
 		$mceInit['toolbar1'] = 'bold,italic,alignleft,aligncenter,alignright,link,strikethrough,hr,forecolor,pastetext,removeformat,charmap,undo,redo,wp_help';
 
 		return $mceInit;
