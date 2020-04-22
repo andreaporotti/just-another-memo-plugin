@@ -42,9 +42,13 @@ if ( ! empty( $global_notes ) ) {
 
 	foreach ( $global_notes as $note ) {
 
+		$note_author = get_userdata( $note->post_author );
+		$note_date   = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_modified_gmt ) );
+
 		$html .= '<div class="jamp-admin-bar-note" data-note="' . esc_attr( $note->ID ) . '">'
 				. '<span class="jamp-admin-bar-note__title">' . esc_html( $note->post_title ) . '</span>'
 				. '<span class="jamp-admin-bar-note__actions">'
+				. '<div class="jamp-admin-bar-action jamp-admin-bar-action--info jamp-note-info-tooltip"><span class="jamp-note-info-tooltip__content jamp-note-info-tooltip__content--left"><span class="jamp-note-info-tooltip__label">' . esc_html__( 'Autore', 'jamp' ) . '</span><span class="jamp-note-info-tooltip__field">' . esc_html( $note_author->display_name ) . '</span><span class="jamp-note-info-tooltip__label">' . esc_html__( 'Ultima modifica', 'jamp' ) . '</span><span class="jamp-note-info-tooltip__field">' . esc_html( $note_date ) . '</span></span></div>'
 				. '<a class="jamp-admin-bar-action jamp-admin-bar-action--edit" href="' . esc_url( get_edit_post_link( $note->ID ) ) . '" title="' . esc_html__( 'Modifica', 'jamp' ) . '"></a>'
 				. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="#" data-note="' . esc_attr( $note->ID ) . '" title="' . esc_html__( 'Sposta nel cestino', 'jamp' ) . '"></a>'
 				. '</span>'
@@ -91,9 +95,13 @@ if ( $this->is_section_supported() ) {
 
 		foreach ( $section_notes as $note ) {
 
+			$note_author = get_userdata( $note->post_author );
+			$note_date   = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_modified_gmt ) );
+
 			$html .= '<div class="jamp-admin-bar-note" data-note="' . esc_attr( $note->ID ) . '">'
 					. '<span class="jamp-admin-bar-note__title">' . esc_html( $note->post_title ) . '</span>'
 					. '<span class="jamp-admin-bar-note__actions">'
+					. '<div class="jamp-admin-bar-action jamp-admin-bar-action--info jamp-note-info-tooltip"><span class="jamp-note-info-tooltip__content jamp-note-info-tooltip__content--left"><span class="jamp-note-info-tooltip__label">' . esc_html__( 'Autore', 'jamp' ) . '</span><span class="jamp-note-info-tooltip__field">' . esc_html( $note_author->display_name ) . '</span><span class="jamp-note-info-tooltip__label">' . esc_html__( 'Ultima modifica', 'jamp' ) . '</span><span class="jamp-note-info-tooltip__field">' . esc_html( $note_date ) . '</span></span></div>'
 					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--edit" href="' . esc_url( get_edit_post_link( $note->ID ) ) . '" title="' . esc_html__( 'Modifica', 'jamp' ) . '"></a>'
 					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="#" data-note="' . esc_attr( $note->ID ) . '" title="' . esc_html__( 'Sposta nel cestino', 'jamp' ) . '"></a>'
 					. '</span>'

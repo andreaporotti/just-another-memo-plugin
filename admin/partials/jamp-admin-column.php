@@ -28,6 +28,9 @@ if ( 'jamp_note' === $column_name ) {
 	if ( ! empty( $notes ) ) {
 
 		foreach ( $notes as $note ) {
+			
+			$note_author = get_userdata( $note->post_author );
+			$note_date   = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_modified_gmt ) );
 
 			?>
 			<div class="jamp-column-note" data-note="<?php echo esc_attr( $note->ID ); ?>">
@@ -35,6 +38,14 @@ if ( 'jamp_note' === $column_name ) {
 				<div class="jamp-column-note__container">
 					<div class="jamp-column-note__content"><?php echo wp_kses_post( $note->post_content ); ?></div>
 					<div class="jamp-column-note__note-actions">
+						<a href="#" class="jamp-note-info-tooltip"><?php echo esc_html__( 'Info', 'jamp' ); ?>
+						<span class="jamp-note-info-tooltip__content jamp-note-info-tooltip__content--top">
+							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Autore', 'jamp' ); ?></span>
+							<span class="jamp-note-info-tooltip__field"><?php echo esc_html( $note_author->display_name ); ?></span>
+							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Ultima modifica', 'jamp' ); ?></span>
+							<span class="jamp-note-info-tooltip__field"><?php echo esc_html( $note_date ); ?></span>
+						</span>
+						</a> | 
 						<a href="<?php echo esc_url( get_edit_post_link( $note->ID ) ); ?>"><?php echo esc_html__( 'Modifica', 'jamp' ); ?></a> | 
 						<a href="#" class="jamp-column-note__note-trash-action" data-note="<?php echo esc_attr( $note->ID ); ?>"><?php echo esc_html__( 'Cestino', 'jamp' ); ?></a>
 					</div>

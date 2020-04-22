@@ -38,7 +38,7 @@
 }
 
 #wp-admin-bar-jamp .ab-sub-wrapper .ab-item {
-	color: #FFFFFF;
+	color: #ffffff;
 }
 
 #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item {
@@ -71,6 +71,18 @@
 
 .jamp-admin-bar-action--create {
 	padding: 0 5px 0 0 !important;
+}
+
+.jamp-admin-bar-action--info:before {
+	content: "\f348";
+}
+
+.jamp-admin-bar-action--info {
+	color: #7d7d7d !important;
+}
+
+.jamp-admin-bar-action--info:hover {
+	color: #00a0d2 !important;
 }
 
 .jamp-admin-bar-action--edit:before {
@@ -109,6 +121,7 @@
 
 .jamp-admin-bar-note {
 	position: relative !important;
+	box-sizing: border-box !important;
 	min-width: 300px;
 	max-width: 500px;
 	padding: 0 5px 5px 5px !important;
@@ -223,3 +236,79 @@
 .jamp-trash-dialog--hidden {
 	display: none;
 }
+
+/* ================= */
+/* ==== TOOLTIP ==== */
+/* ================= */
+
+ /* Tooltip container */
+.jamp-note-info-tooltip {
+	position: relative !important;
+	display: inline-block !important;
+}
+
+/* Tooltip content */
+.jamp-note-info-tooltip__content {
+	display: none !important;
+	width: 150px !important;
+	background-color: #555 !important;
+	color: #ffffff !important;
+	text-align: center !important;
+	padding: 5px 5px 10px 5px !important;
+	border-radius: 5px !important;
+	white-space: normal;
+
+	position: absolute !important;
+	z-index: 10 !important;
+	box-sizing: border-box !important;
+}
+
+.jamp-note-info-tooltip__content--top {
+	bottom: 100% !important;
+	left: 50% !important;
+	margin-left: -75px !important;
+}
+
+.jamp-note-info-tooltip__content--left {
+	top: -20px !important;
+	bottom: auto !important;
+	right: 125% !important;
+}
+
+.jamp-note-info-tooltip__label {
+	font-weight: 700 !important;
+	line-height: 1 !important;
+	display: block;
+	margin-bottom: 5px !important;
+}
+
+.jamp-note-info-tooltip__field {
+	line-height: 1 !important;
+	display: block;
+}
+
+.jamp-note-info-tooltip__field:not(:last-child) {
+	margin-bottom: 10px !important;
+}
+
+/* Tooltip arrow */
+.jamp-note-info-tooltip__content:after {
+	content: "";
+	position: absolute !important;
+	top: 100% !important;
+	left: 50% !important;
+	margin-left: -5px !important;
+	border-width: 5px !important;
+	border-style: solid !important;
+	border-color: #555 transparent transparent transparent !important;
+}
+
+.jamp-note-info-tooltip__content.jamp-note-info-tooltip__content--left:after {
+	top: 32px !important;
+	left: 100% !important;
+}
+
+/* Show the tooltip */
+.jamp-note-info-tooltip:hover .jamp-note-info-tooltip__content {
+	display: block !important;
+} 
