@@ -689,6 +689,20 @@ class Jamp_Admin {
 		return $mceInit;
 
 	}
+	
+	/**
+	 * Adds notes to the post types to be deleted when deleting a user.
+	 *
+	 * @since    1.0.0
+	 * @param    array $post_types_to_delete Array of post types to delete.
+	 * @param    int   $id                   User ID.
+	 */
+	public function post_types_to_delete_with_user( $post_types_to_delete, $id ) {
+
+		$post_types_to_delete[] = 'jamp_note';
+		return $post_types_to_delete;
+
+	}
 
 	/**
 	 * Starts PHP session.

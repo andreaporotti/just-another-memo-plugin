@@ -174,6 +174,8 @@ class Jamp {
 		$this->loader->add_action( 'load-post-new.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_action( 'load-post.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_filter( 'redirect_post_location', $plugin_admin, 'redirect_after_save' );
+		
+		$this->loader->add_filter( 'post_types_to_delete_with_user', $plugin_admin, 'post_types_to_delete_with_user', 10, 2 );
 
 		// Ajax.
 		$this->loader->add_action( 'wp_ajax_build_targets_list', $plugin_admin, 'build_targets_list' );
