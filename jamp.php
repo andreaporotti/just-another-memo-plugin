@@ -12,7 +12,7 @@
  * @package           Jamp
  *
  * @wordpress-plugin
- * Plugin Name:       Just Another Memo Plugin (JAMP)
+ * Plugin Name:       JAMP (Just Another Memo Plugin)
  * Plugin URI:        https://www.andreaporotti.it
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
