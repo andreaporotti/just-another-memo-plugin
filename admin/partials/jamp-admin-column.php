@@ -162,7 +162,10 @@ if ( 'jamp_location' === $column_name ) {
 				
 				?>
 				<span class="jamp-column-note__orphan-note-notice">
-					<?php printf( esc_html__('Nota collegata a %s non più esistente.', 'jamp'), esc_html( $target_type_name ) ); ?>
+				<?php
+					// translators: %s is the target the note is attached to (eg. section, post, page... )
+					printf( esc_html__('Nota collegata a %s non più esistente.', 'jamp'), esc_html( $target_type_name ) );
+				?>
 				</span>
 				<?php
 				
