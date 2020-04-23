@@ -12,6 +12,7 @@
 ?>
 
 <?php
+// Columns on post types pages.
 if ( 'jamp_note' === $column_name ) {
 
 	// Get notes.
@@ -81,6 +82,16 @@ if ( 'jamp_note' === $column_name ) {
 		<a href="<?php echo esc_url( $create_url ); ?>">Aggiungi nota</a>
 	</div>
 	<?php
+
+}
+
+// Columns on notes pages.
+if ( 'jamp_author' === $column_name ) {
+
+	$note        = get_post( $post_id );
+	$note_author = get_userdata( $note->post_author );
+
+	echo esc_html( $note_author->display_name );
 
 }
 
