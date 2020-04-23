@@ -107,30 +107,63 @@ if ( 'jamp_location' === $column_name ) {
 
 		case 'section':
 			// Look for the section url inside the sections list and print the corresponding name.
+			$section_name        = '';
+			$section_parent_name = '';
+
 			foreach ( $this->sections_list as $section ) {
 
 				if ( $section['url'] === $jamp_meta['jamp_target'][0] && $section['is_submenu'] ) {
 
-					echo esc_html__( 'Sezione', 'jamp' ) . ': ' . esc_html( $section['parent_name'] ) . ' ' . esc_html( $section['name'] );
+					$section_name        = $section['name'];
+					$section_parent_name = $section['parent_name'];
 
 				}
+			}
+
+			if ( ! empty($section_name) ) {
+
+				echo esc_html__( 'Sezione', 'jamp' ) . ': ' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
+
+			} else {
+
+				?>
+				<span class="jamp-column-note__orphan-note-notice">
+					<?php echo esc_html__('Nota collegata a Sezione non più esistente.', 'jamp'); ?>
+				</span>
+				<?php
+
 			}
 
 			break;
 
 		case 'entity':
 			// Look for the target type name inside the target types list and print the corresponding label.
+			$target_type_name = '';
+			
 			foreach ( $this->target_types_list as $target_type ) {
 
 				if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
 
-					echo esc_html( $target_type['singular_name'] ) . ': ';
+					$target_type_name = $target_type['singular_name'];
 
 				}
 			}
 
 			$current_post = get_post( $jamp_meta['jamp_target'][0] );
-			echo esc_html( $current_post->post_title );
+			
+			if ( ! empty( $current_post ) ) {
+				
+				echo esc_html( $target_type_name ) . ': ' . esc_html( $current_post->post_title );
+				
+			} else {
+				
+				?>
+				<span class="jamp-column-note__orphan-note-notice">
+					<?php printf( esc_html__('Nota collegata a %s non più esistente.', 'jamp'), esc_html( $target_type_name ) ); ?>
+				</span>
+				<?php
+				
+			}
 
 			break;
 
