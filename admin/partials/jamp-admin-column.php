@@ -42,16 +42,16 @@ if ( 'jamp_note' === $column_name ) {
 					<div class="jamp-column-note__note-actions">
 						<a href="#" class="jamp-note-info-tooltip"><?php echo esc_html__( 'Info', 'jamp' ); ?>
 						<span class="jamp-note-info-tooltip__content jamp-note-info-tooltip__content--top">
-							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Autore', 'jamp' ); ?></span>
+							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Author', 'jamp' ); ?></span>
 							<span class="jamp-note-info-tooltip__field"><?php echo esc_html( $note_author->display_name ); ?></span>
-							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Ultima modifica', 'jamp' ); ?></span>
+							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Last edited', 'jamp' ); ?></span>
 							<span class="jamp-note-info-tooltip__field"><?php echo esc_html( $note_modified_date ); ?></span>
-							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Creazione', 'jamp' ); ?></span>
+							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Created', 'jamp' ); ?></span>
 							<span class="jamp-note-info-tooltip__field"><?php echo esc_html( $note_created_date ); ?></span>
 						</span>
 						</a> | 
-						<a href="<?php echo esc_url( get_edit_post_link( $note->ID ) ); ?>"><?php echo esc_html__( 'Modifica', 'jamp' ); ?></a> | 
-						<a href="#" class="jamp-column-note__note-trash-action" data-note="<?php echo esc_attr( $note->ID ); ?>"><?php echo esc_html__( 'Cestino', 'jamp' ); ?></a>
+						<a href="<?php echo esc_url( get_edit_post_link( $note->ID ) ); ?>"><?php echo esc_html__( 'Edit', 'jamp' ); ?></a> | 
+						<a href="#" class="jamp-column-note__note-trash-action" data-note="<?php echo esc_attr( $note->ID ); ?>"><?php echo esc_html__( 'Trash', 'jamp' ); ?></a>
 					</div>
 				</div>
 			</div>
@@ -82,7 +82,7 @@ if ( 'jamp_note' === $column_name ) {
 
 	?>
 	<div class="jamp-column-note__generic-actions">
-		<a href="<?php echo esc_url( $create_url ); ?>">Aggiungi nota</a>
+		<a href="<?php echo esc_url( $create_url ); ?>"><?php echo esc_html__( 'Add New', 'jamp' ); ?></a>
 	</div>
 	<?php
 
@@ -105,7 +105,7 @@ if ( 'jamp_location' === $column_name ) {
 	switch ( $jamp_meta['jamp_scope'][0] ) {
 
 		case 'global':
-			echo esc_html__( 'Globale', 'jamp' );
+			echo esc_html__( 'Global', 'jamp' );
 			break;
 
 		case 'section':
@@ -125,13 +125,13 @@ if ( 'jamp_location' === $column_name ) {
 
 			if ( ! empty($section_name) ) {
 
-				echo esc_html__( 'Sezione', 'jamp' ) . ': ' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
+				echo esc_html__( 'Section', 'jamp' ) . ': ' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
 
 			} else {
 
 				?>
 				<span class="jamp-column-note__orphan-note-notice">
-					<?php echo esc_html__('Nota collegata a Sezione non più esistente.', 'jamp'); ?>
+					<?php echo esc_html__('Note attached to a no longer existing Section.', 'jamp'); ?>
 				</span>
 				<?php
 
@@ -156,15 +156,15 @@ if ( 'jamp_location' === $column_name ) {
 			
 			if ( ! empty( $current_post ) ) {
 				
-				echo esc_html( $target_type_name ) . ': ' . esc_html( $current_post->post_title );
+				echo esc_html__( 'Item', 'jamp' ) . ': ' .  esc_html( $target_type_name ) . ' "' . esc_html( $current_post->post_title ) . '"';
 				
 			} else {
 				
 				?>
 				<span class="jamp-column-note__orphan-note-notice">
 				<?php
-					// translators: %s is the target the note is attached to (eg. section, post, page... )
-					printf( esc_html__('Nota collegata a %s non più esistente.', 'jamp'), esc_html( $target_type_name ) );
+					// translators: %s is the item the note is attached to (eg. post, page...)
+					printf( esc_html__('Note attached to a no longer existing %s.', 'jamp'), esc_html( $target_type_name ) );
 				?>
 				</span>
 				<?php

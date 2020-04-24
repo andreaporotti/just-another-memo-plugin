@@ -289,7 +289,7 @@ class Jamp_Admin {
 		foreach ( $screens as $screen ) {
 			add_meta_box(
 				'jamp_meta_box',
-				esc_html__( 'Impostazioni Nota', 'jamp' ),
+				esc_html__( 'Note Settings', 'jamp' ),
 				array( $this, 'meta_box_html_cb' ),
 				$screen,
 				'side',
@@ -378,7 +378,7 @@ class Jamp_Admin {
 		if ( 'jamp_note' !== $post_type ) {
 
 			// Adds custom columns for other post types and pages.
-			$columns['jamp_note'] = esc_html__( 'Note', 'jamp' );
+			$columns['jamp_note'] = esc_html__( 'Notes', 'jamp' );
 
 		} else {
 
@@ -387,8 +387,8 @@ class Jamp_Admin {
 			unset( $columns['date'] );
 
 			// Adds custom columns for notes page.
-			$columns['jamp_author']   = esc_html__( 'Autore', 'jamp' );
-			$columns['jamp_location'] = esc_html__( 'Posizione', 'jamp' );
+			$columns['jamp_author']   = esc_html__( 'Author', 'jamp' );
+			$columns['jamp_location'] = esc_html__( 'Scope', 'jamp' );
 
 			// Re-add Date column at the end.
 			$columns['date'] = $date_column_label;
@@ -477,7 +477,7 @@ class Jamp_Admin {
 		$wp_admin_bar->add_node(
 			array(
 				'id'    => 'jamp',
-				'title' => '<span class="ab-icon"></span>' . esc_html__( 'Note', 'jamp' ),
+				'title' => '<span class="ab-icon"></span>' . esc_html__( 'Notes', 'jamp' ),
 				'href'  => '#',
 			)
 		);
@@ -588,18 +588,17 @@ class Jamp_Admin {
 
 			// Set custom feedback messages.
 			$messages['jamp_note'] = array(
-				0  => '',
-				1  => esc_html__( 'Nota aggiornata.', 'jamp' ),
-				2  => esc_html__( 'Campo personalizzato aggiornato.', 'jamp' ),
-				3  => esc_html__( 'Campo personalizzato eliminato.', 'jamp' ),
-				4  => esc_html__( 'Nota aggiornata.', 'jamp' ),
-				5  => '', // Revisions are disabled.
-				6  => esc_html__( 'La nota è stata creata.', 'jamp' ),
-				7  => esc_html__( 'Nota salvata.', 'jamp' ),
-				8  => esc_html__( 'Nota inviata.', 'jamp' ),
-				9  => esc_html__( 'Nota pianificata.', 'jamp' ),
-				10 => esc_html__( 'Bozza della nota aggiornata.', 'jamp' ),
-				11 => esc_html__( 'La nota è stata spostata nel cestino.', 'jamp' ),
+				0  => '', // Unused. Messages start at index 1.
+				1  => esc_html__( 'Note updated.', 'jamp' ),
+				2  => esc_html__( 'Custom field updated.', 'jamp' ),
+				3  => esc_html__( 'Custom field deleted.', 'jamp' ),
+				4  => esc_html__( 'Note updated.', 'jamp' ),
+				5  => '', // Unused. Revisions are disabled.
+				6  => esc_html__( 'Note published.', 'jamp' ),
+				7  => esc_html__( 'Note saved.', 'jamp' ),
+				8  => esc_html__( 'Note submitted.', 'jamp' ),
+				9  => esc_html__( 'Note scheduled.', 'jamp' ),
+				10 => esc_html__( 'Note draft updated.', 'jamp' ),
 			);
 
 			?>
@@ -625,16 +624,16 @@ class Jamp_Admin {
 	public function manage_default_bulk_notices( $bulk_messages, $bulk_counts ) {
 
 		$bulk_messages['jamp_note'] = array(
-			// translators: %s is the number of notes.
-			'updated'   => _n( '%s nota aggiornata.', '%s note aggiornate.', $bulk_counts['updated'], 'jamp' ),
-			// translators: %s is the number of notes.
-			'locked'    => _n( '%s nota non aggiornata, qualcuno la sta modificando.', '%s note non aggiornate, qualcuno le sta modificando.', $bulk_counts['locked'], 'jamp' ),
-			// translators: %s is the number of notes.
-			'deleted'   => _n( '%s nota eliminata definitivamente.', '%s note eliminate definitivamente.', $bulk_counts['deleted'], 'jamp' ),
-			// translators: %s is the number of notes.
-			'trashed'   => _n( '%s nota spostata nel cestino.', '%s note spostate nel cestino.', $bulk_counts['trashed'], 'jamp' ),
-			// translators: %s is the number of notes.
-			'untrashed' => _n( '%s nota ripristinata dal cestino.', '%s note ripristinate dal cestino.', $bulk_counts['untrashed'], 'jamp' ),
+			// translators: %s is the number of updated notes.
+			'updated'   => esc_html( _n( '%s note updated.', '%s notes updated.', $bulk_counts['updated'], 'jamp' ) ),
+			// translators: %s is the number of locked notes.
+			'locked'    => esc_html( _n( '%s note not updated, somebody is editing it.', '%s notes not updated, somebody is editing them.', $bulk_counts['locked'], 'jamp' ) ),
+			// translators: %s is the number of deleted notes.
+			'deleted'   => esc_html( _n( '%s note permanently deleted.', '%s notes permanently deleted.', $bulk_counts['deleted'], 'jamp' ) ),
+			// translators: %s is the number of trashed notes.
+			'trashed'   => esc_html( _n( '%s note moved to the Trash.', '%s notes moved to the Trash.', $bulk_counts['trashed'], 'jamp' ) ),
+			// translators: %s is the number of untrashed notes.
+			'untrashed' => esc_html( _n( '%s note restored from the Trash.', '%s notes restored from the Trash.', $bulk_counts['untrashed'], 'jamp' ) ),
 		);
 
 		return $bulk_messages;

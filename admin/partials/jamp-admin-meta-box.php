@@ -41,28 +41,28 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 <input type="hidden" id="saved-target" value="<?php echo ( isset( $jamp_meta['jamp_target'] ) ) ? esc_attr( $jamp_meta['jamp_target'][0] ) : ''; ?>">
 
 <div class="meta-field meta-scope no-margin-top">
-	<span><?php esc_html_e( 'Seleziona l\'ambito della nota.', 'jamp' ); ?></span>
+	<span><?php esc_html_e( 'Select the Note scope.', 'jamp' ); ?></span>
 	<br>
 	<label for="scope-global">
 		<input type="radio" name="scope" id="scope-global" value="global" <?php ( isset( $jamp_meta['jamp_scope'] ) ) ? checked( $jamp_meta['jamp_scope'][0], 'global' ) : ''; ?>>
-		<?php esc_html_e( 'Globale', 'jamp' ); ?>
+		<?php esc_html_e( 'Global', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="scope-section">
 		<input type="radio" name="scope" id="scope-section" value="section" <?php ( isset( $jamp_meta['jamp_scope'] ) ) ? checked( $jamp_meta['jamp_scope'][0], 'section' ) : ''; ?>>
-		<?php esc_html_e( 'Sezione', 'jamp' ); ?>
+		<?php esc_html_e( 'Section', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="scope-entity">
 		<input type="radio" name="scope" id="scope-entity" value="entity" <?php ( isset( $jamp_meta['jamp_scope'] ) ) ? checked( $jamp_meta['jamp_scope'][0], 'entity' ) : ''; ?>>
-		<?php esc_html_e( 'Entità', 'jamp' ); ?>
+		<?php esc_html_e( 'Item', 'jamp' ); ?>
 	</label>
 </div>
 
 <div class="meta-field meta-section">
-	<label for="section" class="display-block"><?php esc_html_e( 'Scegli la Sezione.', 'jamp' ); ?></label>
+	<label for="section" class="display-block"><?php esc_html_e( 'Select the Section.', 'jamp' ); ?></label>
 	<select name="section" id="section">
-		<option value=""><?php esc_html_e( 'seleziona...' ); ?></option>
+		<option value=""><?php esc_html_e( 'select...', 'jamp' ); ?></option>
 
 		<?php foreach ( $args['args']['sections'] as $section ) : ?>
 
@@ -75,9 +75,9 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 </div>
 
 <div class="meta-field meta-target-type">
-	<label for="target-type" class="display-block"><?php esc_html_e( 'Scegli il tipo di Entità.', 'jamp' ); ?></label>
+	<label for="target-type" class="display-block"><?php esc_html_e( 'Select the item type.', 'jamp' ); ?></label>
 	<select name="target-type" id="target-type">
-		<option value=""><?php esc_html_e( 'seleziona...' ); ?></option>
+		<option value=""><?php esc_html_e( 'select...', 'jamp' ); ?></option>
 
 		<?php foreach ( $args['args']['target_types'] as $target_type ) : ?>
 
@@ -90,8 +90,8 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 </div>
 
 <div class="meta-field meta-target">
-	<label for="target" class="display-block"><?php esc_html_e( 'Scegli l\'Entità.', 'jamp' ); ?></label>
+	<label for="target" class="display-block"><?php esc_html_e( 'Select the item.', 'jamp' ); ?></label>
 	<select name="target" id="target">
-		<option value=""><?php esc_html_e( 'seleziona...' ); ?></option>
+		<option value=""><?php esc_html_e( 'select...', 'jamp' ); ?></option>
 	</select>
 </div>
