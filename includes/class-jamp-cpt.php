@@ -60,24 +60,24 @@ class Jamp_CPT {
 		);
 
 		$args = array(
-			'label'               => esc_html__( 'Note', 'jamp' ),
-			'description'         => esc_html__( 'A short text you can put on some places of the dashboard.', 'jamp' ),
+			'label'               => esc_html__( 'Notes', 'jamp' ),
 			'labels'              => $labels,
+			'description'         => esc_html__( 'A short text you can put on some places of the dashboard.', 'jamp' ),
 			'supports'            => array( 'title', 'editor' ),
 			'taxonomies'          => array(),
 			'hierarchical'        => false,
-			'public'              => true,
+			'public'              => false,
 			'show_ui'             => true,
 			'show_in_menu'        => true,
-			'menu_position'       => 5,
-			'menu_icon'           => 'dashicons-welcome-write-blog',
-			'show_in_admin_bar'   => true,
-			'show_in_nav_menus'   => true,
+			'menu_position'       => null,
+			'menu_icon'           => 'dashicons-pressthis',
+			'show_in_admin_bar'   => false,
+			'show_in_nav_menus'   => false,
 			'can_export'          => true,
 			'has_archive'         => false,
 			'exclude_from_search' => true,
 			'publicly_queryable'  => false,
-			'capability_type'     => 'page',
+			'capability_type'     => 'post',
 			'show_in_rest'        => false,
 		);
 
