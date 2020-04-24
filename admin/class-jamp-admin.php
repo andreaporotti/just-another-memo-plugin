@@ -146,9 +146,16 @@ class Jamp_Admin {
 		// The sections placed on the first level menu.
 		$first_level_sections = array();
 
-		// Gets sections placed on the first level menu. Some items are ignored.
+		// Menu items to not insert in the sections list.
+		$menu_items_to_skip = array(
+			'wp-menu-separator',
+			'menu-top menu-icon-links',
+			'menu-top menu-icon-jamp_note',
+		);
+		
+		// Gets sections placed on the first level menu.
 		foreach ( $menu as $menu_item ) {
-			if ( ! in_array( $menu_item[0], array( '', 'Link' ), true ) && ! strpos( $menu_item[2], 'jamp_note' ) ) {
+			if ( ! in_array( $menu_item[4], $menu_items_to_skip, true ) ) {
 				// Gets section name removing unwanted HTML content and HTML code surrounding the section name.
 				$name = sanitize_text_field( ( strpos( $menu_item[0], ' <' ) > 0 ) ? strstr( $menu_item[0], ' <', true ) : $menu_item[0] );
 
