@@ -29,6 +29,11 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	$jamp_meta['jamp_scope']       = array( ( isset( $params['jamp_scope'] ) ) ? $params['jamp_scope'] : '' );
 	$jamp_meta['jamp_target_type'] = array( ( isset( $params['jamp_target_type'] ) ) ? $params['jamp_target_type'] : '' );
 	$jamp_meta['jamp_target']      = array( ( isset( $params['jamp_target'] ) ) ? $params['jamp_target'] : '' );
+	
+	// The scope must be set. If it's empty or wrong, let's set it to "global".
+	if ( ! in_array($jamp_meta['jamp_scope'][0], array( 'global', 'section', 'entity' ), true) ) {
+		$jamp_meta['jamp_scope'] = array( 'global' );
+	}
 
 } else { // Editing a note.
 
