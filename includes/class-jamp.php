@@ -186,10 +186,10 @@ class Jamp {
 		$this->loader->add_filter( 'bulk_post_updated_messages', $plugin_admin, 'manage_default_bulk_notices', 10, 2 );
 
 		// Custom column.
-		$this->loader->add_filter( 'manage_posts_columns', $plugin_admin, 'add_columns_head' );
-		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'show_columns_content', 10, 2 );
-		$this->loader->add_filter( 'manage_page_posts_columns', $plugin_admin, 'add_columns_head' );
-		$this->loader->add_action( 'manage_page_posts_custom_column', $plugin_admin, 'show_columns_content', 10, 2 );
+		$this->loader->add_filter( 'manage_posts_columns', $plugin_admin, 'manage_columns_headers' );
+		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'manage_columns_content', 10, 2 );
+		$this->loader->add_filter( 'manage_page_posts_columns', $plugin_admin, 'manage_columns_headers' );
+		$this->loader->add_action( 'manage_page_posts_custom_column', $plugin_admin, 'manage_columns_content', 10, 2 );
 
 		// Session management.
 		$this->loader->add_action( 'init', $plugin_admin, 'session_start', 1 );

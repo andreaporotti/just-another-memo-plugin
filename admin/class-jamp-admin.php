@@ -376,7 +376,7 @@ class Jamp_Admin {
 	 * @since    1.0.0
 	 * @param    array $columns Posts list table columns.
 	 */
-	public function add_columns_head( $columns ) {
+	public function manage_columns_headers( $columns ) {
 
 		$this->build_target_types_list();
 
@@ -413,7 +413,7 @@ class Jamp_Admin {
 	 * @param    string $column_name Current table column name.
 	 * @param    int    $post_id     Current post ID.
 	 */
-	public function show_columns_content( $column_name, $post_id ) {
+	public function manage_columns_content( $column_name, $post_id ) {
 
 		if ( strpos( $column_name, 'jamp' ) !== false ) {
 
