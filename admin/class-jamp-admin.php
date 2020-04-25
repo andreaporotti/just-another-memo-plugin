@@ -374,7 +374,7 @@ class Jamp_Admin {
 	 * Adds a column to a management page.
 	 *
 	 * @since    1.0.0
-	 * @param    array $columns Posts list table columns.
+	 * @param    array $columns Table columns.
 	 */
 	public function manage_columns_headers( $columns ) {
 
@@ -382,12 +382,7 @@ class Jamp_Admin {
 
 		$post_type = get_post_type();
 
-		if ( 'jamp_note' !== $post_type ) {
-
-			// Adds custom columns for other post types and pages.
-			$columns['jamp_note'] = esc_html__( 'Notes', 'jamp' );
-
-		} else {
+		if ( 'jamp_note' == $post_type ) {
 
 			// Get Date column label and remove the column.
 			$date_column_label = $columns['date'];
@@ -399,6 +394,11 @@ class Jamp_Admin {
 
 			// Re-add Date column at the end.
 			$columns['date'] = $date_column_label;
+
+		} else {
+
+			// Adds custom columns for other post types, pages and target types.
+			$columns['jamp_note'] = esc_html__( 'Notes', 'jamp' );
 
 		}
 
