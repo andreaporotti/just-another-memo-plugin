@@ -195,6 +195,10 @@ class Jamp {
 		$this->loader->add_action( 'init', $plugin_admin, 'session_start', 1 );
 		$this->loader->add_action( 'wp_logout', $plugin_admin, 'session_destroy' );
 		$this->loader->add_action( 'wp_login', $plugin_admin, 'session_destroy' );
+		
+		// Plugin options.
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'options_menu' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'options_init' );
 
 	}
 
