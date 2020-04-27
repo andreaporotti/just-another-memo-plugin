@@ -115,6 +115,11 @@ class Jamp {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-jamp-admin.php';
+		
+		/**
+		 * The class responsible for building the options page.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-jamp-options.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
@@ -197,8 +202,10 @@ class Jamp {
 		$this->loader->add_action( 'wp_login', $plugin_admin, 'session_destroy' );
 		
 		// Plugin options.
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'options_menu' );
-		$this->loader->add_action( 'admin_init', $plugin_admin, 'options_init' );
+		$plugin_options = new Jamp_Options();
+		
+		$this->loader->add_action( 'admin_menu', $plugin_options, 'options_menu' );
+		$this->loader->add_action( 'admin_init', $plugin_options, 'options_init' );
 
 	}
 
