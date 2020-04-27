@@ -30,6 +30,13 @@ class Jamp_Activator {
 	 */
 	public static function activate() {
 
+		// Initialize plugin options.
+		if( false === get_option( 'jamp_delete_data_on_uninstall' ) ) {
+
+			add_option( 'jamp_delete_data_on_uninstall', 0, '', 'no' );
+
+		}
+
 	}
 
 }
