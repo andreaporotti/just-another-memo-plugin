@@ -16,7 +16,7 @@
 	
     <form action="options.php" method="post">
 	<?php
-	    // Output security fields for the registered settings.
+	    // Output security fields for the settings page.
 	    settings_fields( 'jamp_options' );
 	    
 	    // Output settings sections and fields.
