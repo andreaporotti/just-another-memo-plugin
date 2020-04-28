@@ -12,12 +12,6 @@
  * - Repeat with other user roles. Best directly by using the links/query string parameters.
  * - Repeat things for multisite. Once for a single site in the network, once sitewide.
  *
- * This file may be updated more in future version of the Boilerplate; however, this is the
- * general skeleton and outline for how the file should work.
- *
- * For more information, see the following discussion:
- * https://github.com/tommcfarlin/WordPress-Plugin-Boilerplate/pull/123#issuecomment-28541913
- *
  * @link       https://www.andreaporotti.it
  * @since      1.0.0
  *
@@ -27,4 +21,52 @@
 // If uninstall not called from WordPress, then exit.
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 	exit;
+}
+
+// Perform a few security checks.
+$is_plugin_valid = ( isset( $_REQUEST['plugin'] ) && strpos( $_REQUEST['plugin'], 'jamp' ) !== false ) ? true : false;
+$is_slug_valid   = ( isset( $_REQUEST['slug'] ) && strpos( $_REQUEST['slug'], 'jamp' ) !== false ) ? true : false;
+$is_user_allowed = current_user_can( 'delete_plugins' );
+
+if ( ! $is_plugin_valid || ! $is_slug_valid || ! $is_user_allowed ) {
+	exit;
+}
+
+// Check if plugin settings and data must be removed.
+$option_delete_data_on_uninstall = get_option( 'jamp_delete_data_on_uninstall' );
+
+if ( '1' === $option_delete_data_on_uninstall ) {
+
+	// Delete notes in all statuses.
+	$post_statuses = array_keys( get_post_stati() );
+	
+	$notes_args = array(
+		'post_type'      => 'jamp_note',
+		'post_status'    => $post_statuses,
+		'posts_per_page' => -1,
+	);
+
+	$notes = get_posts( $notes_args );
+
+	foreach ( $notes as $note ) {
+
+		wp_delete_post( $note->ID, true );
+
+	}
+
+	// Delete options.
+	$options = array(
+		'jamp_delete_data_on_uninstall',
+	);
+
+	foreach ( $options as $option ) {
+
+		if ( get_option( $option ) ) {
+
+			delete_option( $option );
+
+		}
+
+	}
+
 }
