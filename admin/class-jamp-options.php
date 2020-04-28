@@ -104,7 +104,7 @@ class Jamp_Options {
 			'jamp_options_section_uninstall',
 			array(
 				'label_for' => 'jamp_delete_data_on_uninstall',
-			),
+			)
 		);
 
 	}
