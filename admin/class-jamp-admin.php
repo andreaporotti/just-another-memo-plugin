@@ -132,6 +132,15 @@ class Jamp_Admin {
 				'nonce'    => wp_create_nonce( $this->plugin_name ),
 			)
 		);
+		
+		wp_localize_script(
+			'jamp-admin-script',
+			'jamp_strings',
+			array(
+				'get_entities_list_error' => esc_html__( 'An error occurred while loading the items list.', 'jamp' ),
+				'move_to_trash_error'     => esc_html__( 'An error occurred while moving the note to the trash.', 'jamp' ),
+			)
+		);
 
 	}
 

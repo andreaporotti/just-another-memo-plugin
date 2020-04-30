@@ -30,7 +30,7 @@
 							$( '#jamp_meta_box #target' ).val( '' );
 						}
 					} else {
-						console.log('Error getting entities!');
+						alert( jamp_strings.get_entities_list_error );
 					}
 				} );
 			} else {
@@ -88,7 +88,7 @@
 							removeTrashedNoteFromAdminBar( note );
 						}
 					} else {
-						console.log( 'Error moving note to trash!' );
+						alert( jamp_strings.move_to_trash_error );
 					}
 				} );
 			}
