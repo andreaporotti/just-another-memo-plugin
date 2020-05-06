@@ -150,73 +150,84 @@ class Jamp_Admin {
 	 * @since    1.0.0
 	 */
 	public function build_sections_list() {
-		global $menu, $submenu;
-
-		// The sections placed on the first level menu.
-		$first_level_sections = array();
-
-		// Menu items to not insert in the sections list.
-		$menu_items_to_skip = array(
-			'wp-menu-separator',
-			'menu-top menu-icon-links',
-			'menu-top menu-icon-jamp_note',
-		);
 		
-		// Gets sections placed on the first level menu.
-		foreach ( $menu as $menu_item ) {
-			if ( ! in_array( $menu_item[4], $menu_items_to_skip, true ) ) {
-				// Gets section name removing unwanted HTML content and HTML code surrounding the section name.
-				$name = sanitize_text_field( ( strpos( $menu_item[0], ' <' ) > 0 ) ? strstr( $menu_item[0], ' <', true ) : $menu_item[0] );
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-				// Gets section file without the "return" parameter.
-				$file = remove_query_arg( 'return', wp_kses_decode_entities( $menu_item[2] ) );
+			global $menu, $submenu;
 
-				// Generates section absolute url.
-				$url = $file;
-				if ( ! strpos( $url, '.php' ) ) {
-					$url = '/admin.php?page=' . $url;
+			// The sections placed on the first level menu.
+			$first_level_sections = array();
+
+			// Menu items to not insert in the sections list.
+			$menu_items_to_skip = array(
+				'wp-menu-separator',
+				'menu-top menu-icon-links',
+				'menu-top menu-icon-jamp_note',
+			);
+
+			// Gets sections placed on the first level menu.
+			foreach ( $menu as $menu_item ) {
+				if ( ! in_array( $menu_item[4], $menu_items_to_skip, true ) ) {
+					// Gets section name removing unwanted HTML content and HTML code surrounding the section name.
+					$name = sanitize_text_field( ( strpos( $menu_item[0], ' <' ) > 0 ) ? strstr( $menu_item[0], ' <', true ) : $menu_item[0] );
+
+					// Gets section file without the "return" parameter.
+					$file = remove_query_arg( 'return', wp_kses_decode_entities( $menu_item[2] ) );
+
+					// Generates section absolute url.
+					$url = $file;
+					if ( ! strpos( $url, '.php' ) ) {
+						$url = '/admin.php?page=' . $url;
+					}
+					$url = admin_url( $url );
+
+					$first_level_sections[] = array(
+						'name'       => $name,
+						'file'       => $file,
+						'url'        => $url,
+						'is_submenu' => false,
+					);
 				}
-				$url = admin_url( $url );
-
-				$first_level_sections[] = array(
-					'name'       => $name,
-					'file'       => $file,
-					'url'        => $url,
-					'is_submenu' => false,
-				);
 			}
+
+			// Build complete sections list.
+			foreach ( $first_level_sections as $section ) {
+				// Add current first level section to the list.
+				$this->sections_list[] = $section;
+
+				// Check if there are sub sections of current first level section.
+				if ( isset( $submenu[ $section['file'] ] ) ) {
+
+					// Gets the sub sections of current first level section from the sub menu.
+					foreach ( $submenu[ $section['file'] ] as $submenu_item ) {
+						// Gets section name removing unwanted HTML content and HTML code surrounding the section name.
+						$name = '-- ' . sanitize_text_field( ( strpos( $submenu_item[0], ' <' ) > 0 ) ? strstr( $submenu_item[0], ' <', true ) : $submenu_item[0] );
+
+						// Gets section file without the "return" parameter.
+						$file = remove_query_arg( 'return', wp_kses_decode_entities( $submenu_item[2] ) );
+
+						// Generates section absolute url.
+						$url = $file;
+						if ( ! strpos( $url, '.php' ) ) {
+							$url = '/admin.php?page=' . $url;
+						}
+						$url = admin_url( $url );
+
+						$this->sections_list[] = array(
+							'name'        => $name,
+							'file'        => $file,
+							'url'         => $url,
+							'is_submenu'  => true,
+							'parent_url'  => $section['url'],
+							'parent_name' => $section['name'],
+						);
+					}
+
+				}
+			}
+		
 		}
 
-		// Build complete sections list.
-		foreach ( $first_level_sections as $section ) {
-			// Add current first level section to the list.
-			$this->sections_list[] = $section;
-
-			// Gets the sub sections of current first level section from the sub menu.
-			foreach ( $submenu[ $section['file'] ] as $submenu_item ) {
-				// Gets section name removing unwanted HTML content and HTML code surrounding the section name.
-				$name = '-- ' . sanitize_text_field( ( strpos( $submenu_item[0], ' <' ) > 0 ) ? strstr( $submenu_item[0], ' <', true ) : $submenu_item[0] );
-
-				// Gets section file without the "return" parameter.
-				$file = remove_query_arg( 'return', wp_kses_decode_entities( $submenu_item[2] ) );
-
-				// Generates section absolute url.
-				$url = $file;
-				if ( ! strpos( $url, '.php' ) ) {
-					$url = '/admin.php?page=' . $url;
-				}
-				$url = admin_url( $url );
-
-				$this->sections_list[] = array(
-					'name'        => $name,
-					'file'        => $file,
-					'url'         => $url,
-					'is_submenu'  => true,
-					'parent_url'  => $section['url'],
-					'parent_name' => $section['name'],
-				);
-			}
-		}
 	}
 
 	/**
@@ -487,25 +498,29 @@ class Jamp_Admin {
 	 */
 	public function add_admin_bar_menu_item() {
 
-		global $wp_admin_bar;
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-		// Main node.
-		$wp_admin_bar->add_node(
-			array(
-				'id'    => 'jamp',
-				'title' => '<span class="ab-icon"></span>' . esc_html__( 'Notes', 'jamp' ),
-				'href'  => '#',
-			)
-		);
+			global $wp_admin_bar;
 
-		// Content node.
-		$wp_admin_bar->add_node(
-			array(
-				'id'     => 'jamp-content',
-				'parent' => 'jamp',
-				'title'  => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
-			)
-		);
+			// Main node.
+			$wp_admin_bar->add_node(
+				array(
+					'id'    => 'jamp',
+					'title' => '<span class="ab-icon"></span>' . esc_html__( 'Notes', 'jamp' ),
+					'href'  => '#',
+				)
+			);
+
+			// Content node.
+			$wp_admin_bar->add_node(
+				array(
+					'id'     => 'jamp-content',
+					'parent' => 'jamp',
+					'title'  => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
+				)
+			);
+
+		}
 
 	}
 

@@ -77,7 +77,8 @@ class Jamp_CPT {
 			'has_archive'         => false,
 			'exclude_from_search' => true,
 			'publicly_queryable'  => false,
-			'capability_type'     => 'post',
+			'capability_type'     => array( 'jamp_note', 'jamp_notes' ),
+			'map_meta_cap'        => true,
 			'show_in_rest'        => false,
 		);
 

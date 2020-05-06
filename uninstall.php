@@ -57,6 +57,7 @@ if ( '1' === $option_delete_data_on_uninstall ) {
 	// Delete options.
 	$options = array(
 		'jamp_delete_data_on_uninstall',
+		'jamp_permissions',
 	);
 
 	foreach ( $options as $option ) {
@@ -64,6 +65,23 @@ if ( '1' === $option_delete_data_on_uninstall ) {
 		if ( get_option( $option ) ) {
 
 			delete_option( $option );
+
+		}
+
+	}
+
+	// Delete custom capabilities from all roles.
+	require_once dirname( __FILE__ ) . '/includes/class-jamp.php';
+	$capabilities = Jamp::$capabilities;
+	$roles = get_editable_roles();
+
+	foreach ($roles as $role_slug => $role_details) {
+
+		$role = get_role($role_slug);
+
+		foreach ($capabilities as $capability) {
+
+			$role->remove_cap( $capability );
 
 		}
 

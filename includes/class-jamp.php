@@ -55,6 +55,26 @@ class Jamp {
 	 * @var      string    $version    The current version of the plugin.
 	 */
 	protected $version;
+	
+	/**
+	 * List of plugin capabilities.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      array    $capabilities    List of plugin capabilities.
+	 */
+	public static $capabilities = array(
+		'read_private_jamp_notes',
+		'edit_jamp_notes',
+		'edit_others_jamp_notes',
+		'edit_published_jamp_notes',
+		'edit_private_jamp_notes',
+		'publish_jamp_notes',
+		'delete_jamp_notes',
+		'delete_others_jamp_notes',
+		'delete_published_jamp_notes',
+		'delete_private_jamp_notes',
+	);
 
 	/**
 	 * Define the core functionality of the plugin.
@@ -66,6 +86,7 @@ class Jamp {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
+		
 		if ( defined( 'JAMP_VERSION' ) ) {
 			$this->version = JAMP_VERSION;
 		} else {
