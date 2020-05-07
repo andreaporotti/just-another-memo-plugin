@@ -243,7 +243,7 @@ class Jamp_Admin {
 	 *
 	 * @since    1.0.0
 	 */
-	public function build_target_types_list() {
+	public function build_target_types_list( $return = false ) {
 
 		$post_types = get_post_types(
 			array(
@@ -251,16 +251,28 @@ class Jamp_Admin {
 			),
 			'objects'
 		);
+		
+		$post_types_to_skip = array(
+			'attachment',
+			'jamp_note',
+		);
 
 		foreach ( $post_types as $post_type ) {
-			if ( ! in_array( $post_type->name, array( 'attachment', 'jamp_note' ), true ) ) {
+			
+			if ( ! in_array( $post_type->name, $post_types_to_skip, true ) ) {
 
 				$this->target_types_list[] = array(
 					'name'          => $post_type->name,
 					'label'         => $post_type->label,
 					'singular_name' => $post_type->labels->singular_name,
 				);
+				
 			}
+			
+		}
+		
+		if ( $return ) {
+			return $this->target_types_list;
 		}
 
 	}
