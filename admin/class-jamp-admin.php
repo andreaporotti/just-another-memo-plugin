@@ -99,7 +99,11 @@ class Jamp_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . 'css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
+			
+			wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . 'css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
+			
+		}
 
 	}
 
@@ -122,25 +126,29 @@ class Jamp_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( 'jamp-admin-script', plugin_dir_url( __FILE__ ) . 'js/jamp-admin.js', array( 'jquery', 'jquery-ui-dialog' ), $this->version, false );
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-		wp_localize_script(
-			'jamp-admin-script',
-			'jamp_ajax',
-			array(
-				'ajax_url' => admin_url( 'admin-ajax.php' ),
-				'nonce'    => wp_create_nonce( $this->plugin_name ),
-			)
-		);
-		
-		wp_localize_script(
-			'jamp-admin-script',
-			'jamp_strings',
-			array(
-				'get_entities_list_error' => esc_html__( 'An error occurred while loading the items list.', 'jamp' ),
-				'move_to_trash_error'     => esc_html__( 'An error occurred while moving the note to the trash.', 'jamp' ),
-			)
-		);
+			wp_enqueue_script( 'jamp-admin-script', plugin_dir_url( __FILE__ ) . 'js/jamp-admin.js', array( 'jquery', 'jquery-ui-dialog' ), $this->version, false );
+
+			wp_localize_script(
+				'jamp-admin-script',
+				'jamp_ajax',
+				array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'nonce'    => wp_create_nonce( $this->plugin_name ),
+				)
+			);
+
+			wp_localize_script(
+				'jamp-admin-script',
+				'jamp_strings',
+				array(
+					'get_entities_list_error' => esc_html__( 'An error occurred while loading the items list.', 'jamp' ),
+					'move_to_trash_error'     => esc_html__( 'An error occurred while moving the note to the trash.', 'jamp' ),
+				)
+			);
+
+		}
 
 	}
 
@@ -150,7 +158,7 @@ class Jamp_Admin {
 	 * @since    1.0.0
 	 */
 	public function build_sections_list() {
-		
+
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
 			global $menu, $submenu;
@@ -225,7 +233,7 @@ class Jamp_Admin {
 
 				}
 			}
-		
+
 		}
 
 	}
@@ -264,36 +272,44 @@ class Jamp_Admin {
 	 */
 	public function build_targets_list() {
 
-		// Checks the nonce is valid.
-		check_ajax_referer( $this->plugin_name );
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-		$post_type = ( isset( $_POST['post_type'] ) ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : '';
+			// Checks the nonce is valid.
+			check_ajax_referer( $this->plugin_name );
 
-		if ( ! empty( $post_type ) ) {
+			$post_type = ( isset( $_POST['post_type'] ) ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : '';
 
-			// Gets entities as objects.
-			$entities_objects = get_posts(
-				array(
-					'post_type'      => $post_type,
-					'posts_per_page' => -1,
-					'post_status'    => array( 'publish', 'future', 'draft', 'pending', 'private', 'trash' ),
-				)
-			);
+			if ( ! empty( $post_type ) ) {
 
-			// Builds the actual list.
-			$entities = array();
-			foreach ( $entities_objects as $entity ) {
-
-				$post_status_obj = get_post_status_object( $entity->post_status );
-
-				$entities[] = array(
-					'id'     => $entity->ID,
-					'title'  => $entity->post_title,
-					'status' => $post_status_obj->label,
+				// Gets entities as objects.
+				$entities_objects = get_posts(
+					array(
+						'post_type'      => $post_type,
+						'posts_per_page' => -1,
+						'post_status'    => array( 'publish', 'future', 'draft', 'pending', 'private', 'trash' ),
+					)
 				);
-			}
 
-			wp_send_json_success( $entities );
+				// Builds the actual list.
+				$entities = array();
+				foreach ( $entities_objects as $entity ) {
+
+					$post_status_obj = get_post_status_object( $entity->post_status );
+
+					$entities[] = array(
+						'id'     => $entity->ID,
+						'title'  => $entity->post_title,
+						'status' => $post_status_obj->label,
+					);
+				}
+
+				wp_send_json_success( $entities );
+
+			} else {
+
+				wp_send_json_error( '' );
+
+			}
 
 		} else {
 
@@ -310,22 +326,26 @@ class Jamp_Admin {
 	 */
 	public function add_meta_box() {
 
-		$this->build_target_types_list();
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-		$screens = array( 'jamp_note' );
-		foreach ( $screens as $screen ) {
-			add_meta_box(
-				'jamp_meta_box',
-				esc_html__( 'Note Settings', 'jamp' ),
-				array( $this, 'meta_box_html_cb' ),
-				$screen,
-				'side',
-				'default',
-				array(
-					'sections'     => $this->sections_list,
-					'target_types' => $this->target_types_list,
-				)
-			);
+			$this->build_target_types_list();
+
+			$screens = array( 'jamp_note' );
+			foreach ( $screens as $screen ) {
+				add_meta_box(
+					'jamp_meta_box',
+					esc_html__( 'Note Settings', 'jamp' ),
+					array( $this, 'meta_box_html_cb' ),
+					$screen,
+					'side',
+					'default',
+					array(
+						'sections'     => $this->sections_list,
+						'target_types' => $this->target_types_list,
+					)
+				);
+			}
+
 		}
 
 	}
@@ -351,41 +371,45 @@ class Jamp_Admin {
 	 */
 	public function save_meta_data( $post_id ) {
 
-		// Checks save status and nonce.
-		$is_autosave    = wp_is_post_autosave( $post_id );
-		$is_revision    = wp_is_post_revision( $post_id );
-		$is_nonce_valid = ( isset( $_POST['jamp-meta-box-nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['jamp-meta-box-nonce'] ) ), 'jamp_meta_box_nonce_secret_action' ) ) ? true : false;
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-		// Exits script depending on save status and nonce.
-		if ( $is_autosave || $is_revision || ! $is_nonce_valid ) {
-			return;
-		}
+			// Checks save status and nonce.
+			$is_autosave    = wp_is_post_autosave( $post_id );
+			$is_revision    = wp_is_post_revision( $post_id );
+			$is_nonce_valid = ( isset( $_POST['jamp-meta-box-nonce'] ) && wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['jamp-meta-box-nonce'] ) ), 'jamp_meta_box_nonce_secret_action' ) ) ? true : false;
 
-		// Checks for field values and saves if needed.
-		if ( isset( $_POST['scope'] ) ) {
-			update_post_meta( $post_id, 'jamp_scope', sanitize_text_field( wp_unslash( $_POST['scope'] ) ) );
-
-			if ( 'global' === $_POST['scope'] ) {
-				update_post_meta( $post_id, 'jamp_target_type', 'global' );
-				update_post_meta( $post_id, 'jamp_target', 'global' );
+			// Exits script depending on save status and nonce.
+			if ( $is_autosave || $is_revision || ! $is_nonce_valid ) {
+				return;
 			}
 
-			if ( 'section' === $_POST['scope'] ) {
-				if ( isset( $_POST['section'] ) ) {
-					update_post_meta( $post_id, 'jamp_target_type', 'section' );
-					update_post_meta( $post_id, 'jamp_target', sanitize_text_field( wp_unslash( $_POST['section'] ) ) );
+			// Checks for field values and saves if needed.
+			if ( isset( $_POST['scope'] ) ) {
+				update_post_meta( $post_id, 'jamp_scope', sanitize_text_field( wp_unslash( $_POST['scope'] ) ) );
+
+				if ( 'global' === $_POST['scope'] ) {
+					update_post_meta( $post_id, 'jamp_target_type', 'global' );
+					update_post_meta( $post_id, 'jamp_target', 'global' );
+				}
+
+				if ( 'section' === $_POST['scope'] ) {
+					if ( isset( $_POST['section'] ) ) {
+						update_post_meta( $post_id, 'jamp_target_type', 'section' );
+						update_post_meta( $post_id, 'jamp_target', sanitize_text_field( wp_unslash( $_POST['section'] ) ) );
+					}
+				}
+
+				if ( 'entity' === $_POST['scope'] ) {
+					if ( isset( $_POST['target-type'] ) ) {
+						update_post_meta( $post_id, 'jamp_target_type', sanitize_text_field( wp_unslash( $_POST['target-type'] ) ) );
+					}
+
+					if ( isset( $_POST['target'] ) ) {
+						update_post_meta( $post_id, 'jamp_target', sanitize_text_field( wp_unslash( $_POST['target'] ) ) );
+					}
 				}
 			}
 
-			if ( 'entity' === $_POST['scope'] ) {
-				if ( isset( $_POST['target-type'] ) ) {
-					update_post_meta( $post_id, 'jamp_target_type', sanitize_text_field( wp_unslash( $_POST['target-type'] ) ) );
-				}
-
-				if ( isset( $_POST['target'] ) ) {
-					update_post_meta( $post_id, 'jamp_target', sanitize_text_field( wp_unslash( $_POST['target'] ) ) );
-				}
-			}
 		}
 
 	}
@@ -397,29 +421,33 @@ class Jamp_Admin {
 	 * @param    array $columns Table columns.
 	 */
 	public function manage_columns_headers( $columns ) {
+	
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-		$this->build_target_types_list();
+			$this->build_target_types_list();
 
-		$post_type = get_post_type();
+			$post_type = get_post_type();
 
-		if ( 'jamp_note' == $post_type ) {
+			if ( 'jamp_note' == $post_type ) {
 
-			// Get Date column label and remove the column.
-			$date_column_label = $columns['date'];
-			unset( $columns['date'] );
+				// Get Date column label and remove the column.
+				$date_column_label = $columns['date'];
+				unset( $columns['date'] );
 
-			// Adds custom columns for notes page.
-			$columns['jamp_author']   = esc_html__( 'Author', 'jamp' );
-			$columns['jamp_location'] = esc_html__( 'Scope', 'jamp' );
+				// Adds custom columns for notes page.
+				$columns['jamp_author']   = esc_html__( 'Author', 'jamp' );
+				$columns['jamp_location'] = esc_html__( 'Scope', 'jamp' );
 
-			// Re-add Date column at the end.
-			$columns['date'] = $date_column_label;
+				// Re-add Date column at the end.
+				$columns['date'] = $date_column_label;
 
-		} else {
+			} else {
 
-			// Adds custom columns for other post types, pages and target types.
-			$columns['jamp_note'] = esc_html__( 'Notes', 'jamp' );
+				// Adds custom columns for other post types, pages and target types.
+				$columns['jamp_note'] = esc_html__( 'Notes', 'jamp' );
 
+			}
+		
 		}
 
 		return $columns;
@@ -435,9 +463,13 @@ class Jamp_Admin {
 	 */
 	public function manage_columns_content( $column_name, $post_id ) {
 
-		if ( strpos( $column_name, 'jamp' ) !== false ) {
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-			require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
+			if ( strpos( $column_name, 'jamp' ) !== false ) {
+
+				require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
+
+			}
 
 		}
 
@@ -531,37 +563,41 @@ class Jamp_Admin {
 	 */
 	public function note_form_page() {
 
-		// Extract parameters from querystring.
-		$current_url = $this->get_current_page_url();
-		$querystring = wp_parse_url( $current_url, PHP_URL_QUERY );
-		parse_str( $querystring, $params );
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-		// Get post type.
-		$post_type      = '';
-		$current_screen = get_current_screen();
+			// Extract parameters from querystring.
+			$current_url = $this->get_current_page_url();
+			$querystring = wp_parse_url( $current_url, PHP_URL_QUERY );
+			parse_str( $querystring, $params );
 
-		if ( 'add' === $current_screen->action ) { // Creating a new note.
+			// Get post type.
+			$post_type      = '';
+			$current_screen = get_current_screen();
 
-			if ( isset( $params['post_type'] ) ) {
+			if ( 'add' === $current_screen->action ) { // Creating a new note.
 
-				$post_type = $params['post_type'];
+				if ( isset( $params['post_type'] ) ) {
+
+					$post_type = $params['post_type'];
+
+				}
+			} else { // Editing a note.
+
+				if ( isset( $params['post'] ) ) {
+
+					$post      = get_post( $params['post'] );
+					$post_type = $post->post_type;
+
+				}
+			}
+
+			// Save referer in session if current post is a note.
+			if ( 'jamp_note' === $post_type ) {
+
+				$referer                     = wp_get_referer();
+				$_SESSION['jamp_return_url'] = $referer;
 
 			}
-		} else { // Editing a note.
-
-			if ( isset( $params['post'] ) ) {
-
-				$post      = get_post( $params['post'] );
-				$post_type = $post->post_type;
-
-			}
-		}
-
-		// Save referer in session if current post is a note.
-		if ( 'jamp_note' === $post_type ) {
-
-			$referer                     = wp_get_referer();
-			$_SESSION['jamp_return_url'] = $referer;
 
 		}
 
@@ -575,35 +611,44 @@ class Jamp_Admin {
 	 */
 	public function redirect_after_save( $location ) {
 
-		global $post;
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-		// Perform redirection only for notes.
-		if ( 'jamp_note' === $post->post_type ) {
+			global $post;
 
-			if ( isset( $_SESSION['jamp_return_url'] ) && ! empty( $_SESSION['jamp_return_url'] ) ) {
+			// Perform redirection only for notes.
+			if ( 'jamp_note' === $post->post_type ) {
 
-				// Extract the "message" parameter value from querystring.
-				$querystring = wp_parse_url( $location, PHP_URL_QUERY );
-				parse_str( $querystring, $params );
-				$message = $params['message'];
+				if ( isset( $_SESSION['jamp_return_url'] ) && ! empty( $_SESSION['jamp_return_url'] ) ) {
 
-				// Save message id in session.
-				$_SESSION['jamp_message'] = $message;
+					// Extract the "message" parameter value from querystring.
+					$querystring = wp_parse_url( $location, PHP_URL_QUERY );
+					parse_str( $querystring, $params );
+					$message = $params['message'];
 
-				// Get return url.
-				$return_url = $_SESSION['jamp_return_url'];
+					// Save message id in session.
+					$_SESSION['jamp_message'] = $message;
 
-				// Destroy session variabile.
-				unset( $_SESSION['jamp_return_url'] );
+					// Get return url.
+					$return_url = $_SESSION['jamp_return_url'];
 
-				return $return_url;
+					// Destroy session variabile.
+					unset( $_SESSION['jamp_return_url'] );
 
-			} else {
+					return $return_url;
 
-				// Fallback to default location.
-				return $location;
+				} else {
 
+					// Fallback to default location.
+					return $location;
+
+				}
 			}
+
+		} else {
+
+			// Fallback to default location.
+			return $location;
+
 		}
 
 	}
@@ -615,31 +660,35 @@ class Jamp_Admin {
 	 */
 	public function show_admin_notices() {
 
-		if ( isset( $_SESSION['jamp_message'] ) && $_SESSION['jamp_message'] >= 0 ) {
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-			// Set custom feedback messages.
-			$messages['jamp_note'] = array(
-				0  => '', // Unused. Messages start at index 1.
-				1  => esc_html__( 'Note updated.', 'jamp' ),
-				2  => esc_html__( 'Custom field updated.', 'jamp' ),
-				3  => esc_html__( 'Custom field deleted.', 'jamp' ),
-				4  => esc_html__( 'Note updated.', 'jamp' ),
-				5  => '', // Unused. Revisions are disabled.
-				6  => esc_html__( 'Note published.', 'jamp' ),
-				7  => esc_html__( 'Note saved.', 'jamp' ),
-				8  => esc_html__( 'Note submitted.', 'jamp' ),
-				9  => esc_html__( 'Note scheduled.', 'jamp' ),
-				10 => esc_html__( 'Note draft updated.', 'jamp' ),
-			);
+			if ( isset( $_SESSION['jamp_message'] ) && $_SESSION['jamp_message'] >= 0 ) {
 
-			?>
-				<div class="notice notice-success is-dismissible">
-					<p><?php echo esc_html( $messages['jamp_note'][ $_SESSION['jamp_message'] ] ); ?></p>
-				</div>
-			<?php
+				// Set custom feedback messages.
+				$messages['jamp_note'] = array(
+					0  => '', // Unused. Messages start at index 1.
+					1  => esc_html__( 'Note updated.', 'jamp' ),
+					2  => esc_html__( 'Custom field updated.', 'jamp' ),
+					3  => esc_html__( 'Custom field deleted.', 'jamp' ),
+					4  => esc_html__( 'Note updated.', 'jamp' ),
+					5  => '', // Unused. Revisions are disabled.
+					6  => esc_html__( 'Note published.', 'jamp' ),
+					7  => esc_html__( 'Note saved.', 'jamp' ),
+					8  => esc_html__( 'Note submitted.', 'jamp' ),
+					9  => esc_html__( 'Note scheduled.', 'jamp' ),
+					10 => esc_html__( 'Note draft updated.', 'jamp' ),
+				);
 
-			// Destroy session variabile.
-			unset( $_SESSION['jamp_message'] );
+				?>
+					<div class="notice notice-success is-dismissible">
+						<p><?php echo esc_html( $messages['jamp_note'][ $_SESSION['jamp_message'] ] ); ?></p>
+					</div>
+				<?php
+
+				// Destroy session variabile.
+				unset( $_SESSION['jamp_message'] );
+
+			}
 
 		}
 
@@ -654,18 +703,22 @@ class Jamp_Admin {
 	 */
 	public function manage_default_bulk_notices( $bulk_messages, $bulk_counts ) {
 
-		$bulk_messages['jamp_note'] = array(
-			// translators: %s is the number of updated notes.
-			'updated'   => esc_html( _n( '%s note updated.', '%s notes updated.', $bulk_counts['updated'], 'jamp' ) ),
-			// translators: %s is the number of locked notes.
-			'locked'    => esc_html( _n( '%s note not updated, somebody is editing it.', '%s notes not updated, somebody is editing them.', $bulk_counts['locked'], 'jamp' ) ),
-			// translators: %s is the number of deleted notes.
-			'deleted'   => esc_html( _n( '%s note permanently deleted.', '%s notes permanently deleted.', $bulk_counts['deleted'], 'jamp' ) ),
-			// translators: %s is the number of trashed notes.
-			'trashed'   => esc_html( _n( '%s note moved to the Trash.', '%s notes moved to the Trash.', $bulk_counts['trashed'], 'jamp' ) ),
-			// translators: %s is the number of untrashed notes.
-			'untrashed' => esc_html( _n( '%s note restored from the Trash.', '%s notes restored from the Trash.', $bulk_counts['untrashed'], 'jamp' ) ),
-		);
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
+
+			$bulk_messages['jamp_note'] = array(
+				// translators: %s is the number of updated notes.
+				'updated'   => esc_html( _n( '%s note updated.', '%s notes updated.', $bulk_counts['updated'], 'jamp' ) ),
+				// translators: %s is the number of locked notes.
+				'locked'    => esc_html( _n( '%s note not updated, somebody is editing it.', '%s notes not updated, somebody is editing them.', $bulk_counts['locked'], 'jamp' ) ),
+				// translators: %s is the number of deleted notes.
+				'deleted'   => esc_html( _n( '%s note permanently deleted.', '%s notes permanently deleted.', $bulk_counts['deleted'], 'jamp' ) ),
+				// translators: %s is the number of trashed notes.
+				'trashed'   => esc_html( _n( '%s note moved to the Trash.', '%s notes moved to the Trash.', $bulk_counts['trashed'], 'jamp' ) ),
+				// translators: %s is the number of untrashed notes.
+				'untrashed' => esc_html( _n( '%s note restored from the Trash.', '%s notes restored from the Trash.', $bulk_counts['untrashed'], 'jamp' ) ),
+			);
+
+		}
 
 		return $bulk_messages;
 
@@ -678,24 +731,32 @@ class Jamp_Admin {
 	 */
 	public function move_to_trash() {
 
-		// Checks the nonce is valid.
-		check_ajax_referer( $this->plugin_name );
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-		$note_id = ( isset( $_POST['note'] ) ) ? intval( wp_unslash( $_POST['note'] ) ) : 0;
+			// Checks the nonce is valid.
+			check_ajax_referer( $this->plugin_name );
 
-		if ( ! empty( $note_id ) && current_user_can( 'delete_post', $note_id ) ) {
+			$note_id = ( isset( $_POST['note'] ) ) ? intval( wp_unslash( $_POST['note'] ) ) : 0;
 
-			$note = wp_trash_post( $note_id );
+			if ( ! empty( $note_id ) && current_user_can( 'delete_post', $note_id ) ) {
 
-			if ( ! empty( $note ) ) {
+				$note = wp_trash_post( $note_id );
 
-				wp_send_json_success();
+				if ( ! empty( $note ) ) {
 
-			} else {
+					wp_send_json_success();
 
-				wp_send_json_error();
+				} else {
 
+					wp_send_json_error();
+
+				}
 			}
+
+		} else {
+
+			wp_send_json_error();
+
 		}
 
 	}
@@ -708,18 +769,22 @@ class Jamp_Admin {
 	 */
 	public function tiny_mce_before_init( $mceInit ) {
 
-		unset( $mceInit['toolbar1'] );
-		unset( $mceInit['toolbar2'] );
-		unset( $mceInit['toolbar3'] );
-		unset( $mceInit['toolbar4'] );
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-		$mceInit['wpautop']  = false;
-		$mceInit['toolbar1'] = 'bold,italic,alignleft,aligncenter,alignright,link,strikethrough,hr,forecolor,pastetext,removeformat,charmap,undo,redo,wp_help';
+			unset( $mceInit['toolbar1'] );
+			unset( $mceInit['toolbar2'] );
+			unset( $mceInit['toolbar3'] );
+			unset( $mceInit['toolbar4'] );
+
+			$mceInit['wpautop']  = false;
+			$mceInit['toolbar1'] = 'bold,italic,alignleft,aligncenter,alignright,link,strikethrough,hr,forecolor,pastetext,removeformat,charmap,undo,redo,wp_help';
+
+		}
 
 		return $mceInit;
 
 	}
-	
+
 	/**
 	 * Adds notes to the post types to be deleted when deleting a user.
 	 *
@@ -729,7 +794,12 @@ class Jamp_Admin {
 	 */
 	public function post_types_to_delete_with_user( $post_types_to_delete, $id ) {
 
-		$post_types_to_delete[] = 'jamp_note';
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
+
+			$post_types_to_delete[] = 'jamp_note';
+
+		}
+
 		return $post_types_to_delete;
 
 	}
