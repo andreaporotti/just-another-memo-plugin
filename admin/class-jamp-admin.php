@@ -771,13 +771,19 @@ class Jamp_Admin {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-			unset( $mceInit['toolbar1'] );
-			unset( $mceInit['toolbar2'] );
-			unset( $mceInit['toolbar3'] );
-			unset( $mceInit['toolbar4'] );
+			global $post;
 
-			$mceInit['wpautop']  = false;
-			$mceInit['toolbar1'] = 'bold,italic,alignleft,aligncenter,alignright,link,strikethrough,hr,forecolor,pastetext,removeformat,charmap,undo,redo,wp_help';
+			if ( 'jamp_note' === $post->post_type ) {
+
+				unset( $mceInit['toolbar1'] );
+				unset( $mceInit['toolbar2'] );
+				unset( $mceInit['toolbar3'] );
+				unset( $mceInit['toolbar4'] );
+
+				$mceInit['wpautop']  = false;
+				$mceInit['toolbar1'] = 'bold,italic,alignleft,aligncenter,alignright,link,strikethrough,hr,forecolor,pastetext,removeformat,charmap,undo,redo,wp_help';
+
+			}
 
 		}
 
