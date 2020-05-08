@@ -242,9 +242,15 @@ class Jamp_Admin {
 	 * Creates a list of all supported target types.
 	 *
 	 * @since    1.0.0
+	 * @param    boolean $filtered If true returns only the enabled target types.
+	 * @param    boolean $return   If true returns the target types array.
 	 */
-	public function build_target_types_list( $return = false ) {
+	public function build_target_types_list( $filtered = true, $return = false ) {
 
+		// Get enabled target types.
+		$enabled_target_types = get_option( 'jamp_enabled_target_types', array() );
+		
+		// Get post types.
 		$post_types = get_post_types(
 			array(
 				'public' => true,
@@ -252,6 +258,7 @@ class Jamp_Admin {
 			'objects'
 		);
 		
+		// Set post types to be ignored.
 		$post_types_to_skip = array(
 			'attachment',
 			'jamp_note',
@@ -260,6 +267,11 @@ class Jamp_Admin {
 		foreach ( $post_types as $post_type ) {
 			
 			if ( ! in_array( $post_type->name, $post_types_to_skip, true ) ) {
+				
+				// If we need just the enabled target types.
+				if ( $filtered && ! in_array( $post_type->name, $enabled_target_types, true ) ) {
+					continue;
+				}
 
 				$this->target_types_list[] = array(
 					'name'          => $post_type->name,
@@ -340,6 +352,7 @@ class Jamp_Admin {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
+			// Get enabled target types.
 			$this->build_target_types_list();
 
 			$screens = array( 'jamp_note' );
@@ -436,11 +449,13 @@ class Jamp_Admin {
 	
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-			$this->build_target_types_list();
+			//$post_type = get_post_type();
+			$post_type = $this->get_current_post_type();
 
-			$post_type = get_post_type();
-
-			if ( 'jamp_note' == $post_type ) {
+			if ( 'jamp_note' == $post_type ) { // Notes admin page.
+				
+				// Get all target types.
+				$this->build_target_types_list( false );
 
 				// Get Date column label and remove the column.
 				$date_column_label = $columns['date'];
@@ -453,10 +468,23 @@ class Jamp_Admin {
 				// Re-add Date column at the end.
 				$columns['date'] = $date_column_label;
 
-			} else {
+			} else { // Other admin pages.
+				
+				// Get enabled target types.
+				$this->build_target_types_list();
+				
+				// Create a list of target types names.
+				$enabled_target_types_names = array();
+				foreach ( $this->target_types_list as $target_type ) {
+					$enabled_target_types_names[] = $target_type['name'];
+				}
 
-				// Adds custom columns for other post types, pages and target types.
-				$columns['jamp_note'] = esc_html__( 'Notes', 'jamp' );
+				if ( in_array( $post_type, $enabled_target_types_names ) ) {
+					
+					// Adds custom columns for other post types, pages and target types.
+					$columns['jamp_note'] = esc_html__( 'Notes', 'jamp' );
+					
+				}
 
 			}
 		
@@ -477,6 +505,7 @@ class Jamp_Admin {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
+			// Load the file if the column name contains the word 'jamp'.
 			if ( strpos( $column_name, 'jamp' ) !== false ) {
 
 				require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
@@ -819,6 +848,29 @@ class Jamp_Admin {
 		}
 
 		return $post_types_to_delete;
+
+	}
+	
+	/**
+	 * Gets current post type.
+	 *
+	 * @since    1.0.0
+	 */
+	private static function get_current_post_type() {
+
+		global $post, $typenow, $current_screen;
+
+		if ( $post && $post->post_type ) {
+			return $post->post_type;
+		} elseif ( $typenow ) {
+			return $typenow;
+		} elseif ( $current_screen && $current_screen->post_type ) {
+			return $current_screen->post_type;
+		} elseif ( isset( $_REQUEST['post_type'] ) ) {
+			return sanitize_key( $_REQUEST['post_type'] );
+		}
+
+		return null;
 
 	}
 

@@ -68,6 +68,49 @@ class Jamp_Options {
 
 		// Add a new section.
 		add_settings_section(
+			'jamp_options_section_target_types',
+			esc_html__( 'Item types', 'jamp' ),
+			array(
+				$this,
+				'options_section_target_types',
+			),
+			'jamp_options'
+		);
+		
+		// Register a setting.
+		register_setting(
+			'jamp_options',
+			'jamp_enabled_target_types',
+			array(
+				'type'              => 'array',
+				'show_in_rest'      => false,
+				'default'           => array(),
+				'sanitize_callback' => array(
+					$this,
+					'option_enabled_target_types_sanitize'
+				),
+			)
+		);
+		
+		// Add setting field to the section.
+		add_settings_field(
+			'jamp_enabled_target_types',
+			esc_html__( 'Enable notes for these item types', 'jamp' ),
+			array(
+				$this,
+				'option_enabled_target_types',
+			),
+			'jamp_options',
+			'jamp_options_section_target_types',
+			array(
+				'name' => 'jamp_enabled_target_types',
+			)
+		);
+		
+		/* ====================================================== */
+		
+		// Add a new section.
+		add_settings_section(
 			'jamp_options_section_uninstall',
 			esc_html__( 'Uninstall', 'jamp' ),
 			array(
@@ -110,6 +153,68 @@ class Jamp_Options {
 	}
 
 	/**
+	 * Callback for the target types options section output.
+	 *
+	 * @since    1.0.0
+	 * @param    array $args Array of section attributes.
+	 */
+	public function options_section_target_types( $args ) {
+
+	?>
+		<p id="<?php echo esc_attr( $args['id'] ); ?>">
+			<?php echo esc_html__( 'Settings about the item types discovered by the plugin.', 'jamp' ); ?>
+		</p>
+	<?php
+
+	}
+
+	/**
+	 * Callback for the enabled_target_types option field output.
+	 *
+	 * @since    1.0.0
+	 * @param    array $args Array of field attributes.
+	 */
+	public function option_enabled_target_types( $args ) {
+
+		// Get the option value.
+		$option_enabled_target_types = get_option( $args['name'], array() );
+
+		// Get the target types.
+		$admin = new Jamp_Admin( '', '' );
+		$target_types = $admin->build_target_types_list( false, true );
+
+	?>
+		<?php foreach ( $target_types as $target_type ): ?>
+			<?php $id_attr = $args['name'] . '_' . $target_type['name']; ?>
+			<?php $checked_attr = ( in_array( $target_type['name'], $option_enabled_target_types ) ) ? 'checked' : ''; ?>
+			<input type="checkbox" id="<?php echo esc_attr( $id_attr ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>[]" value="<?php echo esc_attr( $target_type['name'] ); ?>" <?php echo esc_attr( $checked_attr ); ?>>
+			<label for="<?php echo esc_attr( $id_attr ); ?>"><?php echo esc_html( $target_type['label'] ); ?></label>
+			<br>
+		<?php endforeach; ?>
+
+		<p class="description">
+			<?php echo esc_html__( 'Choose which items you want to add notes to.', 'jamp' ); ?>
+		</p>
+	<?php
+    }
+
+	/**
+	 * Callback for the enabled_target_types option value sanitization.
+	 *
+	 * @since    1.0.0
+	 * @param    array $value Option value.
+	 */
+	public function option_enabled_target_types_sanitize( $value ) {
+
+		if ( empty( $value ) ) {
+			$value = array();
+		}
+
+		return $value;
+
+	}
+
+	/**
 	 * Callback for the uninstall options section output.
 	 *
 	 * @since    1.0.0
@@ -146,7 +251,7 @@ class Jamp_Options {
     }
 
 	/**
-	 * Callback for the delete_data_on_uninstall option value check before save.
+	 * Callback for the delete_data_on_uninstall option value sanitization.
 	 *
 	 * @since    1.0.0
 	 * @param    string $value Option value.

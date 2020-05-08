@@ -31,11 +31,11 @@ class Jamp_Activator {
 	public static function activate() {
 
 		// Initialize plugin options.
-		if( false === get_option( 'jamp_delete_data_on_uninstall' ) ) {
+		if ( false === get_option( 'jamp_delete_data_on_uninstall' ) ) {
 			add_option( 'jamp_delete_data_on_uninstall', 0, '', 'no' );
 		}
 		
-		if( false === get_option( 'jamp_permissions' ) ) {
+		if ( false === get_option( 'jamp_permissions' ) ) {
 			// Set default permissions.
 			$permissions = array(	
 				array(
@@ -54,6 +54,20 @@ class Jamp_Activator {
 					$role->add_cap( $capability );
 				}
 			}
+		}
+		
+		if ( false === get_option( 'jamp_enabled_target_types' ) ) {
+			// Get the target types.
+			$admin = new Jamp_Admin( '', '' );
+			$target_types = $admin->build_target_types_list( false, true );
+			
+			// Create a list of target types names.
+			$target_types_names = array();
+			foreach ( $target_types as $target_type ) {
+				$target_types_names[] = $target_type['name'];
+			}
+			
+			add_option( 'jamp_enabled_target_types', $target_types_names, '', 'no' );
 		}
 
 	}
