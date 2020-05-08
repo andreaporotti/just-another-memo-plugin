@@ -55,7 +55,7 @@ class Jamp {
 	 * @var      string    $version    The current version of the plugin.
 	 */
 	protected $version;
-	
+
 	/**
 	 * List of plugin capabilities.
 	 *
@@ -86,7 +86,7 @@ class Jamp {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		
+
 		if ( defined( 'JAMP_VERSION' ) ) {
 			$this->version = JAMP_VERSION;
 		} else {
@@ -136,7 +136,7 @@ class Jamp {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-jamp-admin.php';
-		
+
 		/**
 		 * The class responsible for building the options page.
 		 */
@@ -194,13 +194,13 @@ class Jamp {
 		$this->loader->add_action( 'save_post_jamp_note', $plugin_admin, 'save_meta_data' );
 
 		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'add_admin_bar_menu_item', 999 );
-		
+
 		$this->loader->add_filter( 'tiny_mce_before_init', $plugin_admin, 'tiny_mce_before_init' );
 
 		$this->loader->add_action( 'load-post-new.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_action( 'load-post.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_filter( 'redirect_post_location', $plugin_admin, 'redirect_after_save' );
-		
+
 		$this->loader->add_filter( 'post_types_to_delete_with_user', $plugin_admin, 'post_types_to_delete_with_user', 10, 2 );
 
 		// Ajax.
@@ -221,10 +221,10 @@ class Jamp {
 		$this->loader->add_action( 'init', $plugin_admin, 'session_start', 1 );
 		$this->loader->add_action( 'wp_logout', $plugin_admin, 'session_destroy' );
 		$this->loader->add_action( 'wp_login', $plugin_admin, 'session_destroy' );
-		
+
 		// Plugin options.
 		$plugin_options = new Jamp_Options();
-		
+
 		$this->loader->add_action( 'admin_menu', $plugin_options, 'options_menu' );
 		$this->loader->add_action( 'admin_init', $plugin_options, 'options_init' );
 

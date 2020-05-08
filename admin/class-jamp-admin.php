@@ -100,9 +100,9 @@ class Jamp_Admin {
 		 */
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
-			
+
 			wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . 'css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
-			
+
 		}
 
 	}
@@ -230,10 +230,8 @@ class Jamp_Admin {
 							'parent_name' => $section['name'],
 						);
 					}
-
 				}
 			}
-
 		}
 
 	}
@@ -249,7 +247,7 @@ class Jamp_Admin {
 
 		// Get enabled target types.
 		$enabled_target_types = get_option( 'jamp_enabled_target_types', array() );
-		
+
 		// Get post types.
 		$post_types = get_post_types(
 			array(
@@ -257,7 +255,7 @@ class Jamp_Admin {
 			),
 			'objects'
 		);
-		
+
 		// Set post types to be ignored.
 		$post_types_to_skip = array(
 			'attachment',
@@ -265,9 +263,9 @@ class Jamp_Admin {
 		);
 
 		foreach ( $post_types as $post_type ) {
-			
+
 			if ( ! in_array( $post_type->name, $post_types_to_skip, true ) ) {
-				
+
 				// If we need just the enabled target types.
 				if ( $filtered && ! in_array( $post_type->name, $enabled_target_types, true ) ) {
 					continue;
@@ -278,11 +276,10 @@ class Jamp_Admin {
 					'label'         => $post_type->label,
 					'singular_name' => $post_type->labels->singular_name,
 				);
-				
+
 			}
-			
 		}
-		
+
 		if ( $return ) {
 			return $this->target_types_list;
 		}
@@ -334,7 +331,6 @@ class Jamp_Admin {
 				wp_send_json_error( '' );
 
 			}
-
 		} else {
 
 			wp_send_json_error( '' );
@@ -370,7 +366,6 @@ class Jamp_Admin {
 					)
 				);
 			}
-
 		}
 
 	}
@@ -434,7 +429,6 @@ class Jamp_Admin {
 					}
 				}
 			}
-
 		}
 
 	}
@@ -446,14 +440,13 @@ class Jamp_Admin {
 	 * @param    array $columns Table columns.
 	 */
 	public function manage_columns_headers( $columns ) {
-	
+
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-			//$post_type = get_post_type();
 			$post_type = $this->get_current_post_type();
 
-			if ( 'jamp_note' == $post_type ) { // Notes admin page.
-				
+			if ( 'jamp_note' === $post_type ) { // Notes admin page.
+
 				// Get all target types.
 				$this->build_target_types_list( false );
 
@@ -469,25 +462,23 @@ class Jamp_Admin {
 				$columns['date'] = $date_column_label;
 
 			} else { // Other admin pages.
-				
+
 				// Get enabled target types.
 				$this->build_target_types_list();
-				
+
 				// Create a list of target types names.
 				$enabled_target_types_names = array();
 				foreach ( $this->target_types_list as $target_type ) {
 					$enabled_target_types_names[] = $target_type['name'];
 				}
 
-				if ( in_array( $post_type, $enabled_target_types_names ) ) {
-					
+				if ( in_array( $post_type, $enabled_target_types_names, true ) ) {
+
 					// Adds custom columns for other post types, pages and target types.
 					$columns['jamp_note'] = esc_html__( 'Notes', 'jamp' );
-					
-				}
 
+				}
 			}
-		
 		}
 
 		return $columns;
@@ -511,7 +502,6 @@ class Jamp_Admin {
 				require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
 
 			}
-
 		}
 
 	}
@@ -534,7 +524,7 @@ class Jamp_Admin {
 		}
 
 		// If current url is the admin url, let's add "index.php" to it so it's equal to the "Home" link in the sidebar menu.
-		if ( $url === admin_url() ) {
+		if ( admin_url() === $url ) {
 			$url .= 'index.php';
 		}
 
@@ -639,7 +629,6 @@ class Jamp_Admin {
 				$_SESSION['jamp_return_url'] = $referer;
 
 			}
-
 		}
 
 	}
@@ -684,7 +673,6 @@ class Jamp_Admin {
 
 				}
 			}
-
 		} else {
 
 			// Fallback to default location.
@@ -730,7 +718,6 @@ class Jamp_Admin {
 				unset( $_SESSION['jamp_message'] );
 
 			}
-
 		}
 
 	}
@@ -793,7 +780,6 @@ class Jamp_Admin {
 
 				}
 			}
-
 		} else {
 
 			wp_send_json_error();
@@ -806,9 +792,9 @@ class Jamp_Admin {
 	 * Creates a TinyMCE custom configuration when editing notes.
 	 *
 	 * @since    1.0.0
-	 * @param    array $mceInit An array with TinyMCE config.
+	 * @param    array $mce_init An array with TinyMCE config.
 	 */
-	public function tiny_mce_before_init( $mceInit ) {
+	public function tiny_mce_before_init( $mce_init ) {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
@@ -816,19 +802,18 @@ class Jamp_Admin {
 
 			if ( 'jamp_note' === $post->post_type ) {
 
-				unset( $mceInit['toolbar1'] );
-				unset( $mceInit['toolbar2'] );
-				unset( $mceInit['toolbar3'] );
-				unset( $mceInit['toolbar4'] );
+				unset( $mce_init['toolbar1'] );
+				unset( $mce_init['toolbar2'] );
+				unset( $mce_init['toolbar3'] );
+				unset( $mce_init['toolbar4'] );
 
-				$mceInit['wpautop']  = false;
-				$mceInit['toolbar1'] = 'bold,italic,alignleft,aligncenter,alignright,link,strikethrough,hr,forecolor,pastetext,removeformat,charmap,undo,redo,wp_help';
+				$mce_init['wpautop']  = false;
+				$mce_init['toolbar1'] = 'bold,italic,alignleft,aligncenter,alignright,link,strikethrough,hr,forecolor,pastetext,removeformat,charmap,undo,redo,wp_help';
 
 			}
-
 		}
 
-		return $mceInit;
+		return $mce_init;
 
 	}
 
@@ -850,7 +835,7 @@ class Jamp_Admin {
 		return $post_types_to_delete;
 
 	}
-	
+
 	/**
 	 * Gets current post type.
 	 *

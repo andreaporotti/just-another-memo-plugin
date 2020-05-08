@@ -159,7 +159,7 @@
 	display: inline !important;
 	margin: 0 !important;
 	padding: 0 !important;
-	
+
 	color: inherit !important;
 	text-decoration: underline !important;
 }
@@ -245,7 +245,7 @@
 /* ==== TOOLTIP ==== */
 /* ================= */
 
- /* Tooltip container */
+/* Tooltip container */
 .jamp-note-info-tooltip {
 	position: relative !important;
 	display: inline-block !important;
@@ -315,4 +315,4 @@
 /* Show the tooltip */
 .jamp-note-info-tooltip:hover .jamp-note-info-tooltip__content {
 	display: block !important;
-} 
+}

@@ -105,7 +105,7 @@
 			// Hides current note.
 			selectedNote.addClass( 'jamp-column-note--red-background' ).fadeOut( 600, function() {
 				// Removes hidden note.
-				$(this).remove();
+				$( this ).remove();
 
 				// Shows the placeholder if the row contains no more notes.
 				if ( ( existingNotes - 1 ) === 0 ) {
@@ -125,7 +125,7 @@
 			// Hides current note.
 			selectedNote.addClass( 'jamp-admin-bar-note--red-background' ).fadeOut( 600, function() {
 				// Removes hidden note.
-				$(this).remove();
+				$( this ).remove();
 
 				// Shows the placeholder if the section contains no more notes.
 				if ( ( existingNotes - 1 ) === 0 ) {
@@ -135,14 +135,14 @@
 		}
 
 		// Fills meta box entities list on target type change.
-		$( '#jamp_meta_box #target-type' ).on('change', function() {
+		$( '#jamp_meta_box #target-type' ).on( 'change', function() {
 			getEntitiesList( this.value );
-		});
+		} );
 
 		// Sets meta box fields visibility on Scope change.
-		$( '#jamp_meta_box input[type=radio][name=scope]' ).on('change', function() {
+		$( '#jamp_meta_box input[type=radio][name=scope]' ).on( 'change', function() {
 			setFieldsVisibility( this.value );
-		});
+		} );
 
 		// Sets meta box fields visibility on page ready.
 		setFieldsVisibility( $( '#jamp_meta_box input[type=radio][name=scope]:checked' ).val() );
@@ -158,7 +158,7 @@
 				buttons: {
 					'OK': function() {
 						$( this ).dialog( 'close' );
-						moveToTrash( trashLink.data('note'), 'column' );
+						moveToTrash( trashLink.data( 'note' ), 'column' );
 					}
 				}
 			} );
@@ -175,7 +175,7 @@
 				buttons: {
 					'OK': function() {
 						$( this ).dialog( 'close' );
-						moveToTrash( trashLink.data('note'), 'adminbar' );
+						moveToTrash( trashLink.data( 'note' ), 'adminbar' );
 					}
 				}	
 			} );	

@@ -76,7 +76,7 @@ class Jamp_Options {
 			),
 			'jamp_options'
 		);
-		
+
 		// Register a setting.
 		register_setting(
 			'jamp_options',
@@ -87,11 +87,11 @@ class Jamp_Options {
 				'default'           => array(),
 				'sanitize_callback' => array(
 					$this,
-					'option_enabled_target_types_sanitize'
+					'option_enabled_target_types_sanitize',
 				),
 			)
 		);
-		
+
 		// Add setting field to the section.
 		add_settings_field(
 			'jamp_enabled_target_types',
@@ -106,9 +106,9 @@ class Jamp_Options {
 				'name' => 'jamp_enabled_target_types',
 			)
 		);
-		
+
 		/* ====================================================== */
-		
+
 		// Add a new section.
 		add_settings_section(
 			'jamp_options_section_uninstall',
@@ -130,7 +130,7 @@ class Jamp_Options {
 				'default'           => 0,
 				'sanitize_callback' => array(
 					$this,
-					'option_delete_data_on_uninstall_sanitize'
+					'option_delete_data_on_uninstall_sanitize',
 				),
 			)
 		);
@@ -160,11 +160,11 @@ class Jamp_Options {
 	 */
 	public function options_section_target_types( $args ) {
 
-	?>
+		?>
 		<p id="<?php echo esc_attr( $args['id'] ); ?>">
 			<?php echo esc_html__( 'Settings about the item types discovered by the plugin.', 'jamp' ); ?>
 		</p>
-	<?php
+		<?php
 
 	}
 
@@ -180,13 +180,13 @@ class Jamp_Options {
 		$option_enabled_target_types = get_option( $args['name'], array() );
 
 		// Get the target types.
-		$admin = new Jamp_Admin( '', '' );
+		$admin        = new Jamp_Admin( '', '' );
 		$target_types = $admin->build_target_types_list( false, true );
 
-	?>
-		<?php foreach ( $target_types as $target_type ): ?>
+		?>
+		<?php foreach ( $target_types as $target_type ) : ?>
 			<?php $id_attr = $args['name'] . '_' . $target_type['name']; ?>
-			<?php $checked_attr = ( in_array( $target_type['name'], $option_enabled_target_types ) ) ? 'checked' : ''; ?>
+			<?php $checked_attr = ( in_array( $target_type['name'], $option_enabled_target_types, true ) ) ? 'checked' : ''; ?>
 			<input type="checkbox" id="<?php echo esc_attr( $id_attr ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>[]" value="<?php echo esc_attr( $target_type['name'] ); ?>" <?php echo esc_attr( $checked_attr ); ?>>
 			<label for="<?php echo esc_attr( $id_attr ); ?>"><?php echo esc_html( $target_type['label'] ); ?></label>
 			<br>
@@ -195,8 +195,8 @@ class Jamp_Options {
 		<p class="description">
 			<?php echo esc_html__( 'Choose which items you want to add notes to.', 'jamp' ); ?>
 		</p>
-	<?php
-    }
+		<?php
+	}
 
 	/**
 	 * Callback for the enabled_target_types option value sanitization.
@@ -222,11 +222,11 @@ class Jamp_Options {
 	 */
 	public function options_section_uninstall( $args ) {
 
-	?>
+		?>
 		<p id="<?php echo esc_attr( $args['id'] ); ?>">
 			<?php echo esc_html__( 'These settings are applied when you uninstall the plugin.', 'jamp' ); ?>
 		</p>
-	<?php
+		<?php
 
 	}
 
@@ -241,14 +241,14 @@ class Jamp_Options {
 		// Get the option value.
 		$option_delete_data_on_uninstall = get_option( $args['label_for'], 0 );
 
-	?>
+		?>
 		<input type="checkbox" id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr( $args['label_for'] ); ?>" value="1" <?php checked( $option_delete_data_on_uninstall, 1 ); ?>>
-	    <p class="description">
+		<p class="description">
 			<?php echo esc_html__( 'Enabling this option all notes and settings will be PERMANENTLY DELETED when you uninstall the plugin.', 'jamp' ); ?>
-	    </p>
-	<?php
+		</p>
+		<?php
 
-    }
+	}
 
 	/**
 	 * Callback for the delete_data_on_uninstall option value sanitization.

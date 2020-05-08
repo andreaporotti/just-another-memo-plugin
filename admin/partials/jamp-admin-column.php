@@ -29,7 +29,7 @@ if ( 'jamp_note' === $column_name ) {
 	if ( ! empty( $notes ) ) {
 
 		foreach ( $notes as $note ) {
-			
+
 			$note_author        = get_userdata( $note->post_author );
 			$note_modified_date = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_modified_gmt ) );
 			$note_created_date  = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_date_gmt ) );
@@ -123,7 +123,7 @@ if ( 'jamp_location' === $column_name ) {
 				}
 			}
 
-			if ( ! empty($section_name) ) {
+			if ( ! empty( $section_name ) ) {
 
 				echo esc_html__( 'Section', 'jamp' ) . ': ' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
 
@@ -131,7 +131,7 @@ if ( 'jamp_location' === $column_name ) {
 
 				?>
 				<span class="jamp-column-note__orphan-note-notice">
-					<?php echo esc_html__('Note attached to a no longer existing Section.', 'jamp'); ?>
+					<?php echo esc_html__( 'Note attached to a no longer existing Section.', 'jamp' ); ?>
 				</span>
 				<?php
 
@@ -142,7 +142,7 @@ if ( 'jamp_location' === $column_name ) {
 		case 'entity':
 			// Look for the target type name inside the target types list and print the corresponding label.
 			$target_type_name = '';
-			
+
 			foreach ( $this->target_types_list as $target_type ) {
 
 				if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
@@ -153,22 +153,22 @@ if ( 'jamp_location' === $column_name ) {
 			}
 
 			$current_post = get_post( $jamp_meta['jamp_target'][0] );
-			
+
 			if ( ! empty( $current_post ) ) {
-				
-				echo esc_html__( 'Item', 'jamp' ) . ': ' .  esc_html( $target_type_name ) . ' "' . esc_html( $current_post->post_title ) . '"';
-				
+
+				echo esc_html__( 'Item', 'jamp' ) . ': ' . esc_html( $target_type_name ) . ' "' . esc_html( $current_post->post_title ) . '"';
+
 			} else {
-				
+
 				?>
 				<span class="jamp-column-note__orphan-note-notice">
 				<?php
-					// translators: %s is the item the note is attached to (eg. post, page...)
-					printf( esc_html__('Note attached to a no longer existing %s.', 'jamp'), esc_html( $target_type_name ) );
+					// translators: %s is the item the note is attached to (eg. post, page...).
+					printf( esc_html__( 'Note attached to a no longer existing %s.', 'jamp' ), esc_html( $target_type_name ) );
 				?>
 				</span>
 				<?php
-				
+
 			}
 
 			break;

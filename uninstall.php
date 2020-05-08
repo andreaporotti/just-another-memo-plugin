@@ -24,8 +24,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // Perform a few security checks.
-$is_plugin_valid = ( isset( $_REQUEST['plugin'] ) && strpos( $_REQUEST['plugin'], 'jamp' ) !== false ) ? true : false;
-$is_slug_valid   = ( isset( $_REQUEST['slug'] ) && strpos( $_REQUEST['slug'], 'jamp' ) !== false ) ? true : false;
+$is_plugin_valid = ( isset( $_REQUEST['plugin'] ) && strpos( sanitize_text_field( wp_unslash( $_REQUEST['plugin'] ) ), 'jamp' ) !== false ) ? true : false;
+$is_slug_valid   = ( isset( $_REQUEST['slug'] ) && strpos( sanitize_text_field( wp_unslash( $_REQUEST['slug'] ) ), 'jamp' ) !== false ) ? true : false;
 $is_user_allowed = current_user_can( 'delete_plugins' );
 
 if ( ! $is_plugin_valid || ! $is_slug_valid || ! $is_user_allowed ) {
@@ -39,7 +39,7 @@ if ( '1' === $option_delete_data_on_uninstall ) {
 
 	// Delete notes in all statuses.
 	$post_statuses = array_keys( get_post_stati() );
-	
+
 	$notes_args = array(
 		'post_type'      => 'jamp_note',
 		'post_status'    => $post_statuses,
@@ -68,24 +68,21 @@ if ( '1' === $option_delete_data_on_uninstall ) {
 			delete_option( $option );
 
 		}
-
 	}
 
 	// Delete custom capabilities from all roles.
 	require_once dirname( __FILE__ ) . '/includes/class-jamp.php';
 	$capabilities = Jamp::$capabilities;
-	$roles = get_editable_roles();
+	$roles        = get_editable_roles();
 
-	foreach ($roles as $role_slug => $role_details) {
+	foreach ( $roles as $role_slug => $role_details ) {
 
-		$role = get_role($role_slug);
+		$current_role = get_role( $role_slug );
 
-		foreach ($capabilities as $capability) {
+		foreach ( $capabilities as $capability ) {
 
-			$role->remove_cap( $capability );
+			$current_role->remove_cap( $capability );
 
 		}
-
 	}
-
 }
