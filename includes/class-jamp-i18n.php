@@ -1,13 +1,11 @@
 <?php
 /**
- * Define the internationalization functionality
+ * Define the internationalization functionality.
  *
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @link       https://www.andreaporotti.it
  * @since      1.0.0
- *
  * @package    Jamp
  * @subpackage Jamp/includes
  */
@@ -25,9 +23,8 @@
  */
 class Jamp_I18n {
 
-
 	/**
-	 * Load the plugin text domain for translation.
+	 * Loads the plugin text domain for translation.
 	 *
 	 * @since    1.0.0
 	 */
@@ -40,7 +37,5 @@ class Jamp_I18n {
 		);
 
 	}
-
-
 
 }

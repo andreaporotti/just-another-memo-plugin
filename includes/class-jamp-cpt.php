@@ -2,9 +2,7 @@
 /**
  * Custom Post Types registration.
  *
- * @link       https://www.andreaporotti.it
  * @since      1.0.0
- *
  * @package    Jamp
  * @subpackage Jamp/includes
  */
@@ -22,9 +20,7 @@
 class Jamp_CPT {
 
 	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
+	 * Registers the custom post type.
 	 *
 	 * @since    1.0.0
 	 */

@@ -1,18 +1,14 @@
 <?php
 /**
- * Fired during plugin activation
+ * Fired during plugin activation.
  *
- * @link       https://www.andreaporotti.it
  * @since      1.0.0
- *
  * @package    Jamp
  * @subpackage Jamp/includes
  */
 
 /**
  * Fired during plugin activation.
- *
- * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
  * @package    Jamp
@@ -22,9 +18,7 @@
 class Jamp_Activator {
 
 	/**
-	 * Short Description. (use period)
-	 *
-	 * Long Description.
+	 * Performs tasks on plugin activation.
 	 *
 	 * @since    1.0.0
 	 */

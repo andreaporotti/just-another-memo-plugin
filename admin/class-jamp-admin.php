@@ -2,18 +2,13 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://www.andreaporotti.it
  * @since      1.0.0
- *
  * @package    Jamp
  * @subpackage Jamp/admin
  */
 
 /**
  * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
  *
  * @package    Jamp
  * @subpackage Jamp/admin
@@ -67,7 +62,7 @@ class Jamp_Admin {
 	private $feedback_messages = array();
 
 	/**
-	 * Initialize the class and set its properties.
+	 * Initializes the class and set its properties.
 	 *
 	 * @since    1.0.0
 	 * @param    string $plugin_name    The name of this plugin.
@@ -81,23 +76,11 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Register the stylesheets for the admin area.
+	 * Registers the stylesheets for the admin area.
 	 *
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Jamp_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Jamp_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
@@ -108,23 +91,11 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Register the JavaScript for the admin area.
+	 * Registers the JavaScript for the admin area.
 	 *
 	 * @since    1.0.0
 	 */
 	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Jamp_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Jamp_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
@@ -287,7 +258,8 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Creates a list of all entities of the passed post type. (ajax function)
+	 * Creates a list of all entities of the passed post type.
+	 * It's used by ajax calls.
 	 *
 	 * @since    1.0.0
 	 */
@@ -384,7 +356,7 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Saves meta data
+	 * Saves meta data.
 	 *
 	 * @since    1.0.0
 	 * @param    int $post_id Current post ID.
@@ -434,10 +406,10 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Adds a column to a management page.
+	 * Adds a custom column to a management page.
 	 *
 	 * @since    1.0.0
-	 * @param    array $columns Table columns.
+	 * @param    array $columns List of table columns.
 	 */
 	public function manage_columns_headers( $columns ) {
 
@@ -723,7 +695,7 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Adds bulk actions custom notices.
+	 * Adds custom notices for bulk actions.
 	 *
 	 * @since    1.0.0
 	 * @param    array $bulk_messages Array of messages displayed in the notices.
@@ -753,7 +725,8 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Moves a note to trash. (ajax function)
+	 * Moves a note to trash.
+	 * It's used by ajax calls.
 	 *
 	 * @since    1.0.0
 	 */
@@ -818,7 +791,7 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Adds notes to the post types to be deleted when deleting a user.
+	 * Adds the notes to the post types to be deleted when deleting a user.
 	 *
 	 * @since    1.0.0
 	 * @param    array $post_types_to_delete Array of post types to delete.

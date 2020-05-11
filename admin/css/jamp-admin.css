@@ -1,6 +1,6 @@
-/* ================= */
-/* ==== GENERAL ==== */
-/* ================= */
+/*
+* GENERAL
+*/
 
 .display-block {
 	display: block;
@@ -10,7 +10,9 @@
 	margin-top: 0 !important;
 }
 
-/* ==== META BOX ==== */
+/*
+* META BOX
+*/
 
 #jamp_meta_box .meta-field {
 	margin-top: 15px;
@@ -22,15 +24,9 @@
 	display: none;
 }
 
-/* =================== */
-/* ==== ADMIN BAR ==== */
-/* =================== */
-
-/* START debug styles */
-/*#wp-admin-bar-jamp .ab-sub-wrapper {
-	display: block !important;
-}*/
-/* STOP debug styles */
+/*
+* ADMIN BAR
+*/
 
 #wp-admin-bar-jamp .ab-icon:before {
 	content: "\f157";
@@ -177,9 +173,9 @@
 	display: none;
 }
 
-/* ====================== */
-/* ==== TABLE COLUMN ==== */
-/* ====================== */
+/*
+* TABLE COLUMNS
+*/
 
 .jamp-column-note {
 	margin-bottom: 10px;
@@ -233,17 +229,17 @@
 	font-weight: 700;
 }
 
-/* ====================== */
-/* ==== TRASH DIALOG ==== */
-/* ====================== */
+/*
+* TRASH DIALOG
+*/
 
 .jamp-trash-dialog--hidden {
 	display: none;
 }
 
-/* ================= */
-/* ==== TOOLTIP ==== */
-/* ================= */
+/*
+* NOTE TOOLTIP
+*/
 
 /* Tooltip container */
 .jamp-note-info-tooltip {
