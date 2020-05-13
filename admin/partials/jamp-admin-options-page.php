@@ -1,10 +1,8 @@
 <?php
 /**
- * The HTML code for the options page.
+ * Provides HTML code for the options page.
  *
- * @link       https://www.andreaporotti.it
  * @since      1.0.0
- *
  * @package    Jamp
  * @subpackage Jamp/admin/partials
  */

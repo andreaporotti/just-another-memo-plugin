@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       JAMP
  * Plugin URI:        https://www.andreaporotti.it
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       This plugin allows you to attach notes to some WordPress elements like posts, pages, dashboard sections... or the whole site!
  * Version:           1.0.0
  * Author:            Andrea Porotti
  * Author URI:        https://www.andreaporotti.it
@@ -28,7 +28,6 @@ define( 'JAMP_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-jamp-activator.php
  */
 function activate_jamp() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-jamp-activator.php';
@@ -37,7 +36,6 @@ function activate_jamp() {
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-jamp-deactivator.php
  */
 function deactivate_jamp() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-jamp-deactivator.php';

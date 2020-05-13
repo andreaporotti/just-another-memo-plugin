@@ -17,11 +17,11 @@
 class Jamp_Admin {
 
 	/**
-	 * The ID of this plugin.
+	 * The name of this plugin.
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      string    $plugin_name    The ID of this plugin.
+	 * @var      string    $plugin_name    The name of this plugin.
 	 */
 	private $plugin_name;
 
@@ -62,7 +62,7 @@ class Jamp_Admin {
 	private $feedback_messages = array();
 
 	/**
-	 * Initializes the class and set its properties.
+	 * Initializes the class and sets its properties.
 	 *
 	 * @since    1.0.0
 	 * @param    string $plugin_name    The name of this plugin.
@@ -258,7 +258,7 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Creates a list of all entities of the passed post type.
+	 * Creates a list of all entities of a post type.
 	 * It's used by ajax calls.
 	 *
 	 * @since    1.0.0
@@ -347,7 +347,7 @@ class Jamp_Admin {
 	 *
 	 * @since    1.0.0
 	 * @param    object $post Current post.
-	 * @param    array  $args Variables to be available inside the callback.
+	 * @param    array  $args Variables coming from the registered meta box.
 	 */
 	public static function meta_box_html_cb( $post, $args ) {
 
@@ -375,7 +375,7 @@ class Jamp_Admin {
 				return;
 			}
 
-			// Checks for field values and saves if needed.
+			// Check for field values and save them.
 			if ( isset( $_POST['scope'] ) ) {
 				update_post_meta( $post_id, 'jamp_scope', sanitize_text_field( wp_unslash( $_POST['scope'] ) ) );
 
@@ -406,7 +406,7 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Adds a custom column to a management page.
+	 * Adds a custom column to an admin page.
 	 *
 	 * @since    1.0.0
 	 * @param    array $columns List of table columns.
@@ -606,7 +606,7 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Returns to the previous page after note create or edit.
+	 * Returns to the previous page after note save.
 	 *
 	 * @since    1.0.0
 	 * @param    string $location Destination url.

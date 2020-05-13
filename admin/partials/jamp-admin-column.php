@@ -1,10 +1,8 @@
 <?php
 /**
- * Provides HTML code for the column inside elements lists.
+ * Provides HTML code for the custom column added to the lists of items.
  *
- * @link       https://www.andreaporotti.it
  * @since      1.0.0
- *
  * @package    Jamp
  * @subpackage Jamp/admin/partials
  */
@@ -12,7 +10,7 @@
 ?>
 
 <?php
-// Columns on post types pages.
+// Columns on enabled post types pages.
 if ( 'jamp_note' === $column_name ) {
 
 	// Get notes.
@@ -60,14 +58,14 @@ if ( 'jamp_note' === $column_name ) {
 		}
 	}
 
-	// Adds placeholder, hidden if there are notes.
+	// Add the placeholder to be shown when no notes are available.
 	$css_class = ( ! empty( $notes ) ) ? 'jamp-column-note__no-notes-notice--hidden' : '';
 
 	?>
 	<span class="jamp-column-note__no-notes-notice <?php echo esc_attr( $css_class ); ?>">—</span>
 	<?php
 
-	// Create link.
+	// New note link.
 	$screen = get_current_screen();
 
 	$create_url = add_query_arg(
@@ -88,7 +86,7 @@ if ( 'jamp_note' === $column_name ) {
 
 }
 
-// Columns on notes pages.
+// Columns on the notes post type page.
 if ( 'jamp_author' === $column_name ) {
 
 	$note        = get_post( $post_id );
@@ -163,7 +161,7 @@ if ( 'jamp_location' === $column_name ) {
 				?>
 				<span class="jamp-column-note__orphan-note-notice">
 				<?php
-					// translators: %s is the item the note is attached to (eg. post, page...).
+					// translators: %s is the item type the note is attached to (eg. post, page...).
 					printf( esc_html__( 'Note attached to a no longer existing %s.', 'jamp' ), esc_html( $target_type_name ) );
 				?>
 				</span>

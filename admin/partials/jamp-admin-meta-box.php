@@ -1,10 +1,8 @@
 <?php
 /**
- * Provides HTML code for the meta box
+ * Provides HTML code for the meta box.
  *
- * @link       https://www.andreaporotti.it
  * @since      1.0.0
- *
  * @package    Jamp
  * @subpackage Jamp/admin/partials
  */
@@ -12,7 +10,7 @@
 ?>
 
 <?php
-// Cretes nonce field.
+// Add nonce field.
 wp_nonce_field( 'jamp_meta_box_nonce_secret_action', 'jamp-meta-box-nonce' );
 
 $screen = get_current_screen();
@@ -36,7 +34,7 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	}
 } else { // Editing a note.
 
-	// Gets post's meta data.
+	// Get post meta data.
 	$jamp_meta = get_post_meta( $post->ID );
 
 }

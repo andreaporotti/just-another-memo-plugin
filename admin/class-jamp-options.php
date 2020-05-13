@@ -2,9 +2,7 @@
 /**
  * The options-specific functionality of the plugin.
  *
- * @link       https://www.andreaporotti.it
  * @since      1.0.0
- *
  * @package    Jamp
  * @subpackage Jamp/admin
  */
@@ -21,7 +19,7 @@
 class Jamp_Options {
 
 	/**
-	 * Adds the plugin options menu item under the Settings item.
+	 * Adds the plugin options page as sub-item in the Settings menu.
 	 *
 	 * @since    1.0.0
 	 */
@@ -41,7 +39,7 @@ class Jamp_Options {
 	}
 
 	/**
-	 * Adds the plugin options page.
+	 * Shows the options page content.
 	 *
 	 * @since    1.0.0
 	 */

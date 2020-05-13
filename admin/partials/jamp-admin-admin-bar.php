@@ -1,10 +1,8 @@
 <?php
 /**
- * Provides HTML code for the admin bar menu item.
+ * Provides HTML code for the admin bar item.
  *
- * @link       https://www.andreaporotti.it
  * @since      1.0.0
- *
  * @package    Jamp
  * @subpackage Jamp/admin/partials
  */
@@ -68,7 +66,7 @@ if ( ! empty( $global_notes ) ) {
 	}
 }
 
-// Adds placeholder, hidden if there are notes.
+// Add the placeholder to be shown when no notes are available.
 $css_class = ( ! empty( $global_notes ) ) ? 'jamp-admin-bar-note__no-notes-notice--hidden' : '';
 $html     .= '<span class="jamp-admin-bar-note__no-notes-notice ' . esc_attr( $css_class ) . '">' . esc_html__( 'No global Notes.', 'jamp' ) . '</span>';
 
@@ -131,7 +129,7 @@ if ( $this->is_section_supported() ) {
 		}
 	}
 
-	// Adds placeholder, hidden if there are notes.
+	// Add the placeholder to be shown when no notes are available.
 	$css_class = ( ! empty( $section_notes ) ) ? 'jamp-admin-bar-note__no-notes-notice--hidden' : '';
 	$html     .= '<span class="jamp-admin-bar-note__no-notes-notice ' . esc_attr( $css_class ) . '">' . esc_html__( 'No Notes in this section.', 'jamp' ) . '</span>';
 
@@ -139,7 +137,7 @@ if ( $this->is_section_supported() ) {
 
 }
 
-// Trash dialog.
+// Dialog to confirm all trash actions.
 $html .= '<div class="jamp-trash-dialog jamp-trash-dialog--hidden" title="' . esc_html__( 'Trash', 'jamp' ) . '">'
 		. '<p>' . esc_html__( 'Do you want to move this Note to trash?', 'jamp' ) . '</p>'
 		. '</div>';

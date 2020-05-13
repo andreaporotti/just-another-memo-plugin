@@ -18,7 +18,7 @@
 class Jamp_Deactivator {
 
 	/**
-	 * Performs tasks on plugin activation.
+	 * Performs tasks on plugin deactivation.
 	 *
 	 * @since    1.0.0
 	 */
