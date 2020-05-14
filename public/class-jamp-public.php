@@ -55,16 +55,11 @@ class Jamp_Public {
 	 */
 	public function enqueue_styles() {
 
+		// Load admin styles if current user can use the notes.
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-			wp_enqueue_style( 'jamp-public-style', plugin_dir_url( __FILE__ ) . 'css/jamp-public.css', array(), $this->version, 'all' );
+			wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . '../admin/css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
 
-			// Load admin styles if a user is logged.
-			if ( is_user_logged_in() ) {
-
-				wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . '../admin/css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
-
-			}
 		}
 
 	}
@@ -76,34 +71,29 @@ class Jamp_Public {
 	 */
 	public function enqueue_scripts() {
 
+		// Load admin scripts if current user can use the notes.
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-			wp_enqueue_script( 'jamp-public-script', plugin_dir_url( __FILE__ ) . 'js/jamp-public.js', array( 'jquery' ), $this->version, false );
+			wp_enqueue_script( 'jamp-admin-script', plugin_dir_url( __FILE__ ) . '../admin/js/jamp-admin.js', array( 'jquery', 'jquery-ui-dialog' ), $this->version, false );
 
-			// Load admin scripts if a user is logged.
-			if ( is_user_logged_in() ) {
+			wp_localize_script(
+				'jamp-admin-script',
+				'jamp_ajax',
+				array(
+					'ajax_url' => admin_url( 'admin-ajax.php' ),
+					'nonce'    => wp_create_nonce( $this->plugin_name ),
+				)
+			);
 
-				wp_enqueue_script( 'jamp-admin-script', plugin_dir_url( __FILE__ ) . '../admin/js/jamp-admin.js', array( 'jquery', 'jquery-ui-dialog' ), $this->version, false );
+			wp_localize_script(
+				'jamp-admin-script',
+				'jamp_strings',
+				array(
+					'get_entities_list_error' => esc_html__( 'An error occurred while loading the items list.', 'jamp' ),
+					'move_to_trash_error'     => esc_html__( 'An error occurred while moving the note to the trash.', 'jamp' ),
+				)
+			);
 
-				wp_localize_script(
-					'jamp-admin-script',
-					'jamp_ajax',
-					array(
-						'ajax_url' => admin_url( 'admin-ajax.php' ),
-						'nonce'    => wp_create_nonce( $this->plugin_name ),
-					)
-				);
-
-				wp_localize_script(
-					'jamp-admin-script',
-					'jamp_strings',
-					array(
-						'get_entities_list_error' => esc_html__( 'An error occurred while loading the items list.', 'jamp' ),
-						'move_to_trash_error'     => esc_html__( 'An error occurred while moving the note to the trash.', 'jamp' ),
-					)
-				);
-
-			}
 		}
 
 	}
