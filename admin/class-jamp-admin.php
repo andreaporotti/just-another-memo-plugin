@@ -114,8 +114,8 @@ class Jamp_Admin {
 				'jamp-admin-script',
 				'jamp_strings',
 				array(
-					'get_entities_list_error' => esc_html__( 'An error occurred while loading the items list.', 'jamp' ),
-					'move_to_trash_error'     => esc_html__( 'An error occurred while moving the note to the trash.', 'jamp' ),
+					'get_entities_list_error' => esc_html__( 'An error occurred while loading the items list. Please reload the page and try again.', 'jamp' ),
+					'move_to_trash_error'     => esc_html__( 'An error occurred while moving the note to the trash. Please reload the page and try again.', 'jamp' ),
 				)
 			);
 

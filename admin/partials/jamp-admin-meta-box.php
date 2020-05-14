@@ -61,7 +61,7 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 
 <fieldset <?php disabled( $is_form_disabled, true ) ?>>
 	<div class="meta-field meta-scope no-margin-top">
-		<span><?php esc_html_e( 'Select the Note scope.', 'jamp' ); ?></span>
+		<span><?php esc_html_e( 'Select the note Scope.', 'jamp' ); ?></span>
 		<br>
 		<label for="scope-global">
 			<input type="radio" name="scope" id="scope-global" value="global" <?php ( isset( $jamp_meta['jamp_scope'] ) ) ? checked( $jamp_meta['jamp_scope'][0], 'global' ) : ''; ?>>
@@ -95,7 +95,7 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	</div>
 
 	<div class="meta-field meta-target-type">
-		<label for="target-type" class="display-block"><?php esc_html_e( 'Select the item type.', 'jamp' ); ?></label>
+		<label for="target-type" class="display-block"><?php esc_html_e( 'Select the Item type.', 'jamp' ); ?></label>
 		<select name="target-type" id="target-type">
 			<option value=""><?php esc_html_e( 'select...', 'jamp' ); ?></option>
 
@@ -110,7 +110,7 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	</div>
 
 	<div class="meta-field meta-target">
-		<label for="target" class="display-block"><?php esc_html_e( 'Select the item.', 'jamp' ); ?></label>
+		<label for="target" class="display-block"><?php esc_html_e( 'Select the Item.', 'jamp' ); ?></label>
 		<select name="target" id="target">
 			<option value=""><?php esc_html_e( 'select...', 'jamp' ); ?></option>
 		</select>

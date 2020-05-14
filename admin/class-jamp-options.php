@@ -110,7 +110,7 @@ class Jamp_Options {
 		// Add a new section.
 		add_settings_section(
 			'jamp_options_section_uninstall',
-			esc_html__( 'Uninstall', 'jamp' ),
+			esc_html__( 'Plugin uninstall', 'jamp' ),
 			array(
 				$this,
 				'options_section_uninstall',
@@ -160,7 +160,7 @@ class Jamp_Options {
 
 		?>
 		<p id="<?php echo esc_attr( $args['id'] ); ?>">
-			<?php echo esc_html__( 'Settings about the item types discovered by the plugin.', 'jamp' ); ?>
+			<?php echo esc_html__( 'Settings about the supported item types.', 'jamp' ); ?>
 		</p>
 		<?php
 
@@ -191,7 +191,7 @@ class Jamp_Options {
 		<?php endforeach; ?>
 
 		<p class="description">
-			<?php echo esc_html__( 'Choose which items you want to add notes to.', 'jamp' ); ?>
+			<?php echo esc_html__( 'Choose which item types you want to add notes to. If you disable an item type that has notes, the notes will not be deleted.', 'jamp' ); ?>
 		</p>
 		<?php
 	}
@@ -242,7 +242,7 @@ class Jamp_Options {
 		?>
 		<input type="checkbox" id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr( $args['label_for'] ); ?>" value="1" <?php checked( $option_delete_data_on_uninstall, 1 ); ?>>
 		<p class="description">
-			<?php echo esc_html__( 'Enabling this option all notes and settings will be PERMANENTLY DELETED when you uninstall the plugin.', 'jamp' ); ?>
+			<?php echo esc_html__( 'Please note: enabling this option, all notes and settings will be PERMANENTLY DELETED when you uninstall the plugin.', 'jamp' ); ?>
 		</p>
 		<?php
 

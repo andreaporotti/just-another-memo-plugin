@@ -51,14 +51,14 @@ if ( ! empty( $global_notes ) ) {
 				. '<span class="jamp-note-info-tooltip__content jamp-note-info-tooltip__content--left">'
 				. '<span class="jamp-note-info-tooltip__label">' . esc_html__( 'Author', 'jamp' ) . '</span>'
 				. '<span class="jamp-note-info-tooltip__field">' . esc_html( $note_author->display_name ) . '</span>'
-				. '<span class="jamp-note-info-tooltip__label">' . esc_html__( 'Last edited', 'jamp' ) . '</span>'
+				. '<span class="jamp-note-info-tooltip__label">' . esc_html__( 'Last edit', 'jamp' ) . '</span>'
 				. '<span class="jamp-note-info-tooltip__field">' . esc_html( $note_modified_date ) . '</span>'
 				. '<span class="jamp-note-info-tooltip__label">' . esc_html__( 'Created', 'jamp' ) . '</span>'
 				. '<span class="jamp-note-info-tooltip__field">' . esc_html( $note_created_date ) . '</span>'
 				. '</span>'
 				. '</div>'
 				. '<a class="jamp-admin-bar-action jamp-admin-bar-action--edit" href="' . esc_url( get_edit_post_link( $note->ID ) ) . '" title="' . esc_html__( 'Edit', 'jamp' ) . '"></a>'
-				. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="#" data-note="' . esc_attr( $note->ID ) . '" title="' . esc_html__( 'Trash', 'jamp' ) . '"></a>'
+				. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="#" data-note="' . esc_attr( $note->ID ) . '" title="' . esc_html__( 'Move to Trash', 'jamp' ) . '"></a>'
 				. '</span>'
 				. '<div class="jamp-admin-bar-note__content">' . wp_kses_post( $note->post_content ) . '</div>'
 				. '</div>';
@@ -68,7 +68,7 @@ if ( ! empty( $global_notes ) ) {
 
 // Add the placeholder to be shown when no notes are available.
 $css_class = ( ! empty( $global_notes ) ) ? 'jamp-admin-bar-note__no-notes-notice--hidden' : '';
-$html     .= '<span class="jamp-admin-bar-note__no-notes-notice ' . esc_attr( $css_class ) . '">' . esc_html__( 'No global Notes.', 'jamp' ) . '</span>';
+$html     .= '<span class="jamp-admin-bar-note__no-notes-notice ' . esc_attr( $css_class ) . '">' . esc_html__( 'No global notes.', 'jamp' ) . '</span>';
 
 $html .= '</div>';
 
@@ -86,7 +86,7 @@ if ( $this->is_section_supported() ) {
 		admin_url( 'post-new.php' )
 	);
 
-	$html .= '<span class="jamp-admin-bar-section-title">' . esc_html__( 'Notes in this section', 'jamp' ) . '</span> '
+	$html .= '<span class="jamp-admin-bar-section-title">' . esc_html__( 'Notes for this section', 'jamp' ) . '</span> '
 			. '(<a class="jamp-admin-bar-action jamp-admin-bar-action--create" href="' . esc_url( $create_url ) . '">' . esc_html__( 'New', 'jamp' ) . '</a>)';
 
 	$section_notes_args = array(
@@ -114,14 +114,14 @@ if ( $this->is_section_supported() ) {
 					. '<span class="jamp-note-info-tooltip__content jamp-note-info-tooltip__content--left">'
 					. '<span class="jamp-note-info-tooltip__label">' . esc_html__( 'Author', 'jamp' ) . '</span>'
 					. '<span class="jamp-note-info-tooltip__field">' . esc_html( $note_author->display_name ) . '</span>'
-					. '<span class="jamp-note-info-tooltip__label">' . esc_html__( 'Last edited', 'jamp' ) . '</span>'
+					. '<span class="jamp-note-info-tooltip__label">' . esc_html__( 'Last edit', 'jamp' ) . '</span>'
 					. '<span class="jamp-note-info-tooltip__field">' . esc_html( $note_modified_date ) . '</span>'
 					. '<span class="jamp-note-info-tooltip__label">' . esc_html__( 'Created', 'jamp' ) . '</span>'
 					. '<span class="jamp-note-info-tooltip__field">' . esc_html( $note_created_date ) . '</span>'
 					. '</span>'
 					. '</div>'
 					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--edit" href="' . esc_url( get_edit_post_link( $note->ID ) ) . '" title="' . esc_html__( 'Edit', 'jamp' ) . '"></a>'
-					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="#" data-note="' . esc_attr( $note->ID ) . '" title="' . esc_html__( 'Trash', 'jamp' ) . '"></a>'
+					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--trash" href="#" data-note="' . esc_attr( $note->ID ) . '" title="' . esc_html__( 'Move to Trash', 'jamp' ) . '"></a>'
 					. '</span>'
 					. '<div class="jamp-admin-bar-note__content">' . wp_kses_post( $note->post_content ) . '</div>'
 					. '</div>';
@@ -131,15 +131,15 @@ if ( $this->is_section_supported() ) {
 
 	// Add the placeholder to be shown when no notes are available.
 	$css_class = ( ! empty( $section_notes ) ) ? 'jamp-admin-bar-note__no-notes-notice--hidden' : '';
-	$html     .= '<span class="jamp-admin-bar-note__no-notes-notice ' . esc_attr( $css_class ) . '">' . esc_html__( 'No Notes in this section.', 'jamp' ) . '</span>';
+	$html     .= '<span class="jamp-admin-bar-note__no-notes-notice ' . esc_attr( $css_class ) . '">' . esc_html__( 'No notes for this section.', 'jamp' ) . '</span>';
 
 	$html .= '</div>';
 
 }
 
 // Dialog to confirm all trash actions.
-$html .= '<div class="jamp-trash-dialog jamp-trash-dialog--hidden" title="' . esc_html__( 'Trash', 'jamp' ) . '">'
-		. '<p>' . esc_html__( 'Do you want to move this Note to trash?', 'jamp' ) . '</p>'
+$html .= '<div class="jamp-trash-dialog jamp-trash-dialog--hidden" title="' . esc_html__( 'Move to Trash', 'jamp' ) . '">'
+		. '<p>' . esc_html__( 'Do you want to move this note to Trash?', 'jamp' ) . '</p>'
 		. '</div>';
 
 return $html;

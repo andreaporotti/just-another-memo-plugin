@@ -42,7 +42,7 @@ if ( 'jamp_note' === $column_name ) {
 						<span class="jamp-note-info-tooltip__content jamp-note-info-tooltip__content--top">
 							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Author', 'jamp' ); ?></span>
 							<span class="jamp-note-info-tooltip__field"><?php echo esc_html( $note_author->display_name ); ?></span>
-							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Last edited', 'jamp' ); ?></span>
+							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Last edit', 'jamp' ); ?></span>
 							<span class="jamp-note-info-tooltip__field"><?php echo esc_html( $note_modified_date ); ?></span>
 							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Created', 'jamp' ); ?></span>
 							<span class="jamp-note-info-tooltip__field"><?php echo esc_html( $note_created_date ); ?></span>
