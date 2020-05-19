@@ -28,6 +28,10 @@
 	display: none;
 }
 
+#jamp_meta_box select {
+	width: 100%;
+}
+
 /*
 * ADMIN BAR
 */
