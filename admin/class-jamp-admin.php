@@ -771,9 +771,7 @@ class Jamp_Admin {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-			global $post;
-
-			if ( 'jamp_note' === $post->post_type ) {
+			if ( 'jamp_note' === $this->get_current_post_type() ) {
 
 				unset( $mce_init['toolbar1'] );
 				unset( $mce_init['toolbar2'] );
