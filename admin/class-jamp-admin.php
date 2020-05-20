@@ -482,22 +482,33 @@ class Jamp_Admin {
 	 * Generates current page url.
 	 *
 	 * @since    1.0.0
+	 * @param    boolean $encode Set to true to replace some characters in the url.
 	 */
-	private static function get_current_page_url() {
+	private static function get_current_page_url( $encode = false ) {
 
 		$url = '';
 
 		$request_scheme = ( isset( $_SERVER['REQUEST_SCHEME'] ) ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_SCHEME'] ) ) : '';
 		$http_host      = ( isset( $_SERVER['HTTP_HOST'] ) ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_HOST'] ) ) : '';
-		$request_uri    = ( isset( $_SERVER['REQUEST_URI'] ) ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+		$script_name    = ( isset( $_SERVER['SCRIPT_NAME'] ) ) ? sanitize_text_field( wp_unslash( $_SERVER['SCRIPT_NAME'] ) ) : '';
+		$query_string   = ( isset( $_SERVER['QUERY_STRING'] ) ) ? sanitize_text_field( wp_unslash( $_SERVER['QUERY_STRING'] ) ) : '';
 
-		if ( ! empty( $request_scheme ) && ! empty( $http_host ) && ! empty( $request_uri ) ) {
-			$url = $request_scheme . '://' . $http_host . $request_uri;
+		if ( ! empty( $request_scheme ) && ! empty( $http_host ) && ! empty( $script_name ) ) {
+			$url .= $request_scheme . '://' . $http_host . $script_name;
+
+			if ( ! empty( $query_string ) ) {
+				$url .= '?' . $query_string;
+			}
 		}
 
 		// If current url is the admin url, let's add "index.php" to it so it's equal to the "Home" link in the sidebar menu.
 		if ( admin_url() === $url ) {
 			$url .= 'index.php';
+		}
+
+		// Replace '&' with '|' to prevent parse errors on wp_parse_url.
+		if ( $encode ) {
+			$url = str_replace( '&', '|', $url );
 		}
 
 		return $url;

@@ -28,6 +28,11 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	$jamp_meta['jamp_scope']       = array( ( isset( $params['jamp_scope'] ) )       ? $params['jamp_scope']       : '' );
 	$jamp_meta['jamp_target_type'] = array( ( isset( $params['jamp_target_type'] ) ) ? $params['jamp_target_type'] : '' );
 	$jamp_meta['jamp_target']      = array( ( isset( $params['jamp_target'] ) )      ? $params['jamp_target']      : '' );
+	
+	// Replace '|' with '&' to re-build the correct url.
+	if ( isset( $jamp_meta['jamp_target'][0] ) ) {
+		$jamp_meta['jamp_target'][0] = str_replace( '|', '&', $jamp_meta['jamp_target'][0] );
+	}
 
 	// The form is disabled when creating an already configured note (if at least one setting exists).
 	foreach ($jamp_meta as $key => $value) {

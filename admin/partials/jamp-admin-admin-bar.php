@@ -81,7 +81,7 @@ if ( $this->is_section_supported() ) {
 		array(
 			'post_type'   => 'jamp_note',
 			'jamp_scope'  => 'section',
-			'jamp_target' => $this->get_current_page_url(),
+			'jamp_target' => $this->get_current_page_url( true ),
 		),
 		admin_url( 'post-new.php' )
 	);
