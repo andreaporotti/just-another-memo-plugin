@@ -99,80 +99,84 @@ if ( 'jamp_author' === $column_name ) {
 if ( 'jamp_location' === $column_name ) {
 
 	$jamp_meta = get_post_meta( $post_id );
+	
+	if ( ! empty( $jamp_meta['jamp_scope'] ) ) {
 
-	switch ( $jamp_meta['jamp_scope'][0] ) {
+		switch ( $jamp_meta['jamp_scope'][0] ) {
 
-		case 'global':
-			echo esc_html__( 'Global', 'jamp' );
-			break;
+			case 'global':
+				echo esc_html__( 'Global', 'jamp' );
+				break;
 
-		case 'section':
-			// Look for the section url inside the sections list and print the corresponding name.
-			$section_name        = '';
-			$section_parent_name = '';
+			case 'section':
+				// Look for the section url inside the sections list and print the corresponding name.
+				$section_name        = '';
+				$section_parent_name = '';
 
-			foreach ( $this->sections_list as $section ) {
+				foreach ( $this->sections_list as $section ) {
 
-				if ( $section['url'] === $jamp_meta['jamp_target'][0] && $section['is_submenu'] ) {
+					if ( $section['url'] === $jamp_meta['jamp_target'][0] && $section['is_submenu'] ) {
 
-					$section_name        = $section['name'];
-					$section_parent_name = $section['parent_name'];
+						$section_name        = $section['name'];
+						$section_parent_name = $section['parent_name'];
+
+					}
+				}
+
+				if ( ! empty( $section_name ) ) {
+
+					echo esc_html__( 'Section', 'jamp' ) . ': ' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
+
+				} else {
+
+					?>
+					<span class="jamp-column-note__orphan-note-notice">
+						<?php echo esc_html__( 'Note attached to a no longer existing Section.', 'jamp' ); ?>
+					</span>
+					<?php
 
 				}
-			}
 
-			if ( ! empty( $section_name ) ) {
+				break;
 
-				echo esc_html__( 'Section', 'jamp' ) . ': ' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
+			case 'entity':
+				// Look for the target type name inside the target types list and print the corresponding label.
+				$target_type_name = '';
 
-			} else {
+				foreach ( $this->target_types_list as $target_type ) {
 
-				?>
-				<span class="jamp-column-note__orphan-note-notice">
-					<?php echo esc_html__( 'Note attached to a no longer existing Section.', 'jamp' ); ?>
-				</span>
-				<?php
+					if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
 
-			}
+						$target_type_name = $target_type['singular_name'];
 
-			break;
+					}
+				}
 
-		case 'entity':
-			// Look for the target type name inside the target types list and print the corresponding label.
-			$target_type_name = '';
+				$current_post = get_post( $jamp_meta['jamp_target'][0] );
 
-			foreach ( $this->target_types_list as $target_type ) {
+				if ( ! empty( $current_post ) ) {
 
-				if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
+					echo esc_html__( 'Item', 'jamp' ) . ': ' . esc_html( $target_type_name ) . ' "' . esc_html( $current_post->post_title ) . '"';
 
-					$target_type_name = $target_type['singular_name'];
+				} else {
+
+					?>
+					<span class="jamp-column-note__orphan-note-notice">
+					<?php
+						// translators: %s is the item type the note is attached to (eg. post, page...).
+						printf( esc_html__( 'Note attached to a no longer existing %s.', 'jamp' ), esc_html( $target_type_name ) );
+					?>
+					</span>
+					<?php
 
 				}
-			}
 
-			$current_post = get_post( $jamp_meta['jamp_target'][0] );
+				break;
 
-			if ( ! empty( $current_post ) ) {
+			default:
+				break;
 
-				echo esc_html__( 'Item', 'jamp' ) . ': ' . esc_html( $target_type_name ) . ' "' . esc_html( $current_post->post_title ) . '"';
-
-			} else {
-
-				?>
-				<span class="jamp-column-note__orphan-note-notice">
-				<?php
-					// translators: %s is the item type the note is attached to (eg. post, page...).
-					printf( esc_html__( 'Note attached to a no longer existing %s.', 'jamp' ), esc_html( $target_type_name ) );
-				?>
-				</span>
-				<?php
-
-			}
-
-			break;
-
-		default:
-			break;
-
+		}
+	
 	}
 }
