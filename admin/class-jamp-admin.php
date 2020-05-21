@@ -320,6 +320,9 @@ class Jamp_Admin {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
+			// Get admin menu items.
+			do_action( 'adminmenu' );
+
 			// Get enabled target types.
 			$this->build_target_types_list();
 

@@ -179,7 +179,7 @@ class Jamp {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		$this->loader->add_action( 'admin_menu', $plugin_admin, 'build_sections_list', 999999 );
+		$this->loader->add_action( 'adminmenu', $plugin_admin, 'build_sections_list' );
 
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_meta_box' );
 		$this->loader->add_action( 'save_post_jamp_note', $plugin_admin, 'save_meta_data' );
