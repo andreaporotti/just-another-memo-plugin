@@ -91,7 +91,7 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 
 			<?php foreach ( $args['args']['sections'] as $section ) : ?>
 
-				<option value="<?php echo esc_attr( $section['url'] ); ?>" <?php ( isset( $jamp_meta['jamp_target'] ) ) ? selected( $jamp_meta['jamp_target'][0], $section['url'] ) : ''; ?> <?php echo( ! $section['is_submenu'] ) ? 'disabled' : ''; ?>>
+				<option value="<?php echo esc_attr( $section['url'] ); ?>" <?php ( isset( $jamp_meta['jamp_target'] ) ) ? selected( $jamp_meta['jamp_target'][0], $section['url'] ) : ''; ?> <?php echo( ! $section['is_enabled'] ) ? 'disabled' : ''; ?>>
 					<?php echo esc_html( $section['name'] ); ?>
 				</option>
 

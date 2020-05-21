@@ -165,6 +165,7 @@ class Jamp_Admin {
 						'file'       => $file,
 						'url'        => $url,
 						'is_submenu' => false,
+						'is_enabled' => false, // Assuming it contains sub-items, a first level item is disabled by default.
 					);
 				}
 			}
@@ -197,10 +198,17 @@ class Jamp_Admin {
 							'file'        => $file,
 							'url'         => $url,
 							'is_submenu'  => true,
+							'is_enabled'  => true, // A sub item is enabled by default.
 							'parent_url'  => $section['url'],
 							'parent_name' => $section['name'],
 						);
 					}
+				} else {
+					
+					// Enable last inserted first level section because it must be selectable.
+					end( $this->sections_list );
+					$this->sections_list[ key( $this->sections_list ) ]['is_enabled'] = true;
+					
 				}
 			}
 		}

@@ -115,10 +115,10 @@ if ( 'jamp_location' === $column_name ) {
 
 				foreach ( $this->sections_list as $section ) {
 
-					if ( $section['url'] === $jamp_meta['jamp_target'][0] && $section['is_submenu'] ) {
+					if ( $section['url'] === $jamp_meta['jamp_target'][0] && $section['is_enabled'] ) {
 
 						$section_name        = $section['name'];
-						$section_parent_name = $section['parent_name'];
+						$section_parent_name = ( isset( $section['parent_name'] ) ) ? $section['parent_name'] : '';
 
 					}
 				}
