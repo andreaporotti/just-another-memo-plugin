@@ -148,25 +148,27 @@ class Jamp_Admin {
 			foreach ( $menu as $menu_item ) {
 				if ( ! in_array( $menu_item[4], $menu_items_to_skip, true ) ) {
 					// Gets section name removing unwanted HTML content and HTML code surrounding the section name.
-					$name = sanitize_text_field( ( strpos( $menu_item[0], ' <' ) > 0 ) ? strstr( $menu_item[0], ' <', true ) : $menu_item[0] );
+					$name = trim( sanitize_text_field( ( strpos( $menu_item[0], ' <' ) > 0 ) ? strstr( $menu_item[0], ' <', true ) : $menu_item[0] ) );
+					
+					if ( ! empty( $name ) ) {
+						// Gets section file without the "return" parameter.
+						$file = remove_query_arg( 'return', wp_kses_decode_entities( $menu_item[2] ) );
 
-					// Gets section file without the "return" parameter.
-					$file = remove_query_arg( 'return', wp_kses_decode_entities( $menu_item[2] ) );
+						// Generates section absolute url.
+						$url = $file;
+						if ( ! strpos( $url, '.php' ) ) {
+							$url = '/admin.php?page=' . $url;
+						}
+						$url = admin_url( $url );
 
-					// Generates section absolute url.
-					$url = $file;
-					if ( ! strpos( $url, '.php' ) ) {
-						$url = '/admin.php?page=' . $url;
+						$first_level_sections[] = array(
+							'name'       => $name,
+							'file'       => $file,
+							'url'        => $url,
+							'is_submenu' => false,
+							'is_enabled' => false, // Assuming it contains sub-items, a first level item is disabled by default.
+						);
 					}
-					$url = admin_url( $url );
-
-					$first_level_sections[] = array(
-						'name'       => $name,
-						'file'       => $file,
-						'url'        => $url,
-						'is_submenu' => false,
-						'is_enabled' => false, // Assuming it contains sub-items, a first level item is disabled by default.
-					);
 				}
 			}
 
@@ -181,27 +183,29 @@ class Jamp_Admin {
 					// Gets the sub sections of current first level section from the sub menu.
 					foreach ( $submenu[ $section['file'] ] as $submenu_item ) {
 						// Gets section name removing unwanted HTML content and HTML code surrounding the section name.
-						$name = '-- ' . sanitize_text_field( ( strpos( $submenu_item[0], ' <' ) > 0 ) ? strstr( $submenu_item[0], ' <', true ) : $submenu_item[0] );
+						$name = trim( sanitize_text_field( ( strpos( $submenu_item[0], ' <' ) > 0 ) ? strstr( $submenu_item[0], ' <', true ) : $submenu_item[0] ) );
 
-						// Gets section file without the "return" parameter.
-						$file = remove_query_arg( 'return', wp_kses_decode_entities( $submenu_item[2] ) );
+						if ( ! empty( $name ) ) {
+							// Gets section file without the "return" parameter.
+							$file = remove_query_arg( 'return', wp_kses_decode_entities( $submenu_item[2] ) );
 
-						// Generates section absolute url.
-						$url = $file;
-						if ( ! strpos( $url, '.php' ) ) {
-							$url = '/admin.php?page=' . $url;
+							// Generates section absolute url.
+							$url = $file;
+							if ( ! strpos( $url, '.php' ) ) {
+								$url = '/admin.php?page=' . $url;
+							}
+							$url = admin_url( $url );
+
+							$this->sections_list[] = array(
+								'name'        => '-- ' . $name,
+								'file'        => $file,
+								'url'         => $url,
+								'is_submenu'  => true,
+								'is_enabled'  => true, // A sub item is enabled by default.
+								'parent_url'  => $section['url'],
+								'parent_name' => $section['name'],
+							);
 						}
-						$url = admin_url( $url );
-
-						$this->sections_list[] = array(
-							'name'        => $name,
-							'file'        => $file,
-							'url'         => $url,
-							'is_submenu'  => true,
-							'is_enabled'  => true, // A sub item is enabled by default.
-							'parent_url'  => $section['url'],
-							'parent_name' => $section['name'],
-						);
 					}
 				} else {
 					
