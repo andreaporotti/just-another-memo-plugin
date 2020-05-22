@@ -149,17 +149,16 @@ class Jamp_Admin {
 				if ( ! in_array( $menu_item[4], $menu_items_to_skip, true ) ) {
 					// Gets section name removing unwanted HTML content and HTML code surrounding the section name.
 					$name = trim( sanitize_text_field( ( strpos( $menu_item[0], ' <' ) > 0 ) ? strstr( $menu_item[0], ' <', true ) : $menu_item[0] ) );
-					
+
 					if ( ! empty( $name ) ) {
 						// Gets section file without the "return" parameter.
 						$file = remove_query_arg( 'return', wp_kses_decode_entities( $menu_item[2] ) );
 
-						// Generates section absolute url.
-						$url = $file;
-						if ( ! strpos( $url, '.php' ) ) {
-							$url = '/admin.php?page=' . $url;
+						// Generate section url.
+						$url = wp_specialchars_decode( menu_page_url( $menu_item[2], false ) );
+						if ( empty( $url ) ) {
+							$url = wp_specialchars_decode( admin_url( $menu_item[2] ) );
 						}
-						$url = admin_url( $url );
 
 						$first_level_sections[] = array(
 							'name'       => $name,
@@ -189,12 +188,11 @@ class Jamp_Admin {
 							// Gets section file without the "return" parameter.
 							$file = remove_query_arg( 'return', wp_kses_decode_entities( $submenu_item[2] ) );
 
-							// Generates section absolute url.
-							$url = $file;
-							if ( ! strpos( $url, '.php' ) ) {
-								$url = '/admin.php?page=' . $url;
+							// Generate section url.
+							$url = wp_specialchars_decode( menu_page_url( $submenu_item[2], false ) );
+							if ( empty( $url ) ) {
+								$url = wp_specialchars_decode( admin_url( $submenu_item[2] ) );
 							}
-							$url = admin_url( $url );
 
 							$this->sections_list[] = array(
 								'name'        => '-- ' . $name,
@@ -208,11 +206,11 @@ class Jamp_Admin {
 						}
 					}
 				} else {
-					
+
 					// Enable last inserted first level section because it must be selectable.
 					end( $this->sections_list );
 					$this->sections_list[ key( $this->sections_list ) ]['is_enabled'] = true;
-					
+
 				}
 			}
 		}
