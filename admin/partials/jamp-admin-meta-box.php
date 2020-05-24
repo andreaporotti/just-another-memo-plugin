@@ -66,7 +66,7 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 
 <fieldset <?php disabled( $is_form_disabled, true ) ?>>
 	<div class="meta-field meta-scope no-margin-top">
-		<span><?php esc_html_e( 'Select the note Scope.', 'jamp' ); ?></span>
+		<span><?php esc_html_e( 'Select the note location.', 'jamp' ); ?></span>
 		<br>
 		<label for="scope-global">
 			<input type="radio" name="scope" id="scope-global" value="global" <?php ( isset( $jamp_meta['jamp_scope'] ) ) ? checked( $jamp_meta['jamp_scope'][0], 'global' ) : ''; ?>>
