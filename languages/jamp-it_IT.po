@@ -4,17 +4,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: JAMP 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jamp\n"
-"MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-14T10:47:52+00:00\n"
-"PO-Revision-Date: 2020-05-19 12:28+0200\n"
-"X-Generator: Poedit 2.3.1\n"
-"X-Domain: jamp\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: 2020-05-24T20:38:32+00:00\n"
+"PO-Revision-Date: 2020-05-24 22:44+0200\n"
 "Last-Translator: Andrea Porotti <info@andreaporotti.it>\n"
 "Language-Team: \n"
 "Language: it_IT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+"X-Domain: jamp\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. Plugin Name of the plugin
 msgid "JAMP"
@@ -26,102 +26,115 @@ msgid "https://www.andreaporotti.it"
 msgstr "https://www.andreaporotti.it"
 
 #. Description of the plugin
-msgid "This plugin allows you to attach notes to some WordPress elements like posts, pages, dashboard sections... or the whole site!"
-msgstr "Questo plugin ti permette di allegare delle note ad alcuni elementi di WordPress come articoli, pagine, sezioni della dashboard... oppure all'intero sito!"
+msgid ""
+"This plugin allows you to attach notes to some WordPress elements like "
+"posts, pages, dashboard sections... or the whole site!"
+msgstr ""
+"Questo plugin ti permette di allegare delle note ad alcuni elementi di "
+"WordPress come articoli, pagine, sezioni della dashboard... oppure "
+"all'intero sito!"
 
 #. Author of the plugin
 msgid "Andrea Porotti"
 msgstr "Andrea Porotti"
 
 #: admin/class-jamp-admin.php:117 public/class-jamp-public.php:92
-msgid "An error occurred while loading the items list. Please reload the page and try again."
-msgstr "Si è verificato un errore durante il caricamento dell'elenco di elementi. Ricaricare la pagina e riprovare."
+msgid ""
+"An error occurred while loading the items list. Please reload the page and "
+"try again."
+msgstr ""
+"Si è verificato un errore durante il caricamento dell'elenco di elementi. "
+"Ricaricare la pagina e riprovare."
 
 #: admin/class-jamp-admin.php:118 public/class-jamp-public.php:93
-msgid "An error occurred while moving the note to the trash. Please reload the page and try again."
-msgstr "Si è verificato un errore durante lo spostamento della nota nel cestino. Ricaricare la pagina e riprovare."
+msgid ""
+"An error occurred while moving the note to the trash. Please reload the page "
+"and try again."
+msgstr ""
+"Si è verificato un errore durante lo spostamento della nota nel cestino. "
+"Ricaricare la pagina e riprovare."
 
-#: admin/class-jamp-admin.php:330
+#: admin/class-jamp-admin.php:343
 msgid "Note Settings"
 msgstr "Impostazioni Nota"
 
-#: admin/class-jamp-admin.php:430 admin/partials/jamp-admin-admin-bar.php:52
+#: admin/class-jamp-admin.php:443 admin/partials/jamp-admin-admin-bar.php:52
 #: admin/partials/jamp-admin-admin-bar.php:115
 #: admin/partials/jamp-admin-column.php:43
 msgid "Author"
 msgstr "Autore"
 
-#: admin/class-jamp-admin.php:431
-msgid "Scope"
-msgstr "Ambito"
+#: admin/class-jamp-admin.php:444
+msgid "Location"
+msgstr "Posizione"
 
-#: admin/class-jamp-admin.php:450 admin/class-jamp-admin.php:544
+#: admin/class-jamp-admin.php:463 admin/class-jamp-admin.php:568
 #: includes/class-jamp-cpt.php:31 includes/class-jamp-cpt.php:59
 msgid "Notes"
 msgstr "Note"
 
-#: admin/class-jamp-admin.php:671 admin/class-jamp-admin.php:674
+#: admin/class-jamp-admin.php:688 admin/class-jamp-admin.php:691
 msgid "Note updated."
 msgstr "Nota aggiornata."
 
-#: admin/class-jamp-admin.php:672
+#: admin/class-jamp-admin.php:689
 msgid "Custom field updated."
 msgstr "Campo personalizzato aggiornato."
 
-#: admin/class-jamp-admin.php:673
+#: admin/class-jamp-admin.php:690
 msgid "Custom field deleted."
 msgstr "Campo personalizzato cancellato."
 
-#: admin/class-jamp-admin.php:676
+#: admin/class-jamp-admin.php:693
 msgid "Note published."
 msgstr "Nota pubblicata."
 
-#: admin/class-jamp-admin.php:677
+#: admin/class-jamp-admin.php:694
 msgid "Note saved."
 msgstr "Nota salvata."
 
-#: admin/class-jamp-admin.php:678
+#: admin/class-jamp-admin.php:695
 msgid "Note submitted."
 msgstr "Nota inviata."
 
-#: admin/class-jamp-admin.php:679
+#: admin/class-jamp-admin.php:696
 msgid "Note scheduled."
 msgstr "Nota pianificata."
 
-#: admin/class-jamp-admin.php:680
+#: admin/class-jamp-admin.php:697
 msgid "Note draft updated."
 msgstr "Bozza della nota aggiornata."
 
 #. translators: %s is the number of updated notes.
-#: admin/class-jamp-admin.php:710
+#: admin/class-jamp-admin.php:727
 msgid "%s note updated."
 msgid_plural "%s notes updated."
 msgstr[0] "%s nota aggiornata."
 msgstr[1] "%s note aggiornate."
 
 #. translators: %s is the number of locked notes.
-#: admin/class-jamp-admin.php:712
+#: admin/class-jamp-admin.php:729
 msgid "%s note not updated, somebody is editing it."
 msgid_plural "%s notes not updated, somebody is editing them."
 msgstr[0] "%s nota non aggiornata, qualcuno la sta modificando."
 msgstr[1] "%s note non aggiornate, qualcuno le sta modificando."
 
 #. translators: %s is the number of deleted notes.
-#: admin/class-jamp-admin.php:714
+#: admin/class-jamp-admin.php:731
 msgid "%s note permanently deleted."
 msgid_plural "%s notes permanently deleted."
 msgstr[0] "%s nota eliminata definitivamente."
 msgstr[1] "%s note eliminate definitivamente."
 
 #. translators: %s is the number of trashed notes.
-#: admin/class-jamp-admin.php:716
+#: admin/class-jamp-admin.php:733
 msgid "%s note moved to the Trash."
 msgid_plural "%s notes moved to the Trash."
 msgstr[0] "%s nota spostata nel Cestino."
 msgstr[1] "%s note spostate nel Cestino."
 
 #. translators: %s is the number of untrashed notes.
-#: admin/class-jamp-admin.php:718
+#: admin/class-jamp-admin.php:735
 msgid "%s note restored from the Trash."
 msgid_plural "%s notes restored from the Trash."
 msgstr[0] "%s nota ripristinata dal Cestino."
@@ -152,16 +165,24 @@ msgid "Settings about the supported item types."
 msgstr "Impostazioni riguardanti i tipi di elemento supportati."
 
 #: admin/class-jamp-options.php:194
-msgid "Choose which item types you want to add notes to. If you disable an item type that has notes, the notes will not be deleted."
-msgstr "Scegliere i tipi di elemento a cui aggiungere le note. Se si disabilita un tipo di elemento che possiede delle note, queste non verranno eliminate."
+msgid ""
+"Choose which item types you want to add notes to. If you disable an item "
+"type that has notes, the notes will not be deleted."
+msgstr ""
+"Scegliere i tipi di elemento a cui aggiungere le note. Se si disabilita un "
+"tipo di elemento che possiede delle note, queste non verranno eliminate."
 
 #: admin/class-jamp-options.php:225
 msgid "These settings are applied when you uninstall the plugin."
 msgstr "Queste impostazioni sono applicate quando disinstalli il plugin."
 
 #: admin/class-jamp-options.php:245
-msgid "Please note: enabling this option, all notes and settings will be PERMANENTLY DELETED when you uninstall the plugin."
-msgstr "Attenzione: abilitando questa opzione, tutte le note e le impostazioni saranno ELIMINATE DEFINITIVAMENTE quando disinstalli il plugin."
+msgid ""
+"Please note: enabling this option, all notes and settings will be "
+"PERMANENTLY DELETED when you uninstall the plugin."
+msgstr ""
+"Attenzione: abilitando questa opzione, tutte le note e le impostazioni "
+"saranno ELIMINATE DEFINITIVAMENTE quando disinstalli il plugin."
 
 #: admin/partials/jamp-admin-admin-bar.php:26
 msgid "Global Notes"
@@ -224,49 +245,49 @@ msgstr "Cestino"
 msgid "Add New"
 msgstr "Aggiungi Nuova"
 
-#: admin/partials/jamp-admin-column.php:106
-#: admin/partials/jamp-admin-meta-box.php:68
+#: admin/partials/jamp-admin-column.php:108
+#: admin/partials/jamp-admin-meta-box.php:73
 msgid "Global"
 msgstr "Globale"
 
-#: admin/partials/jamp-admin-column.php:126
-#: admin/partials/jamp-admin-meta-box.php:73
+#: admin/partials/jamp-admin-column.php:128
+#: admin/partials/jamp-admin-meta-box.php:78
 msgid "Section"
 msgstr "Sezione"
 
-#: admin/partials/jamp-admin-column.php:132
+#: admin/partials/jamp-admin-column.php:134
 msgid "Note attached to a no longer existing Section."
 msgstr "Nota associata a una Sezione non più esistente."
 
-#: admin/partials/jamp-admin-column.php:157
-#: admin/partials/jamp-admin-meta-box.php:78
+#: admin/partials/jamp-admin-column.php:159
+#: admin/partials/jamp-admin-meta-box.php:83
 msgid "Item"
 msgstr "Elemento"
 
 #. translators: %s is the item type the note is attached to (eg. post, page...).
-#: admin/partials/jamp-admin-column.php:165
+#: admin/partials/jamp-admin-column.php:167
 msgid "Note attached to a no longer existing %s."
 msgstr "Nota associata a un elemento %s non più esistente."
 
-#: admin/partials/jamp-admin-meta-box.php:64
-msgid "Select the note Scope."
-msgstr "Seleziona l'Ambito della nota."
+#: admin/partials/jamp-admin-meta-box.php:69
+msgid "Select the note location."
+msgstr "Seleziona la posizione della nota."
 
-#: admin/partials/jamp-admin-meta-box.php:83
+#: admin/partials/jamp-admin-meta-box.php:88
 msgid "Select the Section."
 msgstr "Seleziona la Sezione."
 
-#: admin/partials/jamp-admin-meta-box.php:85
-#: admin/partials/jamp-admin-meta-box.php:100
-#: admin/partials/jamp-admin-meta-box.php:115
+#: admin/partials/jamp-admin-meta-box.php:90
+#: admin/partials/jamp-admin-meta-box.php:105
+#: admin/partials/jamp-admin-meta-box.php:120
 msgid "select..."
 msgstr "seleziona..."
 
-#: admin/partials/jamp-admin-meta-box.php:98
+#: admin/partials/jamp-admin-meta-box.php:103
 msgid "Select the Item type."
 msgstr "Seleziona il tipo di Elemento."
 
-#: admin/partials/jamp-admin-meta-box.php:113
+#: admin/partials/jamp-admin-meta-box.php:118
 msgid "Select the Item."
 msgstr "Seleziona l'Elemento."
 
@@ -374,4 +395,11 @@ msgstr "Filtra la lista delle Note"
 
 #: includes/class-jamp-cpt.php:61
 msgid "A note you can attach to some WordPress dashboard elements."
-msgstr "Una nota che puoi allegare ad alcuni elementi della dashboard di WordPress."
+msgstr ""
+"Una nota che puoi allegare ad alcuni elementi della dashboard di WordPress."
+
+#~ msgid "Scope"
+#~ msgstr "Ambito"
+
+#~ msgid "Select the note Scope."
+#~ msgstr "Seleziona l'Ambito della nota."

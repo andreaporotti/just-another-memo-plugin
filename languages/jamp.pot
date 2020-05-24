@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-14T10:47:52+00:00\n"
+"POT-Creation-Date: 2020-05-24T20:38:32+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: jamp\n"
@@ -41,91 +41,91 @@ msgstr ""
 msgid "An error occurred while moving the note to the trash. Please reload the page and try again."
 msgstr ""
 
-#: admin/class-jamp-admin.php:330
+#: admin/class-jamp-admin.php:343
 msgid "Note Settings"
 msgstr ""
 
-#: admin/class-jamp-admin.php:430
+#: admin/class-jamp-admin.php:443
 #: admin/partials/jamp-admin-admin-bar.php:52
 #: admin/partials/jamp-admin-admin-bar.php:115
 #: admin/partials/jamp-admin-column.php:43
 msgid "Author"
 msgstr ""
 
-#: admin/class-jamp-admin.php:431
-msgid "Scope"
+#: admin/class-jamp-admin.php:444
+msgid "Location"
 msgstr ""
 
-#: admin/class-jamp-admin.php:450
-#: admin/class-jamp-admin.php:544
+#: admin/class-jamp-admin.php:463
+#: admin/class-jamp-admin.php:568
 #: includes/class-jamp-cpt.php:31
 #: includes/class-jamp-cpt.php:59
 msgid "Notes"
 msgstr ""
 
-#: admin/class-jamp-admin.php:671
-#: admin/class-jamp-admin.php:674
+#: admin/class-jamp-admin.php:688
+#: admin/class-jamp-admin.php:691
 msgid "Note updated."
 msgstr ""
 
-#: admin/class-jamp-admin.php:672
+#: admin/class-jamp-admin.php:689
 msgid "Custom field updated."
 msgstr ""
 
-#: admin/class-jamp-admin.php:673
+#: admin/class-jamp-admin.php:690
 msgid "Custom field deleted."
 msgstr ""
 
-#: admin/class-jamp-admin.php:676
+#: admin/class-jamp-admin.php:693
 msgid "Note published."
 msgstr ""
 
-#: admin/class-jamp-admin.php:677
+#: admin/class-jamp-admin.php:694
 msgid "Note saved."
 msgstr ""
 
-#: admin/class-jamp-admin.php:678
+#: admin/class-jamp-admin.php:695
 msgid "Note submitted."
 msgstr ""
 
-#: admin/class-jamp-admin.php:679
+#: admin/class-jamp-admin.php:696
 msgid "Note scheduled."
 msgstr ""
 
-#: admin/class-jamp-admin.php:680
+#: admin/class-jamp-admin.php:697
 msgid "Note draft updated."
 msgstr ""
 
 #. translators: %s is the number of updated notes.
-#: admin/class-jamp-admin.php:710
+#: admin/class-jamp-admin.php:727
 msgid "%s note updated."
 msgid_plural "%s notes updated."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s is the number of locked notes.
-#: admin/class-jamp-admin.php:712
+#: admin/class-jamp-admin.php:729
 msgid "%s note not updated, somebody is editing it."
 msgid_plural "%s notes not updated, somebody is editing them."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s is the number of deleted notes.
-#: admin/class-jamp-admin.php:714
+#: admin/class-jamp-admin.php:731
 msgid "%s note permanently deleted."
 msgid_plural "%s notes permanently deleted."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s is the number of trashed notes.
-#: admin/class-jamp-admin.php:716
+#: admin/class-jamp-admin.php:733
 msgid "%s note moved to the Trash."
 msgid_plural "%s notes moved to the Trash."
 msgstr[0] ""
 msgstr[1] ""
 
 #. translators: %s is the number of untrashed notes.
-#: admin/class-jamp-admin.php:718
+#: admin/class-jamp-admin.php:735
 msgid "%s note restored from the Trash."
 msgid_plural "%s notes restored from the Trash."
 msgstr[0] ""
@@ -229,49 +229,49 @@ msgstr ""
 msgid "Add New"
 msgstr ""
 
-#: admin/partials/jamp-admin-column.php:106
-#: admin/partials/jamp-admin-meta-box.php:68
+#: admin/partials/jamp-admin-column.php:108
+#: admin/partials/jamp-admin-meta-box.php:73
 msgid "Global"
 msgstr ""
 
-#: admin/partials/jamp-admin-column.php:126
-#: admin/partials/jamp-admin-meta-box.php:73
+#: admin/partials/jamp-admin-column.php:128
+#: admin/partials/jamp-admin-meta-box.php:78
 msgid "Section"
 msgstr ""
 
-#: admin/partials/jamp-admin-column.php:132
+#: admin/partials/jamp-admin-column.php:134
 msgid "Note attached to a no longer existing Section."
 msgstr ""
 
-#: admin/partials/jamp-admin-column.php:157
-#: admin/partials/jamp-admin-meta-box.php:78
+#: admin/partials/jamp-admin-column.php:159
+#: admin/partials/jamp-admin-meta-box.php:83
 msgid "Item"
 msgstr ""
 
 #. translators: %s is the item type the note is attached to (eg. post, page...).
-#: admin/partials/jamp-admin-column.php:165
+#: admin/partials/jamp-admin-column.php:167
 msgid "Note attached to a no longer existing %s."
 msgstr ""
 
-#: admin/partials/jamp-admin-meta-box.php:64
-msgid "Select the note Scope."
+#: admin/partials/jamp-admin-meta-box.php:69
+msgid "Select the note location."
 msgstr ""
 
-#: admin/partials/jamp-admin-meta-box.php:83
+#: admin/partials/jamp-admin-meta-box.php:88
 msgid "Select the Section."
 msgstr ""
 
-#: admin/partials/jamp-admin-meta-box.php:85
-#: admin/partials/jamp-admin-meta-box.php:100
-#: admin/partials/jamp-admin-meta-box.php:115
+#: admin/partials/jamp-admin-meta-box.php:90
+#: admin/partials/jamp-admin-meta-box.php:105
+#: admin/partials/jamp-admin-meta-box.php:120
 msgid "select..."
 msgstr ""
 
-#: admin/partials/jamp-admin-meta-box.php:98
+#: admin/partials/jamp-admin-meta-box.php:103
 msgid "Select the Item type."
 msgstr ""
 
-#: admin/partials/jamp-admin-meta-box.php:113
+#: admin/partials/jamp-admin-meta-box.php:118
 msgid "Select the Item."
 msgstr ""
 
