@@ -662,20 +662,13 @@ class Jamp_Admin {
 
 					return $return_url;
 
-				} else {
-
-					// Fallback to default location.
-					return $location;
-
 				}
 			}
-		} else {
-
-			// Fallback to default location.
-			return $location;
-
 		}
 
+		// Fallback to default location.
+		return $location;
+		
 	}
 
 	/**
