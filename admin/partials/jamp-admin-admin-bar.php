@@ -10,6 +10,9 @@
 ?>
 
 <?php
+// Define date/time format.
+$date_time_format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
+
 $html = '';
 
 // Global notes.
@@ -41,8 +44,8 @@ if ( ! empty( $global_notes ) ) {
 	foreach ( $global_notes as $note ) {
 
 		$note_author        = get_userdata( $note->post_author );
-		$note_modified_date = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_modified_gmt ) );
-		$note_created_date  = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_date_gmt ) );
+		$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
+		$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
 
 		$html .= '<div class="jamp-admin-bar-note" data-note="' . esc_attr( $note->ID ) . '">'
 				. '<span class="jamp-admin-bar-note__title">' . esc_html( $note->post_title ) . '</span>'
@@ -104,8 +107,8 @@ if ( $this->is_section_supported() ) {
 		foreach ( $section_notes as $note ) {
 
 			$note_author        = get_userdata( $note->post_author );
-			$note_modified_date = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_modified_gmt ) );
-			$note_created_date  = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_date_gmt ) );
+			$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
+			$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
 
 			$html .= '<div class="jamp-admin-bar-note" data-note="' . esc_attr( $note->ID ) . '">'
 					. '<span class="jamp-admin-bar-note__title">' . esc_html( $note->post_title ) . '</span>'

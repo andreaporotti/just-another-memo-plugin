@@ -26,11 +26,14 @@ if ( 'jamp_note' === $column_name ) {
 
 	if ( ! empty( $notes ) ) {
 
+		// Define date/time format.
+		$date_time_format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
+
 		foreach ( $notes as $note ) {
 
 			$note_author        = get_userdata( $note->post_author );
-			$note_modified_date = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_modified_gmt ) );
-			$note_created_date  = wp_date( get_option( 'links_updated_date_format' ), strtotime( $note->post_date_gmt ) );
+			$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
+			$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
 
 			?>
 			<div class="jamp-column-note" data-note="<?php echo esc_attr( $note->ID ); ?>">
