@@ -141,7 +141,6 @@ class Jamp_Admin {
 			$menu_items_to_skip = array(
 				'wp-menu-separator',
 				'menu-top menu-icon-links',
-				'menu-top menu-icon-jamp_note',
 			);
 
 			// Gets sections placed on the first level menu.
