@@ -25,17 +25,17 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	parse_str( $querystring, $params );
 
 	$jamp_meta                     = array();
-	$jamp_meta['jamp_scope']       = array( ( isset( $params['jamp_scope'] ) )       ? $params['jamp_scope']       : '' );
+	$jamp_meta['jamp_scope']       = array( ( isset( $params['jamp_scope'] ) ) ? $params['jamp_scope'] : '' );
 	$jamp_meta['jamp_target_type'] = array( ( isset( $params['jamp_target_type'] ) ) ? $params['jamp_target_type'] : '' );
-	$jamp_meta['jamp_target']      = array( ( isset( $params['jamp_target'] ) )      ? $params['jamp_target']      : '' );
-	
+	$jamp_meta['jamp_target']      = array( ( isset( $params['jamp_target'] ) ) ? $params['jamp_target'] : '' );
+
 	// Replace '|' with '&' to re-build the correct url.
 	if ( isset( $jamp_meta['jamp_target'][0] ) ) {
 		$jamp_meta['jamp_target'][0] = str_replace( '|', '&', $jamp_meta['jamp_target'][0] );
 	}
 
 	// The form is disabled when creating an already configured note (if at least one setting exists).
-	foreach ($jamp_meta as $key => $value) {
+	foreach ( $jamp_meta as $key => $value ) {
 		if ( ! empty( $value[0] ) ) {
 			$is_form_disabled = true;
 			break;
@@ -64,7 +64,7 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	<input type="hidden" name="target" id="target" value="<?php echo esc_attr( $jamp_meta['jamp_target'][0] ); ?>">
 <?php endif; ?>
 
-<fieldset <?php disabled( $is_form_disabled, true ) ?>>
+<fieldset <?php disabled( $is_form_disabled, true ); ?>>
 	<div class="meta-field meta-scope no-margin-top">
 		<span><?php esc_html_e( 'Select the note location.', 'jamp' ); ?></span>
 		<br>

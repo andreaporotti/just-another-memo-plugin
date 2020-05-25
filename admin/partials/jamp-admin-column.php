@@ -102,7 +102,7 @@ if ( 'jamp_author' === $column_name ) {
 if ( 'jamp_location' === $column_name ) {
 
 	$jamp_meta = get_post_meta( $post_id );
-	
+
 	if ( ! empty( $jamp_meta['jamp_scope'] ) ) {
 
 		switch ( $jamp_meta['jamp_scope'][0] ) {
@@ -180,6 +180,5 @@ if ( 'jamp_location' === $column_name ) {
 				break;
 
 		}
-	
 	}
 }

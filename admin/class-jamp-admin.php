@@ -667,7 +667,7 @@ class Jamp_Admin {
 
 		// Fallback to default location.
 		return $location;
-		
+
 	}
 
 	/**
