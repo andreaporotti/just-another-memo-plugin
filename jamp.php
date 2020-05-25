@@ -1,9 +1,11 @@
 <?php
 /**
  * Plugin Name:       JAMP
- * Plugin URI:        https://www.andreaporotti.it
+ * Plugin URI:        https://www.andreaporotti.it/jamp
  * Description:       This plugin allows you to attach notes to some WordPress elements like posts, pages, dashboard sections... or the whole site!
  * Version:           1.0.0
+ * Requires at least: 4.9
+ * Requires PHP:      5.6
  * Author:            Andrea Porotti
  * Author URI:        https://www.andreaporotti.it
  * License:           GPL-2.0+
