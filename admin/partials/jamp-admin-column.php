@@ -108,7 +108,7 @@ if ( 'jamp_location' === $column_name ) {
 		switch ( $jamp_meta['jamp_scope'][0] ) {
 
 			case 'global':
-				echo esc_html__( 'Global', 'jamp' );
+				echo '<strong>' . esc_html__( 'Global', 'jamp' ) . '</strong>';
 				break;
 
 			case 'section':
@@ -128,7 +128,7 @@ if ( 'jamp_location' === $column_name ) {
 
 				if ( ! empty( $section_name ) ) {
 
-					echo esc_html__( 'Section', 'jamp' ) . ': ' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
+					echo '<strong>' . esc_html__( 'Section', 'jamp' ) . '</strong><br>' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
 
 				} else {
 
@@ -159,7 +159,7 @@ if ( 'jamp_location' === $column_name ) {
 
 				if ( ! empty( $current_post ) ) {
 
-					echo esc_html__( 'Item', 'jamp' ) . ': ' . esc_html( $target_type_name ) . ' "' . esc_html( $current_post->post_title ) . '"';
+					echo '<strong>' . esc_html__( 'Item', 'jamp' ) . '</strong><br>' . esc_html( $target_type_name ) . ' "' . esc_html( $current_post->post_title ) . '"';
 
 				} else {
 
