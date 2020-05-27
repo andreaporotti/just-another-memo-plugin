@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name:       JAMP
- * Plugin URI:        https://www.andreaporotti.it/jamp
- * Description:       This plugin allows you to attach notes to some WordPress elements like posts, pages, dashboard sections... or the whole site!
+ * Plugin URI:        https://github.com/andreaporotti/just-another-memo-plugin
+ * Description:       This plugin allows you to attach notes to some WordPress elements like posts, pages, dashboard sections and others.
  * Version:           1.0.0
  * Requires at least: 4.9
  * Requires PHP:      5.6
