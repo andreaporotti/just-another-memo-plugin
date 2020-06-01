@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       JAMP
+ * Plugin Name:       JAMP Notes
  * Plugin URI:        https://github.com/andreaporotti/just-another-memo-plugin
  * Description:       This plugin allows you to attach notes to some WordPress elements like posts, pages, dashboard sections and others.
  * Version:           1.0.0
@@ -42,6 +42,11 @@ if ( ! defined( 'WPINC' ) ) {
  * Uses SemVer ( https://semver.org ).
  */
 define( 'JAMP_VERSION', '1.0.0' );
+
+/**
+ * Plugin name.
+ */
+define( 'JAMP_PLUGIN_NAME', 'JAMP Notes' );
 
 /**
  * The code that runs during plugin activation.

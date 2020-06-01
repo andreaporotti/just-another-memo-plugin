@@ -89,7 +89,12 @@ class Jamp {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'jamp';
+
+		if ( defined( 'JAMP_PLUGIN_NAME' ) ) {
+			$this->plugin_name = JAMP_PLUGIN_NAME;
+		} else {
+			$this->plugin_name = 'JAMP Notes';
+		}
 
 		$this->load_dependencies();
 		$this->set_locale();

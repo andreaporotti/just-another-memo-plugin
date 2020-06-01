@@ -1,6 +1,6 @@
-=== JAMP - Just Another Memo Plugin ===
+=== JAMP Notes (Just Another Memo Plugin) ===
 Contributors: andreaporotti
-Tags: memo, note, notes, dashboard
+Tags: notes, note, memo, dashboard
 Requires at least: 4.9
 Tested up to: 5.4.1
 Requires PHP: 5.6
@@ -12,7 +12,7 @@ This plugin allows you to attach notes to some WordPress elements like posts, pa
 
 == Description ==
 
-Using JAMP (Just Another Memo Plugin) you can attach notes to some elements in the WordPress dashboard, such as:
+Using this plugin you can attach notes to some elements in the WordPress dashboard, such as:
 
 - posts
 - pages
@@ -36,7 +36,7 @@ It can be helpfull if you manage a site with other people or just to take notes 
 
 **Configuration**
 
-Settings for the plugin are available on the *Settings* -> *JAMP* page.
+Settings for the plugin are available on the *Settings* -> *JAMP Notes* page.
 
 Please note:
 
@@ -60,10 +60,10 @@ This plugin does not collect or store any user data. It does not set any cookies
 
 **Installing**
 
-1. Download the plugin file (jamp.zip).
+1. Download the plugin zip file.
 2. Go to *Plugins* -> *Add New* in the WordPress dashboard.
 3. Click on the *Upload Plugin* button.
-4. Browse for the plugin file (jamp.zip) and click on *Install Now*.
+4. Browse for the plugin zip file and click on *Install Now*.
 5. Activate the plugin.
 
 **Uninstalling**
@@ -73,7 +73,7 @@ This plugin does not collect or store any user data. It does not set any cookies
 3. Click on *Deactivate*.
 4. Click on *Delete*.
 
-Please note: by default the plugin data is kept after uninstall. You can choose to delete all data going to *Settings* -> *JAMP* and enabling data removal on uninstall.
+Please note: by default the plugin data is kept after uninstall. You can choose to delete all data going to *Settings* -> *JAMP Notes* and enabling data removal on uninstall.
 
 == Screenshots ==
 

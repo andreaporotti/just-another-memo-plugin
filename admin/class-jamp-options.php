@@ -26,8 +26,12 @@ class Jamp_Options {
 	public function options_menu() {
 
 		add_options_page(
-			esc_html__( 'JAMP Settings', 'jamp' ),
-			'JAMP',
+			sprintf(
+				/* translators: %s is the plugin name */
+				__( '%s Settings', 'jamp' ),
+				JAMP_PLUGIN_NAME
+			),
+			JAMP_PLUGIN_NAME,
 			'manage_options',
 			'jamp_options',
 			array(

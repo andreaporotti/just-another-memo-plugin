@@ -12,8 +12,8 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 }
 
 // Perform a few security checks.
-$is_plugin_valid = ( isset( $_REQUEST['plugin'] ) && strpos( sanitize_text_field( wp_unslash( $_REQUEST['plugin'] ) ), 'jamp' ) !== false ) ? true : false;
-$is_slug_valid   = ( isset( $_REQUEST['slug'] ) && strpos( sanitize_text_field( wp_unslash( $_REQUEST['slug'] ) ), 'jamp' ) !== false ) ? true : false;
+$is_plugin_valid = ( isset( $_REQUEST['plugin'] ) && strpos( sanitize_text_field( wp_unslash( $_REQUEST['plugin'] ) ), 'jamp-notes' ) !== false ) ? true : false;
+$is_slug_valid   = ( isset( $_REQUEST['slug'] ) && strpos( sanitize_text_field( wp_unslash( $_REQUEST['slug'] ) ), 'jamp-notes' ) !== false ) ? true : false;
 $is_user_allowed = current_user_can( 'delete_plugins' );
 
 if ( ! $is_plugin_valid || ! $is_slug_valid || ! $is_user_allowed ) {
