@@ -213,11 +213,6 @@ class Jamp {
 		$this->loader->add_filter( 'manage_page_posts_columns', $plugin_admin, 'manage_columns_headers' );
 		$this->loader->add_action( 'manage_page_posts_custom_column', $plugin_admin, 'manage_columns_content', 10, 2 );
 
-		// Session management.
-		$this->loader->add_action( 'init', $plugin_admin, 'session_start', 1 );
-		$this->loader->add_action( 'wp_logout', $plugin_admin, 'session_destroy' );
-		$this->loader->add_action( 'wp_login', $plugin_admin, 'session_destroy' );
-
 		// Plugin options.
 		$plugin_options = new Jamp_Options();
 

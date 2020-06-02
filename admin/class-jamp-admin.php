@@ -620,8 +620,8 @@ class Jamp_Admin {
 			// Save referer in session if current post is a note.
 			if ( 'jamp_note' === $post_type ) {
 
-				$referer                     = wp_get_referer();
-				$_SESSION['jamp_return_url'] = $referer;
+				$referer = wp_get_referer();
+				$this->set_session( 'return_url', $referer );
 
 			}
 		}
@@ -643,7 +643,9 @@ class Jamp_Admin {
 			// Perform redirection only for notes.
 			if ( 'jamp_note' === $post->post_type ) {
 
-				if ( isset( $_SESSION['jamp_return_url'] ) && ! empty( $_SESSION['jamp_return_url'] ) ) {
+				$return_url = $this->get_session( 'return_url' );
+
+				if ( ! empty( $return_url ) ) {
 
 					// Extract the "message" parameter value from querystring.
 					$querystring = wp_parse_url( $location, PHP_URL_QUERY );
@@ -651,13 +653,7 @@ class Jamp_Admin {
 					$message = $params['message'];
 
 					// Save message id in session.
-					$_SESSION['jamp_message'] = $message;
-
-					// Get return url.
-					$return_url = $_SESSION['jamp_return_url'];
-
-					// Destroy session variabile.
-					unset( $_SESSION['jamp_return_url'] );
+					$this->set_session( 'message_id', $message );
 
 					return $return_url;
 
@@ -679,7 +675,9 @@ class Jamp_Admin {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
 
-			if ( isset( $_SESSION['jamp_message'] ) && $_SESSION['jamp_message'] >= 0 ) {
+			$message_id = $this->get_session( 'message_id' );
+
+			if ( ! empty( $message_id ) ) {
 
 				// Set custom feedback messages.
 				$messages['jamp_note'] = array(
@@ -698,12 +696,12 @@ class Jamp_Admin {
 
 				?>
 					<div class="notice notice-success is-dismissible">
-						<p><?php echo esc_html( $messages['jamp_note'][ $_SESSION['jamp_message'] ] ); ?></p>
+						<p><?php echo esc_html( $messages['jamp_note'][ $message_id ] ); ?></p>
 					</div>
 				<?php
 
-				// Destroy session variabile.
-				unset( $_SESSION['jamp_message'] );
+				// Delete the whole session after the notice is displayed.
+				$this->delete_session();
 
 			}
 		}
@@ -847,28 +845,74 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Starts PHP session.
+	 * Gets a value from the plugin custom session.
 	 *
 	 * @since    1.0.0
+	 * @param    string $key The name of the value.
 	 */
-	public function session_start() {
+	private static function get_session( $key ) {
 
-		if ( session_status() === PHP_SESSION_NONE ) {
+		$transient = get_transient( self::get_transient_name() );
 
-			session_start();
+		if ( false === $transient ) {
+
+			return null;
+
+		} else {
+
+			$value = null;
+
+			if ( isset( $transient[ $key ] ) ) {
+				$value = $transient[ $key ];
+			}
+
+			return $value;
 
 		}
 
 	}
 
 	/**
-	 * Clears PHP session.
+	 * Saves a value to the plugin custom session.
+	 *
+	 * @since    1.0.0
+	 * @param    string $key   The name of the value.
+	 * @param    string $value The actual value to save.
+	 */
+	private static function set_session( $key, $value ) {
+
+		$transient = get_transient( self::get_transient_name() );
+
+		if ( false === $transient ) {
+			$transient = array();
+		}
+
+		$transient[ $key ] = $value;
+
+		set_transient( self::get_transient_name(), $transient, HOUR_IN_SECONDS );
+
+	}
+
+	/**
+	 * Deletes the plugin custom session.
 	 *
 	 * @since    1.0.0
 	 */
-	public function session_destroy() {
+	private static function delete_session() {
 
-		session_destroy();
+		delete_transient( self::get_transient_name() );
+
+	}
+
+	/**
+	 * Generates the name of the transient used by the plugin custom session.
+	 *
+	 * @since    1.0.0
+	 */
+	private static function get_transient_name() {
+
+		$user = wp_get_current_user();
+		return 'jamp_session_user_' . $user->ID;
 
 	}
 

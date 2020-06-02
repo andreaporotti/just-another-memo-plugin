@@ -73,4 +73,17 @@ if ( '1' === $option_delete_data_on_uninstall ) {
 
 		}
 	}
+
+	// Delete transients for all users.
+	$users = get_users();
+	foreach ( $users as $user ) {
+
+		$transient_name = 'jamp_session_user_' . $user->ID;
+
+		if ( get_transient( $transient_name ) ) {
+
+			delete_transient( $transient_name );
+
+		}
+	}
 }
