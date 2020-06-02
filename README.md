@@ -1,5 +1,7 @@
 # JAMP Notes (Just Another Memo Plugin) - WordPress Plugin
 
+**NOTE:** this is a development repository. Please download latest stable release from the WordPress.org directory: https://wordpress.org/plugins/jamp-notes/.
+
 ## Description
 
 Using this plugin you can attach notes to some elements in the WordPress dashboard, such as:
@@ -40,7 +42,7 @@ Each Admin can manage all notes.
 
 ## Support
 
-If you find any errors or compatibility issues with other plugins, please let me know in the plugin support forum on wordpress.org. Thanks!
+If you find any errors or compatibility issues with other plugins, please let me know in the [plugin support forum](https://wordpress.org/support/plugin/jamp-notes/). Thanks!
 
 ## Privacy
 
