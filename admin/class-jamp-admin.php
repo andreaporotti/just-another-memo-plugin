@@ -147,7 +147,7 @@ class Jamp_Admin {
 			foreach ( $menu as $menu_item ) {
 				if ( ! in_array( $menu_item[4], $menu_items_to_skip, true ) ) {
 					// Gets section name removing unwanted HTML content and HTML code surrounding the section name.
-					$name = trim( sanitize_text_field( ( strpos( $menu_item[0], ' <' ) > 0 ) ? strstr( $menu_item[0], ' <', true ) : $menu_item[0] ) );
+					$name = trim( sanitize_text_field( ( strpos( $menu_item[0], '<' ) > 0 ) ? strstr( $menu_item[0], '<', true ) : $menu_item[0] ) );
 
 					if ( ! empty( $name ) ) {
 						// Gets section file without the "return" parameter.
@@ -181,7 +181,7 @@ class Jamp_Admin {
 					// Gets the sub sections of current first level section from the sub menu.
 					foreach ( $submenu[ $section['file'] ] as $submenu_item ) {
 						// Gets section name removing unwanted HTML content and HTML code surrounding the section name.
-						$name = trim( sanitize_text_field( ( strpos( $submenu_item[0], ' <' ) > 0 ) ? strstr( $submenu_item[0], ' <', true ) : $submenu_item[0] ) );
+						$name = trim( sanitize_text_field( ( strpos( $submenu_item[0], '<' ) > 0 ) ? strstr( $submenu_item[0], '<', true ) : $submenu_item[0] ) );
 
 						if ( ! empty( $name ) ) {
 							// Gets section file without the "return" parameter.
