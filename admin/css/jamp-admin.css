@@ -32,6 +32,13 @@
 	width: 100%;
 }
 
+@media only screen and (max-width: 782px) {
+	#jamp_meta_box label {
+		margin: .5em 0 !important;
+		display: inline-block;
+	}
+}
+
 /*
 * ADMIN BAR
 */
