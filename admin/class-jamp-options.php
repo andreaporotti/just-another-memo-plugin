@@ -186,17 +186,18 @@ class Jamp_Options {
 		$target_types = $admin->build_target_types_list( false, true );
 
 		?>
-		<?php foreach ( $target_types as $target_type ) : ?>
-			<?php $id_attr = $args['name'] . '_' . $target_type['name']; ?>
-			<?php $checked_attr = ( in_array( $target_type['name'], $option_enabled_target_types, true ) ) ? 'checked' : ''; ?>
-			<input type="checkbox" id="<?php echo esc_attr( $id_attr ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>[]" value="<?php echo esc_attr( $target_type['name'] ); ?>" <?php echo esc_attr( $checked_attr ); ?>>
-			<label for="<?php echo esc_attr( $id_attr ); ?>"><?php echo esc_html( $target_type['label'] ); ?></label>
-			<br>
-		<?php endforeach; ?>
-
-		<p class="description">
-			<?php echo esc_html__( 'Choose which item types you want to add notes to. If you disable an item type that has notes, the notes will not be deleted.', 'jamp' ); ?>
-		</p>
+		<fieldset>
+			<?php foreach ( $target_types as $target_type ) : ?>
+				<?php $id_attr = $args['name'] . '_' . $target_type['name']; ?>
+				<?php $checked_attr = ( in_array( $target_type['name'], $option_enabled_target_types, true ) ) ? 'checked' : ''; ?>
+				<input type="checkbox" id="<?php echo esc_attr( $id_attr ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>[]" value="<?php echo esc_attr( $target_type['name'] ); ?>" <?php echo esc_attr( $checked_attr ); ?>>
+				<label for="<?php echo esc_attr( $id_attr ); ?>"><?php echo esc_html( $target_type['label'] ); ?></label>
+				<br>
+			<?php endforeach; ?>
+			<p class="description">
+				<?php echo esc_html__( 'Choose which item types you want to add notes to. If you disable an item type that has notes, the notes will not be deleted.', 'jamp' ); ?>
+			</p>
+		</fieldset>
 		<?php
 	}
 
@@ -244,10 +245,13 @@ class Jamp_Options {
 		$option_delete_data_on_uninstall = get_option( $args['label_for'], 0 );
 
 		?>
-		<input type="checkbox" id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr( $args['label_for'] ); ?>" value="1" <?php checked( $option_delete_data_on_uninstall, 1 ); ?>>
-		<p class="description">
-			<?php echo esc_html__( 'Please note: enabling this option, all notes and settings will be PERMANENTLY DELETED when you uninstall the plugin.', 'jamp' ); ?>
-		</p>
+		<fieldset>
+			<input type="checkbox" id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr( $args['label_for'] ); ?>" value="1" <?php checked( $option_delete_data_on_uninstall, 1 ); ?>>
+			<label for="<?php echo esc_attr( $args['label_for'] ); ?>"><?php echo esc_html__( 'Enabled', 'jamp' ); ?></label>
+			<p class="description">
+				<?php echo esc_html__( 'Please note: enabling this option, all notes and settings will be PERMANENTLY DELETED when you uninstall the plugin.', 'jamp' ); ?>
+			</p>
+		</fieldset>
 		<?php
 
 	}
