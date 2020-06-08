@@ -185,6 +185,10 @@
 * TABLE COLUMNS
 */
 
+.jamp_note.column-jamp_note:not(.hidden) {
+    overflow: visible !important;
+}
+
 .jamp-column-note {
 	margin-bottom: 10px;
 }
