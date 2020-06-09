@@ -6,6 +6,11 @@
 * GENERAL
 */
 
+html {
+  --scrollbar-color: #32373c;
+  --scrollbar-thumb-color: #7d7d7d;
+}
+
 .display-block {
 	display: block;
 }
@@ -54,6 +59,25 @@
 
 #wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item {
 	height: 100%;
+	max-height: 60vh;
+	overflow-y: auto;
+	
+	scrollbar-width: thin;
+	scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-color);
+}
+
+#wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item::-webkit-scrollbar {
+  width: 12px;
+}
+
+#wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item::-webkit-scrollbar-track {
+  background: var(--scrollbar-color);
+}
+
+#wp-admin-bar-jamp .ab-sub-wrapper #wp-admin-bar-jamp-content div.ab-item::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb-color) ;
+  border-radius: 5px;
+  border: 3px solid var(--scrollbar-color);
 }
 
 .jamp-admin-bar-section-title {
