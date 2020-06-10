@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the JAMP Notes plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: JAMP Notes 1.0.0\n"
+"Project-Id-Version: JAMP Notes 1.0.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jamp-notes\n"
-"POT-Creation-Date: 2020-05-29T09:08:29+00:00\n"
-"PO-Revision-Date: 2020-05-29 11:11+0200\n"
+"POT-Creation-Date: 2020-06-10T10:43:06+00:00\n"
+"PO-Revision-Date: 2020-06-10 12:48+0200\n"
 "Last-Translator: Andrea Porotti <info@andreaporotti.it>\n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -60,7 +60,7 @@ msgstr ""
 msgid "Note Settings"
 msgstr "Impostazioni Nota"
 
-#: admin/class-jamp-admin.php:442 admin/partials/jamp-admin-admin-bar.php:55
+#: admin/class-jamp-admin.php:442 admin/partials/jamp-admin-admin-bar.php:59
 #: admin/partials/jamp-admin-admin-bar.php:118
 #: admin/partials/jamp-admin-column.php:46
 msgid "Author"
@@ -75,68 +75,68 @@ msgstr "Posizione"
 msgid "Notes"
 msgstr "Note"
 
-#: admin/class-jamp-admin.php:687 admin/class-jamp-admin.php:690
+#: admin/class-jamp-admin.php:685 admin/class-jamp-admin.php:688
 msgid "Note updated."
 msgstr "Nota aggiornata."
 
-#: admin/class-jamp-admin.php:688
+#: admin/class-jamp-admin.php:686
 msgid "Custom field updated."
 msgstr "Campo personalizzato aggiornato."
 
-#: admin/class-jamp-admin.php:689
+#: admin/class-jamp-admin.php:687
 msgid "Custom field deleted."
 msgstr "Campo personalizzato cancellato."
 
-#: admin/class-jamp-admin.php:692
+#: admin/class-jamp-admin.php:690
 msgid "Note published."
 msgstr "Nota pubblicata."
 
-#: admin/class-jamp-admin.php:693
+#: admin/class-jamp-admin.php:691
 msgid "Note saved."
 msgstr "Nota salvata."
 
-#: admin/class-jamp-admin.php:694
+#: admin/class-jamp-admin.php:692
 msgid "Note submitted."
 msgstr "Nota inviata."
 
-#: admin/class-jamp-admin.php:695
+#: admin/class-jamp-admin.php:693
 msgid "Note scheduled."
 msgstr "Nota pianificata."
 
-#: admin/class-jamp-admin.php:696
+#: admin/class-jamp-admin.php:694
 msgid "Note draft updated."
 msgstr "Bozza della nota aggiornata."
 
 #. translators: %s is the number of updated notes.
-#: admin/class-jamp-admin.php:726
+#: admin/class-jamp-admin.php:724
 msgid "%s note updated."
 msgid_plural "%s notes updated."
 msgstr[0] "%s nota aggiornata."
 msgstr[1] "%s note aggiornate."
 
 #. translators: %s is the number of locked notes.
-#: admin/class-jamp-admin.php:728
+#: admin/class-jamp-admin.php:726
 msgid "%s note not updated, somebody is editing it."
 msgid_plural "%s notes not updated, somebody is editing them."
 msgstr[0] "%s nota non aggiornata, qualcuno la sta modificando."
 msgstr[1] "%s note non aggiornate, qualcuno le sta modificando."
 
 #. translators: %s is the number of deleted notes.
-#: admin/class-jamp-admin.php:730
+#: admin/class-jamp-admin.php:728
 msgid "%s note permanently deleted."
 msgid_plural "%s notes permanently deleted."
 msgstr[0] "%s nota eliminata definitivamente."
 msgstr[1] "%s note eliminate definitivamente."
 
 #. translators: %s is the number of trashed notes.
-#: admin/class-jamp-admin.php:732
+#: admin/class-jamp-admin.php:730
 msgid "%s note moved to the Trash."
 msgid_plural "%s notes moved to the Trash."
 msgstr[0] "%s nota spostata nel Cestino."
 msgstr[1] "%s note spostate nel Cestino."
 
 #. translators: %s is the number of untrashed notes.
-#: admin/class-jamp-admin.php:734
+#: admin/class-jamp-admin.php:732
 msgid "%s note restored from the Trash."
 msgid_plural "%s notes restored from the Trash."
 msgstr[0] "%s nota ripristinata dal Cestino."
@@ -175,11 +175,15 @@ msgstr ""
 "Scegliere i tipi di elemento a cui aggiungere le note. Se si disabilita un "
 "tipo di elemento che possiede delle note, queste non verranno eliminate."
 
-#: admin/class-jamp-options.php:229
+#: admin/class-jamp-options.php:230
 msgid "These settings are applied when you uninstall the plugin."
 msgstr "Queste impostazioni sono applicate quando disinstalli il plugin."
 
-#: admin/class-jamp-options.php:249
+#: admin/class-jamp-options.php:250
+msgid "Enabled"
+msgstr "Abilitato"
+
+#: admin/class-jamp-options.php:252
 msgid ""
 "Please note: enabling this option, all notes and settings will be "
 "PERMANENTLY DELETED when you uninstall the plugin."
@@ -192,47 +196,52 @@ msgid "Global Notes"
 msgstr "Note Globali"
 
 #: admin/partials/jamp-admin-admin-bar.php:30
-#: admin/partials/jamp-admin-admin-bar.php:93
+#: admin/partials/jamp-admin-admin-bar.php:89
 msgid "New"
 msgstr "Nuova"
 
-#: admin/partials/jamp-admin-admin-bar.php:57
-#: admin/partials/jamp-admin-admin-bar.php:120
-#: admin/partials/jamp-admin-column.php:48
-msgid "Last edit"
-msgstr "Ultima modifica"
+#: admin/partials/jamp-admin-admin-bar.php:53
+#: admin/partials/jamp-admin-admin-bar.php:112
+msgid "Details"
+msgstr "Dettagli"
 
-#: admin/partials/jamp-admin-admin-bar.php:59
-#: admin/partials/jamp-admin-admin-bar.php:122
-#: admin/partials/jamp-admin-column.php:50
-msgid "Created"
-msgstr "Creata"
-
-#: admin/partials/jamp-admin-admin-bar.php:63
-#: admin/partials/jamp-admin-admin-bar.php:126
+#: admin/partials/jamp-admin-admin-bar.php:54
+#: admin/partials/jamp-admin-admin-bar.php:113
 #: admin/partials/jamp-admin-column.php:54
 msgid "Edit"
 msgstr "Modifica"
 
-#: admin/partials/jamp-admin-admin-bar.php:64
-#: admin/partials/jamp-admin-admin-bar.php:127
-#: admin/partials/jamp-admin-admin-bar.php:144
+#: admin/partials/jamp-admin-admin-bar.php:55
+#: admin/partials/jamp-admin-admin-bar.php:114
+#: admin/partials/jamp-admin-admin-bar.php:136
 msgid "Move to Trash"
 msgstr "Sposta nel Cestino"
 
-#: admin/partials/jamp-admin-admin-bar.php:74
+#: admin/partials/jamp-admin-admin-bar.php:60
+#: admin/partials/jamp-admin-admin-bar.php:119
+#: admin/partials/jamp-admin-column.php:48
+msgid "Last edit"
+msgstr "Ultima modifica"
+
+#: admin/partials/jamp-admin-admin-bar.php:61
+#: admin/partials/jamp-admin-admin-bar.php:120
+#: admin/partials/jamp-admin-column.php:50
+msgid "Created"
+msgstr "Creata"
+
+#: admin/partials/jamp-admin-admin-bar.php:70
 msgid "No global notes."
 msgstr "Nessuna nota globale."
 
-#: admin/partials/jamp-admin-admin-bar.php:92
+#: admin/partials/jamp-admin-admin-bar.php:88
 msgid "Notes for this section"
 msgstr "Note per questa sezione"
 
-#: admin/partials/jamp-admin-admin-bar.php:137
+#: admin/partials/jamp-admin-admin-bar.php:129
 msgid "No notes for this section."
 msgstr "Nessuna nota per questa sezione."
 
-#: admin/partials/jamp-admin-admin-bar.php:145
+#: admin/partials/jamp-admin-admin-bar.php:137
 msgid "Do you want to move this note to Trash?"
 msgstr "Vuoi spostare questa nota nel Cestino?"
 
