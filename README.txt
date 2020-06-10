@@ -80,10 +80,9 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 1. The admin page to manage the notes.
 2. The note editing page with the settings meta box.
 3. The admin bar menu shows global and section notes.
-4. The tooltip with some note details.
-5. An example of note attached to a page.
-6. The confirmation popup when moving a note to the trash.
-7. The plugin settings page.
+4. An example of note attached to a page.
+5. The confirmation popup when moving a note to the trash.
+6. The plugin settings page.
 
 == Changelog ==
 
