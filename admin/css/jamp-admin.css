@@ -203,6 +203,26 @@ html {
 	color: #00a0d2 !important;
 }
 
+.jamp-admin-bar-note__details {
+	display: none;
+	border-top: 1px solid #7d7d7d;
+	padding-top: 2px !important;
+	margin-top: 5px !important;
+}
+
+.jamp-admin-bar-note__detail {
+	display: block;
+	font-size: 12px !important;
+	line-height: 1.2 !important;
+	color: #7d7d7d;
+}
+
+.jamp-admin-bar-note__detail-label {
+	font-size: 12px !important;
+	line-height: 1.2 !important;
+	font-weight: 700 !important;
+}
+
 .jamp-admin-bar-note__no-notes-notice {
 	display: block;
 	font-style: italic !important;

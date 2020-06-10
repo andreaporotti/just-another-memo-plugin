@@ -41,7 +41,7 @@ if ( 'jamp_note' === $column_name ) {
 				<div class="jamp-column-note__container">
 					<div class="jamp-column-note__content"><?php echo wp_kses_post( $note->post_content ); ?></div>
 					<div class="jamp-column-note__note-actions">
-						<a href="#" class="jamp-note-info-tooltip"><?php echo esc_html__( 'Info', 'jamp' ); ?>
+						<a href="#" class="jamp-column-note__note-info-action jamp-note-info-tooltip"><?php echo esc_html__( 'Info', 'jamp' ); ?>
 						<span class="jamp-note-info-tooltip__content jamp-note-info-tooltip__content--top">
 							<span class="jamp-note-info-tooltip__label"><?php echo esc_html__( 'Author', 'jamp' ); ?></span>
 							<span class="jamp-note-info-tooltip__field"><?php echo esc_html( $note_author->display_name ); ?></span>

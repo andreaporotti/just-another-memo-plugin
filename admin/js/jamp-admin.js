@@ -180,6 +180,18 @@
 				}	
 			} );	
 		} );
+		
+		// Info links on custom column.
+		$( '.jamp-column-note__note-info-action' ).on( 'click', function( e ) {
+			e.preventDefault();
+		} );
+		
+		// Info links on admin bar.
+		$( '.jamp-admin-bar-action--info' ).on( 'click', function( e ) {
+			e.preventDefault();
+			
+			$( this ).parent().nextAll( '.jamp-admin-bar-note__details' ).slideToggle( 100 );
+		} );
 
 	});
 
