@@ -2,9 +2,9 @@
 Contributors: andreaporotti
 Tags: notes, note, memo, dashboard
 Requires at least: 4.9
-Tested up to: 5.4.1
+Tested up to: 5.4.2
 Requires PHP: 5.6
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -28,7 +28,7 @@ It can be helpfull if you manage a site with other people or just to take notes 
 - while editing a note, use the meta box on the right to set note properties.
 - manage section and global notes from the admin bar.
 - manage item notes (eg. posts and pages) from the custom column in the admin pages.
-- get note details from the tooltip showing on the "Info" links or icons.
+- get notes details by hovering the mouse on the "Info" links or clicking on the "I" icons.
 - add images and links in the note content.
 - deleted notes go to the trash, so they can be restored.
 - automatically discovers custom post types added by other plugins (eg. events, books...).
@@ -87,5 +87,14 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 
 == Changelog ==
 
+**1.0.1**
+- Managed the admin bar panel max height.
+- Replaced the tooltip with a hidden section for the admin bar notes details. Click on the "I" icon to show it.
+- Fixed an issue with long titles in admin bar notes.
+- Fixed an issue in the admin menu names parsing.
+- Fixed an issue with the tooltip not showing correctly in the custom column in mobile view.
+- Fixed metabox style in mobile view.
+- Fixed settings page style in mobile view.
+
 **1.0.0**
-* First release.
+- First release.
