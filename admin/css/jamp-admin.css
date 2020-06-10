@@ -159,7 +159,7 @@ html {
 	box-sizing: border-box !important;
 	min-width: 300px;
 	max-width: 500px;
-	padding: 0 5px 5px 5px !important;
+	padding: 8px 5px 5px 5px !important;
 	margin-bottom: 5px !important;
 	background-color: #fffebb;
 	color: #32373c;
@@ -175,8 +175,13 @@ html {
 	background-color: #ffbfbf;
 }
 
-.jamp-admin-bar-note__title {
+.jamp-admin-bar-note__title {	
+	display: block;
+	max-width: 75% !important;
+	margin-bottom: 5px !important;
 	font-weight: 700 !important;
+	line-height: 1.4 !important;
+	white-space: normal !important;
 }
 
 .jamp-admin-bar-note__actions {
