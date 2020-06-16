@@ -29,16 +29,6 @@ $create_url = add_query_arg(
 $html .= '<span class="jamp-admin-bar-section-title">' . esc_html__( 'Global Notes', 'jamp' ) . '</span> '
 		. '(<a class="jamp-admin-bar-action jamp-admin-bar-action--create" href="' . esc_url( $create_url ) . '">' . esc_html__( 'New', 'jamp' ) . '</a>)';
 
-$global_notes_args = array(
-	'post_type'      => 'jamp_note',
-	'posts_per_page' => -1,
-	'meta_key'       => 'jamp_scope',
-	'meta_compare'   => '=',
-	'meta_value'     => 'global',
-);
-
-$global_notes = get_posts( $global_notes_args );
-
 if ( ! empty( $global_notes ) ) {
 
 	foreach ( $global_notes as $note ) {
@@ -47,7 +37,7 @@ if ( ! empty( $global_notes ) ) {
 		$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
 		$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
 
-		$html .= '<div class="jamp-admin-bar-note" data-note="' . esc_attr( $note->ID ) . '">'
+		$html .= '<div class="jamp-admin-bar-note" data-note="' . esc_attr( $note->ID ) . '" data-scope="global">'
 				. '<span class="jamp-admin-bar-note__title">' . esc_html( $note->post_title ) . '</span>'
 				. '<span class="jamp-admin-bar-note__actions">'
 				. '<a class="jamp-admin-bar-action jamp-admin-bar-action--info" href="#" title="' . esc_html__( 'Details', 'jamp' ) . '"></a>'
@@ -88,16 +78,6 @@ if ( $this->is_section_supported() ) {
 	$html .= '<span class="jamp-admin-bar-section-title">' . esc_html__( 'Notes for this section', 'jamp' ) . '</span> '
 			. '(<a class="jamp-admin-bar-action jamp-admin-bar-action--create" href="' . esc_url( $create_url ) . '">' . esc_html__( 'New', 'jamp' ) . '</a>)';
 
-	$section_notes_args = array(
-		'post_type'      => 'jamp_note',
-		'posts_per_page' => -1,
-		'meta_key'       => 'jamp_target',
-		'meta_compare'   => '=',
-		'meta_value'     => $this->get_current_page_url(),
-	);
-
-	$section_notes = get_posts( $section_notes_args );
-
 	if ( ! empty( $section_notes ) ) {
 
 		foreach ( $section_notes as $note ) {
@@ -106,7 +86,7 @@ if ( $this->is_section_supported() ) {
 			$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
 			$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
 
-			$html .= '<div class="jamp-admin-bar-note" data-note="' . esc_attr( $note->ID ) . '">'
+			$html .= '<div class="jamp-admin-bar-note" data-note="' . esc_attr( $note->ID ) . '" data-scope="section">'
 					. '<span class="jamp-admin-bar-note__title">' . esc_html( $note->post_title ) . '</span>'
 					. '<span class="jamp-admin-bar-note__actions">'
 					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--info" href="#" title="' . esc_html__( 'Details', 'jamp' ) . '"></a>'

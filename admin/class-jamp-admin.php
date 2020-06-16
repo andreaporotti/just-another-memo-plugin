@@ -560,11 +560,47 @@ class Jamp_Admin {
 
 			global $wp_admin_bar;
 
+			// Global notes.
+			$global_notes_args  = array(
+				'post_type'      => 'jamp_note',
+				'posts_per_page' => -1,
+				'meta_key'       => 'jamp_scope',
+				'meta_compare'   => '=',
+				'meta_value'     => 'global',
+			);
+			$global_notes       = get_posts( $global_notes_args );
+			$global_notes_count = count( $global_notes );
+
+			// Section notes.
+			if ( $this->is_section_supported() ) {
+				$section_notes_args  = array(
+					'post_type'      => 'jamp_note',
+					'posts_per_page' => -1,
+					'meta_key'       => 'jamp_target',
+					'meta_compare'   => '=',
+					'meta_value'     => $this->get_current_page_url(),
+				);
+				$section_notes       = get_posts( $section_notes_args );
+				$section_notes_count = count( $section_notes );
+			} else {
+				$section_notes_count = 0;
+			}
+
 			// Main node.
+			$main_node_html = '<span class="ab-icon"></span>' . esc_html__( 'Notes', 'jamp' );
+
+			if ( ! empty( $global_notes_count ) ) {
+				$main_node_html .= '<span class="notes-count global-notes-count" title="' . esc_attr__( 'Global Notes', 'jamp' ) . '">' . $global_notes_count . '</span>';
+			}
+
+			if ( ! empty( $section_notes_count ) ) {
+				$main_node_html .= '<span class="notes-count section-notes-count" title="' . esc_attr__( 'Notes for this section', 'jamp' ) . '">' . $section_notes_count . '</span>';
+			}
+
 			$wp_admin_bar->add_node(
 				array(
 					'id'    => 'jamp',
-					'title' => '<span class="ab-icon"></span>' . esc_html__( 'Notes', 'jamp' ),
+					'title' => $main_node_html,
 					'href'  => '#',
 				)
 			);

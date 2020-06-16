@@ -53,6 +53,21 @@ html {
 	top: 3px;
 }
 
+#wp-admin-bar-jamp .notes-count {
+	display: inline-block;
+	box-sizing: border-box;
+	margin-left: 4px;
+	padding: 0 5px;
+	min-width: 18px;
+	height: 18px;
+	border-radius: 9px;
+	background-color: #ca4a1f;
+	color: #fff;
+	font-size: 11px;
+	line-height: 1.6;
+	text-align: center;
+}
+
 #wp-admin-bar-jamp .ab-sub-wrapper .ab-item {
 	color: #ffffff;
 }

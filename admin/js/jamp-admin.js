@@ -117,6 +117,7 @@
 		// Removes trashed note from admin bar.
 		function removeTrashedNoteFromAdminBar( note ) {
 			let selectedNote = $( '.jamp-admin-bar-note[data-note=' + note + ']' );
+			let selectedNoteScope = selectedNote.data( 'scope' );
 
 			// Gets number of notes in the current admin bar section.
 			let section = selectedNote.parent( '.jamp-admin-bar-section' );
@@ -130,6 +131,21 @@
 				// Shows the placeholder if the section contains no more notes.
 				if ( ( existingNotes - 1 ) === 0 ) {
 					section.find( '.jamp-admin-bar-note__no-notes-notice' ).removeClass( 'jamp-admin-bar-note__no-notes-notice--hidden' );
+				}
+
+				// Updates or removes notes count.
+				let notesCount;
+				
+				if ( selectedNoteScope === 'global' ) {
+					notesCount = $( '#wp-admin-bar-jamp .global-notes-count' );
+				} else if ( selectedNoteScope === 'section' ) {
+					notesCount = $( '#wp-admin-bar-jamp .section-notes-count' );
+				}
+				
+				if ( ( existingNotes - 1 ) === 0 ) {
+					notesCount.remove();
+				} else {
+					notesCount.text( existingNotes - 1 );
 				}
 			} );
 		}
