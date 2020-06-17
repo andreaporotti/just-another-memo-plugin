@@ -187,6 +187,7 @@ class Jamp {
 		$this->loader->add_action( 'adminmenu', $plugin_admin, 'build_sections_list' );
 
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_meta_box' );
+		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_meta_box_view_notes' );
 		$this->loader->add_action( 'save_post_jamp_note', $plugin_admin, 'save_meta_data' );
 
 		$this->loader->add_action( 'admin_bar_menu', $plugin_admin, 'add_admin_bar_menu_item', 999999 );

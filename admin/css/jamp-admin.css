@@ -20,7 +20,7 @@ html {
 }
 
 /*
-* META BOX
+* META BOX - Settings
 */
 
 #jamp_meta_box .meta-field {
@@ -42,6 +42,51 @@ html {
 		margin: .5em 0 !important;
 		display: inline-block;
 	}
+}
+
+/*
+* META BOX - View Notes
+*/
+
+.jamp-meta-box-note:not(:last-child) {
+	margin-bottom: 20px;
+}
+
+.jamp-meta-box-note__title {
+	font-weight: 600;
+}
+
+.jamp-meta-box-note__container {
+	padding-left: 5px !important;
+	border-left: 2px solid #dddddd;
+}
+
+.jamp-meta-box-note__content {
+	margin-bottom: 0 !important;
+}
+
+.jamp-meta-box-note__content p {
+	margin-top: 2px;
+}
+
+.jamp-meta-box-note__content img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+.jamp-meta-box-note__detail-label {
+	font-weight: 600;
+}
+
+.jamp-meta-box-note__detail-separator:before {
+	content: ' | ';
+	color: #dddddd;
+}
+
+.jamp-meta-box-note__no-notes-notice {
+	display: block;
+	font-style: italic !important;
 }
 
 /*

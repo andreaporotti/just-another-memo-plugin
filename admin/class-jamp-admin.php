@@ -321,7 +321,7 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Adds the meta box.
+	 * Adds the note settings meta box.
 	 *
 	 * @since    1.0.0
 	 */
@@ -355,7 +355,7 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Outputs the meta box HTML.
+	 * Outputs the note settings meta box HTML.
 	 *
 	 * @since    1.0.0
 	 * @param    object $post Current post.
@@ -364,6 +364,50 @@ class Jamp_Admin {
 	public static function meta_box_html_cb( $post, $args ) {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-meta-box.php';
+
+	}
+
+	/**
+	 * Adds the view notes meta box.
+	 *
+	 * @since    1.1.0
+	 */
+	public function add_meta_box_view_notes() {
+
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
+
+			global $current_screen;
+
+			// Do not add metabox when creating a new item.
+			if ( 'add' !== $current_screen->action ) {
+
+				$enabled_post_types = array_column( $this->target_types_list, 'name' );
+
+				add_meta_box(
+					'jamp_meta_box_view_notes',
+					esc_html__( 'Notes', 'jamp' ),
+					array( $this, 'meta_box_view_notes_html_cb' ),
+					$enabled_post_types,
+					'normal',
+					'default',
+					array()
+				);
+
+			}
+		}
+
+	}
+
+	/**
+	 * Outputs the view notes meta box HTML.
+	 *
+	 * @since    1.1.0
+	 * @param    object $post Current post.
+	 * @param    array  $args Variables coming from the registered meta box.
+	 */
+	public static function meta_box_view_notes_html_cb( $post, $args ) {
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-meta-box-view-notes.php';
 
 	}
 
