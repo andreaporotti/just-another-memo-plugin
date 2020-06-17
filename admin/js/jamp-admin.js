@@ -41,15 +41,18 @@
 		// Hides and resets meta box fields skipping ignored elements.
 		function hideFields( ignoredElements ) {
 			if ( $.inArray('.meta-section', ignoredElements) < 0 ) {
-				$( '#jamp_meta_box .meta-section' ).hide().find( 'option:first' ).attr( 'selected', 'selected' );			
+				$( '#jamp_meta_box .meta-section' ).hide().find( 'option:first' ).attr( 'selected', 'selected' );
+				$( '#jamp_meta_box #section' ).removeClass( 'form-field-invalid' );
 			}
 
 			if ( $.inArray('.meta-target-type', ignoredElements) < 0 ) {
 				$( '#jamp_meta_box .meta-target-type' ).hide().find( 'option:first' ).attr( 'selected', 'selected' );
+				$( '#jamp_meta_box #target-type' ).removeClass( 'form-field-invalid' );
 			}
 
 			if ( $.inArray('.meta-target', ignoredElements) < 0 ) {
 				$( '#jamp_meta_box .meta-target' ).hide().find( 'option:first' ).attr( 'selected', 'selected' );
+				$( '#jamp_meta_box #target' ).removeClass( 'form-field-invalid' );
 			}
 		}
 
@@ -207,6 +210,56 @@
 			e.preventDefault();
 			
 			$( this ).parent().nextAll( '.jamp-admin-bar-note__details' ).slideToggle( 100 );
+		} );
+		
+		// Publish button on Note edit screen: validate settings.
+		$( '.post-type-jamp_note #publish' ).on( 'click', function( e ) {
+			let validate = false;
+			let scope = $( '#jamp_meta_box input[type=radio][name=scope]:checked' );
+
+			switch ( scope.val() ) {
+				case 'global':
+					validate = true;
+					break;
+				case 'section':
+					let section = $( '#jamp_meta_box #section' );
+
+					if ( section.val() !== '' && section.val() !== null ) {
+						section.removeClass( 'form-field-invalid' );
+						validate = true;
+					} else {
+						section.addClass( 'form-field-invalid' );
+						validate = false;
+					}
+
+					break;
+				case 'entity':
+					let targetType = $( '#jamp_meta_box #target-type' );
+					let target = $( '#jamp_meta_box #target' );
+
+					if ( targetType.val() !== '' && targetType.val() !== null ) {
+						targetType.removeClass( 'form-field-invalid' );
+						validate = true;
+					} else {
+						targetType.addClass( 'form-field-invalid' );
+						validate = false;
+					}
+
+					if ( target.val() !== '' && target.val() !== null ) {
+						target.removeClass( 'form-field-invalid' );
+						validate = true;
+					} else {
+						target.addClass( 'form-field-invalid' );
+						validate = false;
+					}
+
+					break;
+				default:
+			}
+
+			if ( validate === false ) {
+				e.preventDefault();
+			}
 		} );
 
 	});

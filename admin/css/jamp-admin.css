@@ -19,6 +19,11 @@ html {
 	margin-top: 0 !important;
 }
 
+.form-field-invalid {
+	border-color: #dc3232 !important;
+	box-shadow: 0 0 2px rgba(204,0,0,.8) !important;
+}
+
 /*
 * META BOX - Settings
 */
