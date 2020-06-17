@@ -144,18 +144,24 @@ if ( 'jamp_location' === $column_name ) {
 
 			case 'entity':
 				// Look for the target type name inside the target types list and print the corresponding label.
-				$target_type_name = '';
+				$target_type_name = esc_html__( 'Item', 'jamp' );
 
-				foreach ( $this->target_types_list as $target_type ) {
+				if ( ! empty( $jamp_meta['jamp_target_type'][0] ) ) {
+					foreach ( $this->target_types_list as $target_type ) {
 
-					if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
+						if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
 
-						$target_type_name = $target_type['singular_name'];
+							$target_type_name = $target_type['singular_name'];
 
+						}
 					}
 				}
 
-				$current_post = get_post( $jamp_meta['jamp_target'][0] );
+				$current_post = null;
+
+				if ( ! empty( $jamp_meta['jamp_target'][0] ) ) {
+					$current_post = get_post( $jamp_meta['jamp_target'][0] );
+				}
 
 				if ( ! empty( $current_post ) ) {
 
