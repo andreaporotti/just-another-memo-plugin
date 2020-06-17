@@ -4,7 +4,7 @@ Tags: notes, note, memo, dashboard
 Requires at least: 4.9
 Tested up to: 5.4.2
 Requires PHP: 5.6
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,12 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 6. The plugin settings page.
 
 == Changelog ==
+
+**1.1.0**
+- Added global and section notes counters on the admin bar.
+- Added validation to the Note Setting meta box.
+- Added a meta box to view notes attached to a post while editing it.
+- Improved content generation of Location column in the Notes page.
 
 **1.0.1**
 - Managed the admin bar panel max height.
