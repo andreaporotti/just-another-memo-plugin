@@ -79,12 +79,14 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 ## Changelog
 
 **1.1.0**
+
 - Added global and section notes counters on the admin bar.
 - Added validation to the Note Setting meta box.
 - Added a meta box to view notes attached to a post while editing it.
 - Improved content generation of Location column in the Notes page.
 
 **1.0.1**
+
 - Managed the admin bar panel max height.
 - Replaced the tooltip with a hidden section for the admin bar notes details. Click on the "I" icon to show it.
 - Fixed an issue with long titles in admin bar notes.
@@ -94,6 +96,7 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 - Fixed settings page style in mobile view.
 
 **1.0.0**
+
 - First release.
 
 ## License
