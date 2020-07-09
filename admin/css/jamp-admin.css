@@ -260,6 +260,11 @@ html {
 	line-height: 1.6 !important;
 }
 
+.jamp-admin-bar-note__content b,
+.jamp-admin-bar-note__content strong {
+    font-weight: 700 !important;
+}
+
 .jamp-admin-bar-note__content a {
 	display: inline !important;
 	margin: 0 !important;
