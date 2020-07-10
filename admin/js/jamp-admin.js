@@ -3,13 +3,13 @@
 
 	$(function() {
 
-		// Gets entities of the specified post type and insert them in the meta box items select.
-		function getEntitiesList( postType ) {
-			if ( postType !== '' && postType !== null ) {
+		// Gets entities of the specified target type and insert them in the meta box items select.
+		function getEntitiesList( targetType ) {
+			if ( targetType !== '' && targetType !== null ) {
 				$.post( jamp_ajax.ajax_url, {
 					_ajax_nonce: jamp_ajax.nonce,
 					action: 'build_targets_list',
-					post_type: postType
+					target_type: targetType
 				}, function( response ) {
 					if ( response.success ) {
 						let options = '';

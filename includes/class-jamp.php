@@ -213,6 +213,8 @@ class Jamp {
 		$this->loader->add_action( 'manage_posts_custom_column', $plugin_admin, 'manage_columns_content', 10, 2 );
 		$this->loader->add_filter( 'manage_page_posts_columns', $plugin_admin, 'manage_columns_headers' );
 		$this->loader->add_action( 'manage_page_posts_custom_column', $plugin_admin, 'manage_columns_content', 10, 2 );
+		$this->loader->add_filter( 'manage_plugins_columns', $plugin_admin, 'manage_columns_headers' );
+		$this->loader->add_action( 'manage_plugins_custom_column', $plugin_admin, 'manage_columns_content', 10, 2 );
 
 		// Plugin options.
 		$plugin_options = new Jamp_Options();

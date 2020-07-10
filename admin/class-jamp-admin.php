@@ -228,6 +228,10 @@ class Jamp_Admin {
 		// Get enabled target types.
 		$enabled_target_types = get_option( 'jamp_enabled_target_types', array() );
 
+		// ---------------------------------------
+		// Add the post types to the target types.
+		// ---------------------------------------
+
 		// Get post types.
 		$post_types = get_post_types(
 			array(
@@ -246,18 +250,26 @@ class Jamp_Admin {
 
 			if ( ! in_array( $post_type->name, $post_types_to_skip, true ) ) {
 
-				// If we need just the enabled target types.
-				if ( $filtered && ! in_array( $post_type->name, $enabled_target_types, true ) ) {
-					continue;
+				if ( ( ! $filtered ) || ( $filtered && in_array( $post_type->name, $enabled_target_types, true ) ) ) {
+					$this->target_types_list[] = array(
+						'name'          => $post_type->name,
+						'label'         => $post_type->label,
+						'singular_name' => $post_type->labels->singular_name,
+					);
 				}
-
-				$this->target_types_list[] = array(
-					'name'          => $post_type->name,
-					'label'         => $post_type->label,
-					'singular_name' => $post_type->labels->singular_name,
-				);
-
 			}
+		}
+
+		// ------------------------------------
+		// Add plugins to the target types.
+		// ------------------------------------
+
+		if ( ( ! $filtered ) || ( $filtered && in_array( 'plugins', $enabled_target_types, true ) ) ) {
+			$this->target_types_list[] = array(
+				'name'          => 'plugins',
+				'label'         => esc_html__( 'Plugins' ),
+				'singular_name' => esc_html__( 'Plugin' ),
+			);
 		}
 
 		if ( $return ) {
@@ -267,7 +279,7 @@ class Jamp_Admin {
 	}
 
 	/**
-	 * Creates a list of all entities of a post type.
+	 * Creates a list of all entities of a target type.
 	 * It's used by ajax calls.
 	 *
 	 * @since    1.0.0
@@ -279,33 +291,60 @@ class Jamp_Admin {
 			// Checks the nonce is valid.
 			check_ajax_referer( $this->plugin_name );
 
-			$post_type = ( isset( $_POST['post_type'] ) ) ? sanitize_text_field( wp_unslash( $_POST['post_type'] ) ) : '';
+			$target_type = ( isset( $_POST['target_type'] ) ) ? sanitize_text_field( wp_unslash( $_POST['target_type'] ) ) : '';
 
-			if ( ! empty( $post_type ) ) {
+			if ( ! empty( $target_type ) ) {
 
-				// Gets entities as objects.
-				$entities_objects = get_posts(
-					array(
-						'post_type'      => $post_type,
-						'posts_per_page' => -1,
-						'post_status'    => array( 'publish', 'future', 'draft', 'pending', 'private', 'trash' ),
-					)
-				);
+				$targets = array();
 
-				// Builds the actual list.
-				$entities = array();
-				foreach ( $entities_objects as $entity ) {
+				// Check if the target type is a post type or a screen.
+				if ( post_type_exists( $target_type ) ) { // It's a post type.
 
-					$post_status_obj = get_post_status_object( $entity->post_status );
-
-					$entities[] = array(
-						'id'     => $entity->ID,
-						'title'  => $entity->post_title,
-						'status' => $post_status_obj->label,
+					// Gets posts as objects.
+					$posts_objects = get_posts(
+						array(
+							'post_type'      => $target_type,
+							'posts_per_page' => -1,
+							'post_status'    => array( 'publish', 'future', 'draft', 'pending', 'private', 'trash' ),
+						)
 					);
+
+					// Add posts to the targets array.
+					foreach ( $posts_objects as $post ) {
+						$post_status_obj = get_post_status_object( $post->post_status );
+
+						$targets[] = array(
+							'id'     => $post->ID,
+							'title'  => $post->post_title,
+							'status' => $post_status_obj->label,
+						);
+					}
+				} else { // It's a screen.
+
+					// Plugins page.
+					if ( 'plugins' === $target_type ) {
+
+						if ( ! function_exists( 'get_plugins' ) ) {
+							require_once ABSPATH . 'wp-admin/includes/plugin.php';
+						}
+
+						$plugins        = get_plugins();
+						$active_plugins = get_option( 'active_plugins' );
+
+						// Add plugins to the targets array.
+						foreach ( $plugins as $key => $plugin ) {
+							$plugin_status = ( in_array( $key, $active_plugins, true ) ) ? esc_html__( 'Active', 'jamp' ) : esc_html__( 'Inactive', 'jamp' );
+
+							$targets[] = array(
+								'id'     => $key,
+								'title'  => $plugin['Name'],
+								'status' => $plugin_status,
+							);
+						}
+					}
 				}
 
-				wp_send_json_success( $entities );
+				wp_send_json_success( $targets );
 
 			} else {
 
@@ -500,11 +539,19 @@ class Jamp_Admin {
 					$enabled_target_types_names[] = $target_type['name'];
 				}
 
-				if ( in_array( $post_type, $enabled_target_types_names, true ) ) {
+				// Get the current target type.
+				$target_type = '';
 
-					// Adds custom columns for other post types, pages and target types.
+				if ( ! empty( $post_type ) ) { // It's a post type admin page.
+					$target_type = $post_type;
+				} else { // It's another admin page.
+					$screen      = get_current_screen();
+					$target_type = $screen->id;
+				}
+
+				// Adds custom columns for target type.
+				if ( in_array( $target_type, $enabled_target_types_names, true ) ) {
 					$columns['jamp_note'] = esc_html__( 'Notes', 'jamp' );
-
 				}
 			}
 		}

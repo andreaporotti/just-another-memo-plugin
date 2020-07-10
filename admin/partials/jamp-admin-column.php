@@ -10,7 +10,7 @@
 ?>
 
 <?php
-// Columns on enabled post types pages.
+// Columns on enabled target types pages.
 if ( 'jamp_note' === $column_name ) {
 
 	// Get notes.
@@ -68,14 +68,23 @@ if ( 'jamp_note' === $column_name ) {
 	<span class="jamp-column-note__no-notes-notice <?php echo esc_attr( $css_class ); ?>">—</span>
 	<?php
 
-	// New note link.
-	$screen = get_current_screen();
+	// Get the current target type.
+	$target_type       = '';
+	$current_post_type = $this->get_current_post_type();
 
+	if ( ! empty( $current_post_type ) ) { // It's a post type admin page.
+		$target_type = $current_post_type;
+	} else { // It's another admin page.
+		$screen      = get_current_screen();
+		$target_type = $screen->id;
+	}
+
+	// New note link.
 	$create_url = add_query_arg(
 		array(
 			'post_type'        => 'jamp_note',
 			'jamp_scope'       => 'entity',
-			'jamp_target_type' => $screen->post_type,
+			'jamp_target_type' => $target_type,
 			'jamp_target'      => $post_id,
 		),
 		admin_url( 'post-new.php' )
@@ -157,15 +166,48 @@ if ( 'jamp_location' === $column_name ) {
 					}
 				}
 
-				$current_post = null;
+				// The name or title of the current item.
+				$current_item_name = '';
 
-				if ( ! empty( $jamp_meta['jamp_target'][0] ) ) {
-					$current_post = get_post( $jamp_meta['jamp_target'][0] );
+				// Check if the target type is a post type or a screen.
+				if ( post_type_exists( $jamp_meta['jamp_target_type'][0] ) ) { // It's a post type.
+
+					if ( ! empty( $jamp_meta['jamp_target'][0] ) ) {
+						$current_item = get_post( $jamp_meta['jamp_target'][0] );
+
+						if ( ! empty( $current_item ) ) {
+							$current_item_name = $current_item->post_title;
+						}
+					}
+				} else { // It's a screen.
+
+					// Plugins page.
+					if ( 'plugins' === $jamp_meta['jamp_target_type'][0] ) {
+
+						if ( ! function_exists( 'get_plugin_data' ) ) {
+							require_once ABSPATH . 'wp-admin/includes/plugin.php';
+						}
+
+						// Split plugin id.
+						$plugin_id_parts = explode( '/', $jamp_meta['jamp_target'][0] );
+						$plugin_folder   = $plugin_id_parts[0];
+						$plugin_file     = $plugin_id_parts[1];
+
+						// Get plugin data.
+						$plugin_path = WP_PLUGIN_DIR . '/' . $plugin_folder . '/' . $plugin_file;
+						if ( file_exists( $plugin_path ) ) {
+							$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_folder . '/' . $plugin_file, false, true );
+
+							if ( ! empty( $plugin_data ) ) {
+								$current_item_name = $plugin_data['Name'];
+							}
+						}
+					}
 				}
 
-				if ( ! empty( $current_post ) ) {
+				if ( ! empty( $current_item_name ) ) {
 
-					echo '<strong>' . esc_html__( 'Item', 'jamp' ) . '</strong><br>' . esc_html( $target_type_name ) . ' "' . esc_html( $current_post->post_title ) . '"';
+					echo '<strong>' . esc_html__( 'Item', 'jamp' ) . '</strong><br>' . esc_html( $target_type_name ) . ' "' . esc_html( $current_item_name ) . '"';
 
 				} else {
 
