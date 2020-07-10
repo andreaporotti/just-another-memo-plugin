@@ -53,15 +53,6 @@ class Jamp_Admin {
 	private $target_types_list = array();
 
 	/**
-	 * Custom feedback messages for actions on notes.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 * @var      array     $version    Custom feedback messages for actions on notes.
-	 */
-	private $feedback_messages = array();
-
-	/**
 	 * Initializes the class and sets its properties.
 	 *
 	 * @since    1.0.0
@@ -534,10 +525,7 @@ class Jamp_Admin {
 				$this->build_target_types_list();
 
 				// Create a list of target types names.
-				$enabled_target_types_names = array();
-				foreach ( $this->target_types_list as $target_type ) {
-					$enabled_target_types_names[] = $target_type['name'];
-				}
+				$enabled_target_types_names = array_column($this->target_types_list, 'name');
 
 				// Get the current target type.
 				$target_type = '';
