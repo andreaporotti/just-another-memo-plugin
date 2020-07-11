@@ -74,8 +74,11 @@ class Jamp_Admin {
 	public function enqueue_styles() {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
+			
+			// Use uncompressed file if debug is enabled (remove .min from filename).
+			$min = ( WP_DEBUG ) ? '' : '.min';
 
-			wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . 'css/jamp-admin.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
+			wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . 'css/jamp-admin' . $min . '.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
 
 		}
 
@@ -89,8 +92,11 @@ class Jamp_Admin {
 	public function enqueue_scripts() {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
+			
+			// Use uncompressed file if debug is enabled (remove .min from filename).
+			$min = ( WP_DEBUG ) ? '' : '.min';
 
-			wp_enqueue_script( 'jamp-admin-script', plugin_dir_url( __FILE__ ) . 'js/jamp-admin.js', array( 'jquery', 'jquery-ui-dialog' ), $this->version, false );
+			wp_enqueue_script( 'jamp-admin-script', plugin_dir_url( __FILE__ ) . 'js/jamp-admin' . $min . '.js', array( 'jquery', 'jquery-ui-dialog' ), $this->version, false );
 
 			wp_localize_script(
 				'jamp-admin-script',
