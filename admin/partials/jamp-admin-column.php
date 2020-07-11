@@ -167,6 +167,8 @@ if ( 'jamp_location' === $column_name ) {
 					}
 				}
 
+				// The current item exists.
+				$current_item_exists = false;
 				// The name or title of the current item.
 				$current_item_name = '';
 
@@ -177,7 +179,8 @@ if ( 'jamp_location' === $column_name ) {
 						$current_item = get_post( $jamp_meta['jamp_target'][0] );
 
 						if ( ! empty( $current_item ) ) {
-							$current_item_name = $current_item->post_title;
+							$current_item_exists = true;
+							$current_item_name   = $current_item->post_title;
 						}
 					}
 				} else { // It's a screen.
@@ -200,14 +203,18 @@ if ( 'jamp_location' === $column_name ) {
 							$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_folder . '/' . $plugin_file, false, true );
 
 							if ( ! empty( $plugin_data ) ) {
-								$current_item_name = $plugin_data['Name'];
+								$current_item_exists = true;
+								$current_item_name   = $plugin_data['Name'];
 							}
 						}
 					}
 				}
 
-				if ( ! empty( $current_item_name ) ) {
+				if ( $current_item_exists ) {
 
+					if ( empty( $current_item_name ) ) {
+						$current_item_name = __( '(no title)' );
+					}
 					echo '<strong>' . esc_html__( 'Item', 'jamp' ) . '</strong><br>' . esc_html( $target_type_name ) . ' "' . esc_html( $current_item_name ) . '"';
 
 				} else {
