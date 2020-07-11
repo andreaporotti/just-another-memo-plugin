@@ -311,6 +311,10 @@ html {
 * TABLE COLUMNS
 */
 
+th.column-jamp_note {
+    width: 15%;
+}
+
 .jamp_note.column-jamp_note:not(.hidden) {
     overflow: visible !important;
 }
