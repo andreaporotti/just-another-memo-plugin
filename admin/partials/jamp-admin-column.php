@@ -34,10 +34,11 @@ if ( 'jamp_note' === $column_name ) {
 			$note_author        = get_userdata( $note->post_author );
 			$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
 			$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
+			$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)' ) );
 
 			?>
 			<div class="jamp-column-note" data-note="<?php echo esc_attr( $note->ID ); ?>">
-				<span class="jamp-column-note__title"><?php echo esc_html( $note->post_title ); ?></span>
+				<span class="jamp-column-note__title"><?php echo esc_html( $note_title ); ?></span>
 				<div class="jamp-column-note__container">
 					<div class="jamp-column-note__content"><?php echo wp_kses_post( $note->post_content ); ?></div>
 					<div class="jamp-column-note__note-actions">
