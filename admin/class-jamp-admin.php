@@ -308,11 +308,12 @@ class Jamp_Admin {
 
 					// Add posts to the targets array.
 					foreach ( $posts_objects as $post ) {
+						$post_title = ( ! empty( $post->post_title ) ) ? $post->post_title : esc_html__( '(no title)' );
 						$post_status_obj = get_post_status_object( $post->post_status );
 
 						$targets[] = array(
 							'id'     => $post->ID,
-							'title'  => $post->post_title,
+							'title'  => $post_title,
 							'status' => $post_status_obj->label,
 						);
 					}
