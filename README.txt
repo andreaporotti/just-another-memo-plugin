@@ -2,7 +2,7 @@
 Contributors: andreaporotti
 Tags: notes, note, memo, dashboard
 Requires at least: 4.9
-Tested up to: 5.4.2
+Tested up to: 5.5
 Requires PHP: 5.6
 Stable tag: 1.1.0
 License: GPLv2 or later
