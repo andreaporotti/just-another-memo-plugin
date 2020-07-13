@@ -57,7 +57,7 @@ class Jamp_Public {
 
 		// Load admin styles if current user can use the notes.
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
-			
+
 			// Use uncompressed file if debug is enabled (remove .min from filename).
 			$min = ( WP_DEBUG ) ? '' : '.min';
 
@@ -76,7 +76,7 @@ class Jamp_Public {
 
 		// Load admin scripts if current user can use the notes.
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
-			
+
 			// Use uncompressed file if debug is enabled (remove .min from filename).
 			$min = ( WP_DEBUG ) ? '' : '.min';
 

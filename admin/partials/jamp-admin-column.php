@@ -194,7 +194,7 @@ if ( 'jamp_location' === $column_name ) {
 
 						// Get plugin data.
 						$plugin_path = WP_PLUGIN_DIR . '/' . $jamp_meta['jamp_target'][0];
-						
+
 						if ( file_exists( $plugin_path ) ) {
 							$plugin_data = get_plugin_data( $plugin_path, false, true );
 

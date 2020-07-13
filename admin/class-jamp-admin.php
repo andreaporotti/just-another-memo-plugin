@@ -74,7 +74,7 @@ class Jamp_Admin {
 	public function enqueue_styles() {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
-			
+
 			// Use uncompressed file if debug is enabled (remove .min from filename).
 			$min = ( WP_DEBUG ) ? '' : '.min';
 
@@ -92,7 +92,7 @@ class Jamp_Admin {
 	public function enqueue_scripts() {
 
 		if ( current_user_can( 'publish_jamp_notes' ) ) {
-			
+
 			// Use uncompressed file if debug is enabled (remove .min from filename).
 			$min = ( WP_DEBUG ) ? '' : '.min';
 
@@ -308,7 +308,7 @@ class Jamp_Admin {
 
 					// Add posts to the targets array.
 					foreach ( $posts_objects as $post ) {
-						$post_title = ( ! empty( $post->post_title ) ) ? $post->post_title : esc_html__( '(no title)' );
+						$post_title      = ( ! empty( $post->post_title ) ) ? $post->post_title : esc_html__( '(no title)' );
 						$post_status_obj = get_post_status_object( $post->post_status );
 
 						$targets[] = array(
@@ -532,7 +532,7 @@ class Jamp_Admin {
 				$this->build_target_types_list();
 
 				// Create a list of target types names.
-				$enabled_target_types_names = array_column($this->target_types_list, 'name');
+				$enabled_target_types_names = array_column( $this->target_types_list, 'name' );
 
 				// Get the current target type.
 				$target_type = '';
