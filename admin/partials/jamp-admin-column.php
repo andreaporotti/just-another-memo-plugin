@@ -192,15 +192,11 @@ if ( 'jamp_location' === $column_name ) {
 							require_once ABSPATH . 'wp-admin/includes/plugin.php';
 						}
 
-						// Split plugin id.
-						$plugin_id_parts = explode( '/', $jamp_meta['jamp_target'][0] );
-						$plugin_folder   = $plugin_id_parts[0];
-						$plugin_file     = $plugin_id_parts[1];
-
 						// Get plugin data.
-						$plugin_path = WP_PLUGIN_DIR . '/' . $plugin_folder . '/' . $plugin_file;
+						$plugin_path = WP_PLUGIN_DIR . '/' . $jamp_meta['jamp_target'][0];
+						
 						if ( file_exists( $plugin_path ) ) {
-							$plugin_data = get_plugin_data( WP_PLUGIN_DIR . '/' . $plugin_folder . '/' . $plugin_file, false, true );
+							$plugin_data = get_plugin_data( $plugin_path, false, true );
 
 							if ( ! empty( $plugin_data ) ) {
 								$current_item_exists = true;
