@@ -9,6 +9,7 @@ Using this plugin you can attach notes to some elements in the WordPress dashboa
 - posts
 - pages
 - custom post types from other plugins (except the notes from this plugin)
+- plugins
 - dashboard sections
 - the whole dashboard
 
@@ -77,6 +78,17 @@ This is the preferred way since it allows easy updates and provides latest stabl
 Please note: by default the plugin data is kept after uninstall. You can choose to delete all data going to *Settings* -> *JAMP Notes* and enabling data removal on uninstall.
 
 ## Changelog
+
+**1.2.0**
+
+- NEW: notes can now be added to the plugins!
+- The Notes column has now a specific width to prevent random space usage.
+- Showing a placeholder for missing note title in admin bar and columns.
+- Showing a placeholder for missing titles when selecting items in the note editing page.
+- Fixed a bug in the Location column when a note is attached to a post with no title.
+- Fixed admin bar notes not showing the bold text style.
+- A few changes for performance improvements.
+- Tested on WordPress 5.5.
 
 **1.1.0**
 

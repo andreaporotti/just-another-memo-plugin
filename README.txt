@@ -4,7 +4,7 @@ Tags: notes, note, memo, dashboard
 Requires at least: 4.9
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 1.1.0
+Stable tag: 1.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,7 @@ Using this plugin you can attach notes to some elements in the WordPress dashboa
 - posts
 - pages
 - custom post types from other plugins (except the notes from this plugin)
+- plugins
 - dashboard sections
 - the whole dashboard
 
@@ -85,6 +86,17 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 6. The plugin settings page.
 
 == Changelog ==
+
+**1.2.0**
+
+- NEW: notes can now be added to the plugins!
+- The Notes column has now a specific width to prevent random space usage.
+- Showing a placeholder for missing note title in admin bar and columns.
+- Showing a placeholder for missing titles when selecting items in the note editing page.
+- Fixed a bug in the Location column when a note is attached to a post with no title.
+- Fixed admin bar notes not showing the bold text style.
+- A few changes for performance improvements.
+- Tested on WordPress 5.5.
 
 **1.1.0**
 
