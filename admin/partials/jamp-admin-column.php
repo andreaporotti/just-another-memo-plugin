@@ -204,6 +204,18 @@ if ( 'jamp_location' === $column_name ) {
 							}
 						}
 					}
+
+					// Users page.
+					if ( 'users' === $jamp_meta['jamp_target_type'][0] ) {
+
+						// Get user data.
+						$note_user = get_userdata( $jamp_meta['jamp_target'][0] );
+
+						if ( ! empty( $note_user ) ) {
+							$current_item_exists = true;
+							$current_item_name   = $note_user->data->display_name;
+						}
+					}
 				}
 
 				if ( $current_item_exists ) {

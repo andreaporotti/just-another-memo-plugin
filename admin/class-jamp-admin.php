@@ -258,6 +258,18 @@ class Jamp_Admin {
 		}
 
 		// ------------------------------------
+		// Add users to the target types.
+		// ------------------------------------
+
+		if ( ( ! $filtered ) || ( $filtered && in_array( 'users', $enabled_target_types, true ) ) ) {
+			$this->target_types_list[] = array(
+				'name'          => 'users',
+				'label'         => esc_html__( 'Users' ),
+				'singular_name' => esc_html__( 'User' ),
+			);
+		}
+
+		// ------------------------------------
 		// Add plugins to the target types.
 		// ------------------------------------
 
@@ -337,6 +349,27 @@ class Jamp_Admin {
 								'id'     => $key,
 								'title'  => $plugin['Name'],
 								'status' => $plugin_status,
+							);
+						}
+					}
+
+					// Users page.
+					if ( 'users' === $target_type ) {
+
+						$users = get_users();
+
+						// Add users to the targets array.
+						foreach ( $users as $user ) {
+							$id           = $user->data->ID;
+							$display_name = $user->data->display_name;
+
+							// Get translated role name (first letter must be capitalized).
+							$role = translate_user_role( ucfirst( $user->roles[0] ) );
+
+							$targets[] = array(
+								'id'     => $id,
+								'title'  => $display_name,
+								'status' => $role,
 							);
 						}
 					}
@@ -570,6 +603,32 @@ class Jamp_Admin {
 			if ( strpos( $column_name, 'jamp' ) !== false ) {
 
 				require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
+
+			}
+		}
+
+	}
+
+	/**
+	 * Shows the column content in the Users page.
+	 *
+	 * @since    1.3.0
+	 * @param    string $output      Custom column output.
+	 * @param    string $column_name Current table column name.
+	 * @param    int    $user_id     Current user ID.
+	 */
+	public function manage_users_columns_content( $output, $column_name, $user_id ) {
+
+		if ( current_user_can( 'publish_jamp_notes' ) ) {
+
+			// Load the file if the column name contains the word 'jamp'.
+			if ( strpos( $column_name, 'jamp' ) !== false ) {
+
+				$column_content = '';
+
+				require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column-users.php';
+
+				return $column_content;
 
 			}
 		}
