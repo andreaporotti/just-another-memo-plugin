@@ -50,15 +50,16 @@ class Jamp_Options {
 	public function options_page() {
 
 		// Check user capabilities.
-		if ( ! current_user_can( 'manage_options' ) ) {
+		if ( current_user_can( 'manage_options' ) && current_user_can( 'publish_jamp_notes' ) ) {
+			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-options-page.php';
+		} else {
+			?>
 
-			return;
-
+			<div class="wrap"><?php echo esc_html__( 'Sorry, you are not allowed to access this page.' ); ?></div>
+			
+			<?php
 		}
-
-		// Load page code.
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-options-page.php';
-
+		
 	}
 
 	/**
