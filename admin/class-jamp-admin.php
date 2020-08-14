@@ -657,7 +657,7 @@ class Jamp_Admin {
 				$url .= '?' . $query_string;
 			}
 		}
-		
+
 		// Remove a parameter added after WordPress settings save.
 		$url = remove_query_arg( 'settings-updated', $url );
 

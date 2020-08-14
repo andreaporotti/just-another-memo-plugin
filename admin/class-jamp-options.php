@@ -56,10 +56,10 @@ class Jamp_Options {
 			?>
 
 			<div class="wrap"><?php echo esc_html__( 'Sorry, you are not allowed to access this page.' ); ?></div>
-			
+
 			<?php
 		}
-		
+
 	}
 
 	/**
