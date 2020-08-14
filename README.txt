@@ -4,7 +4,7 @@ Tags: notes, note, memo, dashboard
 Requires at least: 4.9
 Tested up to: 5.5
 Requires PHP: 5.6
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,6 +17,7 @@ Using this plugin you can attach notes to some elements in the WordPress dashboa
 - posts
 - pages
 - custom post types from other plugins (except the notes from this plugin)
+- users
 - plugins
 - dashboard sections
 - the whole dashboard
@@ -86,6 +87,12 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 6. The plugin settings page.
 
 == Changelog ==
+
+**1.3.0**
+
+- NEW: notes can now be added to the users!
+- Fixed a problem preventing settings pages to be recognized as supported sections after settings save.
+- Improved user permissions check in the settings page.
 
 **1.2.0**
 

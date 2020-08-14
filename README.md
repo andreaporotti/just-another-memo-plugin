@@ -9,6 +9,7 @@ Using this plugin you can attach notes to some elements in the WordPress dashboa
 - posts
 - pages
 - custom post types from other plugins (except the notes from this plugin)
+- users
 - plugins
 - dashboard sections
 - the whole dashboard
@@ -78,6 +79,12 @@ This is the preferred way since it allows easy updates and provides latest stabl
 Please note: by default the plugin data is kept after uninstall. You can choose to delete all data going to *Settings* -> *JAMP Notes* and enabling data removal on uninstall.
 
 ## Changelog
+
+**1.3.0**
+
+- NEW: notes can now be added to the users!
+- Fixed a problem preventing settings pages to be recognized as supported sections after settings save.
+- Improved user permissions check in the settings page.
 
 **1.2.0**
 
