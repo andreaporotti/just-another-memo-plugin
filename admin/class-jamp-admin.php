@@ -657,6 +657,9 @@ class Jamp_Admin {
 				$url .= '?' . $query_string;
 			}
 		}
+		
+		// Remove a parameter added after WordPress settings save.
+		$url = remove_query_arg( 'settings-updated', $url );
 
 		// If current url is the admin url, let's add "index.php" to it so it's equal to the "Home" link in the sidebar menu.
 		if ( admin_url() === $url ) {
