@@ -88,13 +88,13 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 
 == Changelog ==
 
-**1.3.0**
+**1.3.0 [2020-08-15]**
 
-- NEW: notes can now be added to the users!
+- NEW: notes can now be added to the users! Go to *Settings* -> *JAMP Notes* to enable it.
 - Fixed a problem preventing settings pages to be recognized as supported sections after settings save.
 - Improved user permissions check in the settings page.
 
-**1.2.0**
+**1.2.0 [2020-07-13]**
 
 - NEW: notes can now be added to the plugins!
 - The Notes column has now a specific width to prevent random space usage.
@@ -105,14 +105,14 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 - A few changes for performance improvements.
 - Tested on WordPress 5.5.
 
-**1.1.0**
+**1.1.0 [2020-06-18]**
 
 - Added global and section notes counters on the admin bar.
 - Added validation to the Note Setting meta box.
 - Added a meta box to view notes attached to a post while editing it.
 - Improved content generation of Location column in the Notes page.
 
-**1.0.1**
+**1.0.1 [2020-06-10]**
 
 - Managed the admin bar panel max height.
 - Replaced the tooltip with a hidden section for the admin bar notes details. Click on the "I" icon to show it.
@@ -122,6 +122,6 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 - Fixed metabox style in mobile view.
 - Fixed settings page style in mobile view.
 
-**1.0.0**
+**1.0.0 [2020-06-03]**
 
 - First release.
