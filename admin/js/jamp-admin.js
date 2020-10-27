@@ -174,6 +174,7 @@
 
 			$( '.jamp-trash-dialog' ).dialog( {
 				modal: true,
+				closeText: '',
 				buttons: {
 					'OK': function() {
 						$( this ).dialog( 'close' );
@@ -191,6 +192,7 @@
 
 			$( '.jamp-trash-dialog' ).dialog( {
 				modal: true,
+				closeText: '',
 				buttons: {
 					'OK': function() {
 						$( this ).dialog( 'close' );
