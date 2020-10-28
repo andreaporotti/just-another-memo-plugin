@@ -460,7 +460,9 @@ class Jamp_Admin {
 					$enabled_post_types,
 					'normal',
 					'default',
-					array()
+					array(
+						'admin' => $this,
+					)
 				);
 
 			}

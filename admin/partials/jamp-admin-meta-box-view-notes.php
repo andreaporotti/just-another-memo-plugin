@@ -10,13 +10,31 @@
 ?>
 
 <?php
+// Get the current target type.
+$target_type       = '';
+$current_post_type = $args['args']['admin']->get_current_post_type();
+
+if ( ! empty( $current_post_type ) ) { // It's a post type admin page.
+	$target_type = $current_post_type;
+} else { // It's another admin page.
+	$screen      = get_current_screen();
+	$target_type = $screen->id;
+}
+
 // Get notes.
 $notes_args = array(
 	'post_type'      => 'jamp_note',
 	'posts_per_page' => -1,
-	'meta_key'       => 'jamp_target',
-	'meta_compare'   => '=',
-	'meta_value'     => $post->ID,
+	'meta_query'     => array(
+		array(
+			'key'   => 'jamp_target',
+			'value' => $post->ID,
+		),
+		array(
+			'key'   => 'jamp_target_type',
+			'value' => $target_type,
+		),
+	),
 );
 
 $notes = get_posts( $notes_args );

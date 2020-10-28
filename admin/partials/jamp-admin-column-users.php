@@ -12,13 +12,24 @@
 <?php
 if ( 'jamp_note' === $column_name ) {
 
+	// Get the current target type.
+	$screen      = get_current_screen();
+	$target_type = $screen->id;
+
 	// Get notes.
 	$notes_args = array(
 		'post_type'      => 'jamp_note',
 		'posts_per_page' => -1,
-		'meta_key'       => 'jamp_target',
-		'meta_compare'   => '=',
-		'meta_value'     => $user_id,
+		'meta_query'     => array(
+			array(
+				'key'   => 'jamp_target',
+				'value' => $user_id,
+			),
+			array(
+				'key'   => 'jamp_target_type',
+				'value' => $target_type,
+			),
+		),
 	);
 
 	$notes = get_posts( $notes_args );
@@ -63,10 +74,6 @@ if ( 'jamp_note' === $column_name ) {
 	$css_class = ( ! empty( $notes ) ) ? 'jamp-column-note__no-notes-notice--hidden' : '';
 
 	$column_content .= '<span class="jamp-column-note__no-notes-notice ' . esc_attr( $css_class ) . '">—</span>';
-
-	// Get the current target type.
-	$screen      = get_current_screen();
-	$target_type = $screen->id;
 
 	// New note link.
 	$create_url = add_query_arg(
