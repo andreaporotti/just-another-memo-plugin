@@ -145,7 +145,7 @@ if ( 'jamp_location' === $column_name ) {
 
 				if ( ! empty( $section_name ) ) {
 
-					echo '<strong>' . esc_html__( 'Section', 'jamp' ) . '</strong><br>' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
+					echo '<strong>' . esc_html__( 'Section', 'jamp' ) . '</strong><br>| ' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
 
 				} else {
 
@@ -230,7 +230,7 @@ if ( 'jamp_location' === $column_name ) {
 					if ( empty( $current_item_name ) ) {
 						$current_item_name = __( '(no title)' );
 					}
-					echo '<strong>' . esc_html__( 'Item', 'jamp' ) . '</strong><br>' . esc_html( $target_type_name ) . ' "' . esc_html( $current_item_name ) . '"';
+					echo '<strong>' . esc_html__( 'Item', 'jamp' ) . '</strong><br>| ' . esc_html( $target_type_name ) . ' "' . esc_html( $current_item_name ) . '"';
 
 				} else {
 
