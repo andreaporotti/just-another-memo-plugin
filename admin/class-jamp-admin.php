@@ -1102,4 +1102,26 @@ class Jamp_Admin {
 
 	}
 
+	/**
+	 * Sets previous status for the untrashed notes and the new status
+	 * for the other post types as per WordPress 5.6 default.
+	 *
+	 * @since    1.3.1
+	 * @param    string $new_status      The new status of the post being restored.
+	 * @param    int    $post_id         The ID of the post being restored.
+	 * @param    string $previous_status The status of the post at the point where it was trashed.
+	 * @return   string                  The new status of the post.
+	 */
+	public function untrash_notes_status( $new_status, $post_id, $previous_status ) {
+
+		$current_post_type = $this->get_current_post_type();
+
+		if ( 'jamp_note' === $current_post_type ) {
+			return $previous_status;
+		} else {
+			return $new_status;
+		}
+
+	}
+
 }

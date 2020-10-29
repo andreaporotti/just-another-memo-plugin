@@ -179,6 +179,8 @@ class Jamp {
 	 */
 	private function define_admin_hooks() {
 
+		global $wp_version;
+
 		$plugin_admin = new Jamp_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
@@ -199,6 +201,11 @@ class Jamp {
 		$this->loader->add_filter( 'redirect_post_location', $plugin_admin, 'redirect_after_save' );
 
 		$this->loader->add_filter( 'post_types_to_delete_with_user', $plugin_admin, 'post_types_to_delete_with_user', 10, 2 );
+
+		// Hook to this filter starting from WordPress 5.6 to change the new untrash behaviour.
+		if ( version_compare( $wp_version, '5.6-beta1-49262' ) >= 0 ) {
+			$this->loader->add_filter( 'wp_untrash_post_status', $plugin_admin, 'untrash_notes_status', 10, 3 );
+		}
 
 		// Ajax.
 		$this->loader->add_action( 'wp_ajax_build_targets_list', $plugin_admin, 'build_targets_list' );
