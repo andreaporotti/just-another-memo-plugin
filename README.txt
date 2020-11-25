@@ -2,9 +2,9 @@
 Contributors: andreaporotti
 Tags: notes, note, memo, dashboard
 Requires at least: 4.9
-Tested up to: 5.5
+Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.3.0
+Stable tag: 1.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,14 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 6. The plugin settings page.
 
 == Changelog ==
+
+**1.3.1 [2020-11-25]**
+
+- Fixed a bug that caused the loading of wrong notes in some conditions.
+- Improved menu items url generation (should support more plugins).
+- Tested on WordPress 5.6.
+- WP 5.6 compatibility: fixed a visual bug on the "Trash Note" dialog.
+- WP 5.6 compatibility: notes restored from trash will be published again (so we skip the new "trash to draft" WP default behavior)
 
 **1.3.0 [2020-08-15]**
 
