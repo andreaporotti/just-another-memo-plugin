@@ -151,9 +151,12 @@ class Jamp_Admin {
 						$file = remove_query_arg( 'return', wp_kses_decode_entities( $menu_item[2] ) );
 
 						// Generate section url.
-						$url = wp_specialchars_decode( menu_page_url( $menu_item[2], false ) );
-						if ( empty( $url ) ) {
+						if ( strpos( $menu_item[2], '.php' ) !== false ) {
+							// The item contains a file name.
 							$url = wp_specialchars_decode( admin_url( $menu_item[2] ) );
+						} else {
+							// Use admin.php if no file name has been found.
+							$url = wp_specialchars_decode( add_query_arg( 'page', $menu_item[2], admin_url( '/admin.php' ) ) );
 						}
 
 						$first_level_sections[] = array(
@@ -185,9 +188,15 @@ class Jamp_Admin {
 							$file = remove_query_arg( 'return', wp_kses_decode_entities( $submenu_item[2] ) );
 
 							// Generate section url.
-							$url = wp_specialchars_decode( menu_page_url( $submenu_item[2], false ) );
-							if ( empty( $url ) ) {
+							if ( strpos( $submenu_item[2], '.php' ) !== false ) {
+								// The item contains a file name.
 								$url = wp_specialchars_decode( admin_url( $submenu_item[2] ) );
+							} elseif ( strpos( $section['file'], '.php' ) !== false ) {
+								// The item parent contains a file name.
+								$url = wp_specialchars_decode( add_query_arg( 'page', $submenu_item[2], admin_url( $section['file'] ) ) );
+							} else {
+								// Use admin.php if no file name has been found.
+								$url = wp_specialchars_decode( add_query_arg( 'page', $submenu_item[2], admin_url( '/admin.php' ) ) );
 							}
 
 							$this->sections_list[] = array(
