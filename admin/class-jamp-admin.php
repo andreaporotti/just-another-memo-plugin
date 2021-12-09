@@ -39,7 +39,7 @@ class Jamp_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      array     $version    The list of all dashboard side menu items.
+	 * @var      array     $sections_list    The list of all dashboard side menu items.
 	 */
 	private $sections_list = array();
 
@@ -48,7 +48,7 @@ class Jamp_Admin {
 	 *
 	 * @since    1.0.0
 	 * @access   private
-	 * @var      array     $version    The list of all supported target types.
+	 * @var      array     $target_types_list    The list of all supported target types.
 	 */
 	private $target_types_list = array();
 
@@ -231,6 +231,9 @@ class Jamp_Admin {
 	 */
 	public function build_target_types_list( $filtered = true, $return = false ) {
 
+		// Reset the target types list.
+		$this->target_types_list = array();
+
 		// Get enabled target types.
 		$enabled_target_types = get_option( 'jamp_enabled_target_types', array() );
 
@@ -412,7 +415,10 @@ class Jamp_Admin {
 			do_action( 'adminmenu' );
 
 			// Get enabled target types.
-			$this->build_target_types_list();
+			$target_types = $this->build_target_types_list( true, true );
+
+			// Get all target types.
+			$target_types_full = $this->build_target_types_list( false, true );
 
 			$screens = array( 'jamp_note' );
 			foreach ( $screens as $screen ) {
@@ -424,8 +430,9 @@ class Jamp_Admin {
 					'side',
 					'default',
 					array(
-						'sections'     => $this->sections_list,
-						'target_types' => $this->target_types_list,
+						'sections'          => $this->sections_list,
+						'target_types'      => $target_types,
+						'target_types_full' => $target_types_full,
 					)
 				);
 			}
@@ -1129,6 +1136,33 @@ class Jamp_Admin {
 			return $previous_status;
 		} else {
 			return $new_status;
+		}
+
+	}
+
+	/**
+	 * Checks if a target type is enabled to have notes.
+	 *
+	 * @since    1.x.x
+	 * @param    string $target_type The target type name.
+	 */
+	private static function is_target_type_enabled( $target_type ) {
+
+		// If target type is missing.
+		if ( empty( $target_type ) ) {
+			return false;
+		}
+
+		// If passed target type is one of the default types.
+		if ( in_array( $target_type, array( 'global', 'section' ), true ) ) {
+			return true;
+		}
+
+		// If passed target type is one of the enabled types.
+		if ( in_array( $target_type, get_option( 'jamp_enabled_target_types', array() ), true ) ) {
+			return true;
+		} else {
+			return false;
 		}
 
 	}
