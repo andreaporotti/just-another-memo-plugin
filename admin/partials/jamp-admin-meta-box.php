@@ -51,6 +51,19 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	// Get post meta data.
 	$jamp_meta = get_post_meta( $post->ID );
 
+	// If this note's target type is not enabled.
+	if ( ! self::is_target_type_enabled( $jamp_meta['jamp_target_type'][0] ) ) {
+		// Get the label of this note's target type.
+		$target_types_names = array_column( $args['args']['target_types_full'], 'name' );
+		$target_type_id     = array_search( $jamp_meta['jamp_target_type'][0], $target_types_names, true );
+		$target_type_label  = $args['args']['target_types_full'][ $target_type_id ]['label'];
+
+		$message = sprintf(
+			// translators: %s is the item type name.
+			esc_html__( 'Please be aware that the Item Type of this note (%s) is not enabled in JAMP settings. Some of the above fields may be empty, but you can edit this note anyway.', 'jamp' ),
+			esc_html( $target_type_label )
+		);
+	}
 }
 ?>
 
@@ -120,4 +133,10 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 			<option value=""><?php esc_html_e( 'select...', 'jamp' ); ?></option>
 		</select>
 	</div>
+
+	<?php if ( isset( $message ) && ! empty( $message ) ) : ?>
+		<div class="meta-field meta-message">
+			<strong><?php echo esc_html( $message ); ?></strong>
+		</div>
+	<?php endif; ?>
 </fieldset>
