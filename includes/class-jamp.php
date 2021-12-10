@@ -200,7 +200,9 @@ class Jamp {
 		$this->loader->add_action( 'load-post.php', $plugin_admin, 'note_form_page' );
 		$this->loader->add_filter( 'redirect_post_location', $plugin_admin, 'redirect_after_save' );
 
+		// Elements deletion.
 		$this->loader->add_filter( 'post_types_to_delete_with_user', $plugin_admin, 'post_types_to_delete_with_user', 10, 2 );
+		$this->loader->add_action( 'before_delete_post', $plugin_admin, 'before_delete_post', 10, 2 );
 
 		// Hook to this filter starting from WordPress 5.6 to change the new untrash behaviour.
 		if ( version_compare( $wp_version, '5.6-beta1-49262' ) >= 0 ) {

@@ -1167,4 +1167,33 @@ class Jamp_Admin {
 
 	}
 
+	/**
+	 * Before deleting a post with attached notes, save the post name in a note custom field.
+	 *
+	 * @since    1.x.x
+	 * @param    int     $postid The post ID.
+	 * @param    WP_Post $post The post object.
+	 */
+	public function before_delete_post( $postid, $post ) {
+
+		// Skip post revisions.
+		if ( 'revision' !== $post->post_type ) {
+			// Look for notes attached to this post.
+			$notes_args = array(
+				'post_type'      => 'jamp_note',
+				'posts_per_page' => -1,
+				'meta_key'       => 'jamp_target',
+				'meta_compare'   => '=',
+				'meta_value'     => $post->ID,
+			);
+			$notes      = get_posts( $notes_args );
+
+			if ( ! empty( $notes ) ) {
+				foreach ( $notes as $note ) {
+					update_post_meta( $note->ID, 'jamp_deleted_target_name', $post->post_title );
+				}
+			}
+		}
+
+	}
 }
