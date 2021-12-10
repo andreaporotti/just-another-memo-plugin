@@ -252,6 +252,10 @@ if ( 'jamp_location' === $column_name ) {
 							<?php
 								$deleted_target_name = $jamp_meta['jamp_deleted_target_name'][0];
 
+								if ( empty( $deleted_target_name ) ) {
+									$deleted_target_name = __( '(no title)' );
+								}
+
 								// translators: %s is the deleted item name.
 								printf( esc_html__( 'Deleted item: %s.', 'jamp' ), esc_html( $deleted_target_name ) );
 							?>
