@@ -235,12 +235,31 @@ if ( 'jamp_location' === $column_name ) {
 				} else {
 
 					?>
+
 					<span class="jamp-column-note__orphan-note-notice">
 					<?php
 						// translators: %s is the item type the note is attached to (eg. post, page...).
 						printf( esc_html__( 'Note attached to a no longer existing %s.', 'jamp' ), esc_html( $target_type_name ) );
 					?>
 					</span>
+
+					<?php
+					// Show deleted item name, if any.
+					if ( isset( $jamp_meta['jamp_deleted_target_name'][0] ) ) {
+						?>
+						<span>
+							<br>
+							<?php
+								$deleted_target_name = $jamp_meta['jamp_deleted_target_name'][0];
+
+								// translators: %s is the deleted item name.
+								printf( esc_html__( 'Deleted item: %s.', 'jamp' ), esc_html( $deleted_target_name ) );
+							?>
+						</span>
+						<?php
+					}
+					?>
+
 					<?php
 
 				}
