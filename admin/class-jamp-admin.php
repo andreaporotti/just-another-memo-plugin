@@ -1227,4 +1227,43 @@ class Jamp_Admin {
 		}
 
 	}
+
+	/**
+	 * Before deleting a plugin with attached notes, save the plugin name in a note custom field.
+	 *
+	 * @since    1.x.x
+	 * @param    string $plugin_file Path to the plugin file.
+	 */
+	public function delete_plugin( $plugin_file ) {
+
+		// Look for notes attached to this user.
+		$notes_args = array(
+			'post_type'      => 'jamp_note',
+			'posts_per_page' => -1,
+			'meta_key'       => 'jamp_target',
+			'meta_compare'   => '=',
+			'meta_value'     => $plugin_file,
+		);
+		$notes      = get_posts( $notes_args );
+
+		if ( ! empty( $notes ) ) {
+			// Get plugin name.
+			$plugin_path = WP_PLUGIN_DIR . '/' . $plugin_file;
+
+			if ( file_exists( $plugin_path ) ) {
+				if ( ! function_exists( 'get_plugin_data' ) ) {
+					require_once ABSPATH . 'wp-admin/includes/plugin.php';
+				}
+
+				$plugin_data = get_plugin_data( $plugin_path, false, true );
+
+				if ( ! empty( $plugin_data ) ) {
+					foreach ( $notes as $note ) {
+						update_post_meta( $note->ID, 'jamp_deleted_target_name', $plugin_data['Name'] );
+					}
+				}
+			}
+		}
+
+	}
 }
