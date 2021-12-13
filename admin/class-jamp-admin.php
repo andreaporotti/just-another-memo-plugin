@@ -1196,4 +1196,35 @@ class Jamp_Admin {
 		}
 
 	}
+
+	/**
+	 * Before deleting a user with attached notes, save the user name in a note custom field.
+	 *
+	 * @since    1.x.x
+	 * @param    int      $id The user ID.
+	 * @param    int|null $reassign ID of the user to reassign posts.
+	 * @param    WP_User  $user The user object.
+	 */
+	public function delete_user( $id, $reassign, $user ) {
+
+		// Look for notes attached to this user.
+		$notes_args = array(
+			'post_type'      => 'jamp_note',
+			'posts_per_page' => -1,
+			'meta_key'       => 'jamp_target',
+			'meta_compare'   => '=',
+			'meta_value'     => $id,
+		);
+		$notes      = get_posts( $notes_args );
+
+		if ( ! empty( $notes ) ) {
+			// Get user's display_name.
+			$display_name = $user->data->display_name;
+
+			foreach ( $notes as $note ) {
+				update_post_meta( $note->ID, 'jamp_deleted_target_name', $display_name );
+			}
+		}
+
+	}
 }

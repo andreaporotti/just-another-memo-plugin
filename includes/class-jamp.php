@@ -203,6 +203,7 @@ class Jamp {
 		// Elements deletion.
 		$this->loader->add_filter( 'post_types_to_delete_with_user', $plugin_admin, 'post_types_to_delete_with_user', 10, 2 );
 		$this->loader->add_action( 'before_delete_post', $plugin_admin, 'before_delete_post', 10, 2 );
+		$this->loader->add_action( 'delete_user', $plugin_admin, 'delete_user', 10, 3 );
 
 		// Hook to this filter starting from WordPress 5.6 to change the new untrash behaviour.
 		if ( version_compare( $wp_version, '5.6-beta1-49262' ) >= 0 ) {
