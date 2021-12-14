@@ -80,6 +80,12 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 
 ## Changelog
 
+**1.3.2 [2021-12-14]**
+
+- If an item type is disabled in the plugin settings, a message will be displayed while editing notes of that type.
+- After an element with attached notes is deleted, the Notes list will show the name of the deleted item on the previously attached notes.
+- Tested on WordPress 5.9.
+
 **1.3.1 [2020-11-25]**
 
 - Fixed a bug that caused the loading of wrong notes in some conditions.
