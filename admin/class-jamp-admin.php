@@ -1143,7 +1143,7 @@ class Jamp_Admin {
 	/**
 	 * Checks if a target type is enabled to have notes.
 	 *
-	 * @since    1.x.x
+	 * @since    1.3.2
 	 * @param    string $target_type The target type name.
 	 */
 	private static function is_target_type_enabled( $target_type ) {
@@ -1170,7 +1170,7 @@ class Jamp_Admin {
 	/**
 	 * Before deleting a post with attached notes, save the post name in a note custom field.
 	 *
-	 * @since    1.x.x
+	 * @since    1.3.2
 	 * @param    int     $postid The post ID.
 	 * @param    WP_Post $post The post object.
 	 */
@@ -1200,7 +1200,7 @@ class Jamp_Admin {
 	/**
 	 * Before deleting a user with attached notes, save the user name in a note custom field.
 	 *
-	 * @since    1.x.x
+	 * @since    1.3.2
 	 * @param    int      $id The user ID.
 	 * @param    int|null $reassign ID of the user to reassign posts.
 	 * @param    WP_User  $user The user object.
@@ -1231,7 +1231,7 @@ class Jamp_Admin {
 	/**
 	 * Before deleting a plugin with attached notes, save the plugin name in a note custom field.
 	 *
-	 * @since    1.x.x
+	 * @since    1.3.2
 	 * @param    string $plugin_file Path to the plugin file.
 	 */
 	public function delete_plugin( $plugin_file ) {
