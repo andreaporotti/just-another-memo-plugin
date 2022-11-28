@@ -7,8 +7,14 @@
 */
 
 html {
-  --scrollbar-color: #32373c;
-  --scrollbar-thumb-color: #7d7d7d;
+	--scrollbar-color: #32373c;
+	--scrollbar-thumb-color: #7d7d7d;
+	--note-color-default: #fff;
+	--note-color-yellow: #FFFEBB;
+	--note-color-red: #FFC0BB;
+	--note-color-green: #D9FFBB;
+	--note-color-light-blue: #BBFFE6;
+	--note-color-light-purple: #E9BBFF;
 }
 
 .display-block {
@@ -322,8 +328,28 @@ th.column-jamp_note {
 .jamp-column-note {
 	box-sizing: border-box;
 	margin-bottom: 10px;
-	background-color: #fffebb;
+	background-color: var(--note-color-default);
 	border: 1px solid #c3c4c7;
+}
+
+.jamp-column-note--color-green {
+	background-color: var(--note-color-green);
+}
+
+.jamp-column-note--color-light-blue {
+	background-color: var(--note-color-light-blue);
+}
+
+.jamp-column-note--color-light-purple {
+	background-color: var(--note-color-light-purple);
+}
+
+.jamp-column-note--color-red {
+	background-color: var(--note-color-red);
+}
+
+.jamp-column-note--color-yellow {
+	background-color: var(--note-color-yellow);
 }
 
 .jamp-column-note--red-background {
