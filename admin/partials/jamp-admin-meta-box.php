@@ -28,6 +28,7 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	$jamp_meta['jamp_scope']       = array( ( isset( $params['jamp_scope'] ) ) ? $params['jamp_scope'] : '' );
 	$jamp_meta['jamp_target_type'] = array( ( isset( $params['jamp_target_type'] ) ) ? $params['jamp_target_type'] : '' );
 	$jamp_meta['jamp_target']      = array( ( isset( $params['jamp_target'] ) ) ? $params['jamp_target'] : '' );
+	$jamp_meta['jamp_color']       = array( ( isset( $params['jamp_color'] ) ) ? $params['jamp_color'] : '' );
 
 	// Replace '|' with '&' to re-build the correct url.
 	if ( isset( $jamp_meta['jamp_target'][0] ) ) {
@@ -46,6 +47,11 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	if ( ! in_array( $jamp_meta['jamp_scope'][0], array( 'global', 'section', 'entity' ), true ) ) {
 		$jamp_meta['jamp_scope'] = array( 'global' );
 	}
+
+	// Set default color.
+	if ( empty( $jamp_meta['jamp_color'][0] ) ) {
+		$jamp_meta['jamp_color'] = array('');
+	}
 } else { // Editing a note.
 
 	// Get post meta data.
@@ -63,6 +69,11 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 			esc_html__( 'Please be aware that the Item Type of this note (%s) is not enabled in JAMP settings. Some of the above fields may be empty, but you can edit this note anyway.', 'jamp' ),
 			esc_html( $target_type_label )
 		);
+	}
+
+	// If editing a note without the color meta, set the default color.
+	if ( empty( $jamp_meta['jamp_color'][0] ) ) {
+		$jamp_meta['jamp_color'] = array('');
 	}
 }
 ?>
@@ -133,10 +144,44 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 			<option value=""><?php esc_html_e( 'select...', 'jamp' ); ?></option>
 		</select>
 	</div>
-
-	<?php if ( isset( $message ) && ! empty( $message ) ) : ?>
-		<div class="meta-field meta-message">
-			<strong><?php echo esc_html( $message ); ?></strong>
-		</div>
-	<?php endif; ?>
 </fieldset>
+
+<div class="meta-field meta-color">
+	<span><?php esc_html_e( 'Select the note color.', 'jamp' ); ?></span>
+	<br>
+	<label for="color-none">
+		<input type="radio" name="color" id="color-none" value="" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], '' ) : ''; ?>>
+		<?php esc_html_e( 'None', 'jamp' ); ?>
+	</label>
+	<br>
+	<label for="color-yellow">
+		<input type="radio" name="color" id="color-yellow" value="yellow" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'yellow' ) : ''; ?>>
+		<?php esc_html_e( 'Yellow', 'jamp' ); ?>
+	</label>
+	<br>
+	<label for="color-green">
+		<input type="radio" name="color" id="color-green" value="green" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'green' ) : ''; ?>>
+		<?php esc_html_e( 'Green', 'jamp' ); ?>
+	</label>
+	<br>
+	<label for="color-red">
+		<input type="radio" name="color" id="color-red" value="red" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'red' ) : ''; ?>>
+		<?php esc_html_e( 'Red', 'jamp' ); ?>
+	</label>
+	<br>
+	<label for="color-light-blue">
+		<input type="radio" name="color" id="color-light-blue" value="light-blue" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'light-blue' ) : ''; ?>>
+		<?php esc_html_e( 'Light blue', 'jamp' ); ?>
+	</label>
+	<br>
+	<label for="color-light-purple">
+		<input type="radio" name="color" id="color-light-purple" value="light-purple" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'light-purple' ) : ''; ?>>
+		<?php esc_html_e( 'Light purple', 'jamp' ); ?>
+	</label>
+</div>
+
+<?php if ( isset( $message ) && ! empty( $message ) ) : ?>
+	<div class="meta-field meta-message">
+		<strong><?php echo esc_html( $message ); ?></strong>
+	</div>
+<?php endif; ?>

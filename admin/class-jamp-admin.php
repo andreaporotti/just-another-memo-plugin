@@ -544,6 +544,8 @@ class Jamp_Admin {
 						update_post_meta( $post_id, 'jamp_target', sanitize_text_field( wp_unslash( $_POST['target'] ) ) );
 					}
 				}
+
+				update_post_meta( $post_id, 'jamp_color', sanitize_text_field( wp_unslash( $_POST['color'] ) ) );
 			}
 		}
 
