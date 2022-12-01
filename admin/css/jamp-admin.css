@@ -9,7 +9,7 @@
 html {
 	--scrollbar-color: #32373c;
 	--scrollbar-thumb-color: #7d7d7d;
-	--note-color-default: #fff;
+	--note-color-none: #fff;
 	--note-color-yellow: #FFFEBB;
 	--note-color-red: #FFC0BB;
 	--note-color-green: #D9FFBB;
@@ -328,7 +328,7 @@ th.column-jamp_note {
 .jamp-column-note {
 	box-sizing: border-box;
 	margin-bottom: 10px;
-	background-color: var(--note-color-default);
+	background-color: var(--note-color-none);
 	border: 1px solid #c3c4c7;
 }
 
