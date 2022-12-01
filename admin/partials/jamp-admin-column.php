@@ -54,8 +54,14 @@ if ( 'jamp_note' === $column_name ) {
 			$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
 			$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)' ) );
 
+			$jamp_meta        = get_post_meta( $note->ID );
+			$note_color_class = '';
+			if ( isset( $jamp_meta['jamp_color'][0] ) && ! empty( $jamp_meta['jamp_color'][0] ) ) {
+				$note_color_class = 'jamp-column-note--color-' . $jamp_meta['jamp_color'][0];
+			}
+
 			?>
-			<div class="jamp-column-note" data-note="<?php echo esc_attr( $note->ID ); ?>">
+			<div class="jamp-column-note <?php echo esc_attr( $note_color_class ); ?>" data-note="<?php echo esc_attr( $note->ID ); ?>">
 				<span class="jamp-column-note__title"><?php echo esc_html( $note_title ); ?></span>
 				<div class="jamp-column-note__container">
 					<div class="jamp-column-note__content"><?php echo wp_kses_post( $note->post_content ); ?></div>
