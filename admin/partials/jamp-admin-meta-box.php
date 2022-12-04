@@ -82,10 +82,10 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 
 <?php // If form is disabled, create hidden fields in place of the actual fields. ?>
 <?php if ( $is_form_disabled ) : ?>
-	<input type="hidden" name="scope" id="scope" value="<?php echo esc_attr( $jamp_meta['jamp_scope'][0] ); ?>">
-	<input type="hidden" name="section" id="section" value="<?php echo esc_attr( $jamp_meta['jamp_target'][0] ); ?>">
-	<input type="hidden" name="target-type" id="target-type" value="<?php echo esc_attr( $jamp_meta['jamp_target_type'][0] ); ?>">
-	<input type="hidden" name="target" id="target" value="<?php echo esc_attr( $jamp_meta['jamp_target'][0] ); ?>">
+	<input type="hidden" name="scope" value="<?php echo esc_attr( $jamp_meta['jamp_scope'][0] ); ?>">
+	<input type="hidden" name="section" value="<?php echo esc_attr( $jamp_meta['jamp_target'][0] ); ?>">
+	<input type="hidden" name="target-type" value="<?php echo esc_attr( $jamp_meta['jamp_target_type'][0] ); ?>">
+	<input type="hidden" name="target" value="<?php echo esc_attr( $jamp_meta['jamp_target'][0] ); ?>">
 <?php endif; ?>
 
 <fieldset <?php disabled( $is_form_disabled, true ); ?>>
