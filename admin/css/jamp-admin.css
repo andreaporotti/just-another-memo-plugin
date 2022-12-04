@@ -55,6 +55,15 @@ html {
 	}
 }
 
+.jamp-color-preview {
+	display: inline-block;
+	vertical-align: bottom;
+	width: 2rem;
+	height: 1rem;
+	border: 1px solid #c3c4c7;
+	background-color: var(--note-color-none);
+}
+
 /*
 * META BOX - View Notes
 */

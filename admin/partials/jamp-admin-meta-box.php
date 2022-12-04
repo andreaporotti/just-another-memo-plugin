@@ -151,31 +151,37 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	<br>
 	<label for="color-none">
 		<input type="radio" name="color" id="color-none" value="" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], '' ) : ''; ?>>
+		<span class="jamp-color-preview"></span>
 		<?php esc_html_e( 'None', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="color-yellow">
 		<input type="radio" name="color" id="color-yellow" value="yellow" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'yellow' ) : ''; ?>>
+		<span class="jamp-color-preview jamp-column-note--color-yellow"></span>
 		<?php esc_html_e( 'Yellow', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="color-green">
 		<input type="radio" name="color" id="color-green" value="green" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'green' ) : ''; ?>>
+		<span class="jamp-color-preview jamp-column-note--color-green"></span>
 		<?php esc_html_e( 'Green', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="color-red">
 		<input type="radio" name="color" id="color-red" value="red" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'red' ) : ''; ?>>
+		<span class="jamp-color-preview jamp-column-note--color-red"></span>
 		<?php esc_html_e( 'Red', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="color-light-blue">
 		<input type="radio" name="color" id="color-light-blue" value="light-blue" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'light-blue' ) : ''; ?>>
+		<span class="jamp-color-preview jamp-column-note--color-light-blue"></span>
 		<?php esc_html_e( 'Light blue', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="color-light-purple">
 		<input type="radio" name="color" id="color-light-purple" value="light-purple" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'light-purple' ) : ''; ?>>
+		<span class="jamp-color-preview jamp-column-note--color-light-purple"></span>
 		<?php esc_html_e( 'Light purple', 'jamp' ); ?>
 	</label>
 </div>
