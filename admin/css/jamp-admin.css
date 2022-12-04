@@ -13,8 +13,8 @@ html {
 	--note-color-yellow: #FFFEBB;
 	--note-color-red: #FFC0BB;
 	--note-color-green: #D9FFBB;
-	--note-color-light-blue: #BBFFE6;
-	--note-color-light-purple: #E9BBFF;
+	--note-color-blue: #BBFFE6;
+	--note-color-purple: #E9BBFF;
 }
 
 .display-block {
@@ -345,12 +345,12 @@ th.column-jamp_note {
 	background-color: var(--note-color-green);
 }
 
-.jamp-column-note--color-light-blue {
-	background-color: var(--note-color-light-blue);
+.jamp-column-note--color-blue {
+	background-color: var(--note-color-blue);
 }
 
-.jamp-column-note--color-light-purple {
-	background-color: var(--note-color-light-purple);
+.jamp-column-note--color-purple {
+	background-color: var(--note-color-purple);
 }
 
 .jamp-column-note--color-red {

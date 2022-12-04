@@ -173,16 +173,16 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 		<?php esc_html_e( 'Red', 'jamp' ); ?>
 	</label>
 	<br>
-	<label for="color-light-blue">
-		<input type="radio" name="color" id="color-light-blue" value="light-blue" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'light-blue' ) : ''; ?>>
-		<span class="jamp-color-preview jamp-column-note--color-light-blue"></span>
-		<?php esc_html_e( 'Light blue', 'jamp' ); ?>
+	<label for="color-blue">
+		<input type="radio" name="color" id="color-blue" value="blue" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'blue' ) : ''; ?>>
+		<span class="jamp-color-preview jamp-column-note--color-blue"></span>
+		<?php esc_html_e( 'Blue', 'jamp' ); ?>
 	</label>
 	<br>
-	<label for="color-light-purple">
-		<input type="radio" name="color" id="color-light-purple" value="light-purple" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'light-purple' ) : ''; ?>>
-		<span class="jamp-color-preview jamp-column-note--color-light-purple"></span>
-		<?php esc_html_e( 'Light purple', 'jamp' ); ?>
+	<label for="color-purple">
+		<input type="radio" name="color" id="color-purple" value="purple" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'purple' ) : ''; ?>>
+		<span class="jamp-color-preview jamp-column-note--color-purple"></span>
+		<?php esc_html_e( 'Purple', 'jamp' ); ?>
 	</label>
 </div>
 
