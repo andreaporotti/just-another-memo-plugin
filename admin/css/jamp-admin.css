@@ -258,8 +258,8 @@ html {
 	height: auto;
 }
 
-.jamp-admin-bar-note--red-background {
-	background-color: #ffbfbf;
+.jamp-admin-bar-note--deleting {
+	background-color: #ff6767;
 }
 
 .jamp-admin-bar-note__title {	
@@ -368,8 +368,8 @@ th.column-jamp_note {
 	background-color: var(--note-color-yellow);
 }
 
-.jamp-column-note--red-background {
-	background-color: #ffbfbf;
+.jamp-column-note--deleting {
+	background-color: #ff6767;
 }
 
 .jamp-column-note img {
