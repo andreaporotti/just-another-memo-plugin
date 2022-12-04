@@ -58,10 +58,17 @@ html {
 .jamp-color-preview {
 	display: inline-block;
 	vertical-align: bottom;
-	width: 2rem;
-	height: 1rem;
+	width: 16px;
+	height: 16px;
 	border: 1px solid #c3c4c7;
 	background-color: var(--note-color-none);
+}
+
+@media only screen and (max-width: 782px) {
+	.jamp-color-preview {
+		width: 25px;
+		height: 25px;
+	}
 }
 
 /*
