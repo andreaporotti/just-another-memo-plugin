@@ -93,7 +93,7 @@ if ( 'jamp_note' === $column_name ) {
 	);
 
 	$column_content .= '<div class="jamp-column-note__generic-actions">'
-						. '<a href="' . esc_url( $create_url ) . '">' . esc_html__( 'Add New', 'jamp' ) . '</a>'
+						. '<a href="' . esc_url( $create_url ) . '">' . esc_html__( 'Add a note', 'jamp' ) . '</a>'
 					. '</div>';
 
 }
