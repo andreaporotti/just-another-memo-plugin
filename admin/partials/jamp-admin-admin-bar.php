@@ -93,7 +93,13 @@ if ( $this->is_section_supported() ) {
 			$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
 			$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
 
-			$html .= '<div class="jamp-admin-bar-note" data-note="' . esc_attr( $note->ID ) . '" data-scope="section">'
+			$jamp_meta        = get_post_meta( $note->ID );
+			$note_color_class = '';
+			if ( isset( $jamp_meta['jamp_color'][0] ) && ! empty( $jamp_meta['jamp_color'][0] ) ) {
+				$note_color_class = 'jamp-admin-bar-note--color-' . $jamp_meta['jamp_color'][0];
+			}
+
+			$html .= '<div class="jamp-admin-bar-note ' . esc_attr( $note_color_class ) . '" data-note="' . esc_attr( $note->ID ) . '" data-scope="section">'
 					. '<span class="jamp-admin-bar-note__title">' . esc_html( $note->post_title ) . '</span>'
 					. '<span class="jamp-admin-bar-note__actions">'
 					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--info" href="#" title="' . esc_html__( 'Details', 'jamp' ) . '"></a>'
