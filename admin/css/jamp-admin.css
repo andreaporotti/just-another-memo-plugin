@@ -231,16 +231,6 @@ html {
 	color: #a00 !important;
 }
 
-.jamp-admin-bar-note:before {
-	content: "";
-	position: absolute !important;
-	top: 0;
-	right: 0;
-	border-width: 0 10px 10px 0;
-	border-style: solid;
-	border-color: #c4c267 #32373c;
-}
-
 .jamp-admin-bar-note {
 	position: relative !important;
 	box-sizing: border-box !important;
@@ -248,7 +238,7 @@ html {
 	max-width: 500px;
 	padding: 8px 5px 5px 5px !important;
 	margin-bottom: 5px !important;
-	background-color: #fffebb;
+	background-color: var(--note-color-none);
 	color: #32373c;
 }
 
@@ -256,6 +246,26 @@ html {
 	display: block;
 	max-width: 100%;
 	height: auto;
+}
+
+.jamp-admin-bar-note--color-green {
+	background-color: var(--note-color-green);
+}
+
+.jamp-admin-bar-note--color-blue {
+	background-color: var(--note-color-blue);
+}
+
+.jamp-admin-bar-note--color-purple {
+	background-color: var(--note-color-purple);
+}
+
+.jamp-admin-bar-note--color-red {
+	background-color: var(--note-color-red);
+}
+
+.jamp-admin-bar-note--color-yellow {
+	background-color: var(--note-color-yellow);
 }
 
 .jamp-admin-bar-note--deleting {
@@ -302,16 +312,16 @@ html {
 
 .jamp-admin-bar-note__details {
 	display: none;
-	border-top: 1px solid #7d7d7d;
+	border-top: 1px solid #32373c;
 	padding-top: 2px !important;
-	margin-top: 5px !important;
+	margin-top: 6px !important;
+	color: #32373c;
 }
 
 .jamp-admin-bar-note__detail {
 	display: block;
 	font-size: 12px !important;
 	line-height: 1.2 !important;
-	color: #7d7d7d;
 }
 
 .jamp-admin-bar-note__detail-label {
