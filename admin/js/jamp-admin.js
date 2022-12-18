@@ -106,7 +106,7 @@
 			let existingNotes = cell.find( '.jamp-column-note' ).length;
 
 			// Hides current note.
-			selectedNote.addClass( 'jamp-column-note--deleting' ).fadeOut( 600, function() {
+			selectedNote.addClass( 'jamp-note--deleting' ).fadeOut( 600, function() {
 				// Removes hidden note.
 				$( this ).remove();
 
@@ -127,7 +127,7 @@
 			let existingNotes = section.find( '.jamp-admin-bar-note' ).length;
 
 			// Hides current note.
-			selectedNote.addClass( 'jamp-admin-bar-note--deleting' ).fadeOut( 600, function() {
+			selectedNote.addClass( 'jamp-note--deleting' ).fadeOut( 600, function() {
 				// Removes hidden note.
 				$( this ).remove();
 

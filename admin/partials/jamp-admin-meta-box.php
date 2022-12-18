@@ -157,31 +157,31 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	<br>
 	<label for="color-blue">
 		<input type="radio" name="color" id="color-blue" value="blue" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'blue' ) : ''; ?>>
-		<span class="jamp-color-preview jamp-column-note--color-blue"></span>
+		<span class="jamp-color-preview jamp-note--color-blue"></span>
 		<?php esc_html_e( 'Blue', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="color-green">
 		<input type="radio" name="color" id="color-green" value="green" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'green' ) : ''; ?>>
-		<span class="jamp-color-preview jamp-column-note--color-green"></span>
+		<span class="jamp-color-preview jamp-note--color-green"></span>
 		<?php esc_html_e( 'Green', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="color-purple">
 		<input type="radio" name="color" id="color-purple" value="purple" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'purple' ) : ''; ?>>
-		<span class="jamp-color-preview jamp-column-note--color-purple"></span>
+		<span class="jamp-color-preview jamp-note--color-purple"></span>
 		<?php esc_html_e( 'Purple', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="color-red">
 		<input type="radio" name="color" id="color-red" value="red" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'red' ) : ''; ?>>
-		<span class="jamp-color-preview jamp-column-note--color-red"></span>
+		<span class="jamp-color-preview jamp-note--color-red"></span>
 		<?php esc_html_e( 'Red', 'jamp' ); ?>
 	</label>
 	<br>
 	<label for="color-yellow">
 		<input type="radio" name="color" id="color-yellow" value="yellow" <?php ( isset( $jamp_meta['jamp_color'] ) ) ? checked( $jamp_meta['jamp_color'][0], 'yellow' ) : ''; ?>>
-		<span class="jamp-color-preview jamp-column-note--color-yellow"></span>
+		<span class="jamp-color-preview jamp-note--color-yellow"></span>
 		<?php esc_html_e( 'Yellow', 'jamp' ); ?>
 	</label>
 </div>
