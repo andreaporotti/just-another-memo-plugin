@@ -2,13 +2,13 @@
 Contributors: andreaporotti
 Tags: notes, note, memo, dashboard
 Requires at least: 4.9
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 5.6
-Stable tag: 1.3.2
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-This plugin allows you to attach notes to some WordPress elements like posts, pages, dashboard sections and others.
+This plugin allows you to attach notes to some WordPress elements like posts, pages, dashboard sections and more.
 
 == Description ==
 
@@ -27,11 +27,11 @@ It can be helpfull if you manage a site with other people or just to take notes 
 **Features**
 
 - manage notes like the standard posts by opening the Notes page from the admin menu.
-- while editing a note, use the meta box on the right to set note properties.
+- while editing a note, use the meta box on the right to set note properties (position, color,...)
 - manage section and global notes from the admin bar.
 - manage item notes (eg. posts and pages) from the custom column in the admin pages.
 - get notes details by hovering the mouse on the "Info" links or clicking on the "I" icons.
-- add images and links in the note content.
+- add text, images and links in the note content.
 - deleted notes go to the trash, so they can be restored.
 - automatically discovers custom post types added by other plugins (eg. events, books...).
 - creates a list of the dashboard sections based on the admin menu items.
@@ -43,12 +43,12 @@ Settings for the plugin are available on the *Settings* -> *JAMP Notes* page.
 Please note:
 
 - by default the plugin data is kept after uninstall. You can choose to delete notes and settings enabling the data removal option.
-- after activation, the plugin enables notes for all the existing public post types. If you then install other plugins which create new post types, you have to manually enable them in the settings.
+- after activation, the plugin enables notes for all the existing public post types. If you then install other plugins which create new post types, you have to manually enable them in the JAMP settings.
 
 **Permissions**
 
-The notes are currently available only for the Admin users.
-Each Admin can manage all notes.
+The notes are currently available only for the users with the "Administrator" role.
+Each Administrator can manage all notes.
 
 **Support**
 
@@ -87,6 +87,15 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 6. The plugin settings page.
 
 == Changelog ==
+
+**1.4.0 [2023-01-01]**
+
+Happy New Year! After a long time I'm back with a new release.
+
+- Now you can set the note color! While creating or editing a note choose a color in the note settings. The default color is yellow: existing notes without a color will be shown in yellow.
+- Changed the style of column notes to support the new color setting.
+- Small fixes and optimizations.
+- Tested on WordPress 6.1.
 
 **1.3.2 [2021-12-14]**
 
