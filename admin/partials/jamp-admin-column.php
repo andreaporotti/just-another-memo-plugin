@@ -55,7 +55,7 @@ if ( 'jamp_note' === $column_name ) {
 			$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)' ) );
 
 			$jamp_meta        = get_post_meta( $note->ID );
-			$note_color_class = '';
+			$note_color_class = 'jamp-note--color-yellow';
 			if ( isset( $jamp_meta['jamp_color'][0] ) && ! empty( $jamp_meta['jamp_color'][0] ) ) {
 				$note_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
 			}

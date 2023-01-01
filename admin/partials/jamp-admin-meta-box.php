@@ -50,7 +50,7 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 
 	// Set default color.
 	if ( empty( $jamp_meta['jamp_color'][0] ) ) {
-		$jamp_meta['jamp_color'] = array( '' );
+		$jamp_meta['jamp_color'] = array( 'yellow' );
 	}
 } else { // Editing a note.
 
@@ -73,7 +73,7 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 
 	// If editing a note without the color meta, set the default color.
 	if ( empty( $jamp_meta['jamp_color'][0] ) ) {
-		$jamp_meta['jamp_color'] = array( '' );
+		$jamp_meta['jamp_color'] = array( 'yellow' );
 	}
 }
 ?>

@@ -39,7 +39,7 @@ if ( ! empty( $global_notes ) ) {
 		$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)' ) );
 
 		$jamp_meta        = get_post_meta( $note->ID );
-		$note_color_class = '';
+		$note_color_class = 'jamp-note--color-yellow';
 		if ( isset( $jamp_meta['jamp_color'][0] ) && ! empty( $jamp_meta['jamp_color'][0] ) ) {
 			$note_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
 		}
@@ -94,7 +94,7 @@ if ( $this->is_section_supported() ) {
 			$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
 
 			$jamp_meta        = get_post_meta( $note->ID );
-			$note_color_class = '';
+			$note_color_class = 'jamp-note--color-yellow';
 			if ( isset( $jamp_meta['jamp_color'][0] ) && ! empty( $jamp_meta['jamp_color'][0] ) ) {
 				$note_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
 			}
