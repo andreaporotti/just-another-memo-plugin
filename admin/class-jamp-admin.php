@@ -53,6 +53,24 @@ class Jamp_Admin {
 	private $target_types_list = array();
 
 	/**
+	 * The ID of the note being processed.
+	 *
+	 * @since    1.x.x
+	 * @access   private
+	 * @var      int       $current_note    The ID of the note being processed.
+	 */
+	private $current_note_id;
+
+	/**
+	 * The meta of the note being processed.
+	 *
+	 * @since    1.x.x
+	 * @access   private
+	 * @var      mixed     $current_note    The meta of the note being processed.
+	 */
+	private $current_note_meta;
+
+	/**
 	 * Initializes the class and sets its properties.
 	 *
 	 * @since    1.0.0
@@ -625,6 +643,16 @@ class Jamp_Admin {
 			// Load the file if the column name contains the word 'jamp'.
 			if ( strpos( $column_name, 'jamp' ) !== false ) {
 
+				// If current post is a note and it's the first time we get this post, get note's meta.
+				if ( 'jamp_note' === get_post_type($post_id) && $this->current_note_id !== $post_id ) {
+					// Save current note.
+					$this->current_note_id = $post_id;
+
+					// Get note's meta.
+					$this->current_note_meta = get_post_meta( $post_id );
+				}
+
+				$jamp_meta = $this->current_note_meta;
 				require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
 
 			}
