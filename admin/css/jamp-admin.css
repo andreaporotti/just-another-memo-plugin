@@ -72,6 +72,13 @@ html {
 	}
 }
 
+@media only screen and (min-width: 783px) {
+	.jamp-color-preview--big {
+		width: 40px;
+		height: 40px;
+	}
+}
+
 /*
 * META BOX - View Notes
 */
@@ -499,4 +506,11 @@ th.column-jamp_note {
 /* Show the tooltip */
 .jamp-note-info-tooltip:hover .jamp-note-info-tooltip__content {
 	display: block !important;
+}
+
+/*
+* NOTES ADMIN SCREEN
+*/
+.post-type-jamp_note th.column-jamp_color {
+	width: 5%;
 }

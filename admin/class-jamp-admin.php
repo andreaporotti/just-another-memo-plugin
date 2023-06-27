@@ -577,6 +577,7 @@ class Jamp_Admin {
 				// Adds custom columns for notes page.
 				$columns['jamp_author']   = esc_html__( 'Author', 'jamp' );
 				$columns['jamp_location'] = esc_html__( 'Location', 'jamp' );
+				$columns['jamp_color']    = esc_html__( 'Color', 'jamp' );
 
 				// Re-add Date column at the end.
 				$columns['date'] = $date_column_label;

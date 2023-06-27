@@ -113,6 +113,18 @@ if ( 'jamp_note' === $column_name ) {
 }
 
 // Columns on the notes post type page.
+if ( 'jamp_color' === $column_name ) {
+
+	$jamp_meta = get_post_meta( $post_id );
+
+	if ( isset( $jamp_meta['jamp_color'] ) ) {
+		echo '<span class="jamp-color-preview jamp-color-preview--big jamp-note--color-' . $jamp_meta['jamp_color'][0] . '" title="' . esc_attr( "Color: ", "jamp" ) . ' ' . esc_attr( "blue", "jamp" ) . '"></span>';
+	} else {
+		echo '<span class="jamp-color-preview jamp-color-preview--big" title="' . esc_attr( "Color: ", "jamp" ) . ' ' . esc_attr( "none", "jamp" ) . '"></span>';
+	}
+
+}
+
 if ( 'jamp_author' === $column_name ) {
 
 	$note        = get_post( $post_id );
