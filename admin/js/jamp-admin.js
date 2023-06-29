@@ -264,6 +264,14 @@
 			}
 		} );
 
+		// Open or close a column note.
+		$( '.jamp-column-note__title' ).on( 'click', function( e ) {
+			e.preventDefault();
+
+			$(this).children( '.jamp-column-note__arrow' ).toggleClass( 'rotate-180' );
+			$(this).next( '.jamp-column-note__container' ).slideToggle( 300 );
+		} );
+
 	});
 
 })( jQuery );

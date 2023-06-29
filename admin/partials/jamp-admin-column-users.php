@@ -53,7 +53,11 @@ if ( 'jamp_note' === $column_name ) {
 			}
 
 			$column_content .= '<div class="jamp-column-note ' . esc_attr( $note_color_class ) . '" data-note="' . esc_attr( $note->ID ) . '">'
-								. '<span class="jamp-column-note__title">' . esc_html( $note_title ) . '</span>'
+								. '<button class="jamp-column-note__title">'
+									. '<span>' . esc_html( $note_title ) . '</span>'
+									. '<span class="jamp-column-note__arrow" aria-hidden="true">&#9650;</span>'
+									. '<span class="screen-reader-text">' . esc_html( 'Click to open or close the note', 'jamp' ) . '</span>'
+								. '</button>'
 								. '<div class="jamp-column-note__container">'
 									. '<div class="jamp-column-note__content">' . wp_kses_post( $note->post_content ) . '</div>'
 									. '<div class="jamp-column-note__note-actions">'

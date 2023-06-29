@@ -62,7 +62,11 @@ if ( 'jamp_note' === $column_name ) {
 
 			?>
 			<div class="jamp-column-note <?php echo esc_attr( $note_color_class ); ?>" data-note="<?php echo esc_attr( $note->ID ); ?>">
-				<span class="jamp-column-note__title"><?php echo esc_html( $note_title ); ?></span>
+				<button class="jamp-column-note__title">
+					<span><?php echo esc_html( $note_title ); ?></span>
+					<span class="jamp-column-note__arrow" aria-hidden="true">&#9650;</span>
+					<span class="screen-reader-text"><?php echo esc_html( 'Click to open or close the note', 'jamp' ); ?></span>
+				</button>
 				<div class="jamp-column-note__container">
 					<div class="jamp-column-note__content"><?php echo wp_kses_post( $note->post_content ); ?></div>
 					<div class="jamp-column-note__note-actions">
