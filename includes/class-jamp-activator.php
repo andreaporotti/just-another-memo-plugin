@@ -64,6 +64,10 @@ class Jamp_Activator {
 			add_option( 'jamp_enabled_target_types', $target_types_names, '', 'no' );
 		}
 
+		if ( false === get_option( 'jamp_column_notes_closed' ) ) {
+			add_option( 'jamp_column_notes_closed', 0, '', 'no' );
+		}
+
 	}
 
 }

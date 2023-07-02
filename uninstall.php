@@ -47,6 +47,7 @@ if ( '1' === $option_delete_data_on_uninstall ) {
 		'jamp_delete_data_on_uninstall',
 		'jamp_permissions',
 		'jamp_enabled_target_types',
+		'jamp_column_notes_closed',
 	);
 
 	foreach ( $options as $option ) {

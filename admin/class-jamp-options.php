@@ -114,6 +114,49 @@ class Jamp_Options {
 
 		// Add a new section.
 		add_settings_section(
+			'jamp_options_section_appearance',
+			esc_html__( 'Appearance', 'jamp' ),
+			array(
+				$this,
+				'options_section_appearance',
+			),
+			'jamp_options'
+		);
+
+		// Register a setting.
+		register_setting(
+			'jamp_options',
+			'jamp_column_notes_closed',
+			array(
+				'type'              => 'boolean',
+				'show_in_rest'      => false,
+				'default'           => 0,
+				'sanitize_callback' => array(
+					$this,
+					'option_column_notes_closed_sanitize',
+				),
+			)
+		);
+
+		// Add setting field to the section.
+		add_settings_field(
+			'jamp_column_notes_closed',
+			esc_html__( 'Keep column notes closed', 'jamp' ),
+			array(
+				$this,
+				'option_column_notes_closed',
+			),
+			'jamp_options',
+			'jamp_options_section_appearance',
+			array(
+				'label_for' => 'jamp_column_notes_closed',
+			)
+		);
+
+		/* ====================================================== */
+
+		// Add a new section.
+		add_settings_section(
 			'jamp_options_section_uninstall',
 			esc_html__( 'Plugin uninstall', 'jamp' ),
 			array(
@@ -212,6 +255,61 @@ class Jamp_Options {
 
 		if ( empty( $value ) ) {
 			$value = array();
+		}
+
+		return $value;
+
+	}
+
+	/**
+	 * Callback for the appearance options section output.
+	 *
+	 * @since    1.5.0
+	 * @param    array $args Array of section attributes.
+	 */
+	public function options_section_appearance( $args ) {
+
+		?>
+		<p id="<?php echo esc_attr( $args['id'] ); ?>">
+			<?php echo esc_html__( 'Configure notes visual features.', 'jamp' ); ?>
+		</p>
+		<?php
+
+	}
+
+	/**
+	 * Callback for the column_notes_closed option field output.
+	 *
+	 * @since    1.5.0
+	 * @param    array $args Array of field attributes.
+	 */
+	public function option_column_notes_closed( $args ) {
+
+		// Get the option value.
+		$option_column_notes_closed = get_option( $args['label_for'], 0 );
+
+		?>
+		<fieldset>
+			<input type="checkbox" id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr( $args['label_for'] ); ?>" value="1" <?php checked( $option_column_notes_closed, 1 ); ?>>
+			<label for="<?php echo esc_attr( $args['label_for'] ); ?>"><?php echo esc_html__( 'Enabled', 'jamp' ); ?></label>
+			<p class="description">
+				<?php echo esc_html__( 'Enabling this option all the notes will appear closed by default and only the title will be visible. Clicking on the title will open or close the note.', 'jamp' ); ?>
+			</p>
+		</fieldset>
+		<?php
+
+	}
+
+	/**
+	 * Callback for the column_notes_closed option value sanitization.
+	 *
+	 * @since    1.5.0
+	 * @param    string $value Option value.
+	 */
+	public function option_column_notes_closed_sanitize( $value ) {
+
+		if ( '1' !== $value ) {
+			return 0;
 		}
 
 		return $value;

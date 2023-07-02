@@ -39,6 +39,11 @@ if ( 'jamp_note' === $column_name ) {
 		// Define date/time format.
 		$date_time_format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
 
+		// Get notes appearance.
+		$column_notes_closed             = get_option( 'jamp_column_notes_closed' );
+		$column_notes_closed_class       = ( $column_notes_closed ) ? 'jamp-column-note--close' : '';
+		$column_notes_closed_arrow_class = ( $column_notes_closed ) ? 'rotate-180' : '';
+
 		foreach ( $notes as $note ) {
 
 			$note_author        = get_userdata( $note->post_author );
@@ -52,10 +57,10 @@ if ( 'jamp_note' === $column_name ) {
 				$note_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
 			}
 
-			$column_content .= '<div class="jamp-column-note ' . esc_attr( $note_color_class ) . '" data-note="' . esc_attr( $note->ID ) . '">'
+			$column_content .= '<div class="jamp-column-note ' . esc_attr( $note_color_class ) . ' ' . esc_attr( $column_notes_closed_class ) . '" data-note="' . esc_attr( $note->ID ) . '">'
 								. '<button class="jamp-column-note__title">'
 									. '<span>' . esc_html( $note_title ) . '</span>'
-									. '<span class="jamp-column-note__arrow" aria-hidden="true">&#9650;</span>'
+									. '<span class="jamp-column-note__arrow ' . esc_attr( $column_notes_closed_arrow_class ) . '" aria-hidden="true">&#9650;</span>'
 									. '<span class="screen-reader-text">' . esc_html( 'Click to open or close the note', 'jamp' ) . '</span>'
 								. '</button>'
 								. '<div class="jamp-column-note__container">'
