@@ -55,7 +55,7 @@ class Jamp_Admin {
 	/**
 	 * The ID of the note being processed.
 	 *
-	 * @since    1.x.x
+	 * @since    1.5.0
 	 * @access   private
 	 * @var      int       $current_note    The ID of the note being processed.
 	 */
@@ -64,7 +64,7 @@ class Jamp_Admin {
 	/**
 	 * The meta of the note being processed.
 	 *
-	 * @since    1.x.x
+	 * @since    1.5.0
 	 * @access   private
 	 * @var      mixed     $current_note    The meta of the note being processed.
 	 */
