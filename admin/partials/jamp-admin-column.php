@@ -70,7 +70,7 @@ if ( 'jamp_note' === $column_name ) {
 				<button class="jamp-column-note__title">
 					<span><?php echo esc_html( $note_title ); ?></span>
 					<span class="jamp-column-note__arrow <?php echo esc_attr( $column_notes_closed_arrow_class ); ?>" aria-hidden="true">&#9650;</span>
-					<span class="screen-reader-text"><?php echo esc_html( 'Click to open or close the note', 'jamp' ); ?></span>
+					<span class="screen-reader-text"><?php echo esc_html__( 'Click to open or close the note', 'jamp' ); ?></span>
 				</button>
 				<div class="jamp-column-note__container">
 					<div class="jamp-column-note__content"><?php echo wp_kses_post( $note->post_content ); ?></div>
@@ -125,11 +125,10 @@ if ( 'jamp_note' === $column_name ) {
 if ( 'jamp_color' === $column_name ) {
 
 	if ( isset( $jamp_meta['jamp_color'] ) ) {
-		echo '<span class="jamp-color-preview jamp-color-preview--big jamp-note--color-' . $jamp_meta['jamp_color'][0] . '" title="' . esc_attr( "Color: ", "jamp" ) . ' ' . esc_attr( "blue", "jamp" ) . '"></span>';
+		echo '<span class="jamp-color-preview jamp-color-preview--big jamp-note--color-' . esc_attr( $jamp_meta['jamp_color'][0] ) . '" title="' . esc_attr__( 'Color: ', 'jamp' ) . ' ' . esc_attr__( 'blue', 'jamp' ) . '"></span>';
 	} else {
-		echo '<span class="jamp-color-preview jamp-color-preview--big" title="' . esc_attr( "Color: ", "jamp" ) . ' ' . esc_attr( "none", "jamp" ) . '"></span>';
+		echo '<span class="jamp-color-preview jamp-color-preview--big" title="' . esc_attr__( 'Color: ', 'jamp' ) . ' ' . esc_attr__( 'none', 'jamp' ) . '"></span>';
 	}
-
 }
 
 if ( 'jamp_author' === $column_name ) {

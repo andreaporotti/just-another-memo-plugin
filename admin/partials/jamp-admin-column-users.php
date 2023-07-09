@@ -61,7 +61,7 @@ if ( 'jamp_note' === $column_name ) {
 								. '<button class="jamp-column-note__title">'
 									. '<span>' . esc_html( $note_title ) . '</span>'
 									. '<span class="jamp-column-note__arrow ' . esc_attr( $column_notes_closed_arrow_class ) . '" aria-hidden="true">&#9650;</span>'
-									. '<span class="screen-reader-text">' . esc_html( 'Click to open or close the note', 'jamp' ) . '</span>'
+									. '<span class="screen-reader-text">' . esc_html__( 'Click to open or close the note', 'jamp' ) . '</span>'
 								. '</button>'
 								. '<div class="jamp-column-note__container">'
 									. '<div class="jamp-column-note__content">' . wp_kses_post( $note->post_content ) . '</div>'

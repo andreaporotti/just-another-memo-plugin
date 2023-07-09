@@ -644,7 +644,7 @@ class Jamp_Admin {
 			if ( strpos( $column_name, 'jamp' ) !== false ) {
 
 				// If current post is a note and it's the first time we get this post, get note's meta.
-				if ( 'jamp_note' === get_post_type($post_id) && $this->current_note_id !== $post_id ) {
+				if ( 'jamp_note' === get_post_type( $post_id ) && $this->current_note_id !== $post_id ) {
 					// Save current note.
 					$this->current_note_id = $post_id;
 
