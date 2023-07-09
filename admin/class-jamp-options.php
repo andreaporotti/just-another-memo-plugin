@@ -149,7 +149,7 @@ class Jamp_Options {
 			'jamp_options',
 			'jamp_options_section_appearance',
 			array(
-				'label_for' => 'jamp_column_notes_closed',
+				'name' => 'jamp_column_notes_closed',
 			)
 		);
 
@@ -192,7 +192,7 @@ class Jamp_Options {
 			'jamp_options',
 			'jamp_options_section_uninstall',
 			array(
-				'label_for' => 'jamp_delete_data_on_uninstall',
+				'name' => 'jamp_delete_data_on_uninstall',
 			)
 		);
 
@@ -286,12 +286,12 @@ class Jamp_Options {
 	public function option_column_notes_closed( $args ) {
 
 		// Get the option value.
-		$option_column_notes_closed = get_option( $args['label_for'], 0 );
+		$option_column_notes_closed = get_option( $args['name'], 0 );
 
 		?>
 		<fieldset>
-			<input type="checkbox" id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr( $args['label_for'] ); ?>" value="1" <?php checked( $option_column_notes_closed, 1 ); ?>>
-			<label for="<?php echo esc_attr( $args['label_for'] ); ?>"><?php echo esc_html__( 'Enabled', 'jamp' ); ?></label>
+			<input type="checkbox" id="<?php echo esc_attr( $args['name'] ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>" value="1" <?php checked( $option_column_notes_closed, 1 ); ?>>
+			<label for="<?php echo esc_attr( $args['name'] ); ?>"><?php echo esc_html__( 'Enabled', 'jamp' ); ?></label>
 			<p class="description">
 				<?php echo esc_html__( 'Enabling this option all the notes will appear closed by default and only the title will be visible. Clicking on the title will open or close the note.', 'jamp' ); ?>
 			</p>
@@ -341,12 +341,12 @@ class Jamp_Options {
 	public function option_delete_data_on_uninstall( $args ) {
 
 		// Get the option value.
-		$option_delete_data_on_uninstall = get_option( $args['label_for'], 0 );
+		$option_delete_data_on_uninstall = get_option( $args['name'], 0 );
 
 		?>
 		<fieldset>
-			<input type="checkbox" id="<?php echo esc_attr( $args['label_for'] ); ?>" name="<?php echo esc_attr( $args['label_for'] ); ?>" value="1" <?php checked( $option_delete_data_on_uninstall, 1 ); ?>>
-			<label for="<?php echo esc_attr( $args['label_for'] ); ?>"><?php echo esc_html__( 'Enabled', 'jamp' ); ?></label>
+			<input type="checkbox" id="<?php echo esc_attr( $args['name'] ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>" value="1" <?php checked( $option_delete_data_on_uninstall, 1 ); ?>>
+			<label for="<?php echo esc_attr( $args['name'] ); ?>"><?php echo esc_html__( 'Enabled', 'jamp' ); ?></label>
 			<p class="description">
 				<?php echo esc_html__( 'Please note: enabling this option, all notes and settings will be PERMANENTLY DELETED when you uninstall the plugin.', 'jamp' ); ?>
 			</p>
