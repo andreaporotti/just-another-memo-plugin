@@ -80,6 +80,15 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 
 ## Changelog
 
+**1.5.0 [2023-07-31]**
+
+- Column notes can now be collapsed! This prevents from having lot of vertical space taken by notes. By default notes are open but can be set as closed in the plugin settings. (thanks to @cebuss for the feature suggestion)
+- Added a column to the notes admin page to display the note color.
+- Fixed an accessibility issue in the plugin settings page (multiple labels for the same fields)
+- Performance improvements.
+- Tested on WordPress 6.3.
+- Tested on PHP 8.0.x.
+
 **1.4.0 [2023-01-01]**
 
 - Now you can set the note color! While creating or editing a note choose a color in the note settings. The default color is yellow: existing notes without a color will be shown in yellow.
