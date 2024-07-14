@@ -22,7 +22,10 @@ if ( 'add' === $screen->action ) { // Creating a new note.
 	// Extract parameters from querystring.
 	$current_url = self::get_current_page_url();
 	$querystring = wp_parse_url( $current_url, PHP_URL_QUERY );
-	parse_str( $querystring, $params );
+
+	if ( ! empty( $querystring ) ) {
+		parse_str( $querystring, $params );
+	}
 
 	$jamp_meta                     = array();
 	$jamp_meta['jamp_scope']       = array( ( isset( $params['jamp_scope'] ) ) ? $params['jamp_scope'] : '' );

@@ -829,7 +829,10 @@ class Jamp_Admin {
 			// Extract parameters from querystring.
 			$current_url = $this->get_current_page_url();
 			$querystring = wp_parse_url( $current_url, PHP_URL_QUERY );
-			parse_str( $querystring, $params );
+
+			if ( ! empty( $querystring ) ) {
+				parse_str( $querystring, $params );
+			}
 
 			// Get post type.
 			$post_type      = '';
