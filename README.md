@@ -80,6 +80,11 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 
 ## Changelog
 
+**1.5.1 [2024-07-14]**
+
+- Tested on WordPress 6.6.
+- Fixed "deprecated" messages on PHP >= 8.1.
+
 **1.5.0 [2023-07-31]**
 
 - Column notes can now be collapsed! This prevents from having lot of vertical space taken by notes. By default notes are open but can be set as closed in the plugin settings. (thanks to @cebuss for the feature suggestion)
