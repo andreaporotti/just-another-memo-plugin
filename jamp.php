@@ -49,6 +49,11 @@ define( 'JAMP_VERSION', '1.5.1' );
 define( 'JAMP_PLUGIN_NAME', 'JAMP Notes' );
 
 /**
+ * Plugin base name.
+ */
+define( 'JAMP_PLUGIN_BASE_NAME', plugin_basename(__FILE__) );
+
+/**
  * The code that runs during plugin activation.
  */
 function activate_jamp() {
