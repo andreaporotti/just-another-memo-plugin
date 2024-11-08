@@ -1302,4 +1302,25 @@ class Jamp_Admin {
 		}
 
 	}
+
+	/**
+	 * Adds links to the plugin actions in the Plugins page.
+	 *
+	 * @since    1.5.2
+	 * @param    array  $plugin_actions    The plugin action links.
+	 * @param    string $plugin_file       The plugin main file name.
+	 */
+	public function plugin_action_links( $plugin_actions, $plugin_file ) {
+
+		$new_actions = array();
+
+		$new_actions['jamp_settings'] = sprintf(
+			'<a href="%1$s">%2$s</a>',
+			esc_url( add_query_arg( 'page', 'jamp_options', admin_url( 'options-general.php' ) ) ),
+			__( 'Settings', 'jamp' ),
+		);
+
+		return array_merge( $plugin_actions, $new_actions );
+
+	}
 }

@@ -229,6 +229,9 @@ class Jamp {
 		$this->loader->add_filter( 'manage_users_columns', $plugin_admin, 'manage_columns_headers' );
 		$this->loader->add_action( 'manage_users_custom_column', $plugin_admin, 'manage_users_columns_content', 10, 3 );
 
+		// Plugin links.
+		$this->loader->add_filter( 'plugin_action_links_jamp/jamp.php', $plugin_admin, 'plugin_action_links', 10, 2 );
+
 		// Plugin options.
 		$plugin_options = new Jamp_Options();
 
