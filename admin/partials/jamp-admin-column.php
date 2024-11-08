@@ -125,7 +125,7 @@ if ( 'jamp_note' === $column_name ) {
 if ( 'jamp_color' === $column_name ) {
 
 	if ( isset( $jamp_meta['jamp_color'] ) ) {
-		echo '<span class="jamp-color-preview jamp-color-preview--big jamp-note--color-' . esc_attr( $jamp_meta['jamp_color'][0] ) . '" title="' . esc_attr__( 'Color: ', 'jamp' ) . ' ' . esc_attr__( 'blue', 'jamp' ) . '"></span>';
+		echo '<span class="jamp-color-preview jamp-color-preview--big jamp-note--color-' . esc_attr( $jamp_meta['jamp_color'][0] ) . '" title="' . esc_attr__( 'Color: ', 'jamp' ) . ' ' . esc_attr__( $jamp_meta['jamp_color'][0], 'jamp' ) . '"></span>';
 	} else {
 		echo '<span class="jamp-color-preview jamp-color-preview--big" title="' . esc_attr__( 'Color: ', 'jamp' ) . ' ' . esc_attr__( 'none', 'jamp' ) . '"></span>';
 	}
