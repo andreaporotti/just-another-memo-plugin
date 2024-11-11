@@ -53,8 +53,13 @@ if ( 'jamp_note' === $column_name ) {
 
 			$jamp_meta        = get_post_meta( $note->ID );
 			$note_color_class = 'jamp-note--color-yellow';
-			if ( isset( $jamp_meta['jamp_color'][0] ) && ! empty( $jamp_meta['jamp_color'][0] ) ) {
-				$note_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
+
+			if ( isset( $jamp_meta['jamp_color'] ) ) {
+				if ( ! empty( $jamp_meta['jamp_color'][0] ) ) {
+					$note_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
+				} else {
+					$note_color_class = '';
+				}
 			}
 
 			$column_content .= '<div class="jamp-column-note ' . esc_attr( $note_color_class ) . ' ' . esc_attr( $column_notes_closed_class ) . '" data-note="' . esc_attr( $note->ID ) . '">'

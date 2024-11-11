@@ -61,8 +61,13 @@ if ( 'jamp_note' === $column_name ) {
 
 			$jamp_meta        = get_post_meta( $note->ID );
 			$note_color_class = 'jamp-note--color-yellow';
-			if ( isset( $jamp_meta['jamp_color'][0] ) && ! empty( $jamp_meta['jamp_color'][0] ) ) {
-				$note_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
+
+			if ( isset( $jamp_meta['jamp_color'] ) ) {
+				if ( ! empty( $jamp_meta['jamp_color'][0] ) ) {
+					$note_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
+				} else {
+					$note_color_class = '';
+				}
 			}
 
 			?>
@@ -124,11 +129,22 @@ if ( 'jamp_note' === $column_name ) {
 // Columns on the notes post type page.
 if ( 'jamp_color' === $column_name ) {
 
+	// Set default color preview values.
+	$preview_color_class = 'jamp-note--color-yellow';
+	$preview_color_title = 'yellow';
+
+	// Check the color meta value if exixsts.
 	if ( isset( $jamp_meta['jamp_color'] ) ) {
-		echo '<span class="jamp-color-preview jamp-color-preview--big jamp-note--color-' . esc_attr( $jamp_meta['jamp_color'][0] ) . '" title="' . esc_attr__( 'Color: ', 'jamp' ) . ' ' . esc_attr__( $jamp_meta['jamp_color'][0], 'jamp' ) . '"></span>';
-	} else {
-		echo '<span class="jamp-color-preview jamp-color-preview--big" title="' . esc_attr__( 'Color: ', 'jamp' ) . ' ' . esc_attr__( 'none', 'jamp' ) . '"></span>';
+		if ( ! empty( $jamp_meta['jamp_color'][0] ) ) {
+			$preview_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
+			$preview_color_title = $jamp_meta['jamp_color'][0];
+		} else {
+			$preview_color_class = '';
+			$preview_color_title = 'none';
+		}
 	}
+
+	echo '<span class="jamp-color-preview jamp-color-preview--big ' . esc_attr( $preview_color_class ) . '" title="' . esc_attr__( 'Color: ', 'jamp' ) . ' ' . esc_attr__( $preview_color_title, 'jamp' ) . '"></span>';
 }
 
 if ( 'jamp_author' === $column_name ) {
