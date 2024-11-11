@@ -1317,7 +1317,7 @@ class Jamp_Admin {
 		$new_actions['jamp_settings'] = sprintf(
 			'<a href="%1$s">%2$s</a>',
 			esc_url( add_query_arg( 'page', 'jamp_options', admin_url( 'options-general.php' ) ) ),
-			__( 'Settings', 'jamp' ),
+			__( 'Settings' ),
 		);
 
 		return array_merge( $plugin_actions, $new_actions );
