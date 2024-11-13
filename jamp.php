@@ -51,7 +51,7 @@ define( 'JAMP_PLUGIN_NAME', 'JAMP Notes' );
 /**
  * Plugin base name.
  */
-define( 'JAMP_PLUGIN_BASE_NAME', plugin_basename(__FILE__) );
+define( 'JAMP_PLUGIN_BASE_NAME', plugin_basename( __FILE__ ) );
 
 /**
  * The code that runs during plugin activation.
@@ -87,6 +87,5 @@ function run_jamp() {
 
 	$plugin = new Jamp();
 	$plugin->run();
-
 }
 run_jamp();

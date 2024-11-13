@@ -45,7 +45,6 @@ class Jamp_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-
 	}
 
 	/**
@@ -64,7 +63,6 @@ class Jamp_Public {
 			wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . '../admin/css/jamp-admin' . $min . '.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
 
 		}
-
 	}
 
 	/**
@@ -101,7 +99,5 @@ class Jamp_Public {
 			);
 
 		}
-
 	}
-
 }

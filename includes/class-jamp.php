@@ -101,7 +101,6 @@ class Jamp {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->register_custom_post_types();
-
 	}
 
 	/**
@@ -124,35 +123,34 @@ class Jamp {
 		/**
 		 * The class responsible for orchestrating the actions and filters of the core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-jamp-loader.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-jamp-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-jamp-i18n.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-jamp-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-jamp-admin.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-jamp-admin.php';
 
 		/**
 		 * The class responsible for building the options page.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-jamp-options.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/class-jamp-options.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-jamp-public.php';
+		require_once plugin_dir_path( __DIR__ ) . 'public/class-jamp-public.php';
 
 		/**
 		 * The class responsible for registering Custom Post Types.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-jamp-cpt.php';
+		require_once plugin_dir_path( __DIR__ ) . 'includes/class-jamp-cpt.php';
 
 		$this->loader = new Jamp_Loader();
-
 	}
 
 	/**
@@ -168,7 +166,6 @@ class Jamp {
 		$plugin_i18n = new Jamp_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
 	}
 
 	/**
@@ -237,7 +234,6 @@ class Jamp {
 
 		$this->loader->add_action( 'admin_menu', $plugin_options, 'options_menu' );
 		$this->loader->add_action( 'admin_init', $plugin_options, 'options_init' );
-
 	}
 
 	/**
@@ -252,7 +248,6 @@ class Jamp {
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
 	}
 
 	/**
@@ -266,7 +261,6 @@ class Jamp {
 		$plugin_custom_post_types = new Jamp_CPT( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'init', $plugin_custom_post_types, 'register' );
-
 	}
 
 	/**
@@ -308,5 +302,4 @@ class Jamp {
 	public function get_version() {
 		return $this->version;
 	}
-
 }

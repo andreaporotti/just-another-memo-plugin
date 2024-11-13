@@ -60,7 +60,7 @@ if ( '1' === $option_delete_data_on_uninstall ) {
 	}
 
 	// Delete custom capabilities from all roles.
-	require_once dirname( __FILE__ ) . '/includes/class-jamp.php';
+	require_once __DIR__ . '/includes/class-jamp.php';
 	$capabilities = Jamp::$capabilities;
 	$roles        = get_editable_roles();
 

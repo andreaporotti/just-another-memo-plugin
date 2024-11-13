@@ -39,7 +39,6 @@ class Jamp_Options {
 				'options_page',
 			)
 		);
-
 	}
 
 	/**
@@ -51,7 +50,7 @@ class Jamp_Options {
 
 		// Check user capabilities.
 		if ( current_user_can( 'manage_options' ) && current_user_can( 'publish_jamp_notes' ) ) {
-			require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-options-page.php';
+			require_once plugin_dir_path( __DIR__ ) . 'admin/partials/jamp-admin-options-page.php';
 		} else {
 			?>
 
@@ -59,7 +58,6 @@ class Jamp_Options {
 
 			<?php
 		}
-
 	}
 
 	/**
@@ -195,7 +193,6 @@ class Jamp_Options {
 				'name' => 'jamp_delete_data_on_uninstall',
 			)
 		);
-
 	}
 
 	/**
@@ -211,7 +208,6 @@ class Jamp_Options {
 			<?php echo esc_html__( 'Settings about the supported item types.', 'jamp' ); ?>
 		</p>
 		<?php
-
 	}
 
 	/**
@@ -258,7 +254,6 @@ class Jamp_Options {
 		}
 
 		return $value;
-
 	}
 
 	/**
@@ -274,7 +269,6 @@ class Jamp_Options {
 			<?php echo esc_html__( 'Configure notes visual features.', 'jamp' ); ?>
 		</p>
 		<?php
-
 	}
 
 	/**
@@ -297,7 +291,6 @@ class Jamp_Options {
 			</p>
 		</fieldset>
 		<?php
-
 	}
 
 	/**
@@ -313,7 +306,6 @@ class Jamp_Options {
 		}
 
 		return $value;
-
 	}
 
 	/**
@@ -329,7 +321,6 @@ class Jamp_Options {
 			<?php echo esc_html__( 'These settings are applied when you uninstall the plugin.', 'jamp' ); ?>
 		</p>
 		<?php
-
 	}
 
 	/**
@@ -352,7 +343,6 @@ class Jamp_Options {
 			</p>
 		</fieldset>
 		<?php
-
 	}
 
 	/**
@@ -368,7 +358,5 @@ class Jamp_Options {
 		}
 
 		return $value;
-
 	}
-
 }

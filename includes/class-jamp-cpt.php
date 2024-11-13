@@ -80,5 +80,4 @@ class Jamp_CPT {
 
 		register_post_type( 'jamp_note', $args );
 	}
-
 }

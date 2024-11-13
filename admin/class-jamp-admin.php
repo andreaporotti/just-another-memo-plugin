@@ -81,7 +81,6 @@ class Jamp_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
-
 	}
 
 	/**
@@ -99,7 +98,6 @@ class Jamp_Admin {
 			wp_enqueue_style( 'jamp-admin-style', plugin_dir_url( __FILE__ ) . 'css/jamp-admin' . $min . '.css', array( 'wp-jquery-ui-dialog' ), $this->version, 'all' );
 
 		}
-
 	}
 
 	/**
@@ -135,7 +133,6 @@ class Jamp_Admin {
 			);
 
 		}
-
 	}
 
 	/**
@@ -237,17 +234,16 @@ class Jamp_Admin {
 				}
 			}
 		}
-
 	}
 
 	/**
 	 * Creates a list of all supported target types.
 	 *
 	 * @since    1.0.0
-	 * @param    boolean $filtered If true returns only the enabled target types.
-	 * @param    boolean $return   If true returns the target types array.
+	 * @param    boolean $filtered      If true returns only the enabled target types.
+	 * @param    boolean $return_list   If true returns the target types array.
 	 */
-	public function build_target_types_list( $filtered = true, $return = false ) {
+	public function build_target_types_list( $filtered = true, $return_list = false ) {
 
 		// Reset the target types list.
 		$this->target_types_list = array();
@@ -311,10 +307,9 @@ class Jamp_Admin {
 			);
 		}
 
-		if ( $return ) {
+		if ( $return_list ) {
 			return $this->target_types_list;
 		}
-
 	}
 
 	/**
@@ -417,7 +412,6 @@ class Jamp_Admin {
 			wp_send_json_error( '' );
 
 		}
-
 	}
 
 	/**
@@ -455,7 +449,6 @@ class Jamp_Admin {
 				);
 			}
 		}
-
 	}
 
 	/**
@@ -467,8 +460,7 @@ class Jamp_Admin {
 	 */
 	public static function meta_box_html_cb( $post, $args ) {
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-meta-box.php';
-
+		require_once plugin_dir_path( __DIR__ ) . 'admin/partials/jamp-admin-meta-box.php';
 	}
 
 	/**
@@ -501,7 +493,6 @@ class Jamp_Admin {
 
 			}
 		}
-
 	}
 
 	/**
@@ -513,8 +504,7 @@ class Jamp_Admin {
 	 */
 	public static function meta_box_view_notes_html_cb( $post, $args ) {
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-meta-box-view-notes.php';
-
+		require_once plugin_dir_path( __DIR__ ) . 'admin/partials/jamp-admin-meta-box-view-notes.php';
 	}
 
 	/**
@@ -568,7 +558,6 @@ class Jamp_Admin {
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -626,7 +615,6 @@ class Jamp_Admin {
 		}
 
 		return $columns;
-
 	}
 
 	/**
@@ -653,11 +641,10 @@ class Jamp_Admin {
 				}
 
 				$jamp_meta = $this->current_note_meta;
-				require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column.php';
+				require plugin_dir_path( __DIR__ ) . 'admin/partials/jamp-admin-column.php';
 
 			}
 		}
-
 	}
 
 	/**
@@ -677,13 +664,12 @@ class Jamp_Admin {
 
 				$column_content = '';
 
-				require plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-column-users.php';
+				require plugin_dir_path( __DIR__ ) . 'admin/partials/jamp-admin-column-users.php';
 
 				return $column_content;
 
 			}
 		}
-
 	}
 
 	/**
@@ -723,7 +709,6 @@ class Jamp_Admin {
 		}
 
 		return $url;
-
 	}
 
 	/**
@@ -745,7 +730,6 @@ class Jamp_Admin {
 		}
 
 		return false;
-
 	}
 
 	/**
@@ -809,12 +793,11 @@ class Jamp_Admin {
 				array(
 					'id'     => 'jamp-content',
 					'parent' => 'jamp',
-					'title'  => require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/partials/jamp-admin-admin-bar.php',
+					'title'  => require_once plugin_dir_path( __DIR__ ) . 'admin/partials/jamp-admin-admin-bar.php',
 				)
 			);
 
 		}
-
 	}
 
 	/**
@@ -863,7 +846,6 @@ class Jamp_Admin {
 
 			}
 		}
-
 	}
 
 	/**
@@ -901,7 +883,6 @@ class Jamp_Admin {
 
 		// Fallback to default location.
 		return $location;
-
 	}
 
 	/**
@@ -943,7 +924,6 @@ class Jamp_Admin {
 
 			}
 		}
-
 	}
 
 	/**
@@ -973,7 +953,6 @@ class Jamp_Admin {
 		}
 
 		return $bulk_messages;
-
 	}
 
 	/**
@@ -1010,7 +989,6 @@ class Jamp_Admin {
 			wp_send_json_error();
 
 		}
-
 	}
 
 	/**
@@ -1037,7 +1015,6 @@ class Jamp_Admin {
 		}
 
 		return $mce_init;
-
 	}
 
 	/**
@@ -1056,7 +1033,6 @@ class Jamp_Admin {
 		}
 
 		return $post_types_to_delete;
-
 	}
 
 	/**
@@ -1079,7 +1055,6 @@ class Jamp_Admin {
 		}
 
 		return null;
-
 	}
 
 	/**
@@ -1107,7 +1082,6 @@ class Jamp_Admin {
 			return $value;
 
 		}
-
 	}
 
 	/**
@@ -1128,7 +1102,6 @@ class Jamp_Admin {
 		$transient[ $key ] = $value;
 
 		set_transient( self::get_transient_name(), $transient, HOUR_IN_SECONDS );
-
 	}
 
 	/**
@@ -1139,7 +1112,6 @@ class Jamp_Admin {
 	private static function delete_session() {
 
 		delete_transient( self::get_transient_name() );
-
 	}
 
 	/**
@@ -1151,7 +1123,6 @@ class Jamp_Admin {
 
 		$user = wp_get_current_user();
 		return 'jamp_session_user_' . $user->ID;
-
 	}
 
 	/**
@@ -1173,7 +1144,6 @@ class Jamp_Admin {
 		} else {
 			return $new_status;
 		}
-
 	}
 
 	/**
@@ -1200,7 +1170,6 @@ class Jamp_Admin {
 		} else {
 			return false;
 		}
-
 	}
 
 	/**
@@ -1230,7 +1199,6 @@ class Jamp_Admin {
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -1261,7 +1229,6 @@ class Jamp_Admin {
 				update_post_meta( $note->ID, 'jamp_deleted_target_name', $display_name );
 			}
 		}
-
 	}
 
 	/**
@@ -1300,7 +1267,6 @@ class Jamp_Admin {
 				}
 			}
 		}
-
 	}
 
 	/**
@@ -1321,6 +1287,5 @@ class Jamp_Admin {
 		);
 
 		return array_merge( $plugin_actions, $new_actions );
-
 	}
 }
