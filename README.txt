@@ -2,9 +2,9 @@
 Contributors: andreaporotti
 Tags: notes, note, memo, dashboard
 Requires at least: 4.9
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 5.6
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,13 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 6. The plugin settings page.
 
 == Changelog ==
+
+**1.5.2 [2024-11-13]**
+
+- Tested on WordPress 6.7.
+- Fixed: the color preview on the Notes page were showing the wrong color name on mouse over.
+- Fixed: notes without a color were displayed in yellow.
+- Added link to the settings page on the Plugins page.
 
 **1.5.1 [2024-07-14]**
 

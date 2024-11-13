@@ -80,6 +80,13 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 
 ## Changelog
 
+**1.5.2 [2024-11-13]**
+
+- Tested on WordPress 6.7.
+- Fixed: the color preview on the Notes page were showing the wrong color name on mouse over.
+- Fixed: notes without a color were displayed in yellow.
+- Added link to the settings page on the Plugins page.
+
 **1.5.1 [2024-07-14]**
 
 - Tested on WordPress 6.6.
