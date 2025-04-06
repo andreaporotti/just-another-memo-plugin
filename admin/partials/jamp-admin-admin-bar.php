@@ -97,15 +97,21 @@ if ( $this->is_section_supported() ) {
 			$note_author        = get_userdata( $note->post_author );
 			$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
 			$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
+			$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)' ) );
 
 			$jamp_meta        = get_post_meta( $note->ID );
 			$note_color_class = 'jamp-note--color-yellow';
-			if ( isset( $jamp_meta['jamp_color'][0] ) && ! empty( $jamp_meta['jamp_color'][0] ) ) {
-				$note_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
+
+			if ( isset( $jamp_meta['jamp_color'] ) ) {
+				if ( ! empty( $jamp_meta['jamp_color'][0] ) ) {
+					$note_color_class = 'jamp-note--color-' . $jamp_meta['jamp_color'][0];
+				} else {
+					$note_color_class = '';
+				}
 			}
 
 			$html .= '<div class="jamp-admin-bar-note ' . esc_attr( $note_color_class ) . '" data-note="' . esc_attr( $note->ID ) . '" data-scope="section">'
-					. '<span class="jamp-admin-bar-note__title">' . esc_html( $note->post_title ) . '</span>'
+					. '<span class="jamp-admin-bar-note__title">' . esc_html( $note_title ) . '</span>'
 					. '<span class="jamp-admin-bar-note__actions">'
 					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--info" href="#" title="' . esc_html__( 'Details', 'jamp' ) . '"></a>'
 					. '<a class="jamp-admin-bar-action jamp-admin-bar-action--edit" href="' . esc_url( get_edit_post_link( $note->ID ) ) . '" title="' . esc_html__( 'Edit', 'jamp' ) . '"></a>'
