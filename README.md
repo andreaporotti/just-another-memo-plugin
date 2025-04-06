@@ -80,6 +80,12 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 
 ## Changelog
 
+**1.5.3 [2025-04-06]**
+
+- Tested on WordPress 6.8.
+- Fixed: section notes without a color were displayed in yellow.
+- Fixed: show a default text on section notes without a title.
+
 **1.5.2 [2024-11-13]**
 
 - Tested on WordPress 6.7.
