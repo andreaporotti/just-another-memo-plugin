@@ -7,6 +7,11 @@
  * @subpackage Jamp/includes
  */
 
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
 /**
  * Register all actions and filters for the plugin.
  *

@@ -7,6 +7,10 @@
  * @subpackage Jamp/admin/partials
  */
 
+// If this file is called directly, abort.
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
 ?>
 
 <?php
