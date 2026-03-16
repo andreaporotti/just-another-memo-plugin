@@ -1,9 +1,9 @@
 === JAMP Notes (Just Another Memo Plugin) ===
 Contributors: andreaporotti
 Tags: notes, note, memo, dashboard
-Requires at least: 4.9
+Requires at least: 6.0
 Tested up to: 6.9
-Requires PHP: 5.6
+Requires PHP: 7.0
 Stable tag: 1.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
