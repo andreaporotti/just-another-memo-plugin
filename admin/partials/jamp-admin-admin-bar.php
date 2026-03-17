@@ -40,7 +40,7 @@ if ( ! empty( $global_notes ) ) {
 		$note_author        = get_userdata( $note->post_author );
 		$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
 		$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
-		$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)' ) );
+		$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)', 'jamp' ) );
 
 		$jamp_meta        = get_post_meta( $note->ID );
 		$note_color_class = 'jamp-note--color-yellow';
@@ -101,7 +101,7 @@ if ( $this->is_section_supported() ) {
 			$note_author        = get_userdata( $note->post_author );
 			$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
 			$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
-			$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)' ) );
+			$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)', 'jamp' ) );
 
 			$jamp_meta        = get_post_meta( $note->ID );
 			$note_color_class = 'jamp-note--color-yellow';

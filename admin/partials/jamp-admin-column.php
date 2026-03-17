@@ -11,6 +11,15 @@
 if ( ! defined( 'WPINC' ) ) {
 	die;
 }
+
+$note_colors = array(
+	'none'   => __( 'none', 'jamp' ),
+	'blue'   => __( 'blue', 'jamp' ),
+	'green'  => __( 'green', 'jamp' ),
+	'purple' => __( 'purple', 'jamp' ),
+	'red'    => __( 'red', 'jamp' ),
+	'yellow' => __( 'yellow', 'jamp' ),
+);
 ?>
 
 <?php
@@ -61,7 +70,7 @@ if ( 'jamp_note' === $column_name ) {
 			$note_author        = get_userdata( $note->post_author );
 			$note_modified_date = date_i18n( $date_time_format, strtotime( $note->post_modified ) );
 			$note_created_date  = date_i18n( $date_time_format, strtotime( $note->post_date ) );
-			$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)' ) );
+			$note_title         = ( ! empty( $note->post_title ) ? $note->post_title : __( '(no title)', 'jamp' ) );
 
 			$jamp_meta        = get_post_meta( $note->ID );
 			$note_color_class = 'jamp-note--color-yellow';
@@ -148,7 +157,7 @@ if ( 'jamp_color' === $column_name ) {
 		}
 	}
 
-	echo '<span class="jamp-color-preview jamp-color-preview--big ' . esc_attr( $preview_color_class ) . '" title="' . esc_attr__( 'Color: ', 'jamp' ) . ' ' . esc_attr__( $preview_color_title, 'jamp' ) . '"></span>';
+	echo '<span class="jamp-color-preview jamp-color-preview--big ' . esc_attr( $preview_color_class ) . '" title="' . esc_attr__( 'Color: ', 'jamp' ) . ' ' . esc_attr( $note_colors[$preview_color_title] ) . '"></span>';
 }
 
 if ( 'jamp_author' === $column_name ) {
@@ -270,7 +279,7 @@ if ( 'jamp_location' === $column_name ) {
 				if ( $current_item_exists ) {
 
 					if ( empty( $current_item_name ) ) {
-						$current_item_name = __( '(no title)' );
+						$current_item_name = __( '(no title)', 'jamp' );
 					}
 					echo '<strong>' . esc_html__( 'Item', 'jamp' ) . '</strong><br>| ' . esc_html( $target_type_name ) . ' "' . esc_html( $current_item_name ) . '"';
 
@@ -295,7 +304,7 @@ if ( 'jamp_location' === $column_name ) {
 								$deleted_target_name = $jamp_meta['jamp_deleted_target_name'][0];
 
 								if ( empty( $deleted_target_name ) ) {
-									$deleted_target_name = __( '(no title)' );
+									$deleted_target_name = __( '(no title)', 'jamp' );
 								}
 
 								// translators: %s is the deleted item name.

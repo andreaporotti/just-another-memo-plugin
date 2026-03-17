@@ -290,8 +290,8 @@ class Jamp_Admin {
 		if ( ( ! $filtered ) || ( $filtered && in_array( 'users', $enabled_target_types, true ) ) ) {
 			$this->target_types_list[] = array(
 				'name'          => 'users',
-				'label'         => esc_html__( 'Users' ),
-				'singular_name' => esc_html__( 'User' ),
+				'label'         => esc_html__( 'Users', 'jamp' ),
+				'singular_name' => esc_html__( 'User', 'jamp' ),
 			);
 		}
 
@@ -302,8 +302,8 @@ class Jamp_Admin {
 		if ( ( ! $filtered ) || ( $filtered && in_array( 'plugins', $enabled_target_types, true ) ) ) {
 			$this->target_types_list[] = array(
 				'name'          => 'plugins',
-				'label'         => esc_html__( 'Plugins' ),
-				'singular_name' => esc_html__( 'Plugin' ),
+				'label'         => esc_html__( 'Plugins', 'jamp' ),
+				'singular_name' => esc_html__( 'Plugin', 'jamp' ),
 			);
 		}
 
@@ -345,7 +345,7 @@ class Jamp_Admin {
 
 					// Add posts to the targets array.
 					foreach ( $posts_objects as $post ) {
-						$post_title      = ( ! empty( $post->post_title ) ) ? $post->post_title : esc_html__( '(no title)' );
+						$post_title      = ( ! empty( $post->post_title ) ) ? $post->post_title : esc_html__( '(no title)', 'jamp' );
 						$post_status_obj = get_post_status_object( $post->post_status );
 
 						$targets[] = array(
@@ -1283,7 +1283,7 @@ class Jamp_Admin {
 		$new_actions['jamp_settings'] = sprintf(
 			'<a href="%1$s">%2$s</a>',
 			esc_url( add_query_arg( 'page', 'jamp_options', admin_url( 'options-general.php' ) ) ),
-			__( 'Settings' ),
+			__( 'Settings', 'jamp' ),
 		);
 
 		return array_merge( $plugin_actions, $new_actions );
