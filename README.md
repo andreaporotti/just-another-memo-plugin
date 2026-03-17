@@ -80,6 +80,14 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 
 ## Changelog
 
+**1.5.4 [2026-03-17]**
+
+- Fixed potential security issues detected by the "Plugin Checker" plugin.
+- Fixed translation issues detected by the "Plugin Checker" plugin.
+- Updated minimum required WordPress version to 6.0.
+- Updated minimum required PHP version to 7.0.
+- Tested on WordPress 7.0.
+
 **1.5.3 [2025-04-06]**
 
 - Tested on WordPress 6.8.
