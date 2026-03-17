@@ -4,8 +4,8 @@
  * Plugin URI:        https://github.com/andreaporotti/just-another-memo-plugin
  * Description:       This plugin allows you to attach notes to some WordPress elements like posts, pages, dashboard sections and others.
  * Version:           1.5.3
- * Requires at least: 4.9
- * Requires PHP:      5.6
+ * Requires at least: 6.0
+ * Requires PHP:      7.0
  * Author:            Andrea Porotti
  * Author URI:        https://www.andreaporotti.it
  * License:           GPL-2.0+
