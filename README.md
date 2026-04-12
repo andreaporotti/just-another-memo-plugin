@@ -80,6 +80,10 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 
 ## Changelog
 
+**1.6.0 [2026-04-12]**
+
+- Added: the "Location" column in the Notes admin page now provides link to the page where each note is displayed (thanks to @dimensionsfoundation for the feature suggestion!)
+
 **1.5.4 [2026-03-17]**
 
 - Fixed potential security issues detected by the "Plugin Checker" plugin.

@@ -4,7 +4,7 @@ Tags: notes, note, memo, dashboard
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.0
-Stable tag: 1.5.4
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,10 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 6. The plugin settings page.
 
 == Changelog ==
+
+**1.6.0 [2026-04-12]**
+
+- Added: the "Location" column in the Notes admin page now provides link to the page where each note is displayed (thanks to @dimensionsfoundation for the feature suggestion!)
 
 **1.5.4 [2026-03-17]**
 
