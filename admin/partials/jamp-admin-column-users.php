@@ -66,7 +66,7 @@ if ( 'jamp_note' === $column_name ) {
 				}
 			}
 
-			$column_content .= '<div class="jamp-column-note ' . esc_attr( $note_color_class ) . ' ' . esc_attr( $column_notes_closed_class ) . '" data-note="' . esc_attr( $note->ID ) . '">'
+			$column_content .= '<div id="jamp-note-' . esc_attr( $note->ID ) . '" class="jamp-column-note ' . esc_attr( $note_color_class ) . ' ' . esc_attr( $column_notes_closed_class ) . '" data-note="' . esc_attr( $note->ID ) . '">'
 								. '<button class="jamp-column-note__title">'
 									. '<span>' . esc_html( $note_title ) . '</span>'
 									. '<span class="jamp-column-note__arrow ' . esc_attr( $column_notes_closed_arrow_class ) . '" aria-hidden="true">&#9650;</span>'

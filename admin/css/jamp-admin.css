@@ -340,6 +340,7 @@ th.column-jamp_note {
 }
 
 .jamp-column-note {
+	scroll-margin: 20px;
 	box-sizing: border-box;
 	margin-bottom: 10px;
 	background-color: var(--note-color-none);

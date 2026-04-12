@@ -84,7 +84,7 @@ if ( 'jamp_note' === $column_name ) {
 			}
 
 			?>
-			<div class="jamp-column-note <?php echo esc_attr( $note_color_class ); ?> <?php echo esc_attr( $column_notes_closed_class ); ?>" data-note="<?php echo esc_attr( $note->ID ); ?>">
+			<div id="jamp-note-<?php echo esc_attr( $note->ID ); ?>" class="jamp-column-note <?php echo esc_attr( $note_color_class ); ?> <?php echo esc_attr( $column_notes_closed_class ); ?>" data-note="<?php echo esc_attr( $note->ID ); ?>">
 				<button class="jamp-column-note__title">
 					<span><?php echo esc_html( $note_title ); ?></span>
 					<span class="jamp-column-note__arrow <?php echo esc_attr( $column_notes_closed_arrow_class ); ?>" aria-hidden="true">&#9650;</span>
@@ -188,6 +188,7 @@ if ( 'jamp_location' === $column_name ) {
 
 					if ( $section['url'] === $jamp_meta['jamp_target'][0] && $section['is_enabled'] ) {
 
+						$section_url         = $section['url'];
 						$section_name        = $section['name'];
 						$section_parent_name = ( isset( $section['parent_name'] ) ) ? $section['parent_name'] : '';
 
@@ -196,7 +197,7 @@ if ( 'jamp_location' === $column_name ) {
 
 				if ( ! empty( $section_name ) ) {
 
-					echo '<strong>' . esc_html__( 'Section', 'jamp' ) . '</strong><br>| ' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name );
+					echo '<strong>' . esc_html__( 'Section', 'jamp' ) . '</strong><br>— <a href="' . esc_url( $section_url ) . '">' . esc_html( $section_parent_name ) . ' ' . esc_html( $section_name ) . '</a>';
 
 				} else {
 
@@ -213,6 +214,8 @@ if ( 'jamp_location' === $column_name ) {
 			case 'entity':
 				// Look for the target type name inside the target types list and print the corresponding label.
 				$target_type_name = esc_html__( 'Item', 'jamp' );
+				// Init target type url.
+				$target_type_url = '';
 
 				if ( ! empty( $jamp_meta['jamp_target_type'][0] ) ) {
 					foreach ( $this->target_types_list as $target_type ) {
@@ -220,6 +223,7 @@ if ( 'jamp_location' === $column_name ) {
 						if ( $target_type['name'] === $jamp_meta['jamp_target_type'][0] ) {
 
 							$target_type_name = $target_type['singular_name'];
+							$target_type_url  = admin_url( 'edit.php?post_type=' . $target_type['name'] . '#jamp-note-' . $post_id );
 
 						}
 					}
@@ -245,6 +249,7 @@ if ( 'jamp_location' === $column_name ) {
 
 					// Plugins page.
 					if ( 'plugins' === $jamp_meta['jamp_target_type'][0] ) {
+						$target_type_url = admin_url( 'plugins.php#jamp-note-' . $post_id );
 
 						if ( ! function_exists( 'get_plugin_data' ) ) {
 							require_once ABSPATH . 'wp-admin/includes/plugin.php';
@@ -265,6 +270,7 @@ if ( 'jamp_location' === $column_name ) {
 
 					// Users page.
 					if ( 'users' === $jamp_meta['jamp_target_type'][0] ) {
+						$target_type_url = admin_url( 'users.php#jamp-note-' . $post_id );
 
 						// Get user data.
 						$note_user = get_userdata( $jamp_meta['jamp_target'][0] );
@@ -281,7 +287,7 @@ if ( 'jamp_location' === $column_name ) {
 					if ( empty( $current_item_name ) ) {
 						$current_item_name = __( '(no title)', 'jamp' );
 					}
-					echo '<strong>' . esc_html__( 'Item', 'jamp' ) . '</strong><br>| ' . esc_html( $target_type_name ) . ' "' . esc_html( $current_item_name ) . '"';
+					echo '<strong>' . esc_html__( 'Item', 'jamp' ) . '</strong><br>— <a href="' . esc_url( $target_type_url ) . '">' . esc_html( $target_type_name ) . ' "' . esc_html( $current_item_name ) . '"' . '</a>';
 
 				} else {
 
@@ -299,7 +305,7 @@ if ( 'jamp_location' === $column_name ) {
 					if ( isset( $jamp_meta['jamp_deleted_target_name'][0] ) ) {
 						?>
 						<span>
-							<br>
+							<br>—
 							<?php
 								$deleted_target_name = $jamp_meta['jamp_deleted_target_name'][0];
 
