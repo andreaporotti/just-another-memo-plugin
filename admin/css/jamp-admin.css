@@ -195,6 +195,7 @@ html {
 .jamp-admin-bar-action {
 	display: inline !important;
 	padding: 0 !important;
+	box-shadow: none !important;
 }
 
 .jamp-admin-bar-action--create:before {
