@@ -16,6 +16,7 @@ html {
 	--note-color-blue: #bbffe6;
 	--note-color-purple: #e9bbff;
 	--note-color-deleting: #ff6767;
+	--note-adminbar-counter-color: #d63638;
 }
 
 .display-block {
@@ -145,7 +146,7 @@ html {
 	min-width: 18px;
 	height: 18px;
 	border-radius: 9px;
-	background-color: #ca4a1f;
+	background-color: var(--note-adminbar-counter-color);
 	color: #fff;
 	font-size: 11px;
 	line-height: 1.6;
