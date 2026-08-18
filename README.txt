@@ -4,7 +4,7 @@ Tags: notes, note, memo, dashboard
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.0
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,10 @@ Please note: by default the plugin data is kept after uninstall. You can choose 
 6. The plugin settings page.
 
 == Changelog ==
+
+**1.6.1 [2026-08-18]**
+
+- Fixed small style issues appeared since WordPress 7.1.
 
 **1.6.0 [2026-04-12]**
 
